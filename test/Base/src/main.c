@@ -33,13 +33,23 @@ struct TestFunct
 
 struct TestFunct    Tests[] =
 {
-  {"strptime", tstrptime },
+  { "strptime",		    tstrptime },
+  { "IsLeapYear",	    tIsLeapYear },
+  { "YearMonthDayToTimeT",  tYearMonthDayToTimeT },
+  { "HourMinSecToTimeT",    tHourMinSecToTimeT },
+  { "YYYYMMDDtoTimeT",	    tYYYYMMDDtoTimeT },
+  { "YYMMDDtoTimeT",	    tYYMMDDtoTimeT },
+  { "HHMMSStoTimeT",	    tHHMMSStoTimeT },
+  { "DateStringToTimeT",    tDateStringToTimeT },
+  { "DateStringFromTm",	    tDateStringFromTm },
+  { "DateStringFromTimeT",  tDateStringFromTimeT },
   {0, 0},
 };
 
 int
 main( int argc, char * argv[] )
 {
+  int result = 0;
   
   if( argc > 1 )
     {
@@ -92,7 +102,7 @@ main( int argc, char * argv[] )
 	}
     }
       
-  return( 0 );
+  return( result );
 }
 
 /*
@@ -100,5 +110,8 @@ main( int argc, char * argv[] )
  * Revision Log:
  *
  * $Log$
+ * Revision 1.1  1998/09/22 14:39:41  houghton
+ * Initial version.
+ *
  *
  */

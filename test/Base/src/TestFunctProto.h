@@ -28,8 +28,15 @@ extern "C" {
 #endif
 
 int tstrptime( void );
-
-
+int tIsLeapYear( void );
+int tYearMonthDayToTimeT( void );
+int tHourMinSecToTimeT( void );
+int tYYYYMMDDtoTimeT( void );
+int tYYMMDDtoTimeT( void );
+int tHHMMSStoTimeT( void );
+int tDateStringToTimeT( void );
+int tDateStringFromTm( void );
+int tDateStringFromTimeT( void );
 
 #if defined( __cplusplus )
 };
@@ -40,6 +47,9 @@ int tstrptime( void );
  * Revision Log:
  *
  * $Log$
+ * Revision 1.1  1998/09/22 14:39:41  houghton
+ * Initial version.
+ *
  *
  */
 
