@@ -1,22 +1,34 @@
 #
-# -*- Makefile -*-
+# Title:        Makefile.Common
+# Project:	Common
+# Desc:
+# 
+#   Makefile for libCommon src/arch/AIX32
+# 
+# Notes:
+# 
+# Author:	Paul A. Houghton - (paul.houghton@wcom.com)
+# Created:	11/20/95
 #
-# Makefile for libCommon src/arch/Linux
+# Revision History: (See end of file for Revision Log)
 #
-# Created 11/20/95
+#   Last Mod By:    $Author$
+#   Last Mod:	    $Date$
+#   Version:	    $Revision$
 #
-# $Id$
-#
-#
+#   $Id$
+# 
 
-ARCHSRC_DIR	= ../arch/src
+ARCH_SRC_DIR	= ../arch/src
 ARCH_DIR	= ../arch/$(arch)
 
+ARCH_VPATH	= $(ARCH_DIR):$(ARCH_SRC_DIR)
+
 ARCH_DEFINES	=
-ARCH_INCDIR	= -I$(ARCH_DIR)
+ARCH_INC	= -I$(ARCH_DIR)
 
 
-ARCHSRC_C_FILES	=		\
+ARCH_C_SOURCES	=		\
 	strlwr.c		\
 	strupr.c		\
 	strdup.c		\
@@ -29,34 +41,22 @@ ARCH_USER_H_INCS	= 		\
 	$(ARCH_DIR)/CommonConfig.h	\
 
 ARCH_C_HEADERS		= 		\
-	$(ARCH_DIR)CommonConfig.h	\
-	$(ARCH_DIR)_GnuRegexCfg.h	\
-
-ARCH_PROTO_C_SOURCES = $(ARCHSRC_C_FILES:%=$(ARCHSRC_DIR)/%)
-ARCH_DEPEND_C_SOURCES = $(ARCHSRC_C_FILES:%=$(ARCHSRC_DIR)/%)
-
-ARCH_OBJECTS_DEFAULT	= $(ARCHSRC_C_FILES:%.c=objects/default/%.o)
-ARCH_OBJECTS_DEBUG	= $(ARCHSRC_C_FILES:%.c=objects/debug/%.o)
-ARCH_OBJECTS_PROFILE	= $(ARCHSRC_C_FILES:%.c=objects/profile/%.o)
-ARCH_OBJECTS_SHARED	= $(ARCHSRC_C_FILES:%.c=objects/shared/%.o)
-
-$(ARCHSRC_OBJECTS_DEFAULT): objects/default
-$(ARCHSRC_OBJECTS_DEBUG):   objects/debug
-$(ARCHSRC_OBJECTS_PROFILE): objects/profile
-$(ARCHSRC_OBJECTS_SHARED):  objects/shared
-
-
-objects/default/%.o 	\
-objects/debug/%.o 	\
-objects/profile/%.o 	\
-objects/shared/%.o : $(ARCHSRC_DIR)/%.c
-	$(C_COMPILE)
+	$(ARCH_DIR)/CommonConfig.h	\
 
 
 
 #
+#
 # $Log$
+# Revision 2.1  1995/12/31 11:28:20  houghton
+# Initial Version.
+#
 # Revision 2.1  1995/12/02 02:12:12  houghton
 # Initial Version.
 #
+
+# Local Variables:
+# mode:makefile
+# End:
 #
+
