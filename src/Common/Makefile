@@ -1,113 +1,129 @@
 #
-# -*- Makefile  -*- for Common src/Common dir
+# -*- Makefile -*- for Common
 #
-# Created: 10/9/95
+# Created: 11/21/95 using MakeConfigs 4.00.00.a.08
 #
 # $Id$
 #
 # (see end of file for Log info)
 
 #
-# Include standard MakeConfig configuration for GNU make required
-#
-
+# Do not modifiy 'makefile_type'
 makefile_type   = library
+# Uncomment 'show_compile_command' to output compile command.
+show_commands = true
 
-include Make/make.cfg.3.5
+# Include standard MakeConfig configuration for GNU make required
+include Make/make.cfg.4.00
 
 # 
 # =USE_CURRENT_MAKEFILE=
 # When you re-gen a make file, every thing between 
-# these tags will be kept int the new makefile
+# these tags will be kept in the new makefile
 # if you want it re-gen'd, just delete the tags
 #
 
 NAME		= Common
 
-BETA_DIR	= 
-BETA_LIB_DIR	= $(LOCAL_ALPHA_LIB_DIR)
-BETA_INC_DIR	= $(LOCAL_ALPHA_INC_DIR)
+INSTALL_LIBDIR	= $(LOCAL_ALPHA_LIBDIR)
+INSTALL_INCDIR	= $(LOCAL_ALPHA_INCDIR)
 
-PROD_DIR	= /usr/local/
-PROD_LIB_DIR	= $(PROD_DIR)/lib 
-PROD_INC_DIR	= $(PROD_DIR)/include
+VER_MAJOR	= 2
+VER_MINOR	= 00
+VER_RELEASE	= 00.a.28
+VERSION		= $(VER_MAJOR).$(VER_MINOR).$(VER_RELEASE)
 
-MAJOR_VER	= 2
-MINOR_VER	= 00.00.a.26
-VERSION		= $(MAJOR_VER).$(MINOR_VER)
+LIBRARY_DEFAULT	= lib$(NAME).a
+LIBRARY_DEBUG	= lib$(NAME)g.a
+LIBRARY_PROFILE	= lib$(NAME)pg.a
+LIBRARY_SHARED	= lib$(NAME).so
 
-LIBRARY		= lib$(NAME).a
+PROTO_H		= _$(NAME)_Proto.h
 
-PROTO_H	= _$(NAME)_Proto.h
+include ../arch/$(arch)/Makefile.Common
 
-include ../arch/$(arch)/Makefile.common
-
-# *****  D E F I N E S  *****
-#
+###### D E F I N E S  #####
+# 
 # Config defines avalable
 #
+# $(X11_DEF)	    defines for X11
+# $(SYB_DEF)	    defines for SYB
+# $(MMALLOC_DEF)    defines for libmmalloc
+# $(DATA_DEF)	    defines for libData (C++)
+# $(CLUE_DEF)	    defines for libClue (C++)
 # $(COMMON_DEF)	    defines for libCommon
 # $(WT_DEF)	    defines for libWt
 # $(WCF_DEF)	    defines for libWcf (CommFabric)
-# $(CLUE_DEF)	    defines for libClue (C++)
-# $(DATA_DEF)	    defines for libData (C++)
-# $(MMALLOC_DEF)    defines for libmmalloc
-# $(X11_DEF)	    defines for X11
+#
+
 
 SRCDEFINES	= 
 PRJDEFINES	= -DVERSION=\"$(VERSION)\" $(ARCH_DEFINES)
 
 DEFINES		= $(PRJDEFINES) $(SRCDEFINES) 
 
-# *****  I N C L U D E S *****
+######  I N C L U D E S #####
 #
 # Config includes available
 #
-# $(LOCAL_BETA_INC)
-# $(LOCAL_INC)
-# $(COMMON_BETA_INC)
-# $(COMMON_INC)
-# $(WT_BETA_INC)
-# $(WT_INC)
-# $(WCF_BETA_INC)
-# $(WCF_INC)
-# $(MMALLOC_BETA_INC)
-# $(MMALLOC_INC)
-# $(CLUE_BETA_INC)
-# $(CLUE_INC)
-# $(DATA_BETA_INC)
-# $(DATA_INC)
-# $(SYB_INC)
 # $(X11_INC)
+# $(SYB_INC)
+# $(MALLOC_ALPHA_INC)	$(MMALLOC_BETA_INC)	$(MMALLOC_INC)
+# $(DATA_ALPHA_INC) 	$(DATA_BETA_INC) 	$(DATA_INC)
+# $(CLUE_ALPHA_INC)	$(CLUE_BETA_INC) 	$(CLUE_INC)
+# $(COMMON_ALPHA_INC)	$(COMMON_BETA_INC) 	$(COMMON_INC)
+# $(WT_ALPHA_INC) 	$(WT_BETA_INC) 		$(WT_INC)
+# $(WCF_ALPHA_INC) 	$(WCF_BETA_INC) 	$(WCF_INC)
+#
+# $(LOCAL_ALPHA_INC) 	$(LOCAL_BETA_INC) 	$(LOCAL_INC)
+#
+
 
 #TOPDIR		=
 
-SRCINCDIR	= -I. -I../arch/$(arch)
+SRCINCDIR	= -I. $(ARCH_INCDIR)
 PRJINCDIR	= 
 
 INCDIRS		= $(SRCINCDIR)	\
 		  $(PRJINCDIR)
 
-
-# **** C O M P I L E / C P P ****
+###### C O M P I L E / C P P #####
 #
 # Config flags available
 #
-# $(CC_OPTIMIZE)
-# $(CC_DEBUG)
-# $(CC_PROFILE)
+# $(CC_OPTIMIZE) $(CXX_OPTIMIZE)
+# $(CC_DEBUG)	 $(CXX_DEBUG)
+# $(CC_PROFILE)	 $(CXX_PROFILE)
+# $(CC_WARN)	 $(CXX_WARN)
 #
 
+
 CPPOTHER 	=
-CCDEBUG		= $(CC_DEBUG)
-CCOTHER		=
+
+CCDEBUG		= $(CC_OPTIMIZE)
+CCOTHER		= $(CC_WARN)
+
+CXXDEBUG	= $(CXX_OPTIMIZE)
+CXXOTHER	= $(CXX_WARN)
 
 # **** I N S T A L L ****
 
-INSTALL_LIB_FLAGS	= -m 664
+INSTALL_LIB_FLAGS	= 
 INSTALL_INC_FLAGS	= -m 664
-INSTALL_MAN_FLAGS	= -m 664
 
+
+objects/default/CommonGetVersion.o: FORCE
+objects/debug/CommonGetVersion.o:   FORCE
+objects/profile/CommonGetVersion.o: FORCE
+objects/shared/CommonGetVersion.o:  FORCE
+
+OBJECTS_DEFAULT	= $(ARCH_OBJECTS_DEFAULT)
+OBJECTS_DEBUG	= $(ARCH_OBJECTS_DEBUG)
+OBJECTS_PROFILE	= $(ARCH_OBJECTS_PROFILE)
+OBJECTS_SHARED	= $(ARCH_OBJECTS_SHARED)
+
+PROTO_C_SOURCES	 = $(C_SOURCES) $(ARCH_PROTO_C_SOURCES)
+DEPEND_C_SOURCES = $(C_SOURCES) $(ARCH_DEPEND_C_SOURCES)
 #
 # =USE_CURRENT_MAKEFILE=
 #
@@ -137,7 +153,7 @@ C_SOURCES	=			\
 	ErrorTypeString.c               \
 	FindPath.c                      \
 	GetErrorHandler.c               \
-	GnuRegex.c			\
+	GnuRegex.c                      \
 	HHMMSStoTimeT.c                 \
 	IsLeapYear.c                    \
 	LogLevelFromString.c            \
@@ -179,26 +195,27 @@ C_SOURCES	=			\
 	_LoggerLogIt.c                  \
 	$(ARCH_C_SOURCES)               \
 
+
 USER_H_INCS	=			\
 	Common.h                        \
-	GnuRegex.h			\
-	 ../arch/$(arch)/CommonConfig.h \
+	GnuRegex.h                      \
+	$(ARCH_USER_H_INCS)             \
 
-USER_INCS	=	   \
-	$(USER_H_INCS)     \
-	$(USER_HH_INCS)    \
-	$(USER_II_INCS)    \
+USER_INCLUDES	=		\
+	$(USER_H_INCS)		\
+	$(USER_HH_INCS)		\
+	$(USER_II_INCS)		\
 
 C_HEADERS	=			\
 	Common.h                        \
-	GnuRegex.h			\
+	GnuRegex.h                      \
 	_AvlTypes.h                     \
 	_Common.h                       \
-	_Common_Proto.h                 \
+	$(ARCH_C_HEADERS)               \
 
 
 
-# ***** T A R G E T S *****
+###### T A R G E T S #####
 #
 # Targets defined in make.cfg.targets.
 #
@@ -210,127 +227,66 @@ C_HEADERS	=			\
 # realclean:	rm -f LIB_OBJECTS LIBRARY .depend.lib PROTO_H TAGS
 # tags:		create TAGS using etags
 #
-#
 
-include Make/make.cfg.targets.3.5
 
-all: $(LIBRARY)
+include Make/make.cfg.targets.4.00
 
-$(LIBRARY): $(OBJECTS) 
-	$(UPDATELIB) $@ $?
 
-install: beta_check_installed beta_install_lib
-	@echo $(BETA_LIB_DIR)/$(LIBRARY).$(VERSION) installed!
+default debug shared:: proto
 
-beta_check_installed: 
-	@if [ -e $(BETA_LIB_DIR)/$(LIBRARY).$(VERSION) ] ; then \
-	  echo $(BETA_LIB_DIR)/$(LIBRARY).$(VERSION) already installed!; \
-	  echo Change version number in makefile and try again.; \
-	  exit 1; \
-	fi
-	@echo + Installing $(NAME) Version: $(VERSION)
+default:: objects/default $(LIBRARY_DEFAULT)
 
-beta_install_lib: default beta_move_installed beta_install_new
+all::	default debug profile shared
 
-beta_move_installed: 
-	@if [ -e .installed.ver ] ; then \
-	  for line in `cat .installed.ver` ; do \
-	    case $$line in \
-	      installed_ver=*) \
-		installed_ver=$${line#installed_ver=};; \
-	      installed_inc_dir=*) \
-		installed_inc_dir=$${line#installed_inc_dir=};; \
-	      installed_lib_dir=*) \
-		installed_lib_dir=$${line#installed_lib_dir=};; \
-	    esac; \
-	  done; \
-	  echo + Moving Version $$installed_ver out of way; \
-	  if [ -d $$installed_inc_dir ] ; then \
-	    for fn in `cat .installed.inc` ; do \
-	      $(MKDIRHIER) $$installed_inc_dir/old/$(NAME).$$installed_ver; \
-	      echo  Moving $$installed_inc_dir/$$fn ; \
-	      echo -n "    to "; \
-	      echo $$installed_inc_dir/old/$(NAME).$$installed_ver/$$fn; \
-	      mv $$installed_inc_dir/$$fn \
-	         $$installed_inc_dir/old/$(NAME).$$installed_ver; \
-	    done; \
-	  fi; \
-	  if [ -d $$installed_lib_dir ] ; then \
-	    for fn in `cat .installed.lib` ; do \
-	      $(MKDIRHIER) $$installed_lib_dir/old/$(NAME).$$installed_ver; \
-	      echo  Moving $$installed_lib_dir/$$fn to; \
-	      echo -n "    to "; \
-	      echo $$installed_lib_dir/old/$(NAME).$$installed_ver/$(LIBRARY);\
-	      mv $$installed_lib_dir/$$fn \
-		 $$installed_lib_dir/old/$(NAME).$$installed_ver/$(LIBRARY); \
-	    done; \
-	  fi; \
-	fi
+debug:: objects/debug
+	$(HIDE) $(MAKE) CCDEBUG='$(CC_DEBUG)' \
+			CXXDEBUG='$(CXX_DEBUG)' \
+			$(LIBRARY_DEBUG)
 
-beta_install_new: 
-	@echo + Installing $(VERSION)
-	@rm -f .installed.ver .installed.inc .installed.lib
-	$(MKDIRHIER) $(BETA_INC_DIR)
-	$(INSTALL) $(INSTALL_INC_FLAGS) \
-	  $(USER_INCS) \
-	  $(BETA_INC_DIR)
-	@for fn in $(USER_INCS); do \
-	  basename $$fn >>.installed.inc; done
-	$(MKDIRHIER) $(BETA_LIB_DIR)
-	$(INSTALL) $(INSTALL_LIB_FLAGS) \
-	  $(LIBRARY) \
-	  $(BETA_LIB_DIR)/$(LIBRARY).$(VERSION)
-	(cd $(BETA_LIB_DIR); \
-	  rm $(LIBRARY); \
-	  ln -s $(LIBRARY).$(VERSION) $(LIBRARY) )
-	@echo $(LIBRARY).$(VERSION) >.installed.lib
-	@echo installed_ver=$(VERSION) >.installed.ver
-	@echo installed_inc_dir=$(BETA_INC_DIR) >>.installed.ver
-	@echo installed_lib_dir=$(BETA_LIB_DIR) >>.installed.ver
+profile:: objects/profile
+	$(HIDE) $(MAKE) CCDEBUG='$(CC_PROFILE)' \
+			CXXDEBUG='$(CXX_PROFILE)' \
+			$(LIBRARY_PROFILE)
 
-install_production: default
-	$(MKDIRHIER) $(PROD_LIB_DIR)/old
-	$(MKDIRHIER) $(PROD_INC_DIR)/old
-	if [ -e $(PROD_LIB_DIR)/$(LIBRARY).$(VERSION) ] ; then \
-	echo $(PROD_LIB_DIR)/$(LIBRARY).$(VERSION) already installed!; \
-	echo Change version number in makefile and try again.; \
-	exit 1; \
-	fi
-	if [ -e .installed.prod.ver ] ; then \
-	ver=`cat .installed.prod.ver`; \
-	for fn in `cat .installed.prod.lib`; do \
-	mv $(PROD_LIB_DIR)/$$fn $(PROD_LIB_DIR)/old; \
-	done; \
-	for fn in `cat .installed.prod.inc`; do \
-	mv $(PROD_INC_DIR)/$$fn $(PROD_INC_DIR)/old/$$fn.$$ver; \
-	done; \
-	fi
-	echo $(MAJOR_VER).$(MINOR_VER) >.installed.prod.ver
-	echo $(LIBRARY).$(VERSION) >.installed.prod.lib
-	rm -f .installed.prod.inc
-	for fn in $(USER_INCS); do basename $$fn >>.installed.inc; done
-	$(INSTALL) $(INSTALL_LIB_FLAGS) \
-		$(LIBRARY) \
-	  	$(PROD_LIB_DIR)/$(LIBRARY).$(VERSION)
-	(cd $(PROD_LIB_DIR); \
-	  rm $(LIBRARY); \
-	  ln -s $(LIBRARY).$(VERSION) $(LIBRARY) )
-	$(INSTALL) $(INSTALL_INC_FLAGS) $(USER_INCS) $(PROD_INC_DIR)
-	echo 'Production Install Complete!'
+shared:: objects/shared
+	$(HIDE) $(MAKE) CCDEBUG='$(CCDEBUG) $(CC_SHARED)' \
+			CXXDEBUG='$(CXXDEBUG) $(CXX_SHARED)' \
+			$(LIBRARY_SHARED)
 
-test:	default
+
+install:: install_lib_check install_default
+	$(HIDE) echo Installation Complete!
+
+install_all:: install_lib_check
+
+install_all:: install_default install_debug install_profile install_shared
+	$(HIDE) echo Installation Complete!
+
+install_default:: default $(INSTALL_LIBDIR)/$(LIBRARY_DEFAULT)
+install_debug::   debug   $(INSTALL_LIBDIR)/$(LIBRARY_DEBUG)
+install_profile:: profile $(INSTALL_LIBDIR)/$(LIBRARY_PROFILE)
+install_shared::  shared  $(INSTALL_LIBDIR)/$(LIBRARY_SHARED)
+
+
+test::	default
+
+FORCE: 
 
 #
 # include dependancies generated by 'make depend'
 #
-ifndef CLEANING
-include .depend
-endif
+-include .depend
+
 
 #
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.7  1995/11/12  17:45:58  houghton
+# Changed to use MakeConfigs 3.5.
+# Added NAME macro for install targets.
+# Added sources for GnuRegex.
+#
 # Revision 2.6  1995/11/10  12:08:33  houghton
 # Added MKDIRHIER to install target for missing directories
 #
