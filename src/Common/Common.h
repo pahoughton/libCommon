@@ -421,8 +421,13 @@ extern const char * AbbrMonths[];
 extern const char * WeekDays[];
 extern const char * AbbrWeekDays[];
 
+#if !defined( CLUE_IsLeapYear )
+#define COMMON_IsLeapYear 1
+
 BOOL
-IsLeapYear( short year );
+IsLeapYear( int year );
+
+#endif
 
 time_t
 Difftm( struct tm * t1, struct tm * t2 );
@@ -640,6 +645,10 @@ const char * CommonGetVersion( void );
  * Modification History
  *     			
  * $Log$
+ * Revision 2.6  1995/11/10  00:44:32  houghton
+ * Modified to use new Error processing routines
+ * Modified for enhanced Logging routines
+ *
  * Revision 2.5  1995/10/31  12:38:29  houghton
  * Move version info from CommonVersion.h to _Common.h
  * Use MakeConfigs 3.3
