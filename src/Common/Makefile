@@ -33,7 +33,7 @@ INSTALL_INCDIR	= $(beta_incdir)
 
 VER_MAJOR	= 2
 VER_MINOR	= 00
-VER_RELEASE	= 01.b.02
+VER_RELEASE	= 01.b.03
 VERSION		= $(VER_MAJOR).$(VER_MINOR).$(VER_RELEASE)
 
 LIBRARY_DEFAULT	= lib$(NAME).a
@@ -261,6 +261,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.17  1997/03/02 15:04:05  houghton
+# Removed GnuRegex.h.
+#
 # Revision 2.16  1997/03/02 15:03:14  houghton
 # Removed GnuReges (now in libGnuRegex).
 #
