@@ -25,6 +25,10 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/11/10  12:07:54  houghton
+ * AIX Port
+ * Cleanup and reorder includes
+ *
  * Revision 2.1  1995/10/28  19:11:38  houghton
  * Change Version Id String
  *
@@ -63,12 +67,20 @@ COMMON_VERSION(
   CenterLine,
   "$Id$" );
 
-char * CenterLine( char * dest, const char *src,int width)
+char * CenterLine( char * dest, const char * src,int width)
 {
-  int	   pad;
-  
-  pad = width - strlen(src);
-  pad /=2;
+  size_t    pad;
+  size_t    srcLen = strlen( src );
+
+  if( width < 0 || ((size_t)width) > srcLen )
+    {
+      pad = 0;
+    }
+  else
+    {
+      pad = ((size_t)width) - srcLen;
+      pad /=2;
+    }
   
   memset(dest,' ',pad);
   dest[pad] = 0;
