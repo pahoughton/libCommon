@@ -130,12 +130,15 @@ MAN_PAGES	=		\
 	DWORD_ALIGN.3		\
 	CommonGetVersion.3	\
 
-install.man: $(MAN_DIR)
+install.man: $(MAN_DIR) $(MAN_PAGES)
 	$(install_cmd) -m 664 $(MAN_PAGES) $(MAN_DIR)
 
 
 #
 # $Log$
+# Revision 2.1  1997/05/07 12:18:27  houghton
+# Initial Version.
+#
 #
 
 # Local Variables:
