@@ -2,5 +2,6 @@
 .depend_default
 .depend_profile
 .depend_shared
+.depend_test
 _Common_Proto.h
 objects
