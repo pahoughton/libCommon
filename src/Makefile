@@ -28,24 +28,27 @@ exports	    = 					\
 	check_install=$(check_install)		\
 
 depend depend_all depend_test depend_default depend_debug:
-	$(hide) if ! $(MAKE) -C Common $@ $(exports); then exit; fi
+	$(hide) $(MAKE) -C Common $@ $(exports)
 
 all default debug:
-	$(hide) if ! $(MAKE) -C Common $@ $(exports); then exit; fi
+	$(hide) $(MAKE) -C Common $@ $(exports)
 
 clean realclean:
-	$(hide) if ! $(MAKE) -C Common $@ $(exports); then exit; fi
+	$(hide) $(MAKE) -C Common $@ $(exports)
 
 test:
-	$(hide) if ! $(MAKE) -C Common $@ $(exports); then exit; fi
+	$(hide) $(MAKE) -C Common $@ $(exports)
 
 
 install_all install install_default install_debug:
-	$(hide) if ! $(MAKE) -C Common $@ $(exports); then exit; fi
+	$(hide) $(MAKE) -C Common $@ $(exports)
 
 
 #
 # $Log$
+# Revision 2.4  1998/10/23 11:41:16  houghton
+# Changed to use MakeConfigs 5.06.
+#
 # Revision 2.3  1998/09/24 15:39:33  houghton
 # Cleanup.
 #

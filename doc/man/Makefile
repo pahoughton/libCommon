@@ -156,11 +156,14 @@ install_man: install_man3
 clean:
 
 realclean:
-	rm *~
+	rm -f *~
 
 
 #
 # $Log$
+# Revision 2.7  1998/10/23 11:41:09  houghton
+# Changed to use MakeConfigs 5.06.
+#
 # Revision 2.6  1998/09/24 15:39:20  houghton
 # Added install_doc target.
 #

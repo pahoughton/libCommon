@@ -43,35 +43,38 @@ beta_exports	=				\
 .PHONY: test
 
 depend depend_all depend_test depend_default depend_debug:
-	$(hide) if ! $(MAKE) -C $(SRC_DIR) $@ $(exports); then exit; fi
+	$(hide) $(MAKE) -C $(SRC_DIR) $@ $(exports)
 
 all default debug:
-	$(hide) if ! $(MAKE) -C $(SRC_DIR) $@ $(exports); then exit; fi
+	$(hide) $(MAKE) -C $(SRC_DIR) $@ $(exports)
 
 clean realclean:
-	$(hide) if ! $(MAKE) -C $(SRC_DIR) $@ $(exports); then exit; fi
-	$(hide) if ! $(MAKE) -C $(DOC_DIR) $@ $(exports); then exit; fi
-	$(hide) if ! $(MAKE) -C $(TEST_DIR) $@ $(exports); then exit; fi
+	$(hide) $(MAKE) -C $(SRC_DIR) $@ $(exports)
+	$(hide) $(MAKE) -C $(DOC_DIR) $@ $(exports)
+	$(hide) $(MAKE) -C $(TEST_DIR) $@ $(exports)
 
 test:
-	$(hide) if ! $(MAKE) -C $(SRC_DIR) $@ $(exports); then exit; fi
-	$(hide) if ! $(MAKE) -C $(TEST_DIR) $@ $(exports); then exit; fi
+	$(hide) $(MAKE) -C $(SRC_DIR) $@ $(exports)
+	$(hide) $(MAKE) -C $(TEST_DIR) $@ $(exports)
 
 install_doc:
-	$(hide) if ! $(MAKE) -C $(DOC_DIR) $@ $(exports); then exit; fi
+	$(hide) $(MAKE) -C $(DOC_DIR) $@ $(exports)
 
 install_all install: install_doc
-	$(hide) if ! $(MAKE) -C $(SRC_DIR) $@ $(exports); then exit; fi
+	$(hide) $(MAKE) -C $(SRC_DIR) $@ $(exports)
 
 install_beta:
-	$(hide) if ! $(MAKE) -C $(SRC_DIR) install_all $(beta_exports); then exit; fi
+	$(hide) $(MAKE) -C $(SRC_DIR) install_all $(beta_exports)
 
 install_default install_debug: 
-	$(hide) if ! $(MAKE) -C $(SRC_DIR) $@ $(exports); then exit; fi
+	$(hide) $(MAKE) -C $(SRC_DIR) $@ $(exports)
 
 
 #
 # $Log$
+# Revision 2.5  1998/10/23 11:40:52  houghton
+# Changed to use MakeConfigs 5.06.
+#
 # Revision 2.4  1998/10/13 14:15:22  houghton
 # Added install_beta target.
 # Cleanup.

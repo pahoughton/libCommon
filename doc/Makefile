@@ -37,18 +37,21 @@ exports	    = 					\
 
 
 install install_doc:
-	$(hide) if ! $(MAKE) -C $(MAN_DIR) $@ $(exports); then exit; fi
+	$(hide) $(MAKE) -C $(MAN_DIR) $@ $(exports)
 
 clean:
-	$(hide) if ! $(MAKE) -C $(MAN_DIR) $@ $(exports); then exit; fi
+	$(hide) $(MAKE) -C $(MAN_DIR) $@ $(exports)
 
 realclean:
-	rm *~
-	$(hide) if ! $(MAKE) -C $(MAN_DIR) $@ $(exports); then exit; fi
+	rm -f *~
+	$(hide) $(MAKE) -C $(MAN_DIR) $@ $(exports)
 
 
 #
 # $Log$
+# Revision 1.2  1998/10/23 11:41:03  houghton
+# Changed to use MakeConfigs 5.06.
+#
 # Revision 1.1  1998/09/24 15:28:14  houghton
 # Initial Version.
 #
