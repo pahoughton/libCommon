@@ -40,12 +40,15 @@ test:
 	$(hide) if ! $(MAKE) -C Common $@ $(exports); then exit; fi
 
 
-install_all install install_default install_debug: install_doc
+install_all install install_default install_debug:
 	$(hide) if ! $(MAKE) -C Common $@ $(exports); then exit; fi
 
 
 #
 # $Log$
+# Revision 2.2  1998/09/24 14:35:36  houghton
+# Complete rework.
+#
 # Revision 2.1  1995/11/12 17:42:28  houghton
 # Initial Version.
 #
