@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/11/10 00:56:03  houghton
+ * Initial Version
+ *
  *
  *********************************************************************/
 
@@ -30,6 +33,9 @@ extern void *	    _CLoggerClosure;	/* LoggerArgs.c */
 void
 LoggerSetFunct( LoggerFunct funct, void * closure )
 {
-  _CLoggerFunct = funct;
-  _CLoggerClosure = closure;
+  if( funct != NULL )
+    {
+      _CLoggerFunct = funct;
+      _CLoggerClosure = closure;
+    }
 }
