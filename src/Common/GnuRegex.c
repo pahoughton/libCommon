@@ -19,7 +19,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
-#if !defined( PROTO_GEN )
+#if !defined( CPROTO )
 
 /* AIX requires this to be the first thing in the file. */
 #include <_GnuRegexCfg.h>
