@@ -349,6 +349,9 @@ true or false, is a char value a valid digit of the specified base.
 SAFE_STRCPY(3)
 copy a string into dest for 'size' bytes and null terminate it.
 .TP
+A2E(3)
+convert an ASCII character to its EBCDIC equivalent.
+.TP
 E2A(3)
 convert an EBCDIC character to its ASCII equivalent.
 .TP
@@ -378,6 +381,9 @@ prefix a string buffer with spaces to center it on a line.
 .TP
 StripSpaces(3)
 remove leading and trailing spaces from a string.
+.TP
+AsciiToEbcdic(3)
+convert all characters in an ASCII char buffer to EBCDIC.
 .TP
 EbcdicToAscii(3)
 convert all characters in an EBCDIC char buffer to ASCII.
@@ -549,6 +555,9 @@ Harris Computer Systems, Fort Lauderdale, FL USA
 
 .\"
 .\" $Log$
+.\" Revision 3.1  1999/10/29 16:56:07  houghton
+.\" Changed Version to 3
+.\"
 .\" Revision 2.3  1998/09/24 14:30:02  houghton
 .\" Reworked to replace directory names with Makefile variable value.
 .\"
