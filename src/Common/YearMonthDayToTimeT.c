@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1995/02/13  15:34:23  houghton
+ * New functions and many enhancements to existing functions.
+ *
  *
  *********************************************************************/
 static const char * RcsId =
@@ -32,8 +35,7 @@ YearMonthDayToTimeT(
 {
   long  seconds = 0;
   int	leapCount = 0;
-  int   index = 0;
-
+  
   /* I really don't like putting this test in here, but
    * it's is the only valid solution to being passed
    * all 0 values. If I get all 0 the i should return

@@ -15,12 +15,17 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1995/02/13  15:34:14  houghton
+ * New functions and many enhancements to existing functions.
+ *
  *
  *********************************************************************/
 static const char * RcsId =
 "$Id$";
 
 #include <DateTime.h>
+
+#include <stdio.h>
 
 const char *
 DateStringFromTm( char * buf, const char * fmt, const struct tm * tmTime )

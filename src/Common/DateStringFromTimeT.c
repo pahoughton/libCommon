@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1995/02/13  15:34:14  houghton
+ * New functions and many enhancements to existing functions.
+ *
  *
  *********************************************************************/
 static const char * RcsId =
@@ -23,7 +26,7 @@ static const char * RcsId =
 #include <DateTime.h>
 
 const char *
-DateStringFromTimeT( char * buffer, char * fmt, time_t seconds )
+DateStringFromTimeT( char * buffer, const char * fmt, time_t seconds )
 {
   struct tm * tmTime;
 
