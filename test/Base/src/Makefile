@@ -182,12 +182,12 @@ PROFILE_LD_LIBDIRS	= $(DEFAULT_LD_LIBDIRS)
 STATIC_LD_LIBDIRS	= $(DEFAULT_LD_LIBDIRS)
 SHARED_LD_LIBDIRS	= $(DEFAULT_LD_LIBDIRS)
 
-DEFAULT_LD_LIBS		= -lCommon -lGnuRegex
-DEBUG_LD_LIBS		= -lCommon_g -lGnuRegex
-TEST_LD_LIBS		= -lCommon_tg -lGnuRegex
-PROFILE_LD_LIBS		= -lCommon_pg -lGnuRegex
+DEFAULT_LD_LIBS		= -lCommon
+DEBUG_LD_LIBS		= -lCommon_g
+TEST_LD_LIBS		= -lCommon_tg
+PROFILE_LD_LIBS		= -lCommon_pg
 STATIC_LD_LIBS		= $(DEFAULT_LD_LIBS)
-SHARED_LD_LIBS		= -lCommon_s -lGnuRegex
+SHARED_LD_LIBS		= -lCommon_s
 
 # DEP_LIBS - rebuild target if DEP_LIBS newer than target
 
@@ -300,6 +300,9 @@ check: test
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 3.1  1999/10/29 16:56:25  houghton
+# Changed Version to 3
+#
 # Revision 1.3  1998/10/23 11:41:44  houghton
 # Changed to use MakeConfigs 5.06.
 #
