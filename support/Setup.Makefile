@@ -92,8 +92,10 @@ $(tools_build_dir)/MakeConfigs-$(make_cfg_ver): $(TOOL_DIR)/Build	      \
 
 $(make_cfg_file): $(tools_build_dir)/MakeConfigs-$(make_cfg_ver)
 	cd $(tools_build_dir)						      \
-	&& $(MAKE) -f MakeConfigs/Makefile setup
-	$(TOOL_DIR)/bin/make -C $(tools_build_dir)/MakeConfigs install
+	&& $(MAKE) -f MakeConfigs-$(make_cfg_ver)/Makefile setup
+	$(TOOL_DIR)/bin/make						      \
+		-C $(tools_build_dir)/MakeConfigs-$(make_cfg_ver)	      \
+		install
 
 MakeConfigs: check_cvs $(make_cfg_file)
 
@@ -102,6 +104,9 @@ setup: MakeConfigs
 
 #
 # $Log$
+# Revision 1.3  1999/10/29 23:17:26  houghton
+# Bug-Fix: need to be able to create tools_build_dir.
+#
 # Revision 1.2  1999/10/29 23:09:50  houghton
 # Changed to use MakeConfigs-(ver) vs MakeConfigs.
 #
