@@ -31,13 +31,14 @@ PROD_LIB_DIR	= $(PROD_DIR)/lib
 PROD_INC_DIR	= $(PROD_DIR)/include
 
 MAJOR_VER	= 2
-MINOR_VER	= 00.00.b.04
+MINOR_VER	= 00.00.b.05
 VERSION		= $(MAJOR_VER).$(MINOR_VER)
 
 LIBRARY		= libCommon.a
 
 PROTO_H	= _Common_Proto.h
 
+include ../arch/$(arch)/Makefile.common
 
 # *****  D E F I N E S  *****
 #
@@ -153,6 +154,7 @@ C_SOURCES	=			\
 	YearMonthDayToTimeT.c           \
 	_ArgString.c                    \
 	_LoggerFileName.c               \
+	$(ARCH_C_SOURCES)		\
 
 
 USER_H_INCS	=			\
@@ -269,6 +271,11 @@ include .depend
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.3  1995/10/31  12:38:30  houghton
+# Move version info from CommonVersion.h to _Common.h
+# Use MakeConfigs 3.3
+# Update ErrorStrings for all CommonErrorType values
+#
 # Revision 2.2  1995/10/30  14:55:15  houghton
 # Move contents of Bit.h & DateTime.h to Common.h
 # Add Net2Host
