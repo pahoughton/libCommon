@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/10/29  13:33:44  houghton
+ * Initial Linux Build of Version 2
+ *
  * Revision 2.1  1995/10/29  12:01:21  houghton
  * Change Version Id String
  *
@@ -104,7 +107,7 @@ StringToDouble(
 
   if( fract > 0 )
     {
-      value = value * pow( 10, -1 * fract );
+      value = value * pow( (double)10, (double)(-1 * fract) );
     }
 
   return( value );
