@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/10/29  18:16:01  houghton
+ * Fixes for Borland 4.0 Port
+ *
  * Revision 2.1  1995/10/29  12:01:20  houghton
  * Change Version Id String
  *
@@ -44,12 +47,8 @@
 #include "_Common.h"
 
 #include <stdio.h>
-
-#ifdef OPENVMS
-#include <unixio.h>
-#else
 #include <sys/stat.h>
-#endif
+#include <unistd.h>
 
 COMMON_VERSION(
   LoggerTrim,
@@ -57,34 +56,49 @@ COMMON_VERSION(
 
 
 
-extern long _CLogMaxSize;     /* = 0 */
-extern long _CLogTrim;        /* = 0 */
+extern LogOutFileType   _CLogFileType;	/* _LoggerDefault.c */
+extern char *		_CLogFilePath;	/* _LoggerFileName.c */
+extern char *		_CLogFileName;	/* _LoggerFileName.c */
 
-extern char * _CLogFilePath;
-extern char * _CLogFileName;
+extern long		_CLogMaxSize;   /* _LoggerDefault.c */
+extern long		_CLogTrim;      /* _LoggerDefault.c */
 
-void
+extern FILE *		_CLogFP;	/* _LoggerDefault.c */
+
+Ret_Status
 LoggerTrim( void )
 {
 
-  FILE * newLogFp;
-  FILE * logFp;
+  FILE *	newLogFp;
+  FILE *	tempFp;
+  struct stat	statBuf;
   
-  char logFn[1024];
-  char newLogFn[1024];
-  char line[2048];
+  const char *  tempFn;
+  char		newLogFn[ COMMON_PATH_MAX + FILENAME_MAX + 10 ];
+  char		line[2048];
 
-  struct stat statBuf;
-  long         newSize = 0;
-  long	       skipCount = 0;
-  
-  sprintf( logFn,"%s/trim.log",_CLogFilePath );
-  
-  _LoggerFileName( newLogFn, sizeof( logFn ) );
+  long		newSize = 0;
+  long		skipCount = 0;
 
-  if( stat( newLogFn, &statBuf ) != 0 )
+  if( _CLogFileType == LOG_STDOUT )
+    return( RET_SUCCEED );
+
+  tempFn = TempFileName( _CLogFilePath, "log.trim." );
+
+  if( tempFn == NULL )
+    return( RET_ERROR );
+  
+  if( _CLogFP != NULL )
     {
-      return;
+      fclose( _CLogFP );
+      _CLogFP = NULL;
+    }
+  
+  _LoggerFileName( newLogFn, sizeof( newLogFn ) );
+
+  if( stat( newLogFn, &statBuf ) != 0 )	    /* file not found so it's empty */
+    {      
+      return( RET_SUCCEED );
     }
 
   if( _CLogTrim == 0 )
@@ -96,24 +110,31 @@ LoggerTrim( void )
 
   skipCount = statBuf.st_size - newSize;
   
-  rename( newLogFn, logFn );
-
-  if( (logFp = fopen( logFn, "r" )) == NULL )
+  if( rename( newLogFn, tempFn ) != 0 )
     {
-      rename( logFn, newLogFn );
-      return;
+      COMMON_RETURN_TYPE_ERROR( ET_OSERROR, errno,
+				( "can't rename %s to %s",
+				  newLogFn, tempFn ) );
+    }
+
+  if( (tempFp = fopen( tempFn, "r" )) == NULL )
+    {
+      COMMON_RETURN_TYPE_ERROR( ET_OSERROR, errno,
+				( "can't open %s for reading",
+				  tempFn ) );
     }
 
   if( (newLogFp = fopen( newLogFn, "w" ) ) == NULL )
     {
-      fclose( logFp );
-      remove( logFn );
-      rename( logFn, newLogFn );
+      fclose( tempFp );
+      remove( tempFn );
+      rename( tempFn, newLogFn );
+      COMMON_RETURN_TYPE_ERROR( ET_OSERROR, errno,
+				( "can't open %s for writing",
+				  newLogFn ) );
     }
 
-  
-  
-  while( fgets( line, sizeof(line), logFp ) != NULL )
+  while( fgets( line, sizeof(line), tempFp ) != NULL )
     {
       if( skipCount > 0 )
 	{
@@ -121,14 +142,24 @@ LoggerTrim( void )
 	}
       else
 	{
-	  fputs( line, newLogFp );
+	  int count = fputs( line, newLogFp );
+	  
+	  if( count != strlen( line ) )
+	    {	      
+	      fclose( newLogFp );
+	      fclose( tempFp );
+	      remove( tempFn );
+	      COMMON_RETURN_TYPE_ERROR( ET_OSERROR, errno,
+					( "wrote %d to '%s' tried %d",
+					  count, newLogFn, strlen( line ) ) );
+	    }
 	}
     }
 
   fclose( newLogFp );
-  fclose( logFp );
-  remove( logFn );
-  
+  fclose( tempFp );
+  remove( tempFn );
+  return( RET_SUCCEED );
 }
 
 
