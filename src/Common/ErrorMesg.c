@@ -16,6 +16,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1997/05/07 11:36:56  houghton
+ * Cleanup
+ *
  * Revision 2.2  1997/03/03 14:12:38  houghton
  * Bug-Fix: changed ErrorMesg arg type to const char *.
  *
@@ -31,12 +34,6 @@ COMMON_VERSION(
   ErrorMesg,
   "$Id$" );
 
-extern const char *	_CommonErrorSetFile;	/* SetError.c */
-extern long		_CommonErrorSetLine;	/* SetError.c */
-extern CommonErrorType	_CommonErrorSetType;	/* SetError.c */
-extern int		_CommonErrorSetValue;	/* SetError.c */
-extern void *		_CommonErrorSetClosure; /* SetError.c */
-
 int
 ErrorMesg( const char * mesgFormat, ... )
 {
@@ -45,12 +42,12 @@ ErrorMesg( const char * mesgFormat, ... )
 
   va_start( args, mesgFormat );
   
-  ret = ErrorArgs( _CommonErrorSetFile,
-		   _CommonErrorSetLine,
-		   _CommonErrorSetType,
-		   _CommonErrorSetValue,
-		   _CommonErrorSetClosure,
-		   CommonErrorDesc,
+  ret = ErrorArgs( CommonErrFile,
+		   CommonErrLine,
+		   CommonErrType,
+		   CommonErrValue,
+		   CommonErrClosure,
+		   CommonErrDesc,
 		   mesgFormat,
 		   args);
 

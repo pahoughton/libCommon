@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/11/10 00:56:07  houghton
+ * Initial Version
+ *
  *
  *********************************************************************/
 
@@ -37,6 +40,6 @@ _CommonErrorDesc( const char * fmt, ... )
 
   vsprintf( Desc, fmt, args );
 
-  CommonErrorDesc = Desc;
+  CommonErrDesc = Desc;
 }
 

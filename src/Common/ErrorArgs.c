@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/11/10 00:48:34  houghton
+ * Initial Version
+ *
  *
  *********************************************************************/
 
@@ -26,18 +29,6 @@ COMMON_VERSION(
 
 CommonErrorHandler	_CommonHandleError  = _CommonDefaultErrorHandler;
 void *			_CommonClosureError = NULL;
-
-extern const char *	_CommonErrorSetFile;	/* SetError.c */
-extern long		_CommonErrorSetLine;	/* SetError.c */
-extern CommonErrorType	_CommonErrorSetType;	/* SetError.c */
-extern int		_CommonErrorSetValue;	/* SetError.c */
-extern void *		_CommonErrorSetClosure; /* SetError.c */
-
-
-CommonError	CommonErrno	= EC_NONE;
-const char *	CommonErrorDesc	= NULL;
-const char *	CommonErrorFile = NULL;
-long		CommonErrorLine = 0;
 
 int
 ErrorArgs(
@@ -58,20 +49,15 @@ ErrorArgs(
 				errorType,
 				errorValue,
 				( ( errorDesc == NULL ) ?
-				  CommonErrorDesc : errorDesc ),
+				  CommonErrDesc : errorDesc ),
 				mesgFormat,
 				args );
 
-  CommonErrno = EC_NONE;
-  CommonErrorDesc = NULL;
-  CommonErrorFile = NULL;
-  CommonErrorLine = 0;
-
-  _CommonErrorSetFile	    = NULL;
-  _CommonErrorSetLine	    = 0;
-  _CommonErrorSetType	    = ET_NONE;
-  _CommonErrorSetValue	    = 0;
-  _CommonErrorSetClosure    = 0;
+  CommonErrFile	    = NULL;
+  CommonErrLine	    = 0;
+  CommonErrType	    = ET_NONE;
+  CommonErrValue    = 0;
+  CommonErrClosure  = 0;
 
   return( ret );
 }

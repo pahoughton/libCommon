@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1997/05/07 11:36:57  houghton
+ * Cleanup
+ *
  * Revision 2.1  1995/11/10 00:56:06  houghton
  * Initial Version
  *
@@ -27,12 +30,12 @@ COMMON_VERSION(
   SetError,
   "$Id$" );
 
-const char *	_CommonErrorSetFile	= NULL;
-long		_CommonErrorSetLine	= 0;
-CommonErrorType	_CommonErrorSetType	= ET_NONE;
-int		_CommonErrorSetValue	= 0;
-void *		_CommonErrorSetClosure	= 0;
-
+const char *	CommonErrFile	    = NULL;
+long		CommonErrLine	    = 0;
+CommonErrorType	CommonErrType	    = ET_NONE;
+CommonError	CommonErrValue	    = 0;
+void *		CommonErrClosure    = NULL;
+const char *	CommonErrDesc	    = NULL;
 
 void
 SetError(
@@ -45,13 +48,14 @@ SetError(
   )
 {
  
-  _CommonErrorSetFile	    = srcFileName;
-  _CommonErrorSetLine	    = srcLineNumber;
-  _CommonErrorSetType	    = errorType;
-  _CommonErrorSetValue	    = errorValue;
-  _CommonErrorSetClosure    = closure;
+  CommonErrFile		= srcFileName;
+  CommonErrLine		= srcLineNumber;
+  CommonErrType		= errorType;
+  CommonErrValue	= errorValue;
+  CommonErrClosure	= closure;
+  
   if( errorDesc )
-    CommonErrorDesc = errorDesc;
+    CommonErrDesc = errorDesc;
   
 }
  
