@@ -18,6 +18,9 @@
  *
  *     			
  * $Log$
+ * Revision 1.8  1994/06/20  15:28:38  dpotluri
+ * LibCommon Port to OPENVMS
+ *
  * Revision 1.7  1994/06/20  10:27:18  houghton
  * Porting and add LoggerLoc function
  *
@@ -153,6 +156,10 @@ Ret_Status ArgEnvString( int * argc, char *argv[],
 		  const char * argid, const char * envVar,
 	          char ** paramVar );
 
+Ret_Status ArgEnvDouble( int * argc, char * argv[],
+			 const char * argid, const char * envVar,
+			 double * paramVar );
+
 /**************************************************************
  * L O G G I N G 
  **************************************************************/
@@ -203,6 +210,8 @@ void Logger( const char * msgFmt, ... );
 Bool LoggerLoc( Bool state );
 void LoggerTrim( void );
 int  LogLevelFromString( const char * levelString );
+const char * LogLevelString( LogBit lvl );
+
 
 extern int	  _CLogOutputLevel;
 extern LogBit     _CLogCurMesgLevel;
@@ -233,7 +242,7 @@ extern int  	    _CLogLocLine;
 #define IsBaseDigit( _d_, _b_ ) (CharToInt(_d_) >= 0 && CharToInt(_d_) < _b_ )
 
 #define SafeStrcpy( _dest_, _src_, _size_ );    \
-strncpy( _dest_, _src_, _size_ - 2); _dest_[_size_ - 2] = 0;
+strncpy( _dest_, _src_, _size_); _dest_[_size_ - 1] = 0;
     
 #define basename(_path_) (strrchr( _path_, '/' ) + 1)
 
@@ -307,15 +316,19 @@ void * AvlFind( AvlTree tree, const void * key );
 unsigned long    AvlCount( AvlTree tree );
 
 void AvlDispose( AvlTree * treeptr,
-		 void      (*action)( void * data, void * closure ),
+		 void      (*action)( void * data,
+				      AvlVisit order,
+				      void * closure ),
   		 AvlSiblingOrder  sibling_order,
 		 void *	   closure );
+
 void AvlWalk( AvlTree      tree,
 	      void          (*action)( void * data, AvlVisit order,
 				       AvlNodeType node, int level,
 				       short bal, void * closure),
 	      AvlSiblingOrder  sibling_order,
 	      void * 	   closure );
+
 void * AvlDelMin( AvlTree  tree );
 void * AvlFindMin( AvlTree  tree );
 void * AvlDelMax( AvlTree  tree );
@@ -337,6 +350,10 @@ const char * CommonGetVersion( void );
 
 #ifndef min
 #define min( _a_, _b_ ) ( ( (_a_) > (_b_) ) ? (_b_) : (_a_) )
+#endif 
+
+#ifndef max
+#define max( _a_, _b_ ) ( ( (_a_) < (_b_) ) ? (_b_) : (_a_) )
 #endif 
 
 #ifdef __cplusplus

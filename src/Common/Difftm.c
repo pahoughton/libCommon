@@ -22,6 +22,9 @@
 *	Modification History:
 *
 *	$Log$
+ * Revision 1.2  1994/06/17  18:03:58  houghton
+ * Cleanup for beta release.
+ *
  * Revision 1.1  1994/01/31  14:06:13  houghton
  * Add avl and some other minor functions
  *
@@ -50,5 +53,5 @@ time_t Difftm(struct tm *t1, struct tm *t2)
 	
 
 /*
- * Public Domain - on copyright
+ * Public Domain - no copyright
  */

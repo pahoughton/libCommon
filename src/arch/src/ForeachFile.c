@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.4  1994/06/20  15:28:40  dpotluri
+ * LibCommon Port to OPENVMS
+ *
  * Revision 1.3  1994/06/17  18:03:59  houghton
  * Cleanup for beta release.
  *
@@ -45,7 +48,7 @@ static const char RcsId[] =
 
 Ret_Status
 ForeachFile(
-    const char *    name,
+    const char *    dirName,
     Ret_Status      (*fileProc)( const char * name, void * closure ),
     Bool    	    recurs,
     void *  	    closure 
@@ -56,7 +59,7 @@ ForeachFile(
   struct stat	fileStat;
   
   
-  if( stat( name, &fileStat ) != 0 )
+  if( stat( dirName, &fileStat ) != 0 )
     {
       SET_ERROR( C_EOSERROR );
       return( RET_ERROR );
@@ -68,7 +71,7 @@ ForeachFile(
       DIR	    	*dir;
       struct dirent	*dirInfo;
       
-      if( (dir = opendir( name ) ) == NULL )
+      if( (dir = opendir( dirName ) ) == NULL )
 	{
 	  SET_ERROR( C_EOSERROR );
 	  return( RET_ERROR );
@@ -82,7 +85,7 @@ ForeachFile(
 	    {
 	      continue;
 	    }
-	  pathName = malloc( strlen( name ) +
+	  pathName = malloc( strlen( dirName ) +
 			     strlen( dirInfo->d_name ) +
 			     2 );
 	  
@@ -92,7 +95,7 @@ ForeachFile(
 	      return( RET_ERROR );
 	    }
 	  
-	  sprintf( pathName,"%s/%s",name, dirInfo->d_name );
+	  sprintf( pathName,"%s/%s",dirName, dirInfo->d_name );
 	  
 	  if( S_ISDIR( fileStat.st_mode ) == TRUE  && recurs == TRUE )
 	    {
@@ -116,7 +119,7 @@ ForeachFile(
     }
   else
     {
-      if( fileProc( name, closure ) != 0 )
+      if( fileProc( dirName, closure ) != 0 )
 	{
 	  return( RET_ERROR );
 	}

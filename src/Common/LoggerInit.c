@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1994/06/17  18:07:29  houghton
+ * Cool new Logger function
+ *
  *
  *********************************************************************/
 static const char RcsId[] =
@@ -28,7 +31,7 @@ static const char RcsId[] =
 #include <Common.h>
 
 char _CLogFilePath[256] = ".";
-char _CLogFileName[256] = "prog.log";
+char _CLogFileName[256] = "program.log";
 
 int _CLogFileType    = LOG_REOPEN;
 long _CLogMaxSize    = 0;

@@ -11,6 +11,9 @@
 * Fri Jul 14 13:53:42 1989, Rev 1.0, brad(0165)
 *
 * $Log$
+ * Revision 1.3  1994/06/17  18:04:03  houghton
+ * Cleanup for beta release.
+ *
 *
 **/
 
@@ -555,7 +558,7 @@ static     void
 avl_free( 
     AVLdescriptor  *avlDesc,
     AVLtree        *rootp,
-    void           (*action)( void * data, void * closure),
+    void           (*action)( void * data, AvlVisit order, void * closure),
     void *	   closure,
     AvlSiblingOrder  sibling_order,
     int            level
@@ -568,21 +571,21 @@ avl_free(
   if ( *rootp != NULL_TREE )  {
     
     if ( action != NULL_ACTION )
-      (*action)( (*rootp) -> data, closure );
+      (*action)( (*rootp) -> data, AVL_PREORDER, closure );
     
     if ( (*rootp) -> subtree[ dir1 ]  !=  NULL_TREE )
       avl_free( avlDesc, &( (*rootp) -> subtree[ dir1 ] ),
 		action, closure, sibling_order, level+1 );
     
     if ( action != NULL_ACTION )
-      (*action)( (*rootp) -> data, closure );
+      (*action)( (*rootp) -> data, AVL_INORDER, closure );
     
     if ( (*rootp) -> subtree[ dir2 ]  !=  NULL_TREE )
       avl_free( avlDesc, &( (*rootp) -> subtree[ dir2 ] ),
 		action, closure, sibling_order, level+1 );
     
     if ( action != NULL_ACTION )
-      (*action)( (*rootp) -> data, closure );
+      (*action)( (*rootp) -> data, AVL_POSTORDER, closure );
     
     free_node( avlDesc,  rootp );
   }/* if non-empty tree */
@@ -742,7 +745,7 @@ AvlGetRoot( AvlTree  avlTree )
 void
 AvlDispose( 
     AvlTree *        treeptr,
-    void             (*action)( void * data, void * closure ),
+    void             (*action)( void * data, AvlVisit order, void * closure ),
     AvlSiblingOrder  sibling_order,
     void *	     closure
     )
