@@ -1,4 +1,3 @@
-#
 # -*- Makefile -*- for Common
 #
 # Created: 4/17/96 using MakeConfigs 5.01.00.a.02
@@ -108,7 +107,7 @@ SHARED_CXX_FLAGS	= $(cxx_optimize)
 
 # **** S H A R E D   D E P   L I B S *****
 
-SHDEP_LIBS		= -lc
+SHDEP_LIBS		= -lc -lm
 
 # **** I N S T A L L ****
 
@@ -263,6 +262,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.12  1996/04/27 12:26:32  houghton
+# Changed to use MakeConfigs 5
+#
 # Revision 2.11  1996/03/04 11:45:22  houghton
 # Bug Fix: profile change dependancy to objects/profile
 #
