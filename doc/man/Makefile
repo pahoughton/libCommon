@@ -19,7 +19,7 @@
 #   $Id$
 # 
 
-make_cfg_ver	= 5.01
+make_cfg_ver	= 5.02
 
 include Make/make.cfg.$(make_cfg_ver)
 
@@ -136,6 +136,9 @@ install.man: $(MAN_DIR) $(MAN_PAGES)
 
 #
 # $Log$
+# Revision 2.2  1997/05/07 12:23:36  houghton
+# Cleanup.
+#
 # Revision 2.1  1997/05/07 12:18:27  houghton
 # Initial Version.
 #

@@ -10,7 +10,7 @@
 # Do not modifiy 'makefile_type'
 makefile_type   = lib
 # This is the make.cfg version that will be used
-make_cfg_ver	= 5.01
+make_cfg_ver	= 5.02
 # Default target type
 make_target	= default
 # Uncomment 'show_compile_command' to output compile command.
@@ -224,7 +224,7 @@ C_HEADERS	=			\
 include Make/make.cfg.targets.$(makefile_type).$(make_cfg_ver)
 
 
-default debug profile shared:: proto
+default debug profile shared:: $(generated_files)
 
 default:: $(LIBRARY_$($(make_target)))
 
@@ -263,6 +263,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.24  1997/08/24 21:50:04  houghton
+# Changed version number.
+#
 # Revision 2.23  1997/05/07 11:37:12  houghton
 # Changed version number.
 #
