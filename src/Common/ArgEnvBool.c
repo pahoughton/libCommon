@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.4  1995/11/10  00:42:10  houghton
+ * Modified to use new Error processing routines
+ *
  * Revision 2.3  1995/10/29  13:33:39  houghton
  * Initial Linux Build of Version 2
  *
@@ -40,8 +43,8 @@
 
 #include "_Common.h"
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 COMMON_VERSION(
   ArgEnvBool,

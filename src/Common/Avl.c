@@ -11,6 +11,9 @@
  * Fri Jul 14 13:53:42 1989, Rev 1.0, brad(0165)
  *
  * $Log$
+ * Revision 2.4  1995/11/10  00:44:05  houghton
+ * Modified to use new Error processing routines
+ *
  * Revision 2.3  1995/10/29  18:15:54  houghton
  * Fixes for Borland 4.0 Port
  *
@@ -43,13 +46,13 @@
 
 #if !defined( COMMON_SHORT_FN )
 #include "_Common.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "_AvlTypes.h"
 #else
 #include "_Common.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "_AvlTyps.h"
 #endif
 
