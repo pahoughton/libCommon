@@ -37,7 +37,7 @@ YearMonthDayToTimeT(
   long  seconds = 0;
   int	leapCount = 0;
   
-  if( year )
+  if( year >= 0 )
     {
       /* this is a best guess for 2 digit years */
       if( year > 100 )
@@ -105,6 +105,9 @@ YearMonthDayToTimeT(
  * Revision Log:
  *
  * $Log$
+ * Revision 2.4  1997/09/02 21:34:27  houghton
+ * Port(Sun5): Added include <stdlib>
+ *
  * Revision 2.3  1997/08/24 21:48:56  houghton
  * Bug-Fix: the old algorithm didn't handle pre 1970 dates nore out of
  *     range values correctly. complete rework (actually copy of the
