@@ -32,8 +32,8 @@ INSTALL_LIBDIR	= $(beta_libdir)
 INSTALL_INCDIR	= $(beta_incdir)
 
 VER_MAJOR	= 2
-VER_MINOR	= 00
-VER_RELEASE	= 01.b.05
+VER_MINOR	= 01
+VER_RELEASE	= 01
 VERSION		= $(VER_MAJOR).$(VER_MINOR).$(VER_RELEASE)
 
 LIBRARY_DEFAULT	= lib$(NAME).a
@@ -261,6 +261,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.20  1997/03/26 12:33:38  houghton
+# Changed version number.
+#
 # Revision 2.19  1997/03/13 02:45:39  houghton
 # Changed ver num.
 #
