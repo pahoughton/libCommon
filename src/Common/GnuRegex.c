@@ -3297,8 +3297,8 @@ GnuRe_match (bufp, string, size, pos, regs)
 static boolean group_match_null_string_p( unsigned char ** p,
 					  unsigned char *  end,
 					  register_info_type * reg_info);
-static int bcmp_translate( const unsigned char * s1,
-			   const unsigned char * s2,
+static int bcmp_translate( const char * s1,
+			   const char * s2,
 			   register int    len,
 			   char *          translate);
 
@@ -4768,12 +4768,13 @@ common_op_match_null_string_p (
    
 static int
 bcmp_translate(
-  const unsigned char * s1,
-  const unsigned char * s2,
+  const char * s1,
+  const char * s2,
   register int len,
   char * translate )
 {
-  register const unsigned char *p1 = s1, *p2 = s2;
+  register const unsigned char *p1 = (const unsigned char *)s1,
+                               *p2 = (const unsigned char *)s2;
   while (len)
     {
       if (translate[*p1++] != translate[*p2++]) return 1;

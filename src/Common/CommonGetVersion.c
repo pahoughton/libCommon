@@ -19,6 +19,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/11/10 00:46:11  houghton
+ * Fixed CVS Tag value
+ *
  * Revision 2.1  1995/10/28  19:11:40  houghton
  * Change Version Id String
  *
@@ -60,10 +63,7 @@ const char CommonVersion[] =
 
 #else
 
-"@(#) libCommon - 2.00.00.b.02
-    Compiled: after $Date$
-    CVS Tag: BETA_2_0
-    $Id$\n";
+"@(#) libCommon - 2.00.00.b.02\n    Compiled: after $Date$\n    CVS Tag: BETA_2_0\n    $Id$\n";
 
 #endif
 
