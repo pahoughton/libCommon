@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/28  19:11:42  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:19  houghton
  * Move to Version 2.0
  *
@@ -108,6 +111,11 @@ YearMonthDayToTimeT( int year, int month, int day );
   ( (hour * 60 * 60 ) + (min * 60) + sec )
 
     
+#if !defined( COMMON_HAVE_STRPTIME )
+char *
+strptime( char *buf, const char *format, struct tm *tm);
+#endif
+
   
 #ifdef __cplusplus
 };

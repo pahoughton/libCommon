@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/10/29  13:33:42  houghton
+ * Initial Linux Build of Version 2
+ *
  * Revision 2.1  1995/10/28  19:11:42  houghton
  * Change Version Id String
  *
@@ -48,7 +51,7 @@ DateStringToTimeT( const char * dateString, const char * fmt )
   int month;
   int day;
 
-  int seconds = 0;
+  time_t seconds = 0;
 
 
   if( dateString == NULL )

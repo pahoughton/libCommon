@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/10/29  13:33:39  houghton
+ * Initial Linux Build of Version 2
+ *
  * Revision 2.1  1995/10/28  19:11:35  houghton
  * Change Version Id String
  *
@@ -79,9 +82,7 @@ ArgEnvFlag(
   
   if( envVar != NULL )
     {
-      char *	envStringVal;
-      
-      if( (envStringVal = getenv( envVar ) ) != NULL )
+      if( getenv( envVar ) != NULL )
 	{
 	  *paramVar = TRUE;
 	}

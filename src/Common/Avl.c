@@ -11,6 +11,9 @@
  * Fri Jul 14 13:53:42 1989, Rev 1.0, brad(0165)
  *
  * $Log$
+ * Revision 2.2  1995/10/29  13:33:40  houghton
+ * Initial Linux Build of Version 2
+ *
  * Revision 2.1  1995/10/28  19:11:37  houghton
  * Change Version Id String
  *
@@ -35,17 +38,23 @@
  *
  */
 
+#if !defined( COMMON_SHORT_FN )
+#include "_Common.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "_AvlTypes.h"
+#else
 #include "_Common.h"
-#include "_AvlTypes.h"    /* private types for avl trees */
+#include <stdio.h>
+#include <stdlib.h>
+#include "_AvlTyps.h"
+#endif
 
 COMMON_VERSION(
   Avl,
   "$Id$" );
 
-#define AVL_VERSION	0x41766c01	/* version id Avl1 */
+#define AVL_VERSION	0x41766c01L	/* version id Avl1 */
 
 
 	/* some defines for debugging purposes */
@@ -322,7 +331,7 @@ avl_find(
   int        cmp;
   
   while ( (tree != NULL_TREE) && 
-          (cmp = (*compar)( data, tree -> data, nd_typ ))  )
+	  (cmp = (*compar)( data, tree -> data, nd_typ )) != 0  )
     tree = tree -> subtree[ (cmp < 0) ? LEFT : RIGHT ];
   
   return  ( tree == NULL_TREE ) ? NULL : tree -> data;

@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/10/29  13:33:41  houghton
+ * Initial Linux Build of Version 2
+ *
  * Revision 2.1  1995/10/28  19:18:18  houghton
  * New for version 2.0
  *
@@ -45,7 +48,7 @@ extern "C" {
 #define COMMON_PRJ_VER_TAG  "BETA_2_0_0_2"
 
 #define COMMON_VERSION( name_, verId_ )					      \
-const char COMMONVER_##name[] =						      \
+const char COMMONVER_##name_[] =						      \
 "@(#) " COMMON_PRJ_NAME " - " COMMON_PRJ_VER "\n"			      \
 "    " #name_ " - " __FILE__ " - Compiled: " __DATE__ " "__TIME__ "\n"	      \
 "    " verId_

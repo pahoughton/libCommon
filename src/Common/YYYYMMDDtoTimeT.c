@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/29  12:01:26  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:36  houghton
  * Move to Version 2.0
  *
@@ -28,7 +31,6 @@
 COMMON_VERSION(
   YYYYMMDDtoTimeT,
   "$Id$");
-
 
 time_t 
 YYYYMMDDtoTimeT( const char * yyyymmdd )

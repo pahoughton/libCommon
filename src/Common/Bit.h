@@ -1,56 +1,127 @@
-#ifndef _Bit_h_
-#define _Bit_h_
+#ifndef _DateTime_h_
+#define _DateTime_h_
 /*********************************************************************
  *
- * Title:            Bit.h
+ * Title:            DateTime.h
  *
  * Description:
  *
- *
+ *  Misc date time manipulation functions
  *
  * Notes:
  *
- * Programmer:	    Paul Houghton x2309 - (houghton@shoe.wiltel.com)
+ * Programmer:	    Paul Houghton x2309 - (houghton@shoe)
  *
- * Start Date:	    01/28/95 18:09
+ * Start Date:	    02/14/94 08:33
  *
  * Modification History:
  *
  * $Log$
- * Revision 1.2  1995/03/02  16:39:54  houghton
- * minor mods
+ * Revision 2.1  1995/10/28  19:11:42  houghton
+ * Change Version Id String
  *
- * Revision 1.1  1995/02/13  15:34:12  houghton
+ * Revision 2.0  1995/10/28  17:35:19  houghton
+ * Move to Version 2.0
+ *
+ * Revision 1.4  1995/02/13  15:34:15  houghton
  * New functions and many enhancements to existing functions.
+ *
+ * Revision 1.3  1994/06/20  10:27:19  houghton
+ * Porting and add LoggerLoc function
+ *
+ * Revision 1.2  1994/06/17  18:03:57  houghton
+ * Cleanup for beta release.
+ *
+ * Revision 1.1  1994/06/06  13:23:34  houghton
+ * Avl and DateTime functions added for Rating
  *
  *
  *********************************************************************/
-
-#include <limits.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define Bit( _b_ ) ( 1 << _b_ )
+#define SEC_PER_MIN   60
+#define SEC_PER_HOUR  (60 * SEC_PER_MIN)
+#define SEC_PER_DAY   (24 * SEC_PER_HOUR)
+#define SEC_PER_YEAR  (365 * SEC_PER_DAY)
+#define MIN_PER_HOUR  60
+#include <time.h>
 
-#define CHAR_BITS   CHAR_BIT
-#define SHORT_BITS  (sizeof(short) * CHAR_BITS)
-#define INT_BITS    (sizeof(int) * CHAR_BITS)
-#define LONG_BITS   (sizeof(long) * CHAR_BITS)
+#if !defined( DAYOFWEEK_ENUM )
+#define DAYOFWEEK_ENUM 1
 
-#define CHAR_ALL_BITS	0xff
-#define SHORT_ALL_BITS	0xffff
-#define LONG_ALL_BITS	0xffffffff
-#define INT_ALL_BITS	(( sizeof(int) == sizeof(long)) ? LONG_ALL_BITS : SHORT_ALL_BITS )
+typedef enum {
+  Sunday = 0,
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday
+} DayOfWeek;
 
+#endif
 
+/*
+ * These constants are defined in DateTimeData.c if your linker
+ * has problems finding them (MS-Win) call the LinkDateData function
+ * from main.
+ */
+
+/* function in DataTimeData.c needed for some linkers */
+void LinkDateData( void );  
+ 
+extern const int    DaysInMonth[];
+extern const int    MonthDayOfYear[];
+extern const char * Months[];
+extern const char * AbbrMonths[];
+extern const char * WeekDays[];
+extern const char * AbbrWeekDays[];
+
+BOOL
+IsLeapYear( short year );
+
+time_t
+Difftm( struct tm * t1, struct tm * t2 );
+
+time_t
+YYYYMMDDtoTimeT( const char * yymmdd );
+
+time_t
+YYMMDDtoTimeT( const char * yymmdd );
+
+time_t
+HHMMSStoTimeT( const char * hhmmss );
+
+time_t
+DateStringToTimeT( const char * dateString, const char * fmt );
+
+const char *
+DateStringFromTimeT( char * buf, const char * fmt, time_t sec );
+
+const char *
+DateStringFromTm( char * buf, const char * fmt, const struct tm * tmTime );
+
+time_t
+YearMonthDayToTimeT( int year, int month, int day );
+
+#define HourMinSecToTimeT( hour, min, sec ) \
+  ( (hour * 60 * 60 ) + (min * 60) + sec )
+
+    
+#if !defined( COMMON_HAVE_STRPTIME )
+char *
+strptime( char *buf, const char *format, struct tm *tm);
+#endif
 
 #ifdef __cplusplus
 };
 #endif
 
-#endif /* ! def _Bit_h_ */
+#endif /* ! def _DateTime_h_ */
+
 /**
  *             This software is the sole property of
  *
@@ -64,3 +135,7 @@ extern "C" {
  *                      All Rights Reserved.  
  *
  **/
+/*
+ * Well actually most of it is public domain.
+ */
+   

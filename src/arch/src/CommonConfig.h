@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/10/29  13:33:55  houghton
+ * Initial Linux Build of Version 2
+ *
  * Revision 2.1  1995/10/28  19:19:12  houghton
  * New for Version 2.0
  *
@@ -60,8 +63,8 @@ extern "C" {
 #define COMMON_HAVE_LOCKING	1 /* */
 #define COMMON_HAVE_BASENAME	1 /* */
 #define COMMON_HAVE_GROUPS	1 /* */
-#define COMMON_HAVE_UMODE	1 /* */
-  
+#define COMMON_HAVE_MODE_T	1 /* */
+#define COMMON_HAVE_STRPTIME	1 /* */  
 
 #ifdef __cplusplus
 };

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/29  12:01:20  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:28  houghton
  * Move to Version 2.0
  *
@@ -72,8 +75,8 @@ LoggerTrim( void )
   char line[2048];
 
   struct stat statBuf;
-  int	 newSize = 0;
-  int	 skipCount = 0;
+  long         newSize = 0;
+  long	       skipCount = 0;
   
   sprintf( logFn,"%s/trim.log",_CLogFilePath );
   

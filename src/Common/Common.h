@@ -18,6 +18,9 @@
  *
  *     			
  * $Log$
+ * Revision 2.2  1995/10/29  13:33:41  houghton
+ * Initial Linux Build of Version 2
+ *
  * Revision 2.1  1995/10/28  19:11:39  houghton
  * Change Version Id String
  *
@@ -431,9 +434,9 @@ BOOL
 MemberOfGroup( gid_t grp );
 #endif
 
-#if defined( COMMON_HAVE_UMODE )
+#if defined( COMMON_HAVE_MODE_T )
 const char * 
-FileModeString( umode_t	mode, char * modeString );
+FileModeString( mode_t	mode, char * modeString );
 #endif
 
 #if !defined( COMMON_HAVE_BASENAME )
