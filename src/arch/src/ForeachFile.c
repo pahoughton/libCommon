@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.6  1994/08/15  19:57:04  houghton
+ * Fix RcsId so ident will work
+ *
  * Revision 1.5  1994/07/05  21:39:14  houghton
  * Minor fixes and cleanup header info.
  *
@@ -43,7 +46,9 @@ static const char * RcsId =
 
 
 #define _ALL_SOURCE
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <dirent.h>
 #include <sys/stat.h>
 

@@ -11,6 +11,9 @@
 * Fri Jul 14 13:53:42 1989, Rev 1.0, brad(0165)
 *
 * $Log$
+ * Revision 1.6  1994/12/02  17:25:43  dpotluri
+ * Added locking to Avl Trees
+ *
  * Revision 1.5  1994/08/15  19:57:11  houghton
  * Fix RcsId so ident will work
  *
@@ -34,7 +37,9 @@ static const char * RcsId =
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/sem.h>
+#ifdef AIX
 #include <sys/mode.h>
+#endif
 
 #include "_Common.h"
 #include "avl_typs.h"    /* private types for avl trees */

@@ -16,6 +16,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.4  1994/08/15  19:57:00  houghton
+ * Fix RcsId so ident will work
+ *
  * Revision 1.3  1994/06/20  15:28:39  dpotluri
  * LibCommon Port to OPENVMS
  *
@@ -30,13 +33,13 @@
 static const char * RcsId =
 "$Id$";
 
-#include <stdio.h>
-#include <stdlib.h>
-
 #include <DateTime.h>
 
 const int DaysInMonth[] =
 { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, 0};
+
+const int MonthDayOfYear[] =
+{ 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365, 0};
 
 const char * Months[] =
 {

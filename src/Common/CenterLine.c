@@ -25,6 +25,9 @@
 *	Modification History:
 *
 *	$Log$
+ * Revision 1.4  1994/08/15  19:56:59  houghton
+ * Fix RcsId so ident will work
+ *
  * Revision 1.3  1994/08/15  19:40:17  houghton
  * Cleanup; Rating QA1 Checkin
  *
@@ -61,6 +64,6 @@ char * CenterLine( char * dest, const char *src,int width)
   memset(dest,' ',pad);
   dest[pad] = 0;
   strcat(dest,src);
-  return;
+  return( dest );
 }
 

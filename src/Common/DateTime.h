@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.3  1994/06/20  10:27:19  houghton
+ * Porting and add LoggerLoc function
+ *
  * Revision 1.2  1994/06/17  18:03:57  houghton
  * Cleanup for beta release.
  *
@@ -57,6 +60,7 @@ typedef enum {
 void LinkDateData( void );  
  
 extern const int    DaysInMonth[];
+extern const int    MonthDayOfYear[];
 extern const char * Months[];
 extern const char * AbbrMonths[];
 extern const char * WeekDays[];
@@ -68,11 +72,31 @@ extern const char * AbbrWeekDays[];
 time_t	Difftm( struct tm * t1, struct tm * t2 );
 
 time_t
+YYYYMMDDtoTimeT( const char * yymmdd );
+
+time_t
 YYMMDDtoTimeT( const char * yymmdd );
 
 time_t
 HHMMSStoTimeT( const char * hhmmss );
 
+time_t
+DateStringToTimeT( const char * dateString, const char * fmt );
+
+const char *
+DateStringFromTimeT( char * buf, const char * fmt, time_t sec );
+
+const char *
+DateStringFromTm( char * buf, const char * fmt, const struct tm * tmTime );
+
+time_t
+YearMonthDayToTimeT( int year, int month, int day );
+
+#define HourMinSecToTimeT( hour, min, sec ) \
+  ( (hour * 60 * 60 ) + (min * 60) + sec )
+
+    
+  
 #ifdef __cplusplus
 };
 #endif

@@ -19,6 +19,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.3  1994/08/15  19:57:01  houghton
+ * Fix RcsId so ident will work
+ *
  * Revision 1.2  1994/06/17  18:03:58  houghton
  * Cleanup for beta release.
  *
@@ -30,6 +33,7 @@
 static const char * RcsId =
 "$Id$";
 
+#include <stdio.h>
 #include "_Common.h"
 
 static char * ErrorDescription[] =
@@ -47,7 +51,7 @@ const char *
 ErrorString( CommonErrorType error )
 {
  
-  if( error < 0 || error > C_EUNDEFINED )
+  if( error > C_EUNDEFINED )
     {
       sprintf( UnknownString, "Unknown Error: %d", error );
       return( UnknownString );

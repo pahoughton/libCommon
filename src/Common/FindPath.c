@@ -1,24 +1,29 @@
 /*********************************************************************
  *
- * Title:            FindPath.c
+ * Title            FindPath.c
  *
- * Description:
+ * Description
  *
+ *  	Find an executable file in either the path parameter or
+ *	the PATH environment varialbe (if path is NULL).
  *	
  *
- * Notes:
+ * Notes
  *
  *   SEE end of file for original Copywrite and notices
  *   This module is covered by GPL
  *
- * Programmer:	    Jeff Nieusma
+ * Author:	    Jeff Nieusma
  *		    Paul Houghton x2309 - (houghton@shoe.wiltel.com)
  *
- * Start Date:	    08/04/94 09:38
+ * Start Date	    08/04/94 09:38
  *
- * Modification History:
+ * Modification History
  *
  * $Log$
+ * Revision 1.2  1994/08/15  19:57:01  houghton
+ * Fix RcsId so ident will work
+ *
  * Revision 1.1  1994/08/15  19:42:20  houghton
  * Add ArgEnvFlage, ArgEnvLong, CanExecute, FindPath and MemberOfGroup
  * functions
@@ -28,8 +33,14 @@
 static const char * RcsId =
 "$Id$";
 
+#undef _POSIX_SOURCE
+
 #ifdef _AIX
 #define _ALL_SOURCE
+#endif
+
+#ifdef Linux
+#define BSD
 #endif
 
 #include <string.h>
@@ -42,8 +53,15 @@ static const char * RcsId =
 #define PATH_ENV_VAR	"PATH"
 #define PATH_SEP	":"
 
+/*
+ * find it
+ */
 char *
-FindPath( const char * fileName, const char * path )
+FindPath(
+  const char * fileName,	/* name of file to look for (no wild cards) */
+  const char * path		/* colon seperated path or NULL to use
+				 * PATH environment variable */
+  )
 {
 
   char * envPath;

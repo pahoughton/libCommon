@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1994/08/15  19:56:59  houghton
+ * Fix RcsId so ident will work
+ *
  * Revision 1.1  1994/08/15  19:42:19  houghton
  * Add ArgEnvFlage, ArgEnvLong, CanExecute, FindPath and MemberOfGroup
  * functions
@@ -39,7 +42,7 @@ CanExecute( const char * fileName )
   if( stat( fileName, &st ) == 0 &&
       ( ( st.st_uid == geteuid() && ( st.st_mode & S_IXUSR ) ) ||
 	( MemberOfGroup( st.st_gid ) && ( st.st_mode & S_IXGRP ) ) ||
-	( st.st_mode & S_IXUSR ) ) )
+	( st.st_mode & S_IXOTH ) ) )
     {
       return( TRUE );
     }

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1994/08/15  19:56:58  houghton
+ * Fix RcsId so ident will work
+ *
  * Revision 1.1  1994/08/15  19:42:18  houghton
  * Add ArgEnvFlage, ArgEnvLong, CanExecute, FindPath and MemberOfGroup
  * functions
@@ -36,11 +39,9 @@ ArgEnvFlag(
     char *  	  argv[],	/* argv from main */
     const char *  argId,	/* arg identifier string */
     const char *  envVar,	/* env var identfier string */
-    int *   	  paramVar	/* assigned to value on return */
+    Bool *     	  paramVar	/* assigned to value on return */
     )
 {
-  
-  int	paramValue;
     
   if( argId != NULL )
     {

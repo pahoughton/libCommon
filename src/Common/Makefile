@@ -1,84 +1,113 @@
 #
-# Makefile for libCommon.a - a collection of common library functions
+# Makefile for Common
 #
-# Paul Houghton - 09/03/93 11:39 
 #
-# See End of file for modification log
+# Created: 0/22/95
 #
 # $Id$
 #
+# (see end of file for Log info)
 
+#
+# Include standard MakeConfig configuration for GNU make required
+#
 
-include make.cfg
+include Make/make.cfg.2.1
 
+BETA_LIB_DIR	= 
+BETA_INC_DIR	= 
 
-BETA_LIB_DEST	= /usr/local/lib/beta
-BETA_INC_DEST	= /usr/local/include/beta
+PROD_LIB_DIR	= 
+PROD_INC_DIR	= 
 
-PROD_LIB_DEST	= /usr/local/lib
-PROD_INC_DEST	= /usr/local/include
+LIBRARY		= libCommon.a
 
-LIBRARY = libCommon.a
+USER_INCS	=			\
+	Common.h                        \
+	DateTime.h                      \
+	Bit.h				\
+	avl.h                           \
+	avl_typs.h                      \
 
-USER_INCS	= Common.h DateTime.h
-
-PROTO_H = _CommonProto.h
+PROTO_H		= _Common_Proto.h
 
 # **** S O U R C E   F I L E S ****
 
-LIB_C_SOURCES   =   	\
-	ArgEnvInt.c	\
-	ArgEnvLong.c	\
-	ArgEnvBool.c	\
-	ArgEnvString.c	\
-	ArgEnvFlag.c	\
-	ErrorString.c	\
-	strlwr.c	\
-	strupr.c	\
-	LibError.c	\
-	_ArgString.c	\
-	CommonGetVersion.c \
-	CenterLine.c	\
-	Difftm.c	\
-	ForeachFile.c	\
-	FindPath.c	\
-	CanExecute.c	\
-	MemberOfGroup.c \
-	avl.c           \
-	StripSpaces.c	\
-	StringToInt.c   \
-	StringToLong.c	\
-	SetErrorHandler.c \
-	YYMMDDtoTimeT.c \
-	HHMMSStoTimeT.c \
-	DateTimeData.c  \
-	LoggerInit.c    \
-	LoggerTee.c	\
-	Logger.c	\
-	LogLevelFromString.c \
-	LogLevelString.c \
-	LoggerTrim.c    \
-	LoggerLoc.c     \
-	_LoggerFileName.c \
-	InitLocking.c	\
-	$(ARCH_C_SOURCES)
+LIB_C_SOURCES	=			\
+	ArgEnvBool.c                    \
+	ArgEnvDouble.c                  \
+	ArgEnvFlag.c                    \
+	ArgEnvInt.c                     \
+	ArgEnvLong.c                    \
+	ArgEnvString.c                  \
+	CanExecute.c                    \
+	CenterLine.c                    \
+	CommonGetVersion.c              \
+	DateStringToTimeT.c             \
+	DateStringFromTimeT.c		\
+	DateStringFromTm.c		\
+	DateTimeData.c                  \
+	Difftm.c                        \
+	EbcdicToAscii.c                 \
+	ErrorString.c                   \
+	FileModeString.c                \
+	FindPath.c                      \
+	ForeachFile.c                   \
+	HHMMSStoTimeT.c                 \
+	LibError.c                      \
+	LogLevelFromString.c            \
+	LogLevelString.c                \
+	Logger.c                        \
+	LoggerInit.c                    \
+	LoggerLoc.c                     \
+	LoggerTee.c                     \
+	LoggerTrim.c                    \
+	MemberOfGroup.c                 \
+	SetErrorHandler.c               \
+	StringToDouble.c                \
+	StringToInt.c                   \
+	StringToUInt.c                  \
+	StringToShort.c                 \
+	StringToUShort.c                \
+	StringToLong.c                  \
+	StringToULong.c                 \
+	StripSpaces.c                   \
+	YYMMDDtoTimeT.c                 \
+	YYYYMMDDtoTimeT.c               \
+	YearMonthDayToTimeT.c           \
+	_ArgString.c                    \
+	_LoggerFileName.c               \
+	avl.c                           \
+	key_gen.c                       \
+	basename.c			\
+	strdup.c                        \
+	strlwr.c                        \
+	strupr.c                        \
+
+LIB_CXX_SOURCES	=			\
 
 
-ifeq ($(arch),NeXT)
-  ARCH_C_SOURCES  = strdup.c
-endif
-
-
+# 
+# =USE_CURRENT_MAKEFILE=
+# When you re-gen a make file, every thing between 
+# these tags will be kept int the new makefile
+# if you want it re-gen'd, just delete the tags
+#
 # *****  D E F I N E S  *****
+#
+# see MakeConfig(1) for portable library defines
+#
 
 DEFINES		= -D_POSIX_SOURCE 
 
 # *****  I N C L U D E S *****
+#
+# see MakeConfig(1) for portable library includes
+#
 
-TOPDIR		= .
 
-SRCINCDIR	= -I. -I$(TOPDIR)
-PRJINCDIR	= 
+SRCINCDIR	= -I.
+PRJINCDIR	= -I.
 
 INCDIRS		= $(SRCINCDIR)	\
 		  $(PRJINCDIR)
@@ -87,86 +116,73 @@ INCDIRS		= $(SRCINCDIR)	\
 # **** C O M P I L E / C P P ****
 
 CPPOTHER 	=
-CCDEBUG		= -Q -02
+CCDEBUG		= -g
 CCOTHER		=
 
-# ***** L I B R A R I E S *****
-
-LDLIBDIRS	=
-LDLIBS		=
-
-
+INSTALL_LIB_FLAGS	= -m 664
+INSTALL_INC_FLAGS	= -m 664
+INSTALL_MAN_FLAGS	= -m 664
 
 # ***** D E P E N D A N C I E S *****
 
-
+# =USE_CURRENT_MAKEFILE=
 
 all: $(PROTO_H) $(LIBRARY)
 
 
 
-$(LIBRARY): $(LIB_OBJECTS)
+$(LIBRARY): $(LIB_OBJECTS) 
 	$(UPDATELIB) $@ $?
 
-.depend:
-	touch .depend
-	$(MKPROTO) $(CPPFLAGS) $(LIB_C_SOURCES) >$(PROTO_H)
-	$(DEPEND) -f.depend -- $(CPPFLAGS) -- $(LIB_C_SOURCES)
-	sed  's/^\([^ 	].*o:.*\)$(PROTO_H)\(.*\)/\1\2/' .depend >dep.out
-	mv dep.out .depend
-
-depend:
-	touch .depend
-	$(MKPROTO) $(CPPFLAGS) $(LIB_C_SOURCES) >$(PROTO_H)
-	$(DEPEND) -f.depend -- $(CPPFLAGS) -- $(LIB_C_SOURCES)
-	sed  's/^\([^ 	].*o:.*\)$(PROTO_H)\(.*\)/\1\2/' .depend >dep.out
-	mv dep.out .depend
-
-
-test:
-
 clean:
-	rm -f $(LIBRARY) $(LIB_OBJECTS) $(PROTO_H)
+	rm -f $(LIBRARY) $(LIB_OBJECTS) 
+
+realclean:
+	rm -f $(LIBRARY) $(LIB_OBJECTS) $(PROTO_H) .depend.lib TAGS 
 
 install:
-	-( cd $(BETA_LIB_DEST); cp $(LIBRARY) old )
-	-( cd $(BETA_INC_DEST); cp $(USER_INCS) old )
-	cp $(LIBRARY) $(BETA_LIB_DEST)
-	chmod 664 $(BETA_LIB_DEST)/$(LIBRARY)
-	chgrp tools $(BETA_LIB_DEST)/$(LIBRARY)
-	cp $(USER_INCS) $(BETA_INC_DEST)
-	(cd $(BETA_INC_DEST); chmod 664 $(USER_INCS) )
-	(cd $(BETA_INC_DEST); chgrp tools $(USER_INCS) )
-	@echo 'Beta Install Complete!'
+	mkdirhier $(BETA_LIB_DIR)/old
+	mkdirhier $(BETA_INC_DIR)/old
+	-( cd $(BETA_LIB_DIR)/old; rm -f $(LIBRARY); cd ..; mv $(LIBRARY) old )
+	-( cd $(BETA_INC_DIR)/old; rm -f $(USER_INCS); cd ..; mv $(USER_INCS) old )
+	$(INSTALL) $(INSTALL_LIB_FLAGS) $(LIBRARY) $(BETA_LIB_DIR)
+	$(INSTALL) $(INSTALL_INC_FLAGS) $(USER_INCS) $(BETA_INC_DIR)
+	echo 'Beta Install Complete!'
+
 
 install_production:
-	-( cd $(PROD_LIB_DEST); cp $(LIBRARY) old )
-	-( cd $(PROD_INC_DEST); cp $(USER_INCS) old )
-	cp $(LIBRARY) $(PROD_LIB_DEST)
-	chmod 664 $(PROD_LIB_DEST)/$(LIBRARY)
-	chgrp tools $(PROD_LIB_DEST)/$(LIBRARY)
-	cp $(USER_INCS) $(PROD_INC_DEST)
-	(cd $(PROD_INC_DEST); chmod 664 $(USER_INCS) )
-	(cd $(PROD_INC_DEST); chgrp tools $(USER_INCS) )
-	echo 'Production Install Complete!'
+	mkdirhier $(PROD_LIB_DIR)/old
+	mkdirhier $(PROD_INC_DIR)/old
+	-( cd $(PROD_LIB_DIR)/old; rm -f $(LIBRARY); cd ..; mv $(LIBRARY) old )
+	-( cd $(PROD_INC_DIR)/old; rm -f $(USER_INCS); cd ..; mv $(USER_INCS) old )
+	$(INSTALL) $(INSTALL_LIB_FLAGS) $(LIBRARY) $(PROD_LIB_DIR)
+	$(INSTALL) $(INSTALL_INC_FLAGS) $(USER_INCS) $(PROD_INC_DIR)
+	echo 'Beta Install Complete!'
 
-proto: $(PROTO_H)
-
-$(PROTO_H): $(LIB_C_SOURCES)
+proto: 
 	$(MKPROTO) $(CPPFLAGS) $(LIB_C_SOURCES) >$(PROTO_H)
+
+   
+$(PROTO_H): $(LIB_C_SOURCES)
+	$(MKPROTO) $(CPPFLAGS) $(LIB_C_SOURCES) >$@
 
 
 tags: 
-	etags *.h *.c
+	etags -t *.h *.c *.C *.hh
 
+depend: depend.lib
+
+FORCE:
 #
 # include dependancies generated by 'make depend'
 #
-include .depend
+include .depend.lib
 
-
-#
+# 
 # $Log$
+# Revision 1.13  1994/12/02  17:25:42  dpotluri
+# Added locking to Avl Trees
+#
 # Revision 1.12  1994/08/15  19:40:19  houghton
 # Cleanup; Rating QA1 Checkin
 #
@@ -176,5 +192,8 @@ include .depend
 #
 # Revision 1.10  1994/07/13  14:54:01  houghton
 # Sequent port
+#
+# Revision 1.1  1994/01/23  18:16:55  houghton
+# Production release 1.0 of MakeConfig system
 #
 #

@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * Title:            StringToLong.c
+ * Title:            StringToUShort.c
  *
  * Description:
  *
@@ -8,36 +8,23 @@
  *
  * Notes:
  *
- * Programmer:	    Paul Houghton x2309 - (houghton@shoe)
+ * Programmer:	    Paul Houghton x2309 - (houghton@shoe.wiltel.com)
  *
- * Start Date:	    06/16/94 08:19
+ * Start Date:	    02/02/95 15:29
  *
  * Modification History:
  *
  * $Log$
- * Revision 1.4  1994/08/15  19:57:09  houghton
- * Fix RcsId so ident will work
- *
- * Revision 1.3  1994/06/22  16:34:55  dpotluri
- * Port to MSWindows and OPENVMS
- *
- * Revision 1.2  1994/06/20  10:27:20  houghton
- * Porting and add LoggerLoc function
- *
- * Revision 1.1  1994/06/17  18:07:30  houghton
- * Cool new Logger function
- *
  *
  *********************************************************************/
 static const char * RcsId =
 "$Id$";
 
-
 #include "_Common.h"
 #include <ctype.h>
 
-long
-StringToLong(
+unsigned short
+StringToUShort(
     const char * string,
     int		 baseToUse,
     int          len
@@ -46,7 +33,7 @@ StringToLong(
 
   int index = 0;
   int base = 0;
-  long value = 0;
+  unsigned short value = 0;
   
   if( baseToUse == 0 )
     {
@@ -93,3 +80,23 @@ StringToLong(
 
 
 
+
+
+
+
+
+
+
+/**
+ *             This software is the sole property of
+ *
+ *                 The Williams Companies, Inc.
+ *                       1 Williams Center
+ *                         P.O. Box 2400
+ *                      Tulsa, Oklahoma 74102
+ *
+ *        Copyright (c) 1994 by The Williams Companies, Inc.
+ *
+ *                      All Rights Reserved.  
+ *
+ **/

@@ -19,6 +19,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.3  1994/08/15  19:57:10  houghton
+ * Fix RcsId so ident will work
+ *
  * Revision 1.2  1994/06/17  18:04:03  houghton
  * Cleanup for beta release.
  *
@@ -37,31 +40,11 @@ static const char * RcsId =
 time_t 
 YYMMDDtoTimeT( const char * yymmdd )
 {
-  long  timeSeconds = 0;
-  int	leapCount = 0;
-  int   index = 0;
-  
   int	year = ( ( (yymmdd[0] - '0') * 10) + (yymmdd[1] - '0') );
-  int	month = ( ( (yymmdd[2] - '0') * 10) + (yymmdd[3] - '0') ) - 1;
-  int	day = ( ( (yymmdd[4] - '0') * 10) + (yymmdd[5] - '0') ) - 1;
+  int	month = ( ( (yymmdd[2] - '0') * 10) + (yymmdd[3] - '0') );
+  int	day = ( ( (yymmdd[4] - '0') * 10) + (yymmdd[5] - '0') );
 
-  leapCount = ((year - 70) + 2) / 4;
-  
-  timeSeconds = ((year - 70) * SEC_PER_YEAR) + (leapCount * SEC_PER_DAY );
-
-  for( index = 0; index < month; index++ )
-    {
-      timeSeconds += SEC_PER_DAY * DaysInMonth[index];
-    }
-
-  if( IsLeapYear( year ) && month > 2 )
-    {
-      timeSeconds += SEC_PER_DAY;
-    }
-
-  timeSeconds += SEC_PER_DAY * day;
-
-  return( timeSeconds );
+  return( YearMonthDayToTimeT( year, month, day ) );
 }
 
 

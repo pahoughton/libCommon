@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.6  1994/08/15  19:57:06  houghton
+ * Fix RcsId so ident will work
+ *
  * Revision 1.5  1994/08/15  19:40:18  houghton
  * Cleanup; Rating QA1 Checkin
  *
@@ -40,6 +43,7 @@ static const char * RcsId =
 
 #include <stdio.h>
 #include <stdarg.h>
+#include <unistd.h>
 
 #ifdef OPENVMS
 #include <unixio.h>
@@ -86,7 +90,7 @@ Logger(
 	    {
 	      if( statBuf.st_size > _CLogMaxSize )
 		{
-		  close( _CLogFP );
+		  fclose( _CLogFP );
 		  _CLogFP = NULL;
 		  LoggerTrim();
 		}
@@ -180,7 +184,7 @@ Logger(
   
   if( _CLogFileType == LOG_REOPEN )
     {
-      close( _CLogFP );
+      fclose( _CLogFP );
       _CLogFP = NULL;
     }
   else

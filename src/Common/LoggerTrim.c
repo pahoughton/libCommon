@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.5  1994/08/15  19:57:07  houghton
+ * Fix RcsId so ident will work
+ *
  * Revision 1.4  1994/08/15  19:40:19  houghton
  * Cleanup; Rating QA1 Checkin
  *
@@ -93,7 +96,7 @@ LoggerTrim( void )
 
   if( (newLogFp = fopen( newLogFn, "w" ) ) == NULL )
     {
-      close( logFp );
+      fclose( logFp );
       remove( logFn );
       rename( logFn, newLogFn );
     }

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.5  1994/07/13  14:54:06  houghton
+ * Sequent port
+ *
  * Revision 1.4  1994/06/22  16:34:55  dpotluri
  * Port to MSWindows and OPENVMS
  *
@@ -35,7 +38,7 @@
 #ifdef MSWIN
 #include "_Cproto.h"
 #else
-#include "_CommonProto.h"
+#include "_Common_Proto.h"
 #endif
 
 #endif

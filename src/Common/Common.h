@@ -18,6 +18,9 @@
  *
  *     			
  * $Log$
+ * Revision 1.13  1994/12/02  17:25:41  dpotluri
+ * Added locking to Avl Trees
+ *
  * Revision 1.12  1994/08/15  19:40:17  houghton
  * Cleanup; Rating QA1 Checkin
  *
@@ -159,26 +162,26 @@ const char * ErrorString( CommonErrorType error );
  * A R G / E N V   P r o c e s s i n g 
  **************************************************************/
 
-    
+
 Ret_Status ArgEnvInt( int * argc, char *argv[],
-	       const char * argid, const char * envVar,
-	       int min, int max, int * paramVar );
+		      const char * argid, const char * envVar,
+		      int min, int max, int * paramVar );
 
 Ret_Status ArgEnvLong( int * argc, char *argv[],
-	       const char * argid, const char * envVar,
-	       long min, long max, long * paramVar );
+		       const char * argid, const char * envVar,
+		       long min, long max, long * paramVar );
 
 Ret_Status ArgEnvBool( int * argc, char *argv[],
-		const char * argid, const char * envVar,
-	        int * paramVar );
+		       const char * argid, const char * envVar,
+		       int * paramVar );
 
 Ret_Status ArgEnvFlag( int * argc, char *argv[],
-		const char * argid, const char * envVar,
-	        int * paramVar );
+		       const char * argid, const char * envVar,
+		       Bool * paramVar );
 
 Ret_Status ArgEnvString( int * argc, char *argv[],
-		  const char * argid, const char * envVar,
-	          char ** paramVar );
+			 const char * argid, const char * envVar,
+			 char ** paramVar );
 
 Ret_Status ArgEnvDouble( int * argc, char * argv[],
 			 const char * argid, const char * envVar,
@@ -270,8 +273,9 @@ extern int  	    _CLogLocLine;
 #define SafeStrcpy( _dest_, _src_, _size_ );    \
 strncpy( _dest_, _src_, _size_); _dest_[_size_ - 1] = 0;
     
-#define basename(_path_)  \
-  ( ( strrchr( _path_, '/' ) == 0) ? _path_ : (strrchr( _path_, '/' ) + 1) )
+#if !defined( Linux )
+const char * basename( const char * path );
+#endif
 
 char * strlwr( char * str );
 char * strupr( char * str );
@@ -279,8 +283,13 @@ char * strupr( char * str );
 char * strdup( const char *);
 #endif
 
-int   StringToInt( const char * str, int base, int len );
-long  StringToLong( const char * str, int base, int len );
+int   	    	StringToInt( const char * str, int base, int len );
+unsigned int   	StringToUInt( const char * str, int base, int len );
+short	    	StringToShort( const char * str, int base, int len );
+unsigned short	StringToUShort( const char * str, int base, int len );
+long  	    	StringToLong( const char * str, int base, int len );
+unsigned long   StringToULong( const char * str, int base, int len );
+double 	    	StringToDouble( const char * str, int bash, int len );
 
 char * CenterLine( char * dest, const char * src, int width );
 void StripSpaces( char * buffer );
@@ -291,6 +300,12 @@ void StripSpaces( char * buffer );
  **************************************************************/
       
 #include <DateTime.h>
+
+/**************************************************************
+ * Bit manipulation
+ **************************************************************/
+
+#include <Bit.h>
 
 /**************************************************************
  * A V L - Balanced Binary Tree
@@ -389,6 +404,11 @@ Ret_Status ForeachFile(
 
 char * FindPath( const char * fileName, const char * path );
 Bool CanExecute( const char * fullFileName );
+#if defined(AIX)
+typedef unsigned short umode_t;
+#endif
+const char * FileModeString( umode_t mode, char * modeString ); 
+
 
 #ifdef _POSIX_SOURCE
 Bool MemberOfGroup( gid_t grp );
