@@ -1,12 +1,13 @@
 #
-#
 # Title:        Makefile
-# Project:	
+# Project:	Common
 # Desc:
 # 
 #   Makefile for Common
 # 
 # Notes:
+#
+#   This Makefile requres MakeConfig and GNU's make version 3.75
 #
 #   Try 'make help' for a list of standard targets.
 # 
@@ -36,7 +37,7 @@
 #
 
 makefile_type   = lib
-make_cfg_ver	= 5.04
+make_cfg_ver	= 5.05
 make_target	= default
 show_commands 	= # true
 proto_dep	= true
@@ -69,7 +70,7 @@ LIBRARY_DEFAULT	= lib$(NAME).a
 LIBRARY_DEBUG	= lib$(NAME)_g.a
 LIBRARY_TEST	= lib$(NAME)_tg.a
 LIBRARY_PROFILE	= lib$(NAME)_pg.a
-LIBRARY_SHARED	= lib$(NAME)$(shlib_ext)
+LIBRARY_SHARED	= lib$(NAME)_s.$(shlib_ext)
 
 PROTO_H		= _$(NAME)_Proto.h
 # include any arch specific makefile component
@@ -123,21 +124,21 @@ BISON_FLAGS		=
 #
 
 
-CC_FLAGS		= $(cc_warn) $(ARCH_CC_FLAGS)
+CC_FLAGS		= $(cc_warn) $(ARCH_CC_FLAGS) $(CC_OTHER)
 
-DEFAULT_CC_FLAGS	= $(cc_default) $(cc_optimize_flags)
-DEBUG_CC_FLAGS		= $(cc_debug) $(cc_debug_flags)
-TEST_CC_FLAGS		= $(cc_test) $(cc_debug_flags)
-PROFILE_CC_FLAGS	= $(cc_profile) $(cc_profile_flags)
-SHARED_CC_FLAGS		= $(cc_shared) $(cc_shared_flags) $(cc_optimize_flags)
+DEFAULT_CC_FLAGS	= $(cc_optimize_flags)
+DEBUG_CC_FLAGS		= $(cc_debug_flags)
+TEST_CC_FLAGS		= $(cc_debug_flags)
+PROFILE_CC_FLAGS	= $(cc_profile_flags)
+SHARED_CC_FLAGS		= $(cc_shared_flags) $(cc_optimize_flags)
 
-CXX_FLAGS		= $(cxx_warn) $(ARCH_CXX_FLAGS)
+CXX_FLAGS		= $(cxx_warn) $(ARCH_CXX_FLAGS) $(CXX_OTHER)
 
-DEFAULT_CXX_FLAGS	= $(cxx_default) $(cxx_optimize_flags)
-DEBUG_CXX_FLAGS		= $(cxx_debug) $(cxx_debug_flags)
-TEST_CXX_FLAGS		= $(cxx_test) $(cxx_debug_flags)
-PROFILE_CXX_FLAGS	= $(cxx_profile) $(cxx_profile_flags)
-SHARED_CXX_FLAGS	= $(cxx_shared) $(cxx_shared_flags) $(cxx_optimize_flags)
+DEFAULT_CXX_FLAGS	= $(cxx_optimize_flags)
+DEBUG_CXX_FLAGS		= $(cxx_debug_flags)
+TEST_CXX_FLAGS		= $(cxx_debug_flags)
+PROFILE_CXX_FLAGS	= $(cxx_profile_flags)
+SHARED_CXX_FLAGS	= $(cxx_shared_flags) $(cxx_optimize_flags)
 
 # **** S H A R E D   D E P   L I B S *****
 
@@ -303,6 +304,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.30  1998/03/03 23:56:59  houghton
+# Changed to use MakeConfig 5.04.
+#
 #
 # =MAKEFILE_LOG=
 #
