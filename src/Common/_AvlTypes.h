@@ -53,6 +53,7 @@ typedef struct
   unsigned long	versionId;
   AVLtree	root;	/* pointer to the root node of the tree */
   unsigned long count;	/* number of nodes in the tree */
+  int	    	numberOfUsers;
 } AVLroot;
 
   /* structure which holds information about an AVL tree */

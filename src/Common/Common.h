@@ -18,6 +18,9 @@
  *
  *     			
  * $Log$
+ * Revision 1.12  1994/08/15  19:40:17  houghton
+ * Cleanup; Rating QA1 Checkin
+ *
  * Revision 1.11  1994/07/26  14:37:19  houghton
  * Fix basename in Common.h
  * Fix month in Logger
@@ -357,6 +360,20 @@ void * AvlDelMin( AvlTree  tree );
 void * AvlFindMin( AvlTree  tree );
 void * AvlDelMax( AvlTree  tree );
 void * AvlFindMax ( AvlTree  tree );
+
+/************************************************************/
+/* AvlTree Locking Mechanisms */
+/************************************************************/
+  
+int    AvlLockTree( AvlTree tree, int semId );
+int    AvlUnlockTree( AvlTree tree, int semId  );
+int    AvlWaitForUnlock( AvlTree tree, int semId  );
+int    AvlGetNumberOfUsers( AvlTree tree );
+int    InitLocking(
+    	    	const char * fileName ,
+		int 	     accessFlag,
+    	        const char  keyID );
+
 
 /**************************************************************
  * M I S C   

@@ -60,6 +60,7 @@ LIB_C_SOURCES   =   	\
 	LoggerTrim.c    \
 	LoggerLoc.c     \
 	_LoggerFileName.c \
+	InitLocking.c	\
 	$(ARCH_C_SOURCES)
 
 
@@ -70,7 +71,7 @@ endif
 
 # *****  D E F I N E S  *****
 
-DEFINES		= -D_POSIX_SOURCE
+DEFINES		= -D_POSIX_SOURCE 
 
 # *****  I N C L U D E S *****
 
@@ -86,7 +87,7 @@ INCDIRS		= $(SRCINCDIR)	\
 # **** C O M P I L E / C P P ****
 
 CPPOTHER 	=
-CCDEBUG		= $(CC_OPTIMIZE)
+CCDEBUG		= -Q -02
 CCOTHER		=
 
 # ***** L I B R A R I E S *****
@@ -166,6 +167,9 @@ include .depend
 
 #
 # $Log$
+# Revision 1.12  1994/08/15  19:40:19  houghton
+# Cleanup; Rating QA1 Checkin
+#
 # Revision 1.11  1994/07/26  14:37:22  houghton
 # Fix basename in Common.h
 # Fix month in Logger

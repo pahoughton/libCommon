@@ -11,6 +11,9 @@
 * Fri Jul 14 13:53:42 1989, Rev 1.0, brad(0165)
 *
 * $Log$
+ * Revision 1.5  1994/08/15  19:57:11  houghton
+ * Fix RcsId so ident will work
+ *
  * Revision 1.4  1994/07/05  21:39:15  houghton
  * Minor fixes and cleanup header info.
  *
@@ -25,12 +28,18 @@ static const char * RcsId =
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <fcntl.h>
+
+#define _XOPEN_SOURCE
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/sem.h>
+#include <sys/mode.h>
 
 #include "_Common.h"
 #include "avl_typs.h"    /* private types for avl trees */
 
 #define AVL_VERSION	0x41766c01	/* version id Avl1 */
-
   
 	/* some defines for debugging purposes */
 #ifdef NDEBUG
@@ -596,8 +605,108 @@ avl_free(
 }/* avl_free */
 
 
+/****************************************************************
+ *
+ * Semaphores for Locking/Unlocking
+ *
+ ****************************************************************/
 
+int
+AvlLockTree(
+  AvlTree avlTree ,
+  int	  semId )
+{
+  AVLdescriptor *  avlDesc = (AVLdescriptor *) avlTree;
+  struct sembuf	    semOps[2];
 
+  semOps[0].sem_num = 0;
+  semOps[0].sem_op = 0;
+  semOps[0].sem_flg = 0;
+
+  semOps[1].sem_num = 0;
+  semOps[1].sem_op = 1;
+  semOps[1].sem_flg = 0;
+
+  if ( semop( semId, semOps, 2 ) == -1 )
+    {
+#ifdef LOCK_DEBUG      
+      printf("Error in AvlLockTree:%d \n", errno );
+#endif      
+      return( -1 );
+    }
+  
+  avlDesc->root->numberOfUsers++;
+
+#ifdef LOCK_DEBUG  
+  printf("Debug:AvlLockTree() numberOfUsers:%d \n", avlDesc->root->numberOfUsers );
+#endif
+  
+  return( 0 );
+}
+
+int
+AvlUnlockTree(
+  AvlTree avlTree,
+  int     semId )
+{
+  AVLdescriptor *  avlDesc = (AVLdescriptor *) avlTree;
+  struct sembuf    semOps[2];
+
+  avlDesc->root->numberOfUsers++;
+  
+  semOps[0].sem_num = 0;
+  semOps[0].sem_op = -1;
+  semOps[0].sem_flg = 0;
+
+  if ( semop( semId, semOps, 1 ) == -1 )
+    {
+#ifdef LOCK_DEBUG      
+      printf("Error in AvlUnlockTree:%d \n", errno );
+#endif      
+      return( -1 );
+    }
+#ifdef LOCK_DEBUG  
+  printf("Debug:AvlLockTree() numberOfUsers:%d \n", avlDesc->root->numberOfUsers );
+#endif
+  
+  return(0);
+}    
+
+int
+AvlWaitForUnlock(
+  AvlTree avlTree ,
+  int 	  semId )
+{
+  AVLdescriptor *  avlDesc = (AVLdescriptor *) avlTree;
+  struct sembuf	 semOps[2];
+
+  semOps[0].sem_num = 0;
+  semOps[0].sem_op = 0;
+  semOps[0].sem_flg = 0;
+
+  if ( semop( semId, semOps, 1 ) == -1 )
+    {
+#ifdef LOCK_DEBUG      
+      printf("Error in AvlWaitForUnlock:%d \n", errno );
+#endif      
+      return( -1 );
+    }
+  return(0 );
+}
+
+int
+AvlGetNumberOfUsers(
+  AvlTree avlTree )
+{
+  AVLdescriptor *  avlDesc = (AVLdescriptor *) avlTree;
+
+#ifdef LOCK_DEBUG  
+  printf("Debug:AvlLockTree() numberOfUsers:%d \n", avlDesc->root->numberOfUsers );
+#endif
+  
+  return( avlDesc->root->numberOfUsers );
+}
+  
 /**********************************************************************
 * 
 *		C-interface (public functions) for avl trees 
@@ -659,13 +768,18 @@ AvlInit(
 	avl_desc->freeMem    = avlFree;
 	avl_desc->memClosure = NULL;
       }
-    
+
     avl_desc->compar	= compar;
     
     avl_desc->root->root	= NULL_TREE;
     avl_desc->root->count	= 0;
     avl_desc->root->versionId = AVL_VERSION;
-  
+    avl_desc->root->numberOfUsers = 0;
+
+#ifdef LOCK_DEBUG  
+  printf("Debug:AvlLockTree() numberOfUsers:%d \n", avl_desc->root->numberOfUsers );
+#endif
+
     return  (AvlTree) avl_desc;
 }/* avlinit */
 
