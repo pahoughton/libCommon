@@ -143,8 +143,8 @@ DEBUG_LIBS	= # g
 LDDEBUG		= 
 LDOTHER		=
 
-LDLIBDIRS	=
-LDLIBS		= $(COMMON_ALPHA_LIBS) -lm
+LDLIBDIRS	= -L../src/Common
+LDLIBS		= -lCommons -lm
 
 #
 # =USE_CURRENT_MAKEFILE=
@@ -234,6 +234,9 @@ test:	default
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.3  1995/12/02 02:12:54  houghton
+# Changed to use MakeConfigs Ver 4.
+#
 #
 # =MAKEFILE_LOG=
 #
