@@ -1,6 +1,6 @@
-# -*- Makefile -*- for Common
+# -*- makefile -*- for Common
 #
-# Created: 4/17/96 using MakeConfigs 5.01.00.a.02
+# Created: 3/2/97 using MakeConfigs 5.01.00.a.07
 #
 # $Id$
 #
@@ -28,12 +28,12 @@ include Make/make.cfg.$(make_cfg_ver)
 
 NAME		= Common
 
-INSTALL_LIBDIR	= /usr/local/lib/pers
-INSTALL_INCDIR	= /usr/local/include/pers
+INSTALL_LIBDIR	= $(beta_libdir)
+INSTALL_INCDIR	= $(beta_incdir)
 
 VER_MAJOR	= 2
 VER_MINOR	= 00
-VER_RELEASE	= 00.a.39
+VER_RELEASE	= 01.b.01
 VERSION		= $(VER_MAJOR).$(VER_MINOR).$(VER_RELEASE)
 
 LIBRARY_DEFAULT	= lib$(NAME).a
@@ -42,10 +42,10 @@ LIBRARY_PROFILE	= lib$(NAME)_pg.a
 LIBRARY_SHARED	= lib$(NAME)$(shlib_ext)
 
 PROTO_H		= _$(NAME)_Proto.h
-PRJ_TOPDIR	= .
+PRJ_TOPDIR	= ../..
 
 # include any arch specific makefile component
--include ../arch/$(arch)/Makefile.$(NAME)
+-include $(PRJ_TOPDIR)/src/arch/$(arch)/Makefile.$(NAME)
 
 VPATH		= $(ARCH_VPATH):.
 
@@ -66,13 +66,13 @@ SHARED_DEFINES	= -DCOMMON_SHARED=1
 
 ######  I N C L U D E S #####
 #
-# Config includes available
+# Config includes available (need to use -I)
 #
-# $(local_alpha_inc) 	$(local_beta_inc) 	$(local_inc)
+# $(alpha_incdir) 	$(beta_incdir) 	$(local_incdir)
 #
 
 
-SRC_INC		= $(ARCH_INC) -I. -I$(PRJ_TOPDIR) 
+SRC_INC		= $(ARCH_INC) -I.
 PRJ_INC		= 
 
 
@@ -96,14 +96,14 @@ CC_FLAGS		= $(cc_warn) $(ARCH_CC_FLAGS)
 DEFAULT_CC_FLAGS	= $(cc_optimize)
 DEBUG_CC_FLAGS		= $(cc_debug)
 PROFILE_CC_FLAGS	= $(cc_profile)
-SHARED_CC_FLAGS		= $(cc_optimize)
+SHARED_CC_FLAGS		= $(cc_shared) $(cc_optimize)
 
-CXX_FLAGS		= $(cxx_warn) $(ARCH_CXX_FLAGS) 
+CXX_FLAGS		= $(cxx_warn) $(ARCH_CXX_FLAGS)
 
 DEFAULT_CXX_FLAGS	= $(cxx_optimize)
 DEBUG_CXX_FLAGS		= $(cxx_debug)
 PROFILE_CXX_FLAGS	= $(cxx_profile)
-SHARED_CXX_FLAGS	= $(cxx_optimize)
+SHARED_CXX_FLAGS	= $(cxx_shared) $(cxx_optimize)
 
 # **** S H A R E D   D E P   L I B S *****
 
@@ -111,8 +111,8 @@ SHDEP_LIBS		= -lc -lm
 
 # **** I N S T A L L ****
 
-INSTALL_LIB_FLAGS	= 
-INSTALL_INC_FLAGS	= 
+INSTALL_LIB_FLAGS	= -m 664
+INSTALL_INC_FLAGS	= -m 664
 
 objects/$(make_target)/CommonGetVersion.o: FORCE
 
@@ -235,17 +235,18 @@ all::	default debug profile shared
 
 
 install:: install_lib_check install_$(make_target)
-	$(HIDE) echo Installation Complete!
+	$(hide) echo Installation Complete!
 
 install_all:: install_lib_check
 
 install_all:: install_default install_debug install_profile install_shared
-	$(HIDE) echo Installation Complete!
+	$(hide) echo Installation Complete!
 
 install_default:: default $(INSTALL_LIBDIR)/$(LIBRARY_DEFAULT)
 install_debug::   debug   $(INSTALL_LIBDIR)/$(LIBRARY_DEBUG)
 install_profile:: profile $(INSTALL_LIBDIR)/$(LIBRARY_PROFILE)
 install_shared::  shared  $(INSTALL_LIBDIR)/$(LIBRARY_SHARED)
+	$(hide) chmod +x $(INSTALL_LIBDIR)/$(LIBRARY_SHARED)
 
 
 test::	default
@@ -262,6 +263,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.14  1996/11/06 18:23:16  houghton
+# Changed install dir for personal use.
+#
 # Revision 2.13  1996/05/03 16:10:17  houghton
 # Change SHDEP_LIBS
 #
