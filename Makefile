@@ -42,11 +42,11 @@ setup_exports	    = 				\
 	INSTALL_LIB_DIR=$(INSTALL_LIB_DIR)	\
 	INSTALL_MAN_DIR=$(INSTALL_MAN_DIR)	\
 	show_commands=$(show_commands)		\
-	check_install=$(check_install)		\
+	check_install=$(check_install)
 
 exports			=			\
 	show_commands=$(show_commands)		\
-	check_install=$(check_install)		\
+	check_install=$(check_install)
 
 no_target: help
 
@@ -171,6 +171,9 @@ help_config:
 
 #
 # $Log$
+# Revision 3.6  1999/11/09 10:45:51  houghton
+# Added install_lib_all target.
+#
 # Revision 3.5  1999/11/08 15:17:25  houghton
 # Changed to use $(hide) instead of @.
 #
