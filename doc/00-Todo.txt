@@ -7,7 +7,6 @@
 #   This is the libCommon TODO file it is used to track all
 #   bug reports and enhancement request. It is formated so
 #   a perl script can be used to generate reports.
-#   This file is out of date.
 # 
 # Notes:
 # 
@@ -125,6 +124,9 @@ comp Paul Houghton 7/13/94 08:00
 #                 of completion
 
 # $Log$
+# Revision 3.2  1999/10/29 22:39:21  houghton
+# Updated
+#
 # Revision 3.1  1999/10/29 16:55:57  houghton
 # Changed Version to 3
 #
