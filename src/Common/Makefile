@@ -1,7 +1,7 @@
 #
-# -*- makefile -*- for Common
+# -*- Makefile -*- for Common
 #
-# Created: 11/21/95 using MakeConfigs 4.00.00.a.08
+# Created: 2/26/96 using MakeConfigs 4.01.00.a.02
 #
 # $Id$
 #
@@ -11,10 +11,10 @@
 # Do not modifiy 'makefile_type'
 makefile_type   = library
 # Uncomment 'show_compile_command' to output compile command.
-show_commands = true
+show_commands = # true
 
 # Include standard MakeConfig configuration for GNU make required
-include Make/make.cfg.4.00
+include Make/make.cfg.4.01
 
 # 
 # =USE_CURRENT_MAKEFILE=
@@ -30,7 +30,7 @@ INSTALL_INCDIR	= $(LOCAL_ALPHA_INCDIR)
 
 VER_MAJOR	= 2
 VER_MINOR	= 00
-VER_RELEASE	= 00.a.28
+VER_RELEASE	= 00.a.33
 VERSION		= $(VER_MAJOR).$(VER_MINOR).$(VER_RELEASE)
 
 LIBRARY_DEFAULT	= lib$(NAME).a
@@ -48,12 +48,6 @@ include ../arch/$(arch)/Makefile.Common
 #
 # $(X11_DEF)	    defines for X11
 # $(SYB_DEF)	    defines for SYB
-# $(MMALLOC_DEF)    defines for libmmalloc
-# $(DATA_DEF)	    defines for libData (C++)
-# $(CLUE_DEF)	    defines for libClue (C++)
-# $(COMMON_DEF)	    defines for libCommon
-# $(WT_DEF)	    defines for libWt
-# $(WCF_DEF)	    defines for libWcf (CommFabric)
 #
 
 
@@ -105,6 +99,11 @@ CCOTHER		= $(CC_WARN)
 
 CXXDEBUG	= $(CXX_OPTIMIZE)
 CXXOTHER	= $(CXX_WARN)
+
+
+# **** S H A R E D   D E P   L I B S *****
+
+SHDEPLIBS	= -lc -lm
 
 # **** I N S T A L L ****
 
@@ -211,6 +210,7 @@ C_HEADERS	=			\
 	GnuRegex.h                      \
 	_AvlTypes.h                     \
 	_Common.h                       \
+	_Common_Proto.h                 \
 	$(ARCH_C_HEADERS)               \
 
 
@@ -229,7 +229,7 @@ C_HEADERS	=			\
 #
 
 
-include Make/make.cfg.targets.4.00
+include Make/make.cfg.targets.4.01
 
 
 default debug shared:: proto
@@ -239,13 +239,11 @@ default:: objects/default $(LIBRARY_DEFAULT)
 all::	default debug profile shared
 
 debug:: objects/debug
-	$(HIDE) $(MAKE) CCDEBUG='$(CC_DEBUG)' \
-			CXXDEBUG='$(CXX_DEBUG)' \
+	$(HIDE) $(MAKE) CCDEBUG='$(CC_DEBUG)' CXXDEBUG='$(CXX_DEBUG)' \
 			$(LIBRARY_DEBUG)
 
-profile:: objects/profile
-	$(HIDE) $(MAKE) CCDEBUG='$(CC_PROFILE)' \
-			CXXDEBUG='$(CXX_PROFILE)' \
+profile:: objects/debug
+	$(HIDE) $(MAKE) CCDEBUG='$(CC_PROFILE)' CXXDEBUG='$(CXX_PROFILE)' \
 			$(LIBRARY_PROFILE)
 
 shared:: objects/shared
@@ -282,6 +280,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.9  1995/12/31 11:27:10  houghton
+# Bug Fix - changed shared lib name for AIX port.
+#
 # Revision 2.8  1995/12/02 02:06:59  houghton
 # Changed to use MakeConfigs Ver 4.
 #
