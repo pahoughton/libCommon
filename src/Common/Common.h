@@ -21,6 +21,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1994/01/31  14:06:12  houghton
+ * Add avl and some other minor functions
+ *
  *********************************************************************/
 
 #include <errno.h>
@@ -112,7 +115,7 @@ Ret_Status ForeachFile(
 void SetErrorHandler( void (*errorHandler_)( CommonErrorType error,
 					     const char * mesg ) );
 
-void Error( CommonErrorType error, const char * message, ... );
+void LibError( CommonErrorType error, const char * message, ... );
 
 const char * ErrorString( CommonErrorType error );
 

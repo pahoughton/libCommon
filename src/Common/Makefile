@@ -104,19 +104,19 @@ clean:
 	rm -f $(LIBRARY) $(LIB_OBJECTS) $(PROTO_H)
 	
 install:
-	( cd $(BETA_LIB_DEST); cp $(LIBRARY) old )
-	( cd $(BETA_INC_DEST); cp $(USER_INCS) old )
+	-( cd $(BETA_LIB_DEST); cp $(LIBRARY) old )
+	-( cd $(BETA_INC_DEST); cp $(USER_INCS) old )
 	cp $(LIBRARY) $(BETA_LIB_DEST)
 	chmod 664 $(BETA_LIB_DEST)/$(LIBRARY)
 	chgrp tools $(BETA_LIB_DEST)/$(LIBRARY)
 	cp $(USER_INCS) $(BETA_INC_DEST)
 	(cd $(BETA_INC_DEST); chmod 664 $(USER_INCS) )
 	(cd $(BETA_INC_DEST); chgrp tools $(USER_INCS) )
-	echo 'Beta Install Complete!'
+	@echo 'Beta Install Complete!'
 	
 install_production:
-	( cd $(PROD_LIB_DEST); cp $(LIBRARY) old )
-	( cd $(PROD_INC_DEST); cp $(USER_INCS) old )
+	-( cd $(PROD_LIB_DEST); cp $(LIBRARY) old )
+	-( cd $(PROD_INC_DEST); cp $(USER_INCS) old )
 	cp $(LIBRARY) $(PROD_LIB_DEST)
 	chmod 664 $(PROD_LIB_DEST)/$(LIBRARY)
 	chgrp tools $(PROD_LIB_DEST)/$(LIBRARY)

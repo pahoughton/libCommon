@@ -19,12 +19,15 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1994/01/31  14:06:14  houghton
+ * Add avl and some other minor functions
+ *
  *
  *********************************************************************/
 static const char RcsId[] =
 {"$Id$"};
 
-#define _POSIX_SORCE
+#define _ALL_SOURCE
 #include <Common.h>
 #include <stdlib.h>
 #include <dirent.h>
@@ -39,6 +42,7 @@ ForeachFile(
     )
 {
   
+
   struct stat	fileStat;
   
   
