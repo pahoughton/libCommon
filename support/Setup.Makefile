@@ -23,6 +23,7 @@
 SHELL		= /bin/ksh
 
 PROJECT		= libCommon-3
+CFG_DIR		= $(PROJECT)/src/config
 
 make_cfg_ver	= 5.06
 make_cfg_file	= $(TOOL_DIR)/include/Make/make.cfg.$(make_cfg_ver)
@@ -113,11 +114,24 @@ $(dejagnu): $(tools_build_dir)/DejagnuSupport-1
 		-C $(tools_build_dir)/DejagnuSupport-1			      \
 		install
 
-setup: check_cvs $(tools_build_dir) $(make_cfg_file) $(dejagnu)
+gen_setup_cfg:
+	rm -f $(CFG_DIR)/Setup.cfg
+	sed								      \
+		-e 's!%INSTALL_INC_DIR%!$(INSTALL_INC_DIR)!'		      \
+		-e 's!%INSTALL_LIB_DIR%!$(INSTALL_LIB_DIR)!'		      \
+		-e 's!%INSTALL_MAN_DIR%!$(INSTALL_MAN_DIR)!'		      \
+	  < $(CFG_DIR)/Setup.cfg.src					      \
+	  > $(CFG_DIR)/Setup.cfg
+	chmod 444 $(CFG_DIR)/Setup.cfg
+
+setup: check_cvs $(tools_build_dir) $(make_cfg_file) $(dejagnu) gen_setup_cfg
 
 
 #
 # $Log$
+# Revision 1.5  1999/11/04 17:23:41  houghton
+# Added dejagnu support to setup.
+#
 # Revision 1.4  1999/10/29 23:20:16  houghton
 # Bug-Fix: all referances to MakeConfigs dir not fixed.
 #
