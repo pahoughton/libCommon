@@ -1,0 +1,115 @@
+.\"
+.\" Man page for AvlWalk
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH AvlWalk 3  "26 Jun 94 (Common)"
+.SH NAME
+AvlWalk \- traverse an AVL tree performing an action at each node.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+void AvlWalk(
+.PD 0
+.RS
+.TP 18
+AvlTree
+tree,
+.TP 18
+void
+(*action)
+.RS
+.RS
+.TP 15
+void *
+data,
+.TP 15
+AvlVisit
+order,
+.TP 15
+AvlNodeType
+node,
+.TP 15
+int
+level
+.TP 15
+short
+balance,
+.TP 15
+void *
+closure )
+.RE
+.RE
+.TP 18
+AvlSiblingOrder
+siblingOrder,
+.TP 18
+void *
+closure )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+tree
+the AVL tree to walk.
+.TP
+action
+this function will be called for three times for every node in the
+tree. The calls correspond to the three different types of tree
+traversal: preorder, inorder and postorder.
+.RS
+.TP
+data
+is the data pointer passed to AvlAdd(3)
+.TP
+order
+will be either AVL_PREORDER, AVL_INORDER or AVL_POSTORDER depending
+upon whether this is the first, second or third visit to this node.
+.TP
+node
+type of node. One of AVL_IS_TREE, AVL_IS_LBRANCH, AVL_IS_RBRANCH,
+AVL_IS_LEAF, AVL_IS_NULL
+.TP
+level
+will be the current depth of the tree (with the root being level zero)
+that the current node corresponds to.
+.TP
+balance
+will be the balance factor for the current node (which should range 
+from -1 .. 1).
+.TP
+closure
+is the closure argument passed to AvlWalk.
+.RE
+.TP
+siblingOrder
+is the order to traverse the tree. It must be either LEFT_TO_RIGHT,
+or RIGHT_TO_LEFT.
+.TP
+closure
+the closure value to pass to action.
+.SH DESCRIPTION
+AvlWalk will traverse each item in the tree in the specified
+sibling order and apply the function action each time it encounters a
+node. Each non-empty node will be encountered three times
+(corresponding to the three different types of tree traversal:
+preorder, inorder, and postorder).
+.SH RETURNS
+None
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+AvlInit(3), AvlAttach(3), , AvlAdd(3), AvlFind(3), AvlDel(3), AvlGetRoot(3),
+AvlDispose(3), AvlCount(3), AvlDelMin(3), AvlFindMin(3),
+AvlDelMax(3), AvlFindMax(3), Common(3)
+.SH AUTHORS
+.PD 0
+Brad Appleton - <brad@ssd.csd.Harris.COM>,
+.LP
+Paul Houghton - (houghton@cworld.wiltel.com) 
+

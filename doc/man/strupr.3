@@ -1,0 +1,38 @@
+.\"
+.\" Man page for strupr
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH strupr 3  "22 Jun 94 (Common)"
+.SH NAME
+strupr \- convert a string to all upper case.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+char * strupr(
+.PD 0
+.RS
+.TP 10
+char *
+text )
+.PD
+.RE
+.SH ARGUMENTS
+text
+the string to be converted.
+.SH DESCRIPTION
+Converts the input string to all upper case.
+.SH RETURNS
+a pointer to the input string.
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+Common(3), strlwr(3), toupper(3)
+.SH AUTHORS
+Paul Houghton - (houghton@cworld.wiltel.com) 
+

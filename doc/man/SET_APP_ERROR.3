@@ -4,10 +4,13 @@
 .\" $Id$
 .\"
 .\" $Log$
+." Revision 1.1  1994/06/17  18:07:14  houghton
+." New man pages ... what a concept!
+."
 .\"
 .TH SET_APP_ERROR 3  "18 Jul 94 (Common)"
 .SH NAME
-SET_APP_ERROR \- macro to specify a application error has occured
+SET_APP_ERROR \- macro to specify a application error has occurred
 .SH SYNOPSIS
 #include <Common.h>
 .LP
@@ -22,10 +25,10 @@ appErrNumber)
 .SH ARGUMENTS
 .TP
 appErrNumber
-the type of error that has occured.
+the type of error that has occurred.
 .SH DESCRIPTION
 This macro should be used by applications to indicate an error has
-occured.
+occurred.
 It set the global CommonAppErrno to appErrNumber, CommonErrno variable
 to C_EAPP and sets the current source filename and line number. 
 .SH RETURNS
@@ -43,7 +46,7 @@ typedef enum
     if( j < k  )
       {
         SET_APP_ERROR( A_EBADERROR );
-	return( RET_ERROR );
+        return( RET_ERROR );
       }
     ...
 .fn

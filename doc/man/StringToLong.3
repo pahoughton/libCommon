@@ -1,0 +1,54 @@
+.\"
+.\" Man page for StringToLong
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH StringToLong 3  "22 Jun 94 (Common)"
+.SH NAME
+StringToLong \- Convert a string to an integer
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+long StringToLong(
+.PD 0
+.RS
+.TP 15
+const char *
+string,
+.TP 15
+int
+base,
+.TP 15
+int
+length )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+string
+the string to be converted.
+.TP
+base
+the base of the string. A value of 0 cause the base to be determined
+by the first two characters of the string. a leading '0' means octal
+(base 8) and a leading '0x' or '0X' means hex (base 16).
+.TP
+length
+the number of character to use for the conversion. A value of 0
+means the string is NULL terminated.
+.SH DESCRIPTION
+Converts a character string to an long.
+.SH RETURNS
+the long value.
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+Common(3), StringToLong(3), atoi(3)
+.SH AUTHORS
+Paul Houghton - (houghton@cworld.wiltel.com) 
+

@@ -1,0 +1,94 @@
+.\"
+.\" Man page for AvlDispose
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH AvlDispose 3  "25 Jun 94 (Common)"
+.SH NAME
+AvlDispose \- destroy AVL tree
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+void AvlDispose(
+.PD 0
+.RS
+.TP 18
+AvlTree *
+treeptr,
+.TP 18
+void
+(*action)(
+.RS
+.RS
+.TP 10
+void *
+data,
+.TP 10
+AvlVisit
+order,
+.TP 10
+void *
+closure )
+.RE
+.RE
+.TP 18
+AvlSiblingOrder
+order,
+.TP 18
+void *
+closure )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+AvlTree
+the AVL tree to dispose of.
+.TP
+action
+this function will be called for three times for every node in the
+tree. The calls correspond to the three different types of tree
+traversal: preorder, inorder and postorder.
+.RS
+.TP
+data
+is the data pointer passed to AvlAdd(3)
+.TP
+order
+will be either AVL_PREORDER, AVL_INORDER or AVL_POSTORDER depending
+upon whether this is the first, second or third visit to this node.
+.TP
+closure
+is the closure argument passed to AvlDispose.
+.RE
+.TP
+order
+is the order to traverse the tree. It must be either LEFT_TO_RIGHT,
+or RIGHT_TO_LEFT.
+.TP
+closure
+the closure value to pass to action.
+.SH DESCRIPTION
+will walk through a tree, applying the function action (which should be
+some type of item-deallocation function) to the item in each node, and then 
+deallocates space for the given node (after AVL_POSTORDER).
+.LP
+Each node will be encountered three times (corresponding to the three different
+types of tree traversal: preorder, inorder, and postorder).
+.SH RETURNS
+None
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+AvlInit(3), AvlAttach(3), , AvlAdd(3), AvlFind(3), AvlDel(3), AvlGetRoot(3),
+AvlWalk(3), AvlCount(3), AvlDelMin(3), AvlFindMin(3),
+AvlDelMax(3), AvlFindMax(3), Common(3)
+.SH AUTHORS
+.PD 0
+Brad Appleton - <brad@ssd.csd.Harris.COM>,
+.LP
+Paul Houghton - (houghton@cworld.wiltel.com) 

@@ -4,10 +4,13 @@
 .\" $Id$
 .\"
 .\" $Log$
+." Revision 1.1  1994/06/17  18:07:15  houghton
+." New man pages ... what a concept!
+."
 .\"
 .TH SET_ERROR 3  "18 Jul 94 (Common)"
 .SH NAME
-SET_ERROR \- macro to specify a library error has occured
+SET_ERROR \- macro to specify a library error has occurred
 .SH SYNOPSIS
 #include <Common.h>
 .LP
@@ -22,7 +25,7 @@ errNumber)
 .SH ARGUMENTS
 .TP
 errNumber
-the type of error that has occured.
+the type of error that has occurred.
 .SH DESCRIPTION
 This macro should only be used by library functions or after a system
 call (i.e. open) has failed. It set the global
@@ -36,13 +39,13 @@ None.
     if( i < MAX_I || i > MIN_I )
       {
         SET_ERROR( C_EBADRANGE );
-	return( RET_ERROR );
+        return( RET_ERROR );
       }
 
     if( (fp = fopen( "a.file","r") ) == NULL )
       {
         SET_ERROR( C_EOSERROR );
-	return( RET_ERROR );
+        return( RET_ERROR );
       }
     ...
 .fn

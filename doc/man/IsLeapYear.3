@@ -1,0 +1,42 @@
+.\"
+.\" Man page for IsLeapYear
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH IsLeapYear 3  "05 Jul 94 (Common)"
+.SH NAME
+IsLeapYear \- Is a specific year a leap year
+.SH SYNOPSIS
+#include <Common.h> or <DateTime.h>
+.LP
+Bool IsLeapYear(
+.PD 0
+.RS
+.TP 10
+int
+year )
+.RE
+.PD
+.SH ARGUMENTS
+year
+the year to check (does not recognize 2 digit years)
+.SH DESCRIPTION
+Check a year to see if it is a leap year
+.SH RETURNS
+.TP
+TRUE (1)
+the year is a leap year
+.TP
+FALSE (0)
+the year is not a leap year
+.SH FILES
+.nf
+/usr/local/include/DateTime.h
+.fn
+.SH "SEE ALSO"
+Common(3)
+.SH AUTHORS
+Paul Houghton - (houghton@cworld.wiltel.com) 
+

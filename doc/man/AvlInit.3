@@ -4,6 +4,9 @@
 .\" $Id$
 .\"
 .\" $Log$
+.\" Revision 1.1  1994/06/06  13:23:18  houghton
+.\" Avl and DateTime functions added for Rating
+.\"
 .\"
 .TH AvlInit 3 "08 Feb 94" Common
 .SH NAME
@@ -16,13 +19,26 @@ AvlTree AvlInit(
 .RS
 .TP 7
 int
-(*compare)(void * dataOne, void * dataTwo, AvlNode node),
+(*compare)(
+.RS
+.RS
+.TP 10
+void *
+dataOne,
+.TP 10
+void *
+dataTwo,
+.TP 10
+AvlNode
+node),
+.RE
+.RE
 .TP 7
 void *
-(*getMemory)( size_t size, void * closure ),
+(*getMem)( size_t size, void * closure ),
 .TP 7
 void
-(*freeMemory)( void * data, void * closure ),
+(*freeMem)( void * data, void * closure ),
 .TP
 void *
 memClosure )
@@ -31,33 +47,33 @@ memClosure )
 .SH ARGUMENTS
 .TP
 compare
-This will be the funtion used to compare two objects. It must return a
+This will be the function used to compare two objects. It must return a
 0 (zero) if the two objects are equal, a value greater than 0 if the
 first object (dataOne) is greater than the second (dataTwo) and a
 value less than 0 if the first object is less than the second (i.e.
 dataOne - dataTwo). The node parameter should be ignored. The objects
 (dataOne & dataTwo) are the pointers passed to AvlAdd(3) or AvlFind(3).
 .TP
-getMemory
+getMem
 This should be either NULL or a function that will allocate some
-memory for the interal structures used by the Avl functions. It will
+memory for the internal structures used by the Avl functions. It will
 be passed the number of bytes needed and the memClosure value. If it
 is NULL, malloc is used.
 .TP
-freeMemory
+freeMem
 This should be either NULL or a function that will release memory that
 was used for internal structures. If it is NULL, free is used.
 .TP
 memClosure
-The value passed in this parameter will be passed to the getMemory and
-freeMemory functions.
+The value passed in this parameter will be passed to the getMem and
+freeMem functions.
 .SH DESCRIPTION
-Initiazes a AVL tree and returns a token used to identify the tree.
+Initialize a AVL tree and returns a token used to identify the tree.
 The value returned must be passed as the first argument to all other
 Avl functions.
 .LP
 An AVL tree is a dynamic balanced binary tree for storing and
-retieving data objects. This implementation utilizes the comparision
+retrieving data objects. This implementation utilizes the comparison
 function passed to AvlInit to determine the position of a data object
 within the tree. All nodes stored in the tree must be unique (as
 determined by the 'compare' function). 
@@ -67,7 +83,7 @@ AvlTree
 The token used to identify the tree.
 .TP
 NULL
-An error has occured.
+An error has occurred.
 .SH EXAMPLE
 .nf
 #include <Common.h>
@@ -101,7 +117,7 @@ main( int argc, char * argv[] )
   
   if( (avl = AvlInit( CompareNodes, NULL, NULL, NULL ) ) ) == NULL )
     {
-      fprintf( stderr, "AvlInit failed\n" );
+      fprintf( stderr, "AvlInit failed\\n" );
       exit( 1 );
     }
 
@@ -109,24 +125,24 @@ main( int argc, char * argv[] )
     {
       if( AvlAdd( avl, Data[index] ) != NULL )
         {
-	   fprintf( stderr, "AvlAdd failed for: %s\n", Data[index] );
+	   fprintf( stderr, "AvlAdd failed for: %s\\n", Data[index] );
 	   exit( 1 );
 	}
     }
 
   if( (findData = AvlFind( avl, "test string" ) ) == NULL )
     {
-      fprintf( stderr,"Could Not find\n" );
+      fprintf( stderr,"Could Not find\\n" );
       exit( 1 );
     }
 
   if( AvlDel( avl, findData ) == NULL )
     {
-      fprintf( stderr, "Could not delete\n" );
+      fprintf( stderr, "Could not delete\\n" );
       exit( 1 );
     }
 
-  printf( "Done!\n" );
+  printf( "Done!\\n" );
 }
 .fn
 .SH FILES
@@ -136,7 +152,7 @@ main( int argc, char * argv[] )
 /usr/local/lib/libCommon.a
 .PD
 .SH "SEE ALSO"
-AvlAdd(3), AvlDel(3), AvlFind(3), AvlDispose(3),
+AvlAttach(3), AvlGetRoot(3), AvlAdd(3), AvlDel(3), AvlFind(3), AvlDispose(3),
 AvlWalk(3), AvlCount(3), AvlDelMin(3), AvlFindMin(3),
 AvlDelMax(3), AvlFindMax(3)
 .LP
@@ -146,6 +162,8 @@ G.M. Adelson-Velskii and E.M. Landis. Doklady Akademia Nauk SSSR, 146,
 Nikalus Wirth, Algorithms and Data Structures, Prentice-Hall, 1986,
 ISBN 0-13-022005-1
 .SH AUTHORS
-Brad Appleton,
+.PD 0
+Brad Appleton - <brad@ssd.csd.Harris.COM>,
+.LP
 Paul Houghton x2309 - (houghton@shoe) 
 

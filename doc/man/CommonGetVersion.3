@@ -1,0 +1,32 @@
+.\"
+.\" Man page for CommonGetVersion
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH CommonGetVersion 3  "26 Jun 94 (Common)"
+.SH NAME
+CommonGetVersion \- return the version information string for libCommon
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+const char * CommonGetVersion( void )
+.SH ARGUMENTS
+None
+.SH DESCRIPTION
+Returns a string that describes the version of libCommon being
+used. the string includes the cvs(1) version number and
+the build date.
+.SH RETURNS
+char * version info
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+Common(3)
+.SH AUTHORS
+Paul Houghton - (houghton@cworld.wiltel.com) 
+

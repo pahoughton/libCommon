@@ -1,0 +1,56 @@
+.\"
+.\" Man page for LoggerLoc
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH LoggerLoc 3  "21 Jun 94 (Common)"
+.SH NAME
+LoggerLoc \- should Logger output source file & line
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+Bool LoggerLoc(
+.PD 0
+.RS
+.TP 10
+Bool
+onOff )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+onOff
+should the source file and line be include in the log message.
+.SH DESCRIPTION
+Turn ON or OFF the logging of the source file and line number
+where LOGIT(3) was called.
+.SH RETURNS
+previous state of the flag
+.SH EXAMPLE
+.nf
+
+    ...
+
+    Bool   oldState;
+
+    oldState = LoggerLoc( OFF );
+
+    LOGIT( LOG_ERROR, Logger( "Don't want source in this message" ) );
+
+    LoggerLoc( oldState );
+
+    ...
+.fn
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+LoggerInit(3), LOGIT(3), LogLevelFromString(3), Logger(3),
+LoggerTrim(3), Common(3)
+.SH AUTHORS
+Paul Houghton - (houghton@cworld.wiltel.com) 
+

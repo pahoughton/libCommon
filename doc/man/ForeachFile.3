@@ -1,0 +1,80 @@
+.\"
+.\" Man page for ForeachFile
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH ForeachFile 3  "26 Jun 94 (Common)"
+.SH NAME
+ForeachFile \- execute a function for each file in a directory.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+Ret_Status ForeachFile(
+.PD 0
+.RS
+.TP 15
+const char *
+dirName,
+.TP 15
+Ret_Status
+(*action) (
+.RS
+.RS
+.TP 15
+const char *
+fileName,
+.TP 15
+void *
+closure )
+.RE
+.RE
+.TP 15
+Bool
+recurs,
+.TP 15
+void *
+closure )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+dirName
+the name of the directory to scan
+.TP
+action
+the function to execute for each file name.
+.RS
+.TP
+fileName
+the name the current file.
+.TP
+closure
+the closure parameter passed to ForeachFile
+.RE
+.TP
+recurs
+TRUE / FALSE - recursively search subdirectories.
+.TP
+closure
+the closure argument to pass to action.
+.SH DESCRIPTION
+ForeachFile will execute the action function for each file
+it finds in the 'dirName' directory. If recurse is TRUE, it
+will recursively scan each subdirectory.
+.LP
+If action returns RET_ERROR the scan will be terminated. Action
+will not be called again.
+.SH RETURNS
+the value returned by the action function.
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+Common(3)
+.SH AUTHORS
+Paul Houghton - (houghton@cworld.wiltel.com) 
+

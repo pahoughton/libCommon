@@ -1,0 +1,29 @@
+.\"
+.\" Man page for LoggerTrim
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH LoggerTrim 3  "21 Jun 94 (Common)"
+.SH NAME
+LoggerTrim \- Trim the log file
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+void LoggerTrim( void )
+.SH DESCRIPTION
+Calling LoggerTrim cause the log file to be trimmed according to the
+maxByteCount and timeIncrement parameters of LoggerInit(3).
+.SH RETURNS
+None
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.SH "SEE ALSO"
+LoggerInit(3), LOGIT(3), LogLevelFromString(3), LoggerLoc(3),
+LoggerTrim(3), Common(3)
+.SH AUTHORS
+Paul Houghton - (houghton@cworld.wiltel.com) 
+

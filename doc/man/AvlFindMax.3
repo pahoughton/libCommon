@@ -1,0 +1,44 @@
+.\"
+.\" Man page for AvlFindMax
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH AvlFindMax 3  "26 Jun 94 (Common)"
+.SH NAME
+AvlFindMax \- return the pointer to the largest node
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+void * AvlFindMax(
+.PD 0
+.RS
+.TP 10
+AvlTree
+tree )
+.PD
+.RE
+.SH ARGUMENTS
+tree
+the AVL tree to search for the largest node.
+.SH DESCRIPTION
+Returns the pointer passed to AvlAdd(3) of the smallest node
+(according the the compare function).
+.SH RETURNS
+the pointer of the largest node passed to AvlAdd(3).
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+AvlInit(3), AvlAttach(3), , AvlAdd(3), AvlFind(3), AvlDel(3), AvlGetRoot(3),
+AvlDispose(3), AvlWalk(3), AvlCount(3), AvlDelMin(3),
+AvlDelMax(3), AvlFindMax(3), Common(3)
+.SH AUTHORS
+.PD 0
+Brad Appleton - <brad@ssd.csd.Harris.COM>,
+.LP
+Paul Houghton - (houghton@cworld.wiltel.com) 
+

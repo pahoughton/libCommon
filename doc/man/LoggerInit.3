@@ -1,0 +1,120 @@
+.\"
+.\" Man page for LoggerInit
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH LoggerInit 3  "20 Jun 94 (Common)"
+.SH NAME
+LoggerInit \- Initialize logger parameters
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+void LoggerInit(
+.PD 0
+.RS
+.TP 18
+const char *
+logPath,
+.TP 18
+const char *
+logFileName,
+.TP 18
+LogOutFileType
+outputFileType,
+.TP 18
+long
+maxByteCount,
+.TP 18
+long
+trimIncrement,
+.TP 18
+LogSetLevelType
+setType,
+.TP 18
+int
+outputLevels
+.TP 18
+Bool
+outputDate,
+.TP 18
+Bool
+outputSourceLoc )
+.RE
+.PD
+.SH ARGUMENTS
+.TP
+logPath
+directory to create log file in. Default is '.'
+.TP
+logFileName
+name of log file. Default is 'program.log'. If the output file type is
+LOG_BY_DATE, the 'logFileName' is prefixed with the date and a '.'.
+.TP
+outputFileType
+the type of log file to create. This can be one of LOG_BY_DATE (a new
+log file is created every day), LOG_REOPEN (the log file can be
+deleted while the program is running), LOG_KEEP_OPEN (the log file is
+kept open by the program). Default value is 'LOG_REOPEN'.
+.TP
+maxByteCount
+maximum size of the log file. When the log file gets to this size,
+at least, 'trimIncrement' bytes will be removed. A value of 0 means no
+maximum. Default is 0.
+.TP
+trimIncrement
+the minimum number of bytes to remove from the beginning of the log
+file when it hits 'maxByteCount'. The log is trimmed up to the next
+end of line character. A value of 0 means the lesser of 2048 or
+maxByteCount / 4. Default is 0.
+.TP
+setType
+defines how to interpret the 'outputLevels' param. LOG_SET override
+all current settings with 'outputLevels' value. LOG_ON means turn on
+'outputLevles' along with current settings. LOG_OFF means stop logging
+'outputLevels'. No default value.
+.TP
+outputLevels
+specifies what types of log messages to write to the log file. The
+different types can be or'd (i.e. LOG_TEST | LOG_ERROR ) together to
+specify multiple settings. Possible settings are: LOG_NONE, LOG_ERROR,
+LOG_WARN, LOG_USR1, LOG_USR2, LOG_INFO, LOG_TEST, LOG_DEBUG,
+LOG_FUNCT and LOG_ALL. Default value is LOG_ALL
+.TP
+outputDate
+true or false, time stamp each log entry with the current time. output
+format is '02/25/94 14:00:05'. Default value is TRUE.
+.TP
+outputSourceLoc
+true or false, include the source file name and line number in each
+log entry. Default value is TRUE.
+.SH DESCRIPTION
+You only need to use this function if you want change the default
+behavior of Logger(3). 
+.SH RETURNS
+None
+.SH ENVIRONMENT
+None
+.SH EXAMPLE
+.nf
+
+    ...
+
+    LoggerInit( "../logs", "doit.log",
+		LOG_REOPEN,
+		4096000, 4096,
+		LOG_SET, LogLevelFromString( argv[1] ),
+		TRUE, TRUE );
+    ...
+.fn    	
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+Logger(3), LogLevelFromStrin(3), LoggerLoc(3), LoggerTrim(3), LOGIT(3)
+.SH AUTHORS
+Paul Houghton - (houghton@cworld.wiltel.com) 
+

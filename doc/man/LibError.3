@@ -4,6 +4,9 @@
 .\" $Id$
 .\"
 .\" $Log$
+." Revision 1.1  1994/06/17  18:07:13  houghton
+." New man pages ... what a concept!
+."
 .\"
 .TH LibError 3  "18 Jul 94 (Common)"
 .SH NAME
@@ -14,20 +17,22 @@ LibError \- execute the error handler to process errors
 void LibError(
 .PD 0
 .RS
-.TP 15
+.TP 18
 CommonErrorType
 errorType,
-.TP 15
+.TP 18
 int
 appErrno,
-.TP 15
+.TP 18
 void *
 closure,
-.TP 15
+.TP 18
 const char *
 errMesgFormat,
-.TP 15
+.TP 18
 ... )
+.PD
+.RE
 .SH ARGUMENTS
 .TP
 errorType

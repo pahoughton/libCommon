@@ -3,7 +3,7 @@
 .SH NAME
 Common - Common C Function Library
 .SH DESCRIPTION
-libCommon is a collection of C generic funtions that should be usefull
+libCommon is a collection of C generic functions that should be useful
 for most projects. It is available for Aix, Sun, HP, Sequent,
 Vax & MS-Win.
 .SH DATA TYPES, CONSTANTS & GLOBALS
@@ -55,10 +55,10 @@ last valid error value.
 .TP
 CommonErrFile
 char string containing the name of the source file where the last
-error occured.
+error occurred.
 .TP
 CommonErrLine
-int line number of source file where the last error occured.
+int line number of source file where the last error occurred.
 .TP
 CommonOsErr
 the errno value if CommonErrno is set to C_EOSERROR.
@@ -70,7 +70,7 @@ CommonAppErrno
 int to be used by applications for application errors.
 .TP
 AvlTree
-typedef used to declare avl tree identifiers.
+typedef used to declare AVL tree identifiers.
 .TP
 AvlVisit
 typedef definition of traversal type.
@@ -107,132 +107,132 @@ AbbrMonths
 string array with month abbreviations (Jan=0).
 .TP
 WeekDays
-string arrary with names of the days of the week (Sun=0).
+string array with names of the days of the week (Sun=0).
 .TP
 AbbrWeekDays
-string arrary with day of week abbreviations (Sun=0).
+string array with day of week abbreviations (Sun=0).
 .SH ARG / ENV FUNCTIONS
 .TP
-ArgEnvBool
+ArgEnvBool(3)
 translate command line argument or environment variable to a boolean
 value.
 .TP
-ArgEnvInt
+ArgEnvInt(3)
 translate command line argument or environment variable to an integer
 value.
 .TP
-ArgEnvDouble
+ArgEnvDouble(3)
 translate command line argument or environment variable to a double.
 .TP
-ArgEnvString
+ArgEnvString(3)
 translate command line argument or environment variable to a char string.
 .SH STRING FUNCTIONS
 .TP
-CharToInt
+CharToInt(3)
 translate a single char to an integer value.
 .TP
-IsBaseDigit
+IsBaseDigit(3)
 true or false, is a char value a valid digit of the specified base.
 .TP
-basename
+basename(3)
 return a pointer to the filename portion of a pathname.
 .TP
-strlwr
+strlwr(3)
 convert a string to lower case.
 .TP
-strupr
-conver a string to upper case.
+strupr(3)
+convert a string to upper case.
 .TP
-strdup
-duplcate a string into a malloc'ed space.
+strdup(3)
+duplicate a string into a malloc'ed space.
 .TP
-StringToInt
+StringToInt(3)
 convert a string to a integer.
 .TP
-CenterLine
+CenterLine(3)
 prefix a string buffer with spaces to center it on a line.
 .TP
-StrinpSpaces
+StrinpSpaces(3)
 remove leading and trailing spaces from a string.
 .SH DATE/TIME FUNCTIONS
 .TP
-IsLeapYear
+IsLeapYear(3)
 true or false, is the specified year a leap year.
 .TP
-YYMMDDtoTimeT
+YYMMDDtoTimeT(3)
 convert a YYMMDD string to time_t.
 .TP
-HHMMSStoTimeT
+HHMMSStoTimeT(3)
 convert a HHMMSS string to time_t.
 .TP
-TimeStringToTimeT
+TimeStringToTimeT(3)
 convert date/time string to time_t.
 .SH AVL FUNCTIONS
 .TP
-AvlInit
+AvlInit(3)
 initialize an AVL (balanced binary) tree.
 .TP
-AvlAttach
+AvlAttach(3)
 attach to an existing AVL tree.
 .TP
-AvlGetRoot
+AvlGetRoot(3)
 return the root pointer of an AVL tree.
 .TP
-AvlAdd
+AvlAdd(3)
 add a new record (node) to an AVL tree.
 .TP
-AvlDel
+AvlDel(3)
 delete a record from an AVL tree.
 .TP
-AvlFind
+AvlFind(3)
 find a record in an AVL tree.
 .TP
-AvlCount
+AvlCount(3)
 return the number of records in an AVL tree.
 .TP
-AvlDispose
+AvlDispose(3)
 destroy an AVL tree.
 .TP
-AvlWalk
+AvlWalk(3)
 execute a specified function for each record of an AVL tree.
 .TP
-AvlDelMin
+AvlDelMin(3)
 delete the first (smallest) record of an AVL tree.
 .TP
-AvlFindMin
+AvlFindMin(3)
 find the first record of an AVL tree.
 .TP
-AvlDelMax
+AvlDelMax(3)
 delete the last record of an AVL tree.
 .TP
-AvlFindMax
+AvlFindMax(3)
 find the last record of an AVL tree.
 .SH ERROR FUNCTIONS
 .TP
-SET_ERROR
-macro to specify a library error has occured.
+SET_ERROR(3)
+macro to specify a library error has occurred.
 .TP
-SET_APP_ERROR
-macro to specify an application error has occured.
+SET_APP_ERROR(3)
+macro to specify an application error has occurred.
 .TP
-LIB_ERROR
+LIB_ERROR(3)
 macro to call LibError with default parameters.
 .TP
-SetErrorHandler
-specify the function to call whan an error occures and/or when
+SetErrorHandler(3)
+specify the function to call when an error occurs and/or when
 LibError is called.
 .TP
-LibError
+LibError(3)
 call the error handler or output an error message to stderr.
 .TP
-ErrorString
+ErrorString(3)
 translate a CommonErrorType value to a string.
 .SH MISC FUNCTIONS
 .TP
-ForeachFile
+ForeachFile(3)
 execute a function for each file in a directory.
 .TP
-CommonGetVersion
+CommonGetVersion(3)
 return the version string to identify the version of the library.
 .SH FILES
 .nf

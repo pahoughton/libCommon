@@ -1,0 +1,61 @@
+.\"
+.\" Man page for Logger
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH Logger 3  "20 Jun 94 (Common)"
+.SH NAME
+Logger \- Log a message to the log file.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+void Logger(
+.PD 0
+.RS
+.TP 15
+const char *
+mesgFmt,
+.TP 15
+...
+)
+.RE
+.PD
+.SH ARGUMENTS
+.TP
+mesgFmt
+format string (like printf).
+.TP
+...
+format string arguments (like printf).
+.SH DESCRIPTION
+Logger should only be called from within the LOGIT(3) macro. It uses
+LOGIT to determine the messages log level and source file location.
+.LP
+Creates a formated entry in the log file using the same formating
+mechanism as printf. Each log entry is terminated with a end of
+line. Do not include the '\\n' char in your mesgFmt string unless you
+want a blank line between log entries.
+.SH RETURNS
+None
+.SH EXAMPLE
+.nf
+
+    ...
+
+    LOGIT( LOG_ERROR, Logger( "Invalid value: %6.2f",aDoubleVar ) );
+
+    ...
+.fn    
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+LoggerInit(3), LOGIT(3), LogLevelFromString(3), LoggerLoc(3),
+LoggerTrim(3), Common(3)
+.SH AUTHORS
+Paul Houghton - (houghton@cworld.wiltel.com) 
+

@@ -4,10 +4,13 @@
 .\" $Id$
 .\"
 .\" $Log$
+." Revision 1.1  1994/06/17  18:07:15  houghton
+." New man pages ... what a concept!
+."
 .\"
 .TH SetErrorHandler 3  "18 Jul 94 (Common)"
 .SH NAME
-SetErrorHandler \- specify the function to call when an error occures.
+SetErrorHandler \- specify the function to call when an error occurs.
 .SH SYNOPSIS
 #include <Common.h>
 .LP
@@ -18,16 +21,16 @@ void SetErrorHandler(
 void (*errorHandler)(
 .RS
 .RS
-.TP 15
+.TP 18
 CommonErrorType
 error
-.TP 15
+.TP 18
 int
 appErrno
-.TP 15
+.TP 18
 void *
 closure
-.TP 15
+.TP 18
 const char *
 errMesg ),
 .RE
@@ -40,7 +43,7 @@ closure )
 .SH ARGUMENTS
 .TP
 errorHandler
-the function to execut when an error occurs.
+the function to execute when an error occurs.
 .RS
 .TP
 error
@@ -61,7 +64,7 @@ closure
 The default closure value to pass to the error handler.
 .SH DESCRIPTION
 The errorHandler function will be executed when a library error
-occures or when the LibError function is called. 
+occurs or when the LibError function is called. 
 .SH RETURNS
 None.
 .SH EXAMPLE

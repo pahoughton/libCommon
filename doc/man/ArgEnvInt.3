@@ -63,7 +63,7 @@ line argument or environment variable.
 This function translates integer flags from either a command line
 argument or an environment variable. It uses the same base syntax as
 C. If the flag is prefixed with '0x' it will be translated as a
-hexidecimal value. If it is prefixed with '0' it will be translated as
+hexadecimal value. If it is prefixed with '0' it will be translated as
 octal. Otherwise it will be translated as decimal.
 .LP
 If both the environment variable and command line argument is set, the
@@ -85,14 +85,14 @@ int	 JustANumber = 5;
 
 int main( int argc, char * argv[] )
 {
-  if( ArgEnvDouble( &argc, argv, "num", "NUMBER", 0, 1000, &JustANumber )
+  if( ArgEnvInt( &argc, argv, "num", "NUMBER", 0, 1000, &JustANumber )
       != RET_SUCCEED )
     {
       LIB_ERROR( NULL, "testarg: bad argument" );
       exit(1);
     }
 
-  printf( "Number is: %d\n", JustANumber );
+  printf( "Number is: %d\\n", JustANumber );
 }
 
 $ testarg

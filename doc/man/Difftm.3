@@ -1,0 +1,47 @@
+.\"
+.\" Man page for Difftm
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH Difftm 3  "05 Jul 94 (Common)"
+.SH NAME
+Difftm \- return the difference of two tm structs in seconds
+.SH SYNOPSIS
+#include <Common.h> or <DateTime.h>
+.LP
+time_t Difftm(
+.PD 0
+.RS
+.TP 15
+struct tm *
+tmOne,
+.TP 15
+struct tm *
+tmTwo )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+tmOne
+the first tm struct to compare
+.TP
+tmTwo
+the second tm struct to compare
+.SH DESCRIPTION
+Returns the number of seconds between two tm structs.
+.SH RETURNS
+.TP
+time_t
+tmOne - tmTwo in seconds.
+.SH FILES
+.nf
+/usr/local/include/DateTime.h
+/usr/local/lib/libCommon.h
+.fn
+.SH "SEE ALSO"
+Common(3)
+.SH AUTHORS
+Paul Houghton - (houghton@cworld.wiltel.com) 
+

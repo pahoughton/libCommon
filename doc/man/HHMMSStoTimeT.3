@@ -1,0 +1,40 @@
+.\"
+.\" Man page for HHMMSStoTimeT
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH HHMMSStoTimeT 3  "05 Jul 94 (Common)"
+.SH NAME
+HHMMSStoTimeT \- convert a 'HHMMSS' string to a time_t value
+.SH SYNOPSIS
+#include <Common.h> or <DateTime.h>
+.LP
+time_t HHMMSStoTimeT(
+.PD 0
+.RS
+.TP 15
+const char *
+hhmmss )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+hhmmss
+the date string to convert. Does not have to be NULL terminated.
+.SH DESCRIPTION
+Converts a 'HHMMSS' string (i.e. '064503') to a time_t value. No
+validation is performed on the string.
+.SH RETURNS
+the translated time_t value
+.SH FILES
+.nf
+/usr/local/include/DateTime.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+YYMMDDtoTimeT(3), Common(3)
+.SH AUTHORS
+Paul Houghton - (houghton@cworld.wiltel.com) 
+

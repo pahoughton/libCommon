@@ -1,0 +1,61 @@
+.\"
+.\" Man page for LOGIT
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH LOGIT 3  "20 Jun 94 (Common)"
+.SH NAME
+LOGIT \- Log a message
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+void LOGIT(
+.PD 0
+.RS
+.TP 10
+LogBit
+mesgLevel,
+.TP
+void
+(*Logger)() )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+mesgLevel
+message log level. Must be one of LOG_ERROR, LOG_WARN, LOG_USR1,
+LOG_USR2, LOG_INFO, LOG_TEST, LOG_DEBUG, LOG_FUNCT
+.TP
+Logger
+a call to the Logger(3) function.
+.SH DESCRIPTION
+LOGIT establishes the log Level, source file and source line number
+for a log message. It is defined as a macro so the current file and
+line can be determined.
+.LP
+Any function can be used as the Logger function, but of course Logger
+itself is recommended.
+.SH RETURNS
+None
+.SH EXAMPLE
+.nf
+
+    ...
+
+    LOGIT( LOG_ERROR, Logger( "Invalid value: %6.2f",aDoubleVar ) );
+
+    ...
+.fn    
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+LoggerInit(3), Logger(3), LogLevelFromString(3), LoggerLoc(3),
+LoggerTrim(3)
+.SH AUTHORS
+Paul Houghton - (houghton@cworld.wiltel.com) 
+

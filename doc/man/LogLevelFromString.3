@@ -1,0 +1,57 @@
+.\"
+.\" Man page for LogLevelFromString
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH LogLevelFromString 3  "21 Jun 94"
+.SH NAME
+LogLevelFromString \- convert a string into a log level
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+int LogLevelFromString(
+.PD 0
+.RS
+.TP 15
+const char *
+levelString )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+levelString
+the string to convert to a log level. It can contain multiple log
+levels which will be OR'd for the return value. Valid strings are
+NONE, ERROR, WARN, USER_1, USER_2, INFO, TEST, DEBUG, FUNCT and ALL.
+.SH DESCRIPTION
+Converts a string containing log levels into a value that can be used
+as the outputLevel parameter to LoggerInit(3). This function was
+developed to make it easy to convert command line arguments.
+.SH RETURNS
+the converted log levels.
+.SH EXAMPLE
+.nf
+
+    ...
+
+    LoggerInit( "../logs", "doit.log",
+		LOG_REOPEN,
+		4096000, 4096,
+		LOG_SET,
+		LogLevelFromString( " ERROR | WARN | TEST" ),
+		TRUE, TRUE );
+    ...
+.fn    	
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+LoggerInit(3), LOGIT(3), Logger(3), LoggerLoc(3), LogLevelString(3),
+LoggerTrim(3), Common(3)
+.SH AUTHORS
+Paul Houghton - (houghton@cworld.wiltel.com) 
+

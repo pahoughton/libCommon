@@ -1,0 +1,41 @@
+.\"
+.\" Man page for strdup
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH strdup 3  "22 Jun 94"
+.SH NAME
+strdup \- create a new copy of a string
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+char * strdup(
+.PD 0
+.RS
+.TP 15
+const char *
+source )
+.PD
+.RE
+.SH ARGUMENTS
+source
+the string to copy from.
+.SH DESCRIPTION
+This function returns a pointer to a new string which is a
+duplicate  of the string pointed to by source.  The space for the new
+string is obtained using malloc(3).  If the new string can
+not be created, a NULL pointer is returned.
+.SH RETURNS
+a pointer to the new copy of the source string
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+Common(3), string(3)
+.SH AUTHORS
+Paul Houghton - (houghton@cworld.wiltel.com) 
+

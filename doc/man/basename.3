@@ -1,0 +1,44 @@
+.\"
+.\" Man page for basename
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH basename 3  "22 Jun 94 (Common)"
+.SH NAME
+basename \- returns a pointer to the file name part of a path
+.SH SYNOPSIS
+#include <Common.h>
+#include <string.h>
+.LP
+char * basename(
+.PD 0
+.RS
+.TP 10
+char * path )
+.PD
+.RE
+.SH ARGUMENTS
+path
+the complete path name to search.
+.SH DESCRIPTION
+Return a pointer to the first character of the filename part
+of a fully qualified path.
+.SH RETURNS
+a pointer the the first character of the filename
+.SH EXAMPLE
+.nf
+
+    /* this will output 'info.text' */
+    
+    printf( "%s\\n", basename("data/input/info.text" ) );
+
+.fn        
+.SH FILES
+/usr/local/include/Common.h
+.SH "SEE ALSO"
+Common(3), strrchr(3)
+.SH AUTHORS
+Paul Houghton - (houghton@cworld.wiltel.com) 
+

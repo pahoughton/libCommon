@@ -1,0 +1,99 @@
+.\"
+.\" Man page for AvlAttach
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH AvlAttach 3 "08 Feb 94" Common
+.SH NAME
+AvlAttach \- Attach an avlRoot to a AVL tree
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+AvlTree AvlAttach( 
+.PD 0
+.RS
+.TP 9
+void *
+avlRoot,
+.TP 9
+int
+(*compare)(
+.RS
+.RS
+.TP 9
+void *
+dataOne,
+.TP 9
+void *
+dataTwo,
+.TP 9
+AvlNode
+node),
+.RE
+.RE
+.TP 9
+void *
+(*getMem)( size_t size, void * closure ),
+.TP 9
+void
+(*freeMem)( void * data, void * closure ),
+.TP
+void *
+memClosure )
+.RE
+.PD
+.SH ARGUMENTS
+.TP
+avlRoot
+an existing avl root to attach the AvlTree to. This must
+be the value returned from a call to AvlGetRoot(3).
+.TP
+compare
+This will be the function used to compare two objects. It must return a
+0 (zero) if the two objects are equal, a value greater than 0 if the
+first object (dataOne) is greater than the second (dataTwo) and a
+value less than 0 if the first object is less than the second (i.e.
+dataOne - dataTwo). The node parameter should be ignored. The objects
+(dataOne & dataTwo) are the pointers passed to AvlAdd(3) or AvlFind(3).
+.TP
+getMem
+This should be either NULL or a function that will allocate some
+memory for the internal structures used by the Avl functions. It will
+be passed the number of bytes needed and the memClosure value. If it
+is NULL, malloc is used.
+.TP
+freeMem
+This should be either NULL or a function that will release memory that
+was used for internal structures. If it is NULL, free is used.
+.TP
+memClosure
+The value passed in this parameter will be passed to the getMem and
+freeMem functions.
+.SH DESCRIPTION
+Attach to an existing AVL tree and and return a token used to
+identify the tree. This function was provided primarily for
+memory mapped (see mmalloc(3)) persistent trees. 
+The value returned must be passed as the first argument to all other
+Avl functions.
+.SH RETURNS
+.TP
+AvlTree
+The token used to identify the tree.
+.TP
+NULL
+An error has occurred.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+AvlInit(3), AvlAdd(3), AvlDel(3), AvlFind(3), AvlGetRoot(3),
+AvlDispose(3), AvlWalk(3), AvlCount(3), AvlDelMin(3), AvlFindMin(3),
+AvlDelMax(3), AvlFindMax(3)
+.SH AUTHORS
+Paul Houghton x2309 - (houghton@shoe) 
+

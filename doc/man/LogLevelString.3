@@ -1,0 +1,41 @@
+.\"
+.\" Man page for LogLevelString
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH LogLevelString 3  "21 Jun 94 (Common)"
+.SH NAME
+LogLevelString \- Convert a log level into a string
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+const char * LogLevelString(
+.PD 0
+.RS
+.TP 10
+LogBit
+logLevel )
+.PD
+.RE
+.SH ARGUMENTS
+logLevel
+the log level to be translated into a string.
+.SH DESCRIPTION
+Converts a log level into a string. It does not handle OR'd (|) log
+levels. It is intended to output the current message log level set by
+LOGIT(3).
+.SH RETURNS
+the converted string or 'UNKNOWN'.
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+LoggerInit(3), LOGIT(3), Logger(3), LoggerLoc(3), LogLevelFromString(3),
+LoggerTrim(3), Common(3)
+.SH AUTHORS
+Paul Houghton - (houghton@cworld.wiltel.com) 
+

@@ -4,6 +4,9 @@
 .\" $Id$
 .\"
 .\" $Log$
+.\" Revision 1.1  1994/06/06  13:23:18  houghton
+.\" Avl and DateTime functions added for Rating
+.\"
 .\"
 .TH AvlAdd 3  "09 Feb 94" Common
 .SH NAME
@@ -14,10 +17,10 @@ AvlAdd \- Add a data item to the tree
 void * AvlAdd(
 .PD 0
 .RS
-.TP 7
+.TP 10
 AvlTree
 avl,
-.TP 7
+.TP 10
 void *
 data )
 .RE
@@ -27,28 +30,33 @@ data )
 avl
 This is the avl token returned from AvlInit(3) for the tree you want the
 data added to.
+.TP
 data
 The data you want to add to the tree. This value is passed to the
-compare funtion to determine its position in the tree. 
+compare function to determine its position in the tree. 
 .SH DESCRIPTION
 AvlAdd will add a data item to the AVL tree. Each item added must
-be unique (as determined by the compare funtion). 
+be unique (as determined by the compare function). 
 .SH RETURNS
 .TP
 NULL
 The item was successfully added.
 .TP
 data
-The value of data will be returned if the data could not be added to
-the tree.
+The value of the data with the same key will be returned if the data
+could not be added to the tree because of a duplicate key.
 .SH FILES
-.PD 0
+.nf
 /usr/local/include/Common.h
 /usr/local/lib/libCommon.a
-.PD
+.fn
 .SH "SEE ALSO"
-AvlInit(3), AvlDel(3), AvlFind(3)
+AvlInit(3), AvlAttach(3), , AvlDel(3), AvlFind(3), AvlGetRoot(3),
+AvlDispose(3), AvlWalk(3), AvlCount(3), AvlDelMin(3), AvlFindMin(3),
+AvlDelMax(3), AvlFindMax(3), Common(3)
 .SH AUTHORS
-Brad Appleton,
+.PD 0
+Brad Appleton - <brad@ssd.csd.Harris.COM>,
+.LP
 Paul Houghton x2309 - (houghton@shoe) 
 

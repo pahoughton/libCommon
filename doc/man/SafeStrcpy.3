@@ -1,0 +1,56 @@
+.\"
+.\" Man page for SafeStrcpy
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH SafeStrcpy 3  "22 Jun 94 (Common)"
+.SH NAME
+SafeStrcpy \- copy a string with strncpy and NULL terminate it.
+.SH SYNOPSIS
+#include <Common.h>
+#include <string.h>
+.LP
+void SafeStrcpy(
+.PD 0
+.RS
+.TP 15
+char *
+dest,
+.TP 15
+const char *
+source,
+.TP 15
+int
+destSize )
+.SH ARGUMENTS
+.TP
+dest
+the buffer to copy the string into.
+.TP
+source
+the buffer to copy from
+.TP
+destSize
+the maximum number of bytes to copy
+.SH DESCRIPTION
+This function uses strncpy(3) to copy destSize - 1 bytes into the
+dest. It then null terminates the dest string.
+.SH RETURNS
+None
+.SH EXAMPLE
+.nf
+
+    char dest[5];
+
+    SafeStrcpy( dest, "The Source", sizeof( dest ) );
+
+    printf( "%s\\n", dest ); /* output would be: 'The ' */
+.SH FILES
+/usr/local/include/Common.h
+.SH "SEE ALSO"
+Common(3), string(3)
+.SH AUTHORS
+Paul Houghton - (houghton@cworld.wiltel.com) 
+
