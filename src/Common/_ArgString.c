@@ -21,6 +21,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/29  12:01:27  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:37  houghton
  * Move to Version 2.0
  *
@@ -73,7 +76,7 @@ _ArgString(
 		    }
 		  else
 		    {
-		      SET_ERROR( C_EBADPARAM );
+		      COMMON_SET_ERROR( EC_BADPARAM,("argument missing") );
 		      return( RET_ERROR );
 		    }
 		}

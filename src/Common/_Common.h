@@ -15,6 +15,11 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/10/31  12:38:31  houghton
+ * Move version info from CommonVersion.h to _Common.h
+ * Use MakeConfigs 3.3
+ * Update ErrorStrings for all CommonErrorType values
+ *
  * Revision 2.1  1995/10/29  12:01:28  houghton
  * Change Version Id String
  *
@@ -41,6 +46,7 @@
 
 
 #include "Common.h"
+#include <stdio.h>
 
 #define COMMON_PRJ_NAME	    "Common"
 #define COMMON_PRJ_VER	    VERSION
@@ -51,6 +57,27 @@ const char COMMONVER_##name_[] =					      \
 "@(#) " COMMON_PRJ_NAME " - " COMMON_PRJ_VER "\n"			      \
 "    " #name_ " - " __FILE__ " - Compiled: " __DATE__ " "__TIME__ "\n"	      \
 "    " verId_
+
+
+#define COMMON_SET_TYPE_ERROR( type_, err_, args_ )			      \
+{									      \
+  SET_ERROR( type_, err_ );						      \
+  _CommonErrorDesc args_;						      \
+}
+
+
+#define COMMON_SET_ERROR( err_, args_ ) \
+  COMMON_SET_TYPE_ERROR( ET_COMMON, err_, args_ )
+
+
+#define COMMON_RETURN_TYPE_ERROR( type_, err_, args_ )			      \
+{									      \
+  COMMON_SET_TYPE_ERROR( type_, err_, args_ );				      \
+  return( RET_ERROR );							      \
+}
+
+#define COMMON_RETURN_ERROR( err_, args_ ) \
+  COMMON_RETURN_TYPE_ERROR( ET_COMMON, err_, args_ )
 
 
 #if !defined( PROTO_GEN )
