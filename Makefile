@@ -58,35 +58,15 @@ setup:
 	$(hide) echo 
 
 verify_setup:
-	$(hide) if [ -z "$$TOOL_DIR" ] ; then				      \
-	  echo "TOOL_DIR env var not set.";				      \
-	  echo "  Please see $(PROJECT)/docs/devel/Dependencies.txt";	      \
-	  echo "  for details.";					      \
-	  exit 1;							      \
-	fi
-	$(hide) if [ ! -f "$(make_cfg_file)" ] ; then			      \
-	  echo " ";							      \
-	  echo "+ MakeConfigs $(make_cfg_ver) NOT FOUND!";		      \
+	$(hide)								      \
+	if [ ! -f $(CFG_DIR)/Setup.cfg ]				      \
+	    && [ ! -f $(PROJECT)/$(CFG_DIR)/Setup.cfg ] ; then		      \
+	  echo "+ Setup.cfg NOT FOUND!";				      \
 	  echo " ";							      \
 	  echo "    To install all the dependencies, please perform";	      \
 	  echo "    the following:";					      \
 	  echo " ";							      \
-	  echo "      cd \$$TOOL_DIR/src/Build/Tools";			      \
-	  echo "      make -f $(PROJECT)/Makefile setup";		      \
-	  echo " ";							      \
-	  echo "    Please see $(PROJECT)/docs/devel/Dependencies.txt";	      \
-	  echo "    for details.";					      \
-	  echo " ";							      \
-	  exit 1;							      \
-	fi
-	$(hide) if [ ! -f "$(dejagnu)" ] ; then				      \
-	  echo " ";							      \
-	  echo "+ $(dejagnu) NOT FOUND!";				      \
-	  echo " ";							      \
-	  echo "    To install all the dependencies, please perform";	      \
-	  echo "    the following:";					      \
-	  echo " ";							      \
-	  echo "      cd \$$TOOL_DIR/src/Build/Tools";			      \
+	  echo "      cd \$$TOOL_DIR/src/Build/Libs";			      \
 	  echo "      make -f $(PROJECT)/Makefile setup";		      \
 	  echo " ";							      \
 	  echo "    Please see $(PROJECT)/docs/devel/Dependencies.txt";	      \
@@ -171,6 +151,9 @@ help_config:
 
 #
 # $Log$
+# Revision 3.7  1999/11/09 13:00:30  houghton
+# Bug-Fix: had to many backslashes '\' in setup_exports and exports.
+#
 # Revision 3.6  1999/11/09 10:45:51  houghton
 # Added install_lib_all target.
 #
