@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1995/12/02 02:07:20  houghton
+ * Bug fix - duplicate symbols.
+ *
  * Revision 2.2  1995/11/10  01:02:52  houghton
  * Change error handler arguments.
  *
@@ -54,7 +57,7 @@ extern CommonErrorHandler  _CommonHandleError;	    /* ErrorArgs.c */
 extern void *		    _CommonClosureError;    /* ErrorArgs.c */
 
 void
-SetErrorHander( CommonErrorHandler handler, void * closure )
+SetErrorHandler( CommonErrorHandler handler, void * closure )
 {
   _CommonHandleError  = handler;
   _CommonClosureError = closure;
