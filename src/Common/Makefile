@@ -20,7 +20,7 @@ PROD_INC_DEST	= /usr/local/include
 
 LIBRARY = libCommon.a
 
-USER_INCS	= Common.h avl.h DateTime.h
+USER_INCS	= Common.h DateTime.h
 
 PROTO_H = _CommonProto.h
 
@@ -28,8 +28,10 @@ PROTO_H = _CommonProto.h
 
 LIB_C_SOURCES   =   	\
 	ArgEnvInt.c	\
+	ArgEnvLong.c	\
 	ArgEnvBool.c	\
 	ArgEnvString.c	\
+	ArgEnvFlag.c	\
 	ErrorString.c	\
 	strlwr.c	\
 	strupr.c	\
@@ -39,22 +41,25 @@ LIB_C_SOURCES   =   	\
 	CenterLine.c	\
 	Difftm.c	\
 	ForeachFile.c	\
+	FindPath.c	\
+	CanExecute.c	\
+	MemberOfGroup.c \
 	avl.c           \
 	StripSpaces.c	\
 	StringToInt.c   \
-    	StringToLong.c	\
+	StringToLong.c	\
 	SetErrorHandler.c \
 	YYMMDDtoTimeT.c \
 	HHMMSStoTimeT.c \
 	DateTimeData.c  \
-    	LoggerInit.c    \
+	LoggerInit.c    \
 	LoggerTee.c	\
 	Logger.c	\
 	LogLevelFromString.c \
 	LogLevelString.c \
 	LoggerTrim.c    \
-    	LoggerLoc.c     \
-    	_LoggerFileName.c \
+	LoggerLoc.c     \
+	_LoggerFileName.c \
 	$(ARCH_C_SOURCES)
 
 
@@ -121,7 +126,7 @@ test:
 
 clean:
 	rm -f $(LIBRARY) $(LIB_OBJECTS) $(PROTO_H)
-	
+
 install:
 	-( cd $(BETA_LIB_DEST); cp $(LIBRARY) old )
 	-( cd $(BETA_INC_DEST); cp $(USER_INCS) old )
@@ -132,7 +137,7 @@ install:
 	(cd $(BETA_INC_DEST); chmod 664 $(USER_INCS) )
 	(cd $(BETA_INC_DEST); chgrp tools $(USER_INCS) )
 	@echo 'Beta Install Complete!'
-	
+
 install_production:
 	-( cd $(PROD_LIB_DEST); cp $(LIBRARY) old )
 	-( cd $(PROD_INC_DEST); cp $(USER_INCS) old )
@@ -148,7 +153,7 @@ proto: $(PROTO_H)
 
 $(PROTO_H): $(LIB_C_SOURCES)
 	$(MKPROTO) $(CPPFLAGS) $(LIB_C_SOURCES) >$(PROTO_H)
-	
+
 
 tags: 
 	etags *.h *.c
@@ -161,6 +166,10 @@ include .depend
 
 #
 # $Log$
+# Revision 1.11  1994/07/26  14:37:22  houghton
+# Fix basename in Common.h
+# Fix month in Logger
+#
 # Revision 1.10  1994/07/13  14:54:01  houghton
 # Sequent port
 #

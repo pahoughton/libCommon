@@ -18,6 +18,10 @@
  *
  *     			
  * $Log$
+ * Revision 1.11  1994/07/26  14:37:19  houghton
+ * Fix basename in Common.h
+ * Fix month in Logger
+ *
  * Revision 1.10  1994/07/13  13:43:00  houghton
  * Added LoggerTee function and fixed some bugs with logging
  *
@@ -47,6 +51,7 @@
  * Add avl and some other minor functions
  *
  *********************************************************************/
+
 
 #include <errno.h>
 #include <time.h>
@@ -106,6 +111,8 @@ typedef enum
   C_ERANGE,
   C_EBADPARAM,
   C_ECOMMFABRIC,    	/* CF Errro */
+  C_ESYBERR,		/* Sybase Error */
+  C_ESYBMSG,		/* Sybase Message */
   C_ESYBOC,		/* SybocErrno */
   C_EOSERROR,		/* system call error */
   C_EAPP,		/* Application Error */  
@@ -154,7 +161,15 @@ Ret_Status ArgEnvInt( int * argc, char *argv[],
 	       const char * argid, const char * envVar,
 	       int min, int max, int * paramVar );
 
+Ret_Status ArgEnvLong( int * argc, char *argv[],
+	       const char * argid, const char * envVar,
+	       long min, long max, long * paramVar );
+
 Ret_Status ArgEnvBool( int * argc, char *argv[],
+		const char * argid, const char * envVar,
+	        int * paramVar );
+
+Ret_Status ArgEnvFlag( int * argc, char *argv[],
 		const char * argid, const char * envVar,
 	        int * paramVar );
 
@@ -354,6 +369,13 @@ Ret_Status ForeachFile(
     Bool    	    recurs,
     void *  	    closure 
     );
+
+char * FindPath( const char * fileName, const char * path );
+Bool CanExecute( const char * fullFileName );
+
+#ifdef _POSIX_SOURCE
+Bool MemberOfGroup( gid_t grp );
+#endif
 
 const char * CommonGetVersion( void );
 

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.3  1994/06/20  15:28:40  dpotluri
+ * LibCommon Port to OPENVMS
+ *
  * Revision 1.2  1994/06/20  10:27:19  houghton
  * Porting and add LoggerLoc function
  *
@@ -26,6 +29,8 @@
 static const char RcsId[] =
 "$Id$";
 
+#include "_Common.h"
+
 #include <stdio.h>
 
 #ifdef OPENVMS
@@ -35,8 +40,6 @@ static const char RcsId[] =
 #endif
 
 /* #include <macros.h> */
-
-#include "_Common.h"
 
 extern long _CLogMaxSize;     /* = 0 */
 extern long _CLogTrim;        /* = 0 */

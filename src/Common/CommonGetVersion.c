@@ -19,6 +19,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.3  1994/06/20  15:28:38  dpotluri
+ * LibCommon Port to OPENVMS
+ *
  * Revision 1.2  1994/06/17  18:03:57  houghton
  * Cleanup for beta release.
  *
@@ -34,16 +37,16 @@ static const char RcsId[] =
 #ifdef OPENVMS
 const char _CommonVersionString[] =
 {
-  "libCommon Version:Beta 0.9 				\
+  "libCommon Version: Prod 1.0
    Compiled: __DATE__ __TIME__ 				\
-   CVS Tag:$Id$				"
+   CVS Tag: PROD_1_0 $Id$				"
 };
 #else
 const char _CommonVersionString[] = 
 {
-      "libCommon Version: BETA 0.9\n"
+      "libCommon Version: PROD 1.0\n"
       "Compiled: " __DATE__ " " __TIME__ "\n"
-      "CVS Tag: BETA_0_9 $Id$ \n"
+      "CVS Tag: PROD_1_0 $Id$ \n"
 };
 #endif
 

@@ -15,6 +15,10 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.4  1994/07/26  14:37:21  houghton
+ * Fix basename in Common.h
+ * Fix month in Logger
+ *
  * Revision 1.3  1994/07/13  13:43:00  houghton
  * Added LoggerTee function and fixed some bugs with logging
  *
@@ -29,6 +33,8 @@
 static const char RcsId[] =
 "$Id$";
 
+#include "_Common.h"
+
 #include <stdio.h>
 #include <stdarg.h>
 
@@ -39,7 +45,6 @@ static const char RcsId[] =
 #include <sys/stat.h>
 #endif
 
-#include "_Common.h"
 
 
 extern char _CLogFilePath[];  /* = "." */

@@ -25,6 +25,9 @@
 *	Modification History:
 *
 *	$Log$
+ * Revision 1.2  1994/06/17  18:03:56  houghton
+ * Cleanup for beta release.
+ *
  * Revision 1.1  1994/01/31  14:06:12  houghton
  * Add avl and some other minor functions
  *
@@ -39,11 +42,10 @@
 static char RcsId[] = 
 {"$Id$"};
 
+#include "_Common.h"
 
 #include <string.h>
 #include <stdlib.h>
-
-#include "_Common.h"
 
 
 char * CenterLine( char * dest, const char *src,int width)

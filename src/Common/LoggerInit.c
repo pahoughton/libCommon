@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.3  1994/07/13  13:43:00  houghton
+ * Added LoggerTee function and fixed some bugs with logging
+ *
  * Revision 1.2  1994/07/05  21:39:14  houghton
  * Minor fixes and cleanup header info.
  *
@@ -26,12 +29,13 @@
 static const char RcsId[] =
 "$Id$";
 
+#include "_Common.h"
+#include <Common.h>
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-#include "_Common.h"
-#include <Common.h>
 
 char _CLogFilePath[256] = ".";
 char _CLogFileName[256] = "program.log";
