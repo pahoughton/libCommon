@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/29  12:01:28  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:37  houghton
  * Move to Version 2.0
  *
@@ -39,11 +42,16 @@
 
 #include "Common.h"
 
-#if !defined( COMMON_SHORT_FN )
-#include "CommonVersion.h"
-#else
-#include "CmmnVer.h"
-#endif
+#define COMMON_PRJ_NAME	    "Common"
+#define COMMON_PRJ_VER	    VERSION
+#define COMMON_PRJ_VER_TAG  "BETA_2_0_0_2"
+
+#define COMMON_VERSION( name_, verId_ )					      \
+const char COMMONVER_##name_[] =					      \
+"@(#) " COMMON_PRJ_NAME " - " COMMON_PRJ_VER "\n"			      \
+"    " #name_ " - " __FILE__ " - Compiled: " __DATE__ " "__TIME__ "\n"	      \
+"    " verId_
+
 
 #if !defined( PROTO_GEN )
 #if !defined( COMMON_SHORT_FN )

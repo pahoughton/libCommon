@@ -19,6 +19,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/28  19:11:44  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:21  houghton
  * Move to Version 2.0
  *
@@ -47,9 +50,13 @@ COMMON_VERSION(
 static char * ErrorDescription[] =
 {
 /* C_ENONE */	     "No error",
-/* C_EOSERROR */     "OS error",
 /* C_ERANGE */       "Value out of range",
 /* C_EBADPARAM */    "Bad parameter",
+/* C_ECOMMFABRIC */  "CommFabric error",
+/* C_ESYBERR */	     "Sybase Error",
+/* C_ESYBMSG */	     "Sybase Message",
+/* C_ESYBOC */	     "Syboc Error",
+/* C_EOSERROR */     "OS error",
 /* C_EAPP */	     "Application error"
 };
 

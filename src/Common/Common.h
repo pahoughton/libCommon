@@ -14,65 +14,9 @@
  *
  * Start Date:	    09/03/93 10:04
  *
- * Modification History:
+ * Modification History: See end of file
  *
- *     			
- * $Log$
- * Revision 2.3  1995/10/29  18:15:57  houghton
- * Fixes for Borland 4.0 Port
- *
- * Revision 2.2  1995/10/29  13:33:41  houghton
- * Initial Linux Build of Version 2
- *
- * Revision 2.1  1995/10/28  19:11:39  houghton
- * Change Version Id String
- *
- * Revision 2.0  1995/10/28  17:35:15  houghton
- * Move to Version 2.0
- *
- * Revision 1.15  1995/03/02  16:39:55  houghton
- * minor mods
- *
- * Revision 1.14  1995/02/13  15:34:13  houghton
- * New functions and many enhancements to existing functions.
- *
- * Revision 1.13  1994/12/02  17:25:41  dpotluri
- * Added locking to Avl Trees
- *
- * Revision 1.12  1994/08/15  19:40:17  houghton
- * Cleanup; Rating QA1 Checkin
- *
- * Revision 1.11  1994/07/26  14:37:19  houghton
- * Fix basename in Common.h
- * Fix month in Logger
- *
- * Revision 1.10  1994/07/13  13:43:00  houghton
- * Added LoggerTee function and fixed some bugs with logging
- *
- * Revision 1.9  1994/07/05  21:39:13  houghton
- * Minor fixes and cleanup header info.
- *
- * Revision 1.8  1994/06/20  15:28:38  dpotluri
- * LibCommon Port to OPENVMS
- *
- * Revision 1.7  1994/06/20  10:27:18  houghton
- * Porting and add LoggerLoc function
- *
- * Revision 1.6  1994/06/17  21:48:14  dpotluri
- * Minor mods to the function Logger
- *
- * Revision 1.5  1994/06/17  18:03:56  houghton
- * Cleanup for beta release.
- *
- * Revision 1.4  1994/06/06  13:23:34  houghton
- * Avl and DateTime functions added for Rating
- *
- * Revision 1.3  1994/02/02  14:38:25  houghton
- * Had to rename error to LibError because of a conflicts with other
- * symbols. Minor mods to other files
- *
- * Revision 1.2  1994/01/31  14:06:12  houghton
- * Add avl and some other minor functions
+ *  $Id$
  *
  *********************************************************************/
 
@@ -128,8 +72,8 @@ typedef enum
 typedef enum
 {
   C_ENONE,
-  C_ERANGE,
-  C_EBADPARAM,
+  C_ERANGE,		/* Argument out of legal value range */
+  C_EBADPARAM,		/* Bad argument */
   C_ECOMMFABRIC,    	/* CF Errro */
   C_ESYBERR,		/* Sybase Error */
   C_ESYBMSG,		/* Sybase Message */
@@ -572,7 +516,71 @@ const char * CommonGetVersion( void );
 #endif
 
 
-#endif
+/*
+ * Modification History
+ *     			
+ * $Log$
+ * Revision 2.4  1995/10/30  14:55:13  houghton
+ * Move contents of Bit.h & DateTime.h to Common.h
+ * Add Net2Host
+ *
+ * Revision 2.3  1995/10/29  18:15:57  houghton
+ * Fixes for Borland 4.0 Port
+ *
+ * Revision 2.2  1995/10/29  13:33:41  houghton
+ * Initial Linux Build of Version 2
+ *
+ * Revision 2.1  1995/10/28  19:11:39  houghton
+ * Change Version Id String
+ *
+ * Revision 2.0  1995/10/28  17:35:15  houghton
+ * Move to Version 2.0
+ *
+ * Revision 1.15  1995/03/02  16:39:55  houghton
+ * minor mods
+ *
+ * Revision 1.14  1995/02/13  15:34:13  houghton
+ * New functions and many enhancements to existing functions.
+ *
+ * Revision 1.13  1994/12/02  17:25:41  dpotluri
+ * Added locking to Avl Trees
+ *
+ * Revision 1.12  1994/08/15  19:40:17  houghton
+ * Cleanup; Rating QA1 Checkin
+ *
+ * Revision 1.11  1994/07/26  14:37:19  houghton
+ * Fix basename in Common.h
+ * Fix month in Logger
+ *
+ * Revision 1.10  1994/07/13  13:43:00  houghton
+ * Added LoggerTee function and fixed some bugs with logging
+ *
+ * Revision 1.9  1994/07/05  21:39:13  houghton
+ * Minor fixes and cleanup header info.
+ *
+ * Revision 1.8  1994/06/20  15:28:38  dpotluri
+ * LibCommon Port to OPENVMS
+ *
+ * Revision 1.7  1994/06/20  10:27:18  houghton
+ * Porting and add LoggerLoc function
+ *
+ * Revision 1.6  1994/06/17  21:48:14  dpotluri
+ * Minor mods to the function Logger
+ *
+ * Revision 1.5  1994/06/17  18:03:56  houghton
+ * Cleanup for beta release.
+ *
+ * Revision 1.4  1994/06/06  13:23:34  houghton
+ * Avl and DateTime functions added for Rating
+ *
+ * Revision 1.3  1994/02/02  14:38:25  houghton
+ * Had to rename error to LibError because of a conflicts with other
+ * symbols. Minor mods to other files
+ *
+ * Revision 1.2  1994/01/31  14:06:12  houghton
+ * Add avl and some other minor functions
+ *
+ */
 
 /**
  *             This software is the sole property of
@@ -590,3 +598,4 @@ const char * CommonGetVersion( void );
 /*
  * Well actually most of it is public domain.
  */
+#endif /* ! def _Common_h_ */
