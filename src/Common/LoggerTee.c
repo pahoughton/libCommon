@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:27  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.2  1994/08/15  19:57:07  houghton
  * Fix RcsId so ident will work
  *
@@ -23,17 +26,20 @@
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
 
-#include <Common.h>
 
-extern Bool _CLogTee;
+#include "_Common.h"
 
-Bool
-LoggerTee( Bool state )
+COMMON_VERSION(
+  LoggerTee,
+  "$Id$");
+
+extern BOOL _CLogTee;
+
+BOOL
+LoggerTee( BOOL state )
 {
-  Bool oldState = _CLogTee;
+  BOOL oldState = _CLogTee;
 
   _CLogTee = state;
 

@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:29  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.4  1994/08/15  19:57:08  houghton
  * Fix RcsId so ident will work
  *
@@ -34,10 +37,12 @@
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
-
 #include "_Common.h"
+
+COMMON_VERSION(
+  SetErrorHandler,
+  "$Id$");
+
 
 /* both these are defined in LibError.c */
 

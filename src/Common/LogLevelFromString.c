@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:24  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.2  1994/08/15  19:57:05  houghton
  * Fix RcsId so ident will work
  *
@@ -23,12 +26,13 @@
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
-
-#include <stdio.h>
-
 #include "_Common.h"
+#include <string.h>
+
+COMMON_VERSION(
+  LogLevelFromString,
+  "$Id$");
+
 
 char * LogLevelNames[] =
 {

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:28  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.6  1995/02/13  15:34:18  houghton
  * New functions and many enhancements to existing functions.
  *
@@ -35,9 +38,6 @@
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
-
 #include "_Common.h"
 
 #include <stdio.h>
@@ -48,7 +48,11 @@ static const char * RcsId =
 #include <sys/stat.h>
 #endif
 
-/* #include <macros.h> */
+COMMON_VERSION(
+  LoggerTrim,
+  "$Id$");
+
+
 
 extern long _CLogMaxSize;     /* = 0 */
 extern long _CLogTrim;        /* = 0 */

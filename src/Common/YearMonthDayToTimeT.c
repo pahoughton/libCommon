@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:36  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.2  1995/02/20  14:22:51  houghton
  * Improve month calc. changed from a for loop
  * to an array that has the day of year for each
@@ -25,11 +28,13 @@
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
 
-#include <DateTime.h>
-#include <time.h>
+#include "_Common.h"
+
+COMMON_VERSION(
+  YearMonthDayToTimeT,
+  "$Id$");
+
 
 time_t
 YearMonthDayToTimeT(

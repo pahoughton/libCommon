@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:38  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.3  1994/08/15  19:57:10  houghton
  * Fix RcsId so ident will work
  *
@@ -26,13 +29,14 @@
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
+#include "_Common.h"
 
 #include <stdio.h>
 #include <time.h>
 
-#include "_Common.h"
+COMMON_VERSION(
+  _LoggerFileName,
+  "$Id$");
 
 extern char   _CLogFilePath[];
 extern int    _CLogFileType;

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:34  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.3  1994/08/15  19:57:09  houghton
  * Fix RcsId so ident will work
  *
@@ -26,10 +29,12 @@
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
-
 #include "_Common.h"
+
+COMMON_VERSION(
+  StripSpaces,
+  "$Id$");
+
 
 void
 StripSpaces( char * buffer )

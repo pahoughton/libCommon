@@ -15,17 +15,22 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:31  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.1  1995/02/13  15:34:20  houghton
  * New functions and many enhancements to existing functions.
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
-
-
 #include "_Common.h"
 #include <ctype.h>
+
+COMMON_VERSION(
+  StringToShort,
+  "$Id$");
+
+
 
 short
 StringToShort(

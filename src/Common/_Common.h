@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:37  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.6  1995/02/13  15:34:23  houghton
  * New functions and many enhancements to existing functions.
  *
@@ -34,14 +37,19 @@
  *********************************************************************/
 
 
-#include <Common.h>
+#include "Common.h"
 
-#ifndef PROTO_GEN
-
-#ifdef MSWIN
-#include "_Cproto.h"
+#if !defined( COMMON_SHORT_FN )
+#include "CommonVersion.h"
 #else
+#include "CmmnVer.h"
+#endif
+
+#if !defined( PROTO_GEN )
+#if !defined( COMMON_SHORT_FN )
 #include "_Common_Proto.h"
+#else
+#include "Cmmnprot.h"
 #endif
 
 #endif

@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:24  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.5  1994/08/15  19:57:04  houghton
  * Fix RcsId so ident will work
  *
@@ -28,25 +31,17 @@
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
+#include "_Common.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
 
-#include "_Common.h"
 
-#define MAX_ERR_MESG	2048
+COMMON_VERSION(
+  LibError,
+  "$Id$");
 
-#ifdef sun4
-#ifdef __STDC__
-#ifndef strerror
-  extern char *sys_errlist[];
-#define strerror(_err_) (sys_errlist[_err_])
-#endif
-#endif
-#endif
 
 char *	    	 CommonErrFile;
 int  	    	 CommonErrLine;

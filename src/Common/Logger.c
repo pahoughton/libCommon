@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:25  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.7  1995/02/13  15:34:18  houghton
  * New functions and many enhancements to existing functions.
  *
@@ -39,21 +42,20 @@
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
-
 #include "_Common.h"
 
 #include <stdio.h>
 #include <stdarg.h>
-#include <unistd.h>
 
-#ifdef OPENVMS
+#if defined( OPENVMS )
 #include <unixio.h>
-#include <time.h>
 #else
 #include <sys/stat.h>
 #endif
+
+COMMON_VERSION(
+  Logger,
+  "$Id$" );
 
 
 
@@ -65,9 +67,9 @@ extern long _CLogMaxSize;     /* = 0 */
 extern long _CLogTrim;        /* = 0 */
 
 extern int _CLogOutputLevel;  /* = LOG_WARN | LOG_ERROR */
-extern Bool _CLogDate;        /* = TRUE */
-extern Bool _CLogLoc ;        /* = TRUE */
-extern Bool _CLogTee;	      /* = TRUE */
+extern BOOL _CLogDate;        /* = TRUE */
+extern BOOL _CLogLoc ;        /* = TRUE */
+extern BOOL _CLogTee;	      /* = TRUE */
 
 
 extern FILE * _CLogFP;
