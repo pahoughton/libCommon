@@ -10,22 +10,17 @@
 
 make_cfg_ver	= 5.06
 show_commands 	= # true
+check_install	= true
 
 # Include standard MakeConfig configuration for GNU make required
 include Make/make.cfg.$(make_cfg_ver)
 
-INSTALL_BIN_DIR	= $(local_bindir)
-INSTALL_INC_DIR = $(local_incdir)
-INSTALL_LIB_DIR = $(local_libdir)
-INSTALL_MAN_DIR = $(local_mandir)
+PRJ_TOPDIR	= ..
+CFG_DIR		= $(PRJ_TOPDIR)/src/config
 
-exports	    = 					\
-	INSTALL_BIN_DIR=$(INSTALL_BIN_DIR)	\
-	INSTALL_INC_DIR=$(INSTALL_INC_DIR)	\
-	INSTALL_LIB_DIR=$(INSTALL_LIB_DIR)	\
-	INSTALL_MAN_DIR=$(INSTALL_MAN_DIR)	\
-	show_commands=$(show_commands)		\
-	check_install=$(check_install)		\
+include $(CFG_DIR)/00-Makefile.cfg
+
+.PHONY: test
 
 depend depend_all depend_test depend_default depend_debug:
 	$(hide) $(MAKE) -C Common $@ $(exports)
@@ -35,17 +30,27 @@ all default debug:
 
 clean realclean:
 	$(hide) $(MAKE) -C Common $@ $(exports)
+	$(hide) $(MAKE) -C $(DOC_DIR) $@ $(exports)
+	$(hide) $(MAKE) -C $(TEST_DIR) $@ $(exports)
 
 test:
 	$(hide) $(MAKE) -C Common $@ $(exports)
 
+check: test
+	$(hide) $(MAKE) -C $(TEST_DIR) $@ $(exports)
 
-install_all install install_default install_debug:
+install_docs:
+	$(hide) $(MAKE) -C $(DOC_DIR) $@ $(exports)
+
+install_all install install_default install_debug: install_docs
 	$(hide) $(MAKE) -C Common $@ $(exports)
 
 
 #
 # $Log$
+# Revision 3.1  1999/10/29 16:56:14  houghton
+# Changed Version to 3
+#
 # Revision 2.5  1999/05/14 10:20:45  houghton
 # Bug-Fix: was not exiting with error code.
 #

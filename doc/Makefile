@@ -36,7 +36,7 @@ exports	    = 					\
 	check_install=$(check_install)		\
 
 
-install install_doc:
+install install_docs:
 	$(hide) $(MAKE) -C $(MAN_DIR) $@ $(exports)
 
 clean:
@@ -49,6 +49,9 @@ realclean:
 
 #
 # $Log$
+# Revision 3.1  1999/10/29 16:55:57  houghton
+# Changed Version to 3
+#
 # Revision 1.3  1999/05/14 10:20:35  houghton
 # Bug-Fix: was not exiting with error code.
 #
