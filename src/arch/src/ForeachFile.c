@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/11/10  01:05:11  houghton
+ * Modified to use new Error processing functions.
+ *
  * Revision 2.1  1995/10/29  13:33:56  houghton
  * Initial Linux Build of Version 2
  *
@@ -52,8 +55,8 @@
  *********************************************************************/
 #include "_Common.h"
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include <dirent.h>
 #include <sys/stat.h>

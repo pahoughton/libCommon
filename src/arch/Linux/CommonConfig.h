@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.4  1995/11/10  01:04:30  houghton
+ * Added configuration defines for File names a sizes
+ *
  * Revision 2.3  1995/10/30  14:55:22  houghton
  * Add Net2Host
  *

@@ -19,6 +19,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/29  13:33:58  houghton
+ * Initial Linux Build of Version 2
+ *
  * Revision 2.0  1995/10/28  17:35:49  houghton
  * Move to Version 2.0
  *
@@ -29,8 +32,8 @@
  *********************************************************************/
 #include "_Common.h"
 
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 COMMON_VERSION(
   strdup,
