@@ -21,6 +21,9 @@
  * Modification History
  *
  * $Log$
+ * Revision 2.2  1995/10/29  12:01:14  houghton
+ * Change Version Id String
+ *
  * Revision 2.1  1995/10/28  19:11:45  houghton
  * Change Version Id String
  *
@@ -42,8 +45,8 @@
 
 #include "_Common.h"
 
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 COMMON_VERSION(
   FindPath,

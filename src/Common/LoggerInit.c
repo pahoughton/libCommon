@@ -15,6 +15,10 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1995/11/10  00:59:38  houghton
+ * Moved functionallity to new Set functions for finer control
+ * over logging. Also add arguments for user Logger Function
+ *
  * Revision 2.2  1995/10/29  13:33:43  houghton
  * Initial Linux Build of Version 2
  *
@@ -43,9 +47,9 @@
  *********************************************************************/
 #include "_Common.h"
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 #include <time.h>
 
 COMMON_VERSION(
