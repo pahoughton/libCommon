@@ -1,7 +1,7 @@
 #
 # -*- Makefile -*- for t
 #
-# Created: 11/21/95 using MakeConfigs 4.00.00.a.08
+# Created: 2/26/96 using MakeConfigs 4.01.00.a.02
 #
 # $Id$
 #
@@ -14,11 +14,11 @@
 #
 # Do not modifiy 'makefile_type'
 makefile_type = program
-# Uncomment 'show_compile_command' to output compile command.
-show_commands = true
+# Uncomment 'show_commands' to output compile command.
+show_commands = # true
 
 # Include standard MakeConfig configuration for GNU make required
-include Make/make.cfg.4.00
+include Make/make.cfg.4.01
 
 # 
 # =USE_CURRENT_MAKEFILE=
@@ -48,12 +48,6 @@ PROTO_H		= _$(NAME)_Proto.h
 #
 # $(X11_DEF)	    defines for X11
 # $(SYB_DEF)	    defines for SYB
-# $(MMALLOC_DEF)    defines for libmmalloc
-# $(DATA_DEF)	    defines for libData (C++)
-# $(CLUE_DEF)	    defines for libClue (C++)
-# $(COMMON_DEF)	    defines for libCommon
-# $(WT_DEF)	    defines for libWt
-# $(WCF_DEF)	    defines for libWcf (CommFabric)
 #
 
 
@@ -79,9 +73,9 @@ DEFINES		= $(PRJDEFINES) $(SRCDEFINES)
 #
 
 
-TOPDIR		= ../../../src
+TOPDIR		= ../src/Common
 
-SRCINCDIR	= -I. $(COMMON_ALPHA_INC)
+SRCINCDIR	= -I. -I$(TOPDIR) -I../src/arch/$(arch)
 PRJINCDIR	= 
 
 INCDIRS		= $(SRCINCDIR)	\
@@ -143,8 +137,8 @@ DEBUG_LIBS	= # g
 LDDEBUG		= 
 LDOTHER		=
 
-LDLIBDIRS	= -L../src/Common
-LDLIBS		= -lCommons -lm
+LDLIBDIRS	= -L$(TOPDIR) -lCommons 
+LDLIBS		= 
 
 #
 # =USE_CURRENT_MAKEFILE=
@@ -154,8 +148,9 @@ LDLIBS		= -lCommons -lm
 
 C_SOURCES	=			\
 	main.c                          \
+	tLOGIT.c                        \
 	tTempFileName.c                 \
-	tLOGIT.c			\
+	$(ARCH_C_SOURCES)               \
 
 hold = \
 	AvlTestLargeValues.c            \
@@ -167,7 +162,6 @@ hold = \
 	TestOutput.c                    \
 	avl_test.c                      \
 	key_gen.c                       \
-	$(ARCH_C_SOURCES)               \
 
 
 USER_INCLUDES	=		\
@@ -191,7 +185,7 @@ USER_INCLUDES	=		\
 #
 
 
-include Make/make.cfg.targets.4.00
+include Make/make.cfg.targets.4.01
 
 default debug profile:: proto
 
@@ -202,13 +196,15 @@ all::	default debug profile
 debug:: objects/debug
 	$(HIDE) $(MAKE) CCDEBUG='$(CC_DEBUG)' \
 			CXXDEBUG='$(CXX_DEBUG)' \
-			LDDEBUG='$(LD_DEBUG)'
+			LDDEBUG='$(LD_DEBUG)' \
+			DEBUG_LIBS='g' \
 			$(PROGRAM_DEBUG)
 
 profile:: objects/profile
 	$(HIDE) $(MAKE) CCDEBUG='$(CC_PROFILE)' \
 			CXXDEBUG='$(CXX_PROFILE)' \
-			LDDEBUG='$(LD_PROFILE)'
+			LDDEBUG='$(LD_PROFILE)' \
+			DEBUG_LIBS='pg' \
 			$(PROGRAM_PROFILE)
 
 $(PROGRAM_DEFAULT):: $(OBJECTS:%=objects/default/%)
@@ -234,9 +230,6 @@ test:	default
 # =MAKEFILE_LOG=
 #
 # $Log$
-# Revision 2.3  1995/12/02 02:12:54  houghton
-# Changed to use MakeConfigs Ver 4.
-#
 #
 # =MAKEFILE_LOG=
 #
