@@ -7,13 +7,20 @@
 # (see end of file for Log info)
 
 #
-# Do not modifiy 'makefile_type'
+# The following variables control the behavior of MakeConfigs.
+#   makefile_type   is the type of object being build (do NOT change)
+#   make_cfg_ver    is the version of MakeConfigs to use
+#   make_target	    is the default target to build
+#   show_commands   if this is true, the commands  will be output
+#   proto_dep	    if this is true, the proto header will be rebuild when
+#		    one of it's dependancies changes (ie a .c source)
+#   check_install   if this is true, install and install_all will NOT
+#		    overwrite an installed version.
+#
+
 makefile_type   = lib
-# This is the make.cfg version that will be used
 make_cfg_ver	= 5.02
-# Default target type
 make_target	= default
-# Uncomment 'show_compile_command' to output compile command.
 show_commands 	= # true
 proto_dep	= true
 check_install	= true
@@ -93,14 +100,14 @@ CPP_FLAGS		= $(ARCH_CPP_FLAGS)
 #
 
 
-CC_FLAGS		= $(cc_warn) $(ARCH_CC_FLAGS)
+CC_FLAGS		= $(cc_warn_all) $(ARCH_CC_FLAGS)
 
 DEFAULT_CC_FLAGS	= $(cc_optimize)
 DEBUG_CC_FLAGS		= $(cc_debug)
 PROFILE_CC_FLAGS	= $(cc_profile)
 SHARED_CC_FLAGS		= $(cc_shared) $(cc_optimize)
 
-CXX_FLAGS		= $(cxx_warn) $(ARCH_CXX_FLAGS)
+CXX_FLAGS		= $(cxx_warn_all) $(ARCH_CXX_FLAGS)
 
 DEFAULT_CXX_FLAGS	= $(cxx_optimize)
 DEBUG_CXX_FLAGS		= $(cxx_debug)
@@ -225,7 +232,7 @@ include Make/make.cfg.targets.$(makefile_type).$(make_cfg_ver)
 
 default debug profile shared:: $(generated_files)
 
-default:: $(LIBRARY_$($(make_target)))
+default:: $(LIBRARY_DEFAULT)
 
 debug profile shared:: 
 	$(hide) $(MAKE) make_target=$@ $(LIBRARY_$($@))
@@ -262,6 +269,10 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.26  1997/09/19 09:09:10  houghton
+# Changed minor version num and release.
+# Removed referances to GnuRegex.h (no longer part of libCommon).
+#
 # Revision 2.25  1997/09/02 21:33:09  houghton
 # Changed to use MakeConfigs 5.02.
 #
