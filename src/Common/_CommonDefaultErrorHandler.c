@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1995/12/02 02:10:10  houghton
+ * Cleanup error messages.
+ *
  * Revision 2.2  1995/11/12  17:46:41  houghton
  * Cleanup output.
  *

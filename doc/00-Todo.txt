@@ -125,6 +125,9 @@ comp Paul Houghton 7/13/94 08:00
 #                 of completion
 
 # $Log$
+# Revision 2.6  1997/05/07 16:52:49  houghton
+# *** empty log message ***
+#
 # Revision 2.5  1997/05/07 12:22:45  houghton
 # Updated and Cleanup.
 #

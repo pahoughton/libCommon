@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1997/05/07 16:53:30  houghton
+ * Added COMMON_n2hi macro.
+ *
  * Revision 2.2  1995/12/31 11:27:43  houghton
  * AIX Port - comment out sys/types.h include line.
  *

@@ -15,6 +15,10 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1997/05/07 11:38:11  houghton
+ * Added Error test.
+ * Cleanup.
+ *
  * Revision 2.2  1995/12/02 02:13:36  houghton
  * Cleanup outputs.
  *

@@ -151,6 +151,9 @@ extern "C" {
  * Revision Log:
  *
  * $Log$
+ * Revision 2.3  1998/10/23 11:37:55  houghton
+ * Added TIMET_MAX & TIMET_MIN.
+ *
  * Revision 2.2  1998/03/21 17:13:31  houghton
  * Removed ';' to eliminate compiler warning.
  *

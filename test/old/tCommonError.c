@@ -113,5 +113,8 @@ tCommonError( void )
  * Revision Log:
  *
  * $Log$
+ * Revision 2.1  1997/05/07 11:38:20  houghton
+ * Initial version.
+ *
  *
  */

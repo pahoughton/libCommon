@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28 17:35:47  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.1  1994/12/02  17:25:42  dpotluri
  * Added locking to Avl Trees
  *

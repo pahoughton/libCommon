@@ -300,6 +300,9 @@ check: test
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 1.3  1998/10/23 11:41:44  houghton
+# Changed to use MakeConfigs 5.06.
+#
 # Revision 1.2  1998/09/24 14:36:38  houghton
 # Added more tests.
 #

@@ -87,6 +87,9 @@ Version 2.00.00.b.04 - 10/31/95
 
 #
 # $Log$
+# Revision 2.4  1998/09/24 15:28:51  houghton
+# *** empty log message ***
+#
 # Revision 2.3  1998/09/22 14:39:53  houghton
 # *** empty log message ***
 #

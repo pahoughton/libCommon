@@ -21,6 +21,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1995/12/02 02:09:11  houghton
+ * Bug Fix - Process args only if found.
+ *
  * Revision 2.2  1995/11/10  01:03:19  houghton
  * Change to use new Error processing functions.
  *

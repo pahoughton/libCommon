@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.4  1995/10/30 14:55:27  houghton
+ * Add Net2Host
+ *
  * Revision 2.3  1995/10/29  18:16:24  houghton
  * Fixes for Borland 4.0 Port
  *

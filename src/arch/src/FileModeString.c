@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1995/12/31 11:29:31  houghton
+ * Changed to use new 'arch' specific Stat.h header.
+ *
  * Revision 2.2  1995/11/10 12:09:51  houghton
  * AIX Port. Change umode_t to mode_t.
  *

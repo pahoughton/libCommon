@@ -105,6 +105,9 @@ YearMonthDayToTimeT(
  * Revision Log:
  *
  * $Log$
+ * Revision 2.5  1998/02/18 15:52:08  houghton
+ * Changed so year 0 means 2000.
+ *
  * Revision 2.4  1997/09/02 21:34:27  houghton
  * Port(Sun5): Added include <stdlib>
  *

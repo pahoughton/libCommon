@@ -16,6 +16,10 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1999/03/02 12:42:50  houghton
+ * Added DaysInMonthLeap
+ * Added MonthDayOfYearLeap
+ *
  * Revision 2.2  1995/10/30 14:55:14  houghton
  * Move contents of Bit.h & DateTime.h to Common.h
  * Add Net2Host

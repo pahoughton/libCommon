@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/10/29 18:16:25  houghton
+ * Fixes for Borland 4.0 Port
+ *
  * Revision 2.1  1995/10/29  13:33:57  houghton
  * Initial Linux Build of Version 2
  *

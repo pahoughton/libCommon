@@ -25,6 +25,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1995/12/02 02:03:21  houghton
+ * Add test for 0 lenght strings.
+ *
  * Revision 2.2  1995/11/10  12:07:54  houghton
  * AIX Port
  * Cleanup and reorder includes

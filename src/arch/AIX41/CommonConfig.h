@@ -116,6 +116,9 @@ extern "C" {
  * Revision Log:
  *
  * $Log$
+ * Revision 2.4  1998/10/13 14:39:31  houghton
+ * Added TIMET_MIN and TIMET_MAX.
+ *
  * Revision 2.3  1997/09/21 12:17:25  houghton
  * Cleanup comment header.
  * Added portable types COMMON_*_T.

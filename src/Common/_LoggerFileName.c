@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.4  1998/09/22 14:35:46  houghton
+ * Changed to use 4 digit year in file name.
+ *
  * Revision 2.3  1995/12/02 02:10:36  houghton
  * Cleanup error messages.
  *

@@ -19,6 +19,11 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1998/09/22 14:32:46  houghton
+ * Port(Linux): I was using 'index' as a variable name. This is also a
+ *     syninoum for strchr(), so I change the variable name to avoid
+ *     warnings.
+ *
  * Revision 2.2  1997/05/07 11:36:56  houghton
  * Cleanup
  *

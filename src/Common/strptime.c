@@ -404,6 +404,9 @@ Boston, MA 02111-1307, USA.  */
  * Revision Log:
  *
  * $Log$
+ * Revision 1.3  1998/10/13 14:39:07  houghton
+ * Port(AIX41): can't use 'match_string' macro.
+ *
  * Revision 1.2  1998/09/24 14:34:40  houghton
  * Bug-Fix: was processing to many digits with the width is specified.
  *

@@ -22,6 +22,9 @@
  * 6/7/94 - use StringToInt for conversion, allows using different bases.
  *
  * $Log$
+ * Revision 2.3  1998/07/20 11:04:10  houghton
+ * Changed order of includes.
+ *
  * Revision 2.2  1995/11/10 00:42:28  houghton
  * Modified to use new Error processing routines
  *

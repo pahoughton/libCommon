@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1998/09/22 14:36:28  houghton
+ * Changed to use 4 digit year in time stamp output.
+ *
  * Revision 2.2  1995/11/12 17:47:06  houghton
  * Cleanup output.
  *

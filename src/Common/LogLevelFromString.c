@@ -79,6 +79,9 @@ LogLevelFromString( const char * levelString )
  * Revision Log:
  *
  * $Log$
+ * Revision 2.3  1997/05/07 11:36:56  houghton
+ * Cleanup
+ *
  * Revision 2.2  1995/11/10 00:50:02  houghton
  * Modified for enhanced Logging routines
  *

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1997/09/19 09:08:25  houghton
+ * Bug-Fix: only set logger funct if funct is not NULL
+ *
  * Revision 2.1  1995/11/10 00:56:03  houghton
  * Initial Version
  *

@@ -53,6 +53,9 @@ CommonGetVersion( void )
  * Revision Log:
  *
  * $Log$
+ * Revision 2.6  1997/05/07 11:36:56  houghton
+ * Cleanup
+ *
  * Revision 2.5  1997/04/26 12:44:46  houghton
  * Cleanup.
  *

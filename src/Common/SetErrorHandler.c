@@ -42,6 +42,9 @@ SetErrorHandler( CommonErrorHandler handler, void * closure )
  * Revision Log:
  *
  * $Log$
+ * Revision 2.5  1997/05/07 11:36:57  houghton
+ * Cleanup
+ *
  * Revision 2.4  1997/03/02 12:11:56  houghton
  * Bug-Fix: function name was missing a 'l'.
  *

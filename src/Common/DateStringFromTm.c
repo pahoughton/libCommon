@@ -57,6 +57,10 @@ DateStringFromTm( char * buf, const char * fmt, const struct tm * tmTime )
  * Revision Log:
  *
  * $Log$
+ * Revision 2.2  1998/09/24 14:32:31  houghton
+ * Changed to generate 4 digit year.
+ * Cleanup.
+ *
  * Revision 2.1  1995/10/28 19:11:41  houghton
  * Change Version Id String
  *

@@ -19,6 +19,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/29 12:01:15  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:23  houghton
  * Move to Version 2.0
  *

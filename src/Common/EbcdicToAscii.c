@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1997/07/18 18:44:44  houghton
+ * Port(Sun5): Changed EtoA to unsigned char.
+ *
  * Revision 2.2  1995/10/29 18:16:00  houghton
  * Fixes for Borland 4.0 Port
  *

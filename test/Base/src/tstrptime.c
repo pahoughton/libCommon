@@ -297,6 +297,9 @@ tstrptime( void )
  * Revision Log:
  *
  * $Log$
+ * Revision 1.2  1998/09/24 14:36:26  houghton
+ * Complete rework.
+ *
  * Revision 1.1  1998/09/22 14:39:41  houghton
  * Initial version.
  *

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28 17:35:53  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.1  1994/08/25  15:58:47  houghton
  * Initial test program for libCommon
  *

@@ -676,6 +676,10 @@ FileModeString( mode_t	mode, char * modeString );
  * Modification History
  *     			
  * $Log$
+ * Revision 2.21  1999/03/02 12:42:42  houghton
+ * Added DaysInMonthLeap
+ * Added MonthDayOfYearLeap
+ *
  * Revision 2.20  1998/09/24 14:32:00  houghton
  * Changed strptime 'buf' arg to const char * (was char *).
  *

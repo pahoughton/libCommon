@@ -80,6 +80,9 @@ const char COMMONVER_##name_[] =					      \
  * Revision Log:
  *
  * $Log$
+ * Revision 2.10  1998/09/24 14:33:53  houghton
+ * Changed version number.
+ *
  * Revision 2.9  1997/05/07 11:40:04  houghton
  * Bug-Fix: Added missing endif.
  *

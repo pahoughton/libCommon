@@ -126,6 +126,10 @@ DateStringToTimeT( const char * dateString, const char * fmt )
  * Revision Log:
  *
  * $Log$
+ * Revision 2.6  1998/09/24 14:33:21  houghton
+ * Changed to return TIMET_MIN (was 0) if the conversion fails.
+ * Cleanup.
+ *
  * Revision 2.5  1998/03/02 22:32:49  houghton
  * Bug-Fix: when passing tm.tm_year to YearMonthDayToTimeT need to add
  *     1900 to the value.

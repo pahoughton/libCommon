@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1995/11/10 01:00:35  houghton
+ * Changed function from set output to set the current location.
+ *
  * Revision 2.2  1995/10/29  13:33:43  houghton
  * Initial Linux Build of Version 2
  *

@@ -133,6 +133,9 @@ extern "C" {
  * Revision Log:
  *
  * $Log$
+ * Revision 2.13  1999/05/14 10:21:42  houghton
+ * Port(Linux): need paths.h.
+ *
  * Revision 2.12  1998/09/24 14:35:10  houghton
  * Added TIMET_MIN & TIMET_MAX values (defines).
  *

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/29 18:14:31  houghton
+ * Change version to 2
+ *
  * Revision 1.1  1995/10/29  18:14:02  houghton
  * First Borland Port support files
  *

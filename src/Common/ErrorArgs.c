@@ -15,6 +15,13 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1997/09/19 09:03:52  houghton
+ * Changed: renamed CommonError* variables to CommonErr becuase of conflict with
+ *     enum names.
+ * Changed to use global public variables (CommonErr*) for error info
+ *     instead of private (_CommonError*) variables.
+ * Removed _CommonError* global variables.
+ *
  * Revision 2.1  1995/11/10 00:48:34  houghton
  * Initial Version
  *

@@ -20,4 +20,7 @@ ARCH_C_HEADERS		= ../arch/$(arch)/CommonConfig.h
 
 #
 # $Log$
+# Revision 2.1  1995/12/02 02:12:31  houghton
+# Initial Version.
+#
 #

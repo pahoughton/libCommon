@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/11/10 00:58:12  houghton
+ * Moved functionallity to LoggerArgs & _LoggerDefault
+ *
  * Revision 2.1  1995/10/29  12:01:18  houghton
  * Change Version Id String
  *

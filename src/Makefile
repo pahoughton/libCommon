@@ -46,6 +46,9 @@ install_all install install_default install_debug:
 
 #
 # $Log$
+# Revision 2.5  1999/05/14 10:20:45  houghton
+# Bug-Fix: was not exiting with error code.
+#
 # Revision 2.4  1998/10/23 11:41:16  houghton
 # Changed to use MakeConfigs 5.06.
 #

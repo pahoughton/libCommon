@@ -48,6 +48,10 @@ ARCH_C_HEADERS		= 		\
 #
 #
 # $Log$
+# Revision 2.2  1997/05/07 16:53:54  houghton
+# Reworked for latest MakeConfigs.
+# Cleanup.
+#
 # Revision 2.1  1995/12/31 11:28:20  houghton
 # Initial Version.
 #

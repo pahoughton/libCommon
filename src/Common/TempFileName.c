@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.4  1998/10/23 11:37:32  houghton
+ * Removed include <paths.h>
+ *
  * Revision 2.3  1998/09/22 14:33:38  houghton
  * Added include paths.h.
  *

@@ -49,6 +49,9 @@ YYYYMMDDtoTimeT( const char * yyyymmdd )
  * Revision Log:
  *
  * $Log$
+ * Revision 2.4  1998/09/24 14:33:42  houghton
+ * Cleanup.
+ *
  * Revision 2.3  1998/09/22 14:34:54  houghton
  * Changed: this function used to convert 0098 to 1998, this
  *     functionallity was not documented and is nolonger supported.

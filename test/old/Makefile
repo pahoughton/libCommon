@@ -210,6 +210,9 @@ test:	default
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.6  1997/05/07 11:37:35  houghton
+# Changed for MakeConfigs 5.
+#
 #
 # =MAKEFILE_LOG=
 #

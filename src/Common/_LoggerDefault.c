@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1999/05/14 10:21:17  houghton
+ * Port(Linux): stdout is not a constant in Gnu Libc 2.
+ *
  * Revision 2.1  1995/11/10 00:56:08  houghton
  * Initial Version
  *

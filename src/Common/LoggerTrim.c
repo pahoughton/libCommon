@@ -15,6 +15,10 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1995/11/10 01:01:43  houghton
+ * Major rework. Uses new TempFileName function. Greater Error checking
+ * and reporting.
+ *
  * Revision 2.2  1995/10/29  18:16:01  houghton
  * Fixes for Borland 4.0 Port
  *

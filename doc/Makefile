@@ -49,6 +49,9 @@ realclean:
 
 #
 # $Log$
+# Revision 1.3  1999/05/14 10:20:35  houghton
+# Bug-Fix: was not exiting with error code.
+#
 # Revision 1.2  1998/10/23 11:41:03  houghton
 # Changed to use MakeConfigs 5.06.
 #

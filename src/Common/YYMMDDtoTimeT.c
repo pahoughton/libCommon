@@ -50,6 +50,9 @@ YYMMDDtoTimeT( const char * yymmdd )
  * Revision Log:
  *
  * $Log$
+ * Revision 2.2  1998/09/24 14:33:30  houghton
+ * Cleanup.
+ *
  * Revision 2.1  1995/10/29 12:01:26  houghton
  * Change Version Id String
  *
