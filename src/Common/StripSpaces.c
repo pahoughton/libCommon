@@ -4,7 +4,7 @@
  *
  * Description:
  *
- *	
+ *	Remove leading and trailing spaces from a string.
  *
  * Notes:
  *
@@ -15,12 +15,15 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1994/06/06  13:23:37  houghton
+ * Avl and DateTime functions added for Rating
+ *
  *
  *********************************************************************/
 static const char RcsId[] =
 "$Id$";
 
-#include <Common.h>
+#include "_Common.h"
 
 void
 StripSpaces( char * buffer )
@@ -54,22 +57,4 @@ StripSpaces( char * buffer )
       
 
 
-
-
-
-
-
-
-/**
- *             This software is the sole property of
- *
- *                 The Williams Companies, Inc.
- *                       1 Williams Center
- *                         P.O. Box 2400
- *                      Tulsa, Oklahoma 74102
- *
- *        Copyright (c) 1993 by The Williams Companies, Inc.
- *
- *                      All Rights Reserved.  
- *
- **/
+ 

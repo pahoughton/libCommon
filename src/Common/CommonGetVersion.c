@@ -4,7 +4,7 @@
  *
  * Description:
  *
- *	
+ *   Return a version String pointer.
  *
  * Error Handling:
  *
@@ -19,6 +19,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1994/01/31  14:06:13  houghton
+ * Add avl and some other minor functions
+ *
  *
  *********************************************************************/
 static const char RcsId[] =
@@ -26,9 +29,9 @@ static const char RcsId[] =
 
 const char _CommonVersionString[] = 
 {
-      "libCommon Version: BETA 0.3\n"
+      "libCommon Version: BETA 0.9\n"
       "Compiled: " __DATE__ " " __TIME__ "\n"
-      "CVS Tag: NONE  $Id$ \n"
+      "CVS Tag: BETA_0_9 $Id$ \n"
 };
 
 

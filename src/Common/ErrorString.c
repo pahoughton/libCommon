@@ -19,12 +19,15 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1994/01/31  14:06:14  houghton
+ * Add avl and some other minor functions
+ *
  *
  *********************************************************************/
 static const char RcsId[] =
 "$Id$";
 
-#include <Common.h>
+#include "_Common.h"
 
 static char * ErrorDescription[] =
 {

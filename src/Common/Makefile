@@ -3,7 +3,11 @@
 #
 # Paul Houghton - 09/03/93 11:39 
 #
+# See End of file for modification log
 #
+# $Id$
+#
+
 
 include make.cfg
 
@@ -38,10 +42,17 @@ LIB_C_SOURCES   =   	\
 	avl.c           \
 	StripSpaces.c	\
 	StringToInt.c   \
+    	StringToLong.c	\
 	SetErrorHandler.c \
 	YYMMDDtoTimeT.c \
 	HHMMSStoTimeT.c \
 	DateTimeData.c  \
+    	LoggerInit.c    \
+	Logger.c	\
+	LogLevelFromString.c \
+	LogLevelString.c \
+	LoggerTrim.c    \
+    	_LoggerFileName.c \
 	$(ARCH_C_SOURCES)
 
 
@@ -52,7 +63,7 @@ endif
 
 # *****  D E F I N E S  *****
 
-DEFINES		=
+DEFINES		= -D_POSIX_SOURCE
 
 # *****  I N C L U D E S *****
 
@@ -133,7 +144,7 @@ install_production:
 	echo 'Production Install Complete!'
 
 $(PROTO_H): $(LIB_C_SOURCES)
-	$(CPROTO) $(CPPFLAGS) $(LIB_C_SOURCES) >$@
+	cproto $(CPPFLAGS) $(LIB_C_SOURCES) >$@
 	
 
 tags: 
@@ -144,3 +155,7 @@ tags:
 #
 include .depend
 
+
+#
+# $log:$
+#

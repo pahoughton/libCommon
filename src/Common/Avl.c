@@ -10,6 +10,8 @@
 * 
 * Fri Jul 14 13:53:42 1989, Rev 1.0, brad(0165)
 *
+* $Log$
+*
 **/
 
 static const char RcsId[] =
@@ -18,7 +20,7 @@ static const char RcsId[] =
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <Common.h>
+#include "_Common.h"
 #include "avl_typs.h"    /* private types for avl trees */
 
 #define AVL_VERSION	0x41766c01	/* version id Avl1 */

@@ -6,7 +6,7 @@
  *
  * Description:
  *
- *
+ *  Misc date time manipulation functions
  *
  * Notes:
  *
@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1994/06/06  13:23:34  houghton
+ * Avl and DateTime functions added for Rating
+ *
  *
  *********************************************************************/
 
@@ -41,7 +44,15 @@ typedef enum {
   SATURDAY
 } DayOfWeek;
 
+/*
+ * These constants are defined in DateTimeData.c if your linker
+ * has problems finding them (MS-Win) call the LinkDateData function
+ * from main.
+ */
 
+/* function in DataTimeData.c needed for some linkers */
+void LinkDateData( void );  
+ 
 extern const int    DaysInMonth[];
 extern const char * Months[];
 extern const char * AbbrMonths[];
@@ -51,6 +62,7 @@ extern const char * AbbrWeekDays[];
 #define IsLeapYear(_year_)  \
     ( !(_year_ % 4) && ( (_year_ % 100) || !(_year_ % 400) ) )
 
+time_t	Difftm( struct tm * t1, struct tm * t2 );
 
 time_t
 YYMMDDtoTimeT( const char * yymmdd );
@@ -63,6 +75,7 @@ HHMMSStoTimeT( const char * hhmmss );
 #endif
 
 #endif /* ! def _DateTime_h_ */
+
 /**
  *             This software is the sole property of
  *
@@ -71,8 +84,12 @@ HHMMSStoTimeT( const char * hhmmss );
  *                         P.O. Box 2400
  *                      Tulsa, Oklahoma 74102
  *
- *        Copyright (c) 1993 by The Williams Companies, Inc.
+ *        Copyright (c) 1994 by The Williams Companies, Inc.
  *
  *                      All Rights Reserved.  
  *
  **/
+/*
+ * Well actually most of it is public domain.
+ */
+   

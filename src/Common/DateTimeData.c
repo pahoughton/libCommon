@@ -4,7 +4,8 @@
  *
  * Description:
  *
- *	
+ *  This is a collection of constants used by date manipulation
+ *  functions.
  *
  * Notes:
  *
@@ -15,6 +16,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1994/06/06  13:23:35  houghton
+ * Avl and DateTime functions added for Rating
+ *
  *
  *********************************************************************/
 static const char RcsId[] =
@@ -53,3 +57,14 @@ const char * AbbrWeekDays[] =
 };
 
 
+/* stupid function that forces some linkers to load this object file
+ */
+
+void LinkDateData( void )
+{
+  return;
+}
+
+/*
+ * Public Domain - no copyright
+ */

@@ -22,6 +22,9 @@
 *	Modification History:
 *
 *	$Log$
+ * Revision 1.1  1994/01/31  14:06:13  houghton
+ * Add avl and some other minor functions
+ *
  * Revision 1.2  1992/01/01  21:22:47  paulh
  * Minor fixes
  *
@@ -35,7 +38,7 @@ static char RcsId[] =
 
 #include <time.h>
 
-#include <Common.h>
+#include "_Common.h"
 
 time_t Difftm(struct tm *t1, struct tm *t2)
 
@@ -46,3 +49,6 @@ time_t Difftm(struct tm *t1, struct tm *t2)
 }
 	
 
+/*
+ * Public Domain - on copyright
+ */

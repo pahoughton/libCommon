@@ -4,7 +4,8 @@
  *
  * Description:
  *
- *	
+ *	Sepecify the function to call when an error occures.
+ *	The error function is call from LibError.
  *
  * Error Handling:
  *
@@ -19,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1994/06/06  13:23:36  houghton
+ * Avl and DateTime functions added for Rating
+ *
  * Revision 1.1  1994/01/31  14:06:15  houghton
  * Add avl and some other minor functions
  *
@@ -27,8 +31,7 @@
 static const char RcsId[] =
 "$Id$";
 
-#include <_Common.h>
-#include <Common.h>
+#include "_Common.h"
 
 /* both these are defined in LibError.c */
 

@@ -24,8 +24,7 @@ static char SccsId[] = {"%W% %G% %U%"};
 
 #include <stdio.h>
 
-#include <_Common.h>
-#include <Common.h>
+#include "_Common.h"
 
 char            *ErrFile = NULL;
 int             ErrLine = 0;

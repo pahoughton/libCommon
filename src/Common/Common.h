@@ -8,19 +8,18 @@
  *
  *	Common / Generic C Functions
  *
- * Error Handling:
- *
- *	
- *
  * Notes:
  *
- * Programmer:	    Paul Houghton (pah)
+ * Programmer:	    Paul Houghton (paul_houghton@wiltel.com)
  *
  * Start Date:	    09/03/93 10:04
  *
  * Modification History:
  *
  * $Log$
+ * Revision 1.4  1994/06/06  13:23:34  houghton
+ * Avl and DateTime functions added for Rating
+ *
  * Revision 1.3  1994/02/02  14:38:25  houghton
  * Had to rename error to LibError because of a conflicts with other
  * symbols. Minor mods to other files
@@ -59,6 +58,10 @@ extern "C" {
 #define Bool int   /* wanted to do an enum, but to common */
 #endif
 
+/**************************************************************
+ * E R R O R   P r o c e s s i n g 
+ **************************************************************/
+  
 typedef enum
 {
   RET_SUCCEED,
@@ -70,15 +73,16 @@ typedef enum
 
 
 /*
- *Remember to add the descriptions for new errors in
- * ErrorString.c
+ * Remember to add the descriptions for new errors in ErrorString.c
  */
 typedef enum
 {
   C_ENONE,
-  C_EOSERROR,
   C_ERANGE,
   C_EBADPARAM,
+  C_ECOMMFABRIC,    	/* CF Errro */
+  C_ESYBOC,		/* SybocErrno */
+  C_EOSERROR,		/* system call error */
   C_EAPP,		/* Application Error */  
   C_EUNDEFINED
 } CommonErrorType;
@@ -102,12 +106,25 @@ extern int		CommonAppErrno;
     LibError( CommonErrno, CommonAppErrno, _close_, _str_ )
 
 
-#define CharToInt( _d_ ) \
-( ( _d_ <= '9' ) ? _d_ - '0' : ( 10 + ( (_d_ | 0x20) - 'a' ) ))
+void SetErrorHandler( void (*errorHandler_)( CommonErrorType error,
+					     int appErrno,
+					     void * closure,
+					     const char * mesg ),
+		      void * closure );
 
-#define IsBaseDigit( _d_, _b_ ) (CharToInt(_d_) >= 0 && CharToInt(_d_) < _b_ )
+void LibError( CommonErrorType error,
+	       int appErrno,
+	       void * closure,
+	       const char * message, ... );
+
+const char * ErrorString( CommonErrorType error );
 
 
+/**************************************************************
+ * A R G / E N V   P r o c e s s i n g 
+ **************************************************************/
+
+    
 Ret_Status ArgEnvInt( int * argc, char *argv[],
 	       const char * argid, const char * envVar,
 	       int min, int max, int * paramVar );
@@ -120,26 +137,112 @@ Ret_Status ArgEnvString( int * argc, char *argv[],
 		  const char * argid, const char * envVar,
 	          char ** paramVar );
 
-time_t	Difftm( struct tm * t1, struct tm * t2 );
-char * strlwr( char * str );
+/**************************************************************
+ * L O G G I N G 
+ **************************************************************/
 
-int  StringToInt( const char * str, int base, int len );
+typedef enum
+{
+  LOG_NONE  = 0,
+  LOG_ERROR = 0x01,
+  LOG_WARN  = 0x02,
+  LOG_USR1  = 0x04,
+  LOG_USR2  = 0x08,
+  LOG_INFO  = 0x10,
+  LOG_TEST  = 0x20,
+  LOG_DEBUG = 0x40,
+  LOG_FUNCT = 0x80,
+  LOG_ALL   = 0xff
+} LogBit;
 
-void CenterLine( char * dest, const char * src, int width );
-void StripSpaces( char * buffer );
+typedef enum
+{
+  LOG_SET,
+  LOG_ON,
+  LOG_OFF
+} LogSetLevelType;
+  
+typedef enum
+{
+  LOG_BY_DATE,
+  LOG_REOPEN,
+  LOG_KEEP_OPEN
+} LogOutFileType;
 
+
+
+void LoggerInit( const char *	logPath,
+		 const char *	logFileName,
+		 LogOutFileType outputFileType,
+		 long	    	maxByteCount,
+		 long	    	trimIncrement,
+		 LogSetLevelType setType,
+		 int		 outputLevels,
+		 Bool		 outputDate,
+		 Bool		 outputSourceLoc
+		 );
+
+void Logger( char * msgFmt, ... );
+
+Bool LoggerLoc( Bool state );
+void LoggerTrim( void );
+int  LogLevelFromString( const char * levelString );
+
+extern int	  _CLogOutputLevel;
+extern LogBit     _CLogCurMesgLevel;
+extern const char * _CLogLocFile;
+extern int  	    _CLogLocLine;
+
+#define LOGIT( _lvl_, _logf_ )						     \
+{									     \
+  if( _lvl_ & _CLogOutputLevel )					     \
+    {									     \
+      _CLogCurMesgLevel = _lvl_;					     \
+      _CLogLocFile = __FILE__;						     \
+      _CLogLocLine = __LINE__;						     \
+      _logf_;								     \
+      _CLogCurMesgLevel = LOG_NONE;					     \
+    }									     \
+}									     \
+  
+		 
+/**************************************************************
+ * S T R I N G   P r o c e s s i n g 
+ **************************************************************/
+  
+
+#define CharToInt( _d_ ) \
+( ( _d_ <= '9' ) ? _d_ - '0' : ( 10 + ( (_d_ | 0x20) - 'a' ) ))
+
+#define IsBaseDigit( _d_, _b_ ) (CharToInt(_d_) >= 0 && CharToInt(_d_) < _b_ )
+
+#define SafeStrcpy( _dest_, _src_, _size_ );    \
+strncpy( _dest_, _src_, _size_ - 2); _dest_[_size_ - 2] = 0;
+    
 #define basename(_path_) (strrchr( _path_, '/' ) + 1)
 
-Ret_Status ForeachFile(
-    const char *    name,
-    Ret_Status      (*fileProc)( const char * name, void * closure ),
-    Bool    	    recurs,
-    void *  	    closure 
-    );
+char * strlwr( char * str );
+char * strupr( char * str );
+#if defined( NeXT )
+char * strdup( const char *);
+#endif
 
-/*
- * AVL tree types and  functions
- */
+int   StringToInt( const char * str, int base, int len );
+long  StringToLong( const char * str, int base, int len );
+
+char * CenterLine( char * dest, const char * src, int width );
+void StripSpaces( char * buffer );
+
+
+/**************************************************************
+ * D A T E / T I M E   P r o c e s s i n g 
+ **************************************************************/
+      
+#include <DateTime.h>
+
+/**************************************************************
+ * A V L - Balanced Binary Tree
+ **************************************************************/
 
 typedef void * AvlTree;
 
@@ -202,29 +305,21 @@ void * AvlFindMin( AvlTree  tree );
 void * AvlDelMax( AvlTree  tree );
 void * AvlFindMax ( AvlTree  tree );
 
+/**************************************************************
+ * M I S C   
+ **************************************************************/
+      
 
-/*
- * Error processing Functions
- */
-void SetErrorHandler( void (*errorHandler_)( CommonErrorType error,
-					     int appErrno,
-					     void * closure,
-					     const char * mesg ),
-		      void * closure );
-
-void LibError( CommonErrorType error,
-	       int appErrno,
-	       void * closure,
-	       const char * message, ... );
-
-const char * ErrorString( CommonErrorType error );
+Ret_Status ForeachFile(
+    const char *    name,
+    Ret_Status      (*fileProc)( const char * name, void * closure ),
+    Bool    	    recurs,
+    void *  	    closure 
+    );
 
 const char * CommonGetVersion( void );
 
 
-#if defined( NeXT )
-char * strdup( const char *);
-#endif
 
 #ifdef __cplusplus
 };
@@ -246,3 +341,6 @@ char * strdup( const char *);
  *                      All Rights Reserved.  
  *
  **/
+/*
+ * Well actually most of it is public domain.
+ */

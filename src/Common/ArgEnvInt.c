@@ -19,7 +19,12 @@
  *
  * Modification History:
  *
+ * 6/7/94 - use StringToInt for conversion, allows using different bases.
+ *
  * $Log$
+ * Revision 1.2  1994/01/31  14:06:11  houghton
+ * Add avl and some other minor functions
+ *
  *
  *********************************************************************/
 static const char * RcsID =
@@ -28,8 +33,7 @@ static const char * RcsID =
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <_Common.h>
-#include <Common.h>
+#include "_Common.h"
 
 
 Ret_Status
@@ -58,7 +62,7 @@ ArgEnvInt(
       
       if( argString != NULL )
 	{
-	  paramValue = atoi( argString );
+	  paramValue = StringToInt( argString, 0, 0 );
 	  
 	  if( paramValue < min || paramValue > max )
 	    {
@@ -79,7 +83,7 @@ ArgEnvInt(
       
       if( (envStringVal = getenv( envVar ) ) != NULL )
 	{
-	  paramValue = atoi( envStringVal );
+	  paramValue = StringToInt( envStringVal, 0, 0 );
 	  
 	  if( paramValue < min || paramValue > max )
 	    {

@@ -4,7 +4,9 @@
  *
  * Description:
  *
- *	
+ *     	Convert a number string into its apropriate binary value.
+ *  	If base is 0, the string will define its base as in C. A
+ *  	leading 0 means octal and a leading 0x means hexidecimal.
  *
  * Notes:
  *
@@ -15,12 +17,15 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1994/06/06  13:23:36  houghton
+ * Avl and DateTime functions added for Rating
+ *
  *
  *********************************************************************/
 static const char RcsId[] =
 "$Id$";
 
-#include <_Common.h>
+#include "_Common.h"
 
 int
 StringToInt(
@@ -29,49 +34,10 @@ StringToInt(
     int          len
     )
 {
-  int index = 0;
-  int base = 0;
-  int value = 0;
-  
-  if( baseToUse == 0 )
-    {
-      for( index = 0;
-	   ! isdigit( string[index] ) &&
-	   ( (len != 0 && index < len ) ||
-	     (len == 0 && string[index] != 0) )
-	   ; index++ );
-
-      if( string[index] == '0' )
-	{
-	  if( string[index + 1] == 'x' || string[index + 1] == 'X' )
-	    {
-	      base = 16;
-	      index += 2;
-	    }
-	  else	
-	    {
-	      base = 8;
-	      index += 1; 
-	    }
-	}
-      else
-	{
-	  base = 10;
-	}
-    }
-  else
-    {
-      base = baseToUse;
-    }
-
-  for( ; (len != 0 && index < len ) || (len == 0 && string[index] != 0); index++ )
-    {
-      if( IsBaseDigit( string[index], base ) )
-	{
-	  value *= base;
-	  value += CharToInt( string[index] );
-	}
-    }
-
-  return( value );
+  return( (int)StringToLong( string, baseToUse, len ) );
 }
+
+
+
+
+

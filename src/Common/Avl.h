@@ -1,3 +1,7 @@
+/*
+ *  This is the original Avl header file, it is not used any more.
+ */
+
 /**
 *  avl.h -- public types and external declarations for avl trees
 *

@@ -4,7 +4,9 @@
  *
  * Description:
  *
- *	
+ *	Find the argv[] for the specified argId. For example, if
+ *      the third argument to the program was -lf and the argId
+ *  	was "lf", string would contain &(argv[4]), the next argument.
  *
  * Error Handling:
  *
@@ -18,14 +20,16 @@
  *
  * Modification History:
  *
+ * $Log$
  *
  *********************************************************************/
+static const char * RcsID =
+"$Id$";
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <_Common.h>
-#include <Common.h>
+#include "_Common.h"
 
 int
 _ArgString(

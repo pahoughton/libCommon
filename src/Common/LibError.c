@@ -4,11 +4,9 @@
  *
  * Description:
  *
- *	
- *
- * Error Handling:
- *
- *	
+ *	Process library and application errors. Calls the
+ *  	function specified with SetErrorHandler or prints the
+ *  	error message to stderr if no error handler was installed.
  *
  * Notes:
  *
@@ -18,15 +16,17 @@
  *
  * Modification History:
  *
+ * $Log$
  *
  *********************************************************************/
+static const char RcsId[] =
+"$Id$";
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
 
-#include <_Common.h>
-#include <Common.h>
+#include "_Common.h"
 
 #define MAX_ERR_MESG	2048
 
@@ -55,7 +55,7 @@ LibError(
     CommonErrorType error,
     int             appError,
     void *	    closure,
-    const char * message,
+    const char *    message,
     ...
     )
 {

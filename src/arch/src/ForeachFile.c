@@ -4,7 +4,8 @@
  *
  * Description:
  *
- *	
+ *	Execute a function (fileProc) for each file in a dirctory
+ *   	tree. If recurs is true, walk down sub dirs.
  *
  * Error Handling:
  *
@@ -19,6 +20,10 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1994/02/02  14:38:26  houghton
+ * Had to rename error to LibError because of a conflicts with other
+ * symbols. Minor mods to other files
+ *
  * Revision 1.1  1994/01/31  14:06:14  houghton
  * Add avl and some other minor functions
  *
@@ -28,10 +33,11 @@ static const char RcsId[] =
 {"$Id$"};
 
 #define _ALL_SOURCE
-#include <Common.h>
 #include <stdlib.h>
 #include <dirent.h>
 #include <sys/stat.h>
+
+#include "_Common.h"
 
 Ret_Status
 ForeachFile(
@@ -115,23 +121,3 @@ ForeachFile(
   return( RET_SUCCEED );
 }
 		  
-	  
-	
-  
-
-
-
-/**
- *             This software is the sole property of
- *
- *                 The Williams Companies, Inc.
- *                       1 Williams Center
- *                         P.O. Box 2400
- *                      Tulsa, Oklahoma 74102
- *
- *        Copyright (c) 1993 by The Williams Companies, Inc.
- *
- *                      All Rights Reserved.  
- *
- **/
-

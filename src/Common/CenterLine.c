@@ -14,7 +14,7 @@
 *
 *	Return Values:
 *
-*		NONE
+*		char * dest;
 *
 *	Notes:
 *
@@ -25,6 +25,9 @@
 *	Modification History:
 *
 *	$Log$
+ * Revision 1.1  1994/01/31  14:06:12  houghton
+ * Add avl and some other minor functions
+ *
  * Revision 1.2  1992/01/01  21:22:44  paulh
  * Minor fixes
  *
@@ -40,10 +43,10 @@ static char RcsId[] =
 #include <string.h>
 #include <stdlib.h>
 
-#include <Common.h>
+#include "_Common.h"
 
 
-void CenterLine( char *dest, const char *src,int width)
+char * CenterLine( char * dest, const char *src,int width)
 {
   int	   pad;
   

@@ -4,9 +4,13 @@
  *
  * Description:
  *
- *	
+ *   	Convert a YYMMDD string to a time_t value. 
  *
  * Notes:
+ *
+ *      This function does minimal bounds and error checking. It was
+ *      made to translate the string with as few instructions as
+ *  	possible. See TimeStringToTimeT for a more flexible translator.
  *
  * Programmer:	    Paul Houghton - (houghton@cworld)
  *
@@ -15,6 +19,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1994/06/06  13:23:38  houghton
+ * Avl and DateTime functions added for Rating
+ *
  *
  *********************************************************************/
 static const char RcsId[] =

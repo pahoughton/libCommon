@@ -4,7 +4,7 @@
  *
  * Description:
  *
- *	
+ *    	create a new string (on the heap) and copy input into it.
  *
  * Error Handling:
  *
@@ -18,12 +18,16 @@
  *
  * Modification History:
  *
+ * $Log$
  *
  *********************************************************************/
+static const char * RcsID =
+"$Id$";
 
 #include <string.h>
 #include <stdlib.h>
 
+#include "_Common.h"
 char *
 strdup( const char * input )
 {
@@ -44,25 +48,4 @@ strdup( const char * input )
 	
 
 
-
-
-
-
-
-
-
-
-/**
- *             This software is the sole property of
- *
- *                 The Williams Companies, Inc.
- *                       1 Williams Center
- *                         P.O. Box 2400
- *                      Tulsa, Oklahoma 74102
- *
- *        Copyright (c) 1993 by The Williams Companies, Inc.
- *
- *                      All Rights Reserved.  
- *
- **/
 

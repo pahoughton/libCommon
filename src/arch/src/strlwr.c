@@ -20,12 +20,17 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1994/01/31  14:06:19  houghton
+ * Add avl and some other minor functions
+ *
  *
  *********************************************************************/
 static const char RcsId[] =
 "$Id$";
 
 #include <ctype.h>
+
+#include "_Common.h"
 
 char *
 strlwr(

@@ -20,14 +20,18 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1994/01/31  14:06:12  houghton
+ * Add avl and some other minor functions
+ *
  * 
  *********************************************************************/
+static const char * RcsID =
+"$Id$";
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <_Common.h>
-#include <Common.h>
+#include "_Common.h"
 
 Ret_Status
 ArgEnvString(

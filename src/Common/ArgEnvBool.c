@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1994/01/31  14:06:11  houghton
+ * Add avl and some other minor functions
+ *
  *
  *********************************************************************/
 static const char * RcsID =
@@ -29,8 +32,7 @@ static const char * RcsID =
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <_Common.h>
-#include <Common.h>
+#include "_Common.h"
 
 
 Ret_Status
