@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.4  1997/09/02 21:34:07  houghton
+ * Port(Sun5): Added define _EXTENTIONS_
+ *
  * Revision 2.3  1995/10/29 18:15:59  houghton
  * Fixes for Borland 4.0 Port
  *
@@ -71,7 +74,7 @@ DateStringToTimeT( const char * dateString, const char * fmt )
       struct tm     tm;
       strptime( (char *)dateString, fmt, &tm );
 
-      seconds = YearMonthDayToTimeT( tm.tm_year,
+      seconds = YearMonthDayToTimeT( tm.tm_year + 1900,
 				     tm.tm_mon + 1,
 				     tm.tm_mday );
 
