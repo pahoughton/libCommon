@@ -1,28 +1,36 @@
 #
-# -*- Makefile -*- for Common root dir
+# Title:        Makefile
+# Project:	Common
+# Desc:
+# 
+#   
+# 
+# Notes:
+# 
+# Author:	Paul Houghton - (paul.houghton@wcom.com)
+# Created:	11/12/95
 #
-# Author: Paul Houghton
+# Revision History: (See end of file for Revision Log)
 #
-# Created: 11/12/95
+#   Last Mod By:    $Author$
+#   Last Mod:	    $Date$
+#   Version:	    $Revision$
 #
-# $Id$
-#
+#   $Id$
+# 
+
+PROJECT		= libCommon-3
+
+PRJ_TOPDIR	= .
+CFG_DIR		= $(PRJ_TOPDIR)/src/config
+
+INSTALL_INC_DIR = $(TOOL_DIR)/include/prod
+INSTALL_LIB_DIR = $(TOOL_DIR)/lib/prod
+INSTALL_BIN_DIR	= $(TOOL_DIR)/bin
+INSTALL_MAN_DIR = $(TOOL_DIR)/man
 
 make_cfg_ver	= 5.06
-show_commands 	= # true
-
-# Include standard MakeConfig configuration for GNU make required
-include Make/make.cfg.$(make_cfg_ver)
-
-
-INSTALL_INC_DIR = $(local_incdir)
-INSTALL_LIB_DIR = $(local_libdir)
-INSTALL_BIN_DIR	= $(local_bindir)
-INSTALL_MAN_DIR = $(local_mandir)
-
-SRC_DIR		= src
-DOC_DIR		= doc
-TEST_DIR	= test
+make_cfg_file	= $(TOOL_DIR)/include/Make/make.cfg.$(make_cfg_ver)
 
 exports	    = 					\
 	INSTALL_BIN_DIR=$(INSTALL_BIN_DIR)	\
@@ -32,46 +40,94 @@ exports	    = 					\
 	show_commands=$(show_commands)		\
 	check_install=$(check_install)		\
 
-beta_exports	=				\
-	INSTALL_BIN_DIR=$(INSTALL_BIN_DIR)	\
-	INSTALL_INC_DIR=$(beta_incdir)		\
-	INSTALL_LIB_DIR=$(beta_libdir)		\
-	INSTALL_MAN_DIR=$(INSTALL_MAN_DIR)	\
-	show_commands=$(show_commands)		\
-	check_install=$(check_install)		\
+no_target: help
 
-.PHONY: test
+setup:
+	$(MAKE) -f $(PROJECT)/support/Setup.Makefile setup
 
-depend depend_all depend_test depend_default depend_debug:
-	$(hide) $(MAKE) -C $(SRC_DIR) $@ $(exports)
+verify_setup:
+	@ if [ -z "$$TOOL_DIR" ] ; then					      \
+	  echo "TOOL_DIR env var not set.";				      \
+	  echo "  Please see $(PROJECT)/docs/devel/Dependencies.txt";	      \
+	  echo "  for details.";					      \
+	  exit 1;							      \
+	fi
+	@ if [ ! -f "$(make_cfg_file)" ] ; then				      \
+	  echo "MakeConfigs $(make_cfg_ver) not properly installed";	      \
+	  echo "  run make -f $(PROJECT)/Makefile setup from the";	      \
+	  echo "  \$TOOL_DIR/src/Build/Libs directory.";		      \
+	  echo "  Please see $(PROJECT)/docs/devel/Dependencies.txt";	      \
+	  echo "  for details.";					      \
+	  exit 1;							      \
+	fi
 
-all default debug:
-	$(hide) $(MAKE) -C $(SRC_DIR) $@ $(exports)
 
-clean realclean:
-	$(hide) $(MAKE) -C $(SRC_DIR) $@ $(exports)
-	$(hide) $(MAKE) -C $(DOC_DIR) $@ $(exports)
-	$(hide) $(MAKE) -C $(TEST_DIR) $@ $(exports)
+depend_all								      \
+depend_debug								      \
+depend_default								      \
+debug									      \
+default									      \
+test									      \
+shared									      \
+all									      \
+check									      \
+clean									      \
+realclean								      \
+install_docs								      \
+install_default								      \
+install_debug								      \
+install									      \
+install_all: verify_setup
+	@ $(TOOL_DIR)/bin/make -C $(PRJ_TOPDIR)/src $@ $(exports)
+	@ echo + $(PROJECT) $@ complete
 
-test:
-	$(hide) $(MAKE) -C $(SRC_DIR) $@ $(exports)
-	$(hide) $(MAKE) -C $(TEST_DIR) $@ $(exports)
+help targets:
+	@ echo " + The following targets are available:"
+	@ echo 
+	@ echo "    setup"
+	@ echo 
+	@ echo "    depend_all"
+	@ echo "    depend_debug"
+	@ echo "    depend_default"
+	@ echo "    debug"
+	@ echo "    default"
+	@ echo "    test (testing version)"
+	@ echo "    shared"
+	@ echo "    all"
+	@ echo "    check (run tests)"
+	@ echo "    clean"
+	@ echo "    realclean"
+	@ echo "    install_docs"
+	@ echo "    install_default"
+	@ echo "    install_debug"
+	@ echo "    install"
+	@ echo "    install_all"
+	@ echo
+	@ echo " + Use the help_config target to see the available"
+	@ echo "   configuration overides."
+	@ echo
 
-install_doc:
-	$(hide) $(MAKE) -C $(DOC_DIR) $@ $(exports)
+help_config:
+	@ echo " + The following configuration variables are available:"
+	@ echo
+	@ echo "    INSTALL_BIN_DIR=$(INSTALL_BIN_DIR)"
+	@ echo "    INSTALL_INC_DIR=$(INSTALL_INC_DIR)"
+	@ echo "    INSTALL_LIB_DIR=$(INSTALL_LIB_DIR)"
+	@ echo "    INSTALL_MAN_DIR=$(INSTALL_MAN_DIR)"
+	@ echo "    show_commands=$(show_commands)"
+	@ echo "    check_install=$(check_install)"
+	@ echo
 
-install_all install: install_doc
-	$(hide) $(MAKE) -C $(SRC_DIR) $@ $(exports)
 
-install_beta:
-	$(hide) $(MAKE) -C $(SRC_DIR) install_all $(beta_exports)
 
-install_default install_debug: 
-	$(hide) $(MAKE) -C $(SRC_DIR) $@ $(exports)
+
 
 
 #
 # $Log$
+# Revision 3.1  1999/10/29 16:55:54  houghton
+# Changed Version to 3
+#
 # Revision 2.6  1999/05/14 10:20:24  houghton
 # Bug-Fix: was not exiting with error code.
 #
@@ -95,3 +151,9 @@ install_default install_debug:
 # Initial Version.
 #
 #
+
+# Local Variables:
+# mode:makefile
+# End:
+#
+
