@@ -63,7 +63,7 @@ INSTALL_INC_DIR		= $(beta_incdir)
 
 VER_MAJOR	= 2
 VER_MINOR	= 02
-VER_RELEASE	= 00.b.01
+VER_RELEASE	= 00.b.02
 VERSION		= $(VER_MAJOR).$(VER_MINOR).$(VER_RELEASE)
 
 LIBRARY_DEFAULT	= lib$(NAME).a
@@ -226,6 +226,7 @@ C_SOURCES	=			\
 	_LoggerDefault.c                \
 	_LoggerFileName.c               \
 	_LoggerLogIt.c                  \
+	strptime.c			\
 	$(ARCH_C_SOURCES)               \
 
 CXX_C_SOURCES	=			
@@ -304,6 +305,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.31  1998/03/23 10:40:11  houghton
+# Changed to work with MakeConfigs 5.05.
+#
 # Revision 2.30  1998/03/03 23:56:59  houghton
 # Changed to use MakeConfig 5.04.
 #
