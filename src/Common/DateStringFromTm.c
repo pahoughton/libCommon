@@ -1,31 +1,21 @@
 /*********************************************************************
  *
- * Title:            DateStringFromTm.c
+ * File:        DateStringFromTm.c
+ * Project:	Common
+ * Desc:
  *
- * Description:
- *
- *	
+ *  
  *
  * Notes:
  *
- * Programmer:	    Paul Houghton x2309 - (houghton@shoe.wiltel.com)
+ * Author:	Paul A. Houghton - (paul.houghton@wcom.com)
+ * Created:	02/10/95 10:22
  *
- * Start Date:	    02/10/95 10:22
+ * Revision History: (See end of file for Revision Log)
  *
- * Modification History:
- *
- * $Log$
- * Revision 2.0  1995/10/28  17:35:17  houghton
- * Move to Version 2.0
- *
- * Revision 1.2  1995/02/20  14:22:51  houghton
- * Improve month calc. changed from a for loop
- * to an array that has the day of year for each
- * end of month.
- *
- * Revision 1.1  1995/02/13  15:34:14  houghton
- * New functions and many enhancements to existing functions.
- *
+ *  Last Mod By:    $Author$
+ *  Last Mod:	    $Date$
+ *  Version:	    $Revision$
  *
  *********************************************************************/
 
@@ -51,10 +41,10 @@ DateStringFromTm( char * buf, const char * fmt, const struct tm * tmTime )
     }
   else
     {
-      sprintf( str, "%02d/%02d/%02d %02d:%02d:%02d",
+      sprintf( str, "%02d/%02d/%04d %02d:%02d:%02d",
 	       tmTime->tm_mon + 1,
 	       tmTime->tm_mday,
-	       tmTime->tm_year,
+	       tmTime->tm_year + 1900,
 	       tmTime->tm_hour,
 	       tmTime->tm_min,
 	       tmTime->tm_sec );
@@ -62,10 +52,27 @@ DateStringFromTm( char * buf, const char * fmt, const struct tm * tmTime )
   return( str );
 }
 
-
-
-
-
+/*
+ *
+ * Revision Log:
+ *
+ * $Log$
+ * Revision 2.1  1995/10/28 19:11:41  houghton
+ * Change Version Id String
+ *
+ * Revision 2.0  1995/10/28  17:35:17  houghton
+ * Move to Version 2.0
+ *
+ * Revision 1.2  1995/02/20  14:22:51  houghton
+ * Improve month calc. changed from a for loop
+ * to an array that has the day of year for each
+ * end of month.
+ *
+ * Revision 1.1  1995/02/13  15:34:14  houghton
+ * New functions and many enhancements to existing functions.
+ *
+ *
+ */
 
 /**
  *             This software is the sole property of
