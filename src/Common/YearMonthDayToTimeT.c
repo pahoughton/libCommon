@@ -15,6 +15,11 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1995/02/20  14:22:51  houghton
+ * Improve month calc. changed from a for loop
+ * to an array that has the day of year for each
+ * end of month.
+ *
  * Revision 1.1  1995/02/13  15:34:23  houghton
  * New functions and many enhancements to existing functions.
  *

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1994/08/25  15:58:50  houghton
+ * Initial test program for libCommon
+ *
  *
  *********************************************************************/
 static const char RcsId[] =

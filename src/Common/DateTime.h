@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.4  1995/02/13  15:34:15  houghton
+ * New functions and many enhancements to existing functions.
+ *
  * Revision 1.3  1994/06/20  10:27:19  houghton
  * Porting and add LoggerLoc function
  *

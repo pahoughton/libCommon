@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1995/07/31  17:56:28  dpotluri
+ * Igor's fix to basename
+ *
  * Revision 1.1  1995/02/13  15:34:24  houghton
  * New functions and many enhancements to existing functions.
  *

@@ -22,6 +22,9 @@
 *	Modification History:
 *
 *	$Log$
+ * Revision 1.4  1994/08/15  19:57:01  houghton
+ * Fix RcsId so ident will work
+ *
  * Revision 1.3  1994/07/05  21:39:14  houghton
  * Minor fixes and cleanup header info.
  *

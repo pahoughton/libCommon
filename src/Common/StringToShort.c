@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1995/02/13  15:34:20  houghton
+ * New functions and many enhancements to existing functions.
+ *
  *
  *********************************************************************/
 static const char * RcsId =

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1994/08/15  19:57:07  houghton
+ * Fix RcsId so ident will work
+ *
  * Revision 1.1  1994/06/20  10:27:19  houghton
  * Porting and add LoggerLoc function
  *

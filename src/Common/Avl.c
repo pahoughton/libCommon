@@ -11,6 +11,9 @@
 * Fri Jul 14 13:53:42 1989, Rev 1.0, brad(0165)
 *
 * $Log$
+ * Revision 1.7  1995/02/13  15:34:23  houghton
+ * New functions and many enhancements to existing functions.
+ *
  * Revision 1.6  1994/12/02  17:25:43  dpotluri
  * Added locking to Avl Trees
  *

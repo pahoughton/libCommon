@@ -18,6 +18,9 @@
  *
  *     			
  * $Log$
+ * Revision 1.15  1995/03/02  16:39:55  houghton
+ * minor mods
+ *
  * Revision 1.14  1995/02/13  15:34:13  houghton
  * New functions and many enhancements to existing functions.
  *

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1994/08/15  19:56:59  houghton
+ * Fix RcsId so ident will work
+ *
  * Revision 1.1  1994/08/15  19:42:19  houghton
  * Add ArgEnvFlage, ArgEnvLong, CanExecute, FindPath and MemberOfGroup
  * functions

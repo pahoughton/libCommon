@@ -180,6 +180,9 @@ include .depend.lib
 
 # 
 # $Log$
+# Revision 1.14  1995/02/13  15:34:19  houghton
+# New functions and many enhancements to existing functions.
+#
 # Revision 1.13  1994/12/02  17:25:42  dpotluri
 # Added locking to Avl Trees
 #

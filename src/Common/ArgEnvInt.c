@@ -22,6 +22,9 @@
  * 6/7/94 - use StringToInt for conversion, allows using different bases.
  *
  * $Log$
+ * Revision 1.5  1994/07/13  14:53:59  houghton
+ * Sequent port
+ *
  * Revision 1.4  1994/06/20  15:28:37  dpotluri
  * LibCommon Port to OPENVMS
  *

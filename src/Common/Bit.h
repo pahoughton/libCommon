@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1995/03/02  16:39:54  houghton
+ * minor mods
+ *
  * Revision 1.1  1995/02/13  15:34:12  houghton
  * New functions and many enhancements to existing functions.
  *

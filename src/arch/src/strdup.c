@@ -19,6 +19,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1994/06/17  18:04:04  houghton
+ * Cleanup for beta release.
+ *
  *
  *********************************************************************/
 static const char * RcsID =

@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.5  1994/08/15  19:57:04  houghton
+ * Fix RcsId so ident will work
+ *
  * Revision 1.4  1994/07/13  19:04:32  dpotluri
  * Port to sun4, and defined strerror()
  *

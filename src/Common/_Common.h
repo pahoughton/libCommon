@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.6  1995/02/13  15:34:23  houghton
+ * New functions and many enhancements to existing functions.
+ *
  * Revision 1.5  1994/07/13  14:54:06  houghton
  * Sequent port
  *

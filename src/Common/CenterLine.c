@@ -25,6 +25,9 @@
 *	Modification History:
 *
 *	$Log$
+ * Revision 1.5  1995/02/13  15:34:13  houghton
+ * New functions and many enhancements to existing functions.
+ *
  * Revision 1.4  1994/08/15  19:56:59  houghton
  * Fix RcsId so ident will work
  *
