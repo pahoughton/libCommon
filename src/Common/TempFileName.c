@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1998/09/22 14:33:38  houghton
+ * Added include paths.h.
+ *
  * Revision 2.2  1995/12/02 02:08:05  houghton
  * Reorder includes.
  *
@@ -30,7 +33,6 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <paths.h>
 
 COMMON_VERSION(
   TempFileName,
