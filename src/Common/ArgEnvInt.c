@@ -22,6 +22,9 @@
  * 6/7/94 - use StringToInt for conversion, allows using different bases.
  *
  * $Log$
+ * Revision 1.3  1994/06/17  18:03:55  houghton
+ * Cleanup for beta release.
+ *
  * Revision 1.2  1994/01/31  14:06:11  houghton
  * Add avl and some other minor functions
  *
@@ -42,7 +45,7 @@ ArgEnvInt(
     char *  	  argv[],
     const char *  argId,
     const char *  envVar,
-    int           min,
+    int           minimum,
     int           max,
     int *         paramVar
     )
@@ -64,7 +67,7 @@ ArgEnvInt(
 	{
 	  paramValue = StringToInt( argString, 0, 0 );
 	  
-	  if( paramValue < min || paramValue > max )
+	  if( paramValue < minimum || paramValue > max )
 	    {
 	      SET_ERROR( C_ERANGE );
 	      return( RET_ERROR );
@@ -85,7 +88,7 @@ ArgEnvInt(
 	{
 	  paramValue = StringToInt( envStringVal, 0, 0 );
 	  
-	  if( paramValue < min || paramValue > max )
+	  if( paramValue < minimum || paramValue > max )
 	    {
 	      SET_ERROR( C_ERANGE );
 	      return( RET_ERROR );
@@ -100,15 +103,6 @@ ArgEnvInt(
   
   return( RET_SUCCEED );
 }
-
-
-
-
-
-
-
-
-
 
 
 

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1994/06/17  18:07:29  houghton
+ * Cool new Logger function
+ *
  *
  *********************************************************************/
 static const char RcsId[] =
@@ -22,7 +25,13 @@ static const char RcsId[] =
 
 #include <stdio.h>
 #include <stdarg.h>
+
+#ifdef OPENVMS
+#include <unixio.h>
+#include <time.h>
+#else
 #include <sys/stat.h>
+#endif
 
 #include "_Common.h"
 

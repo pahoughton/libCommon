@@ -16,6 +16,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1994/06/17  18:03:58  houghton
+ * Cleanup for beta release.
+ *
  * Revision 1.1  1994/06/06  13:23:35  houghton
  * Avl and DateTime functions added for Rating
  *
@@ -23,6 +26,9 @@
  *********************************************************************/
 static const char RcsId[] =
 "$Id$";
+
+#include <stdio.h>
+#include <stdlib.h>
 
 #include <DateTime.h>
 

@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.3  1994/06/17  18:03:59  houghton
+ * Cleanup for beta release.
+ *
  * Revision 1.2  1994/02/02  14:38:26  houghton
  * Had to rename error to LibError because of a conflicts with other
  * symbols. Minor mods to other files
@@ -31,6 +34,7 @@
  *********************************************************************/
 static const char RcsId[] =
 {"$Id$"};
+
 
 #define _ALL_SOURCE
 #include <stdlib.h>

@@ -16,7 +16,11 @@
  *
  * Modification History:
  *
+ *     			
  * $Log$
+ * Revision 1.7  1994/06/20  10:27:18  houghton
+ * Porting and add LoggerLoc function
+ *
  * Revision 1.6  1994/06/17  21:48:14  dpotluri
  * Minor mods to the function Logger
  *
@@ -37,7 +41,13 @@
 
 #include <errno.h>
 #include <time.h>
+
+#ifdef OPENVMS
+#include <types.h>
+#else
 #include <sys/types.h>
+#endif
+
 #include <string.h>
 
 #ifdef __cplusplus
