@@ -488,7 +488,7 @@ YearMonthDayToTimeT( int year, int month, int day );
     
 #if !defined( COMMON_HAVE_STRPTIME )
 char *
-strptime( char *buf, const char *format, struct tm *tm);
+strptime( const char * buf, const char * format, struct tm *tm);
 #endif
 
 
@@ -674,6 +674,9 @@ FileModeString( mode_t	mode, char * modeString );
  * Modification History
  *     			
  * $Log$
+ * Revision 2.19  1998/03/21 17:17:43  houghton
+ * Removed ';' to eliminate compiler warning.
+ *
  * Revision 2.18  1998/02/18 15:46:22  houghton
  * Bug-Fix: MIN_YEAR and MAX_YEAR need to be based of 1970.
  *
