@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.3  1994/06/17  18:03:59  houghton
+ * Cleanup for beta release.
+ *
  *
  *********************************************************************/
 static const char RcsId[] =
@@ -29,6 +32,15 @@ static const char RcsId[] =
 #include "_Common.h"
 
 #define MAX_ERR_MESG	2048
+
+#ifdef sun4
+#ifdef __STDC__
+#ifndef strerror
+  extern char *sys_errlist[];
+#define strerror(_err_) (sys_errlist[_err_])
+#endif
+#endif
+#endif
 
 char *	    	 CommonErrFile;
 int  	    	 CommonErrLine;
