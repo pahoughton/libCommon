@@ -12,14 +12,16 @@
 # See End of file for format specs
 #
 
+ENH Paul Houghton 11/09/95 07:15
+Move YYMMDDtoJD.pl to libPerl
 
-ADM Paul Houghton 10/31/95 05:25
-Update man pages for BOOL
-
-ENH Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
+ENH Paul Houghton 8/19/94 08:00
 Need test programs.
 
-ENH Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
+ADM Paul Houghton 10/31/95 05:25
+Update man pages
+
+ENH Paul Houghton 8/19/94 08:00
 man pages for: ArgEnvLong, CanExecute, FindPath, MemberOfGroup
 YYMMDDtoJD.pl, ArgEnvFlag,
 
@@ -94,6 +96,9 @@ comp Paul Houghton 7/13/94 08:00
 
 #
 # $Log$
+# Revision 2.3  1995/10/31  13:15:50  houghton
+# Added Version id tag
+#
 # Revision 2.2  1995/10/31  13:06:26  houghton
 # General Cleanup
 #
