@@ -53,18 +53,18 @@ no_target: help
 setup:
 	$(MAKE) -f $(PROJECT)/support/Setup.Makefile $(setup_exports) setup
 	$(TOOL_DIR)/bin/make -C $(PROJECT) realclean depend_all
-	@ echo 
-	@ echo "+ $(PROJECT) setup complete."
-	@ echo 
+	$(hide) echo 
+	$(hide) echo "+ $(PROJECT) setup complete."
+	$(hide) echo 
 
 verify_setup:
-	@ if [ -z "$$TOOL_DIR" ] ; then					      \
+	$(hide) if [ -z "$$TOOL_DIR" ] ; then				      \
 	  echo "TOOL_DIR env var not set.";				      \
 	  echo "  Please see $(PROJECT)/docs/devel/Dependencies.txt";	      \
 	  echo "  for details.";					      \
 	  exit 1;							      \
 	fi
-	@ if [ ! -f "$(make_cfg_file)" ] ; then				      \
+	$(hide) if [ ! -f "$(make_cfg_file)" ] ; then			      \
 	  echo " ";							      \
 	  echo "+ MakeConfigs $(make_cfg_ver) NOT FOUND!";		      \
 	  echo " ";							      \
@@ -79,7 +79,7 @@ verify_setup:
 	  echo " ";							      \
 	  exit 1;							      \
 	fi
-	@ if [ ! -f "$(dejagnu)" ] ; then				      \
+	$(hide) if [ ! -f "$(dejagnu)" ] ; then				      \
 	  echo " ";							      \
 	  echo "+ $(dejagnu) NOT FOUND!";				      \
 	  echo " ";							      \
@@ -115,37 +115,37 @@ install_shared								      \
 install_test								      \
 install									      \
 install_all: verify_setup
-	@ $(TOOL_DIR)/bin/make -C $(PRJ_TOPDIR)/src $@ $(exports)
-	@ echo + $(PROJECT) $@ complete
+	$(hide) $(TOOL_DIR)/bin/make -C $(PRJ_TOPDIR)/src $@ $(exports)
+	$(hide) echo + $(PROJECT) $@ complete
 
 help targets:
-	@ echo " + The following targets are available:"
-	@ echo 
-	@ echo "    setup"
-	@ echo 
-	@ echo "    depend_all"
-	@ echo "    depend_debug"
-	@ echo "    depend_default"
-	@ echo "    debug"
-	@ echo "    default"
-	@ echo "    test (testing version)"
-	@ echo "    shared"
-	@ echo "    all"
-	@ echo "    check (run tests)"
-	@ echo "    clean"
-	@ echo "    realclean"
-	@ echo "    install_docs"
-	@ echo "    install_default"
-	@ echo "    install_debug"
-	@ echo "    install"
-	@ echo "    install_all"
-	@ echo
-	@ echo " + Use the help_config target to see the available"
-	@ echo "   configuration overides."
-	@ echo
+	$(hide) echo " + The following targets are available:"
+	$(hide) echo 
+	$(hide) echo "    setup"
+	$(hide) echo 
+	$(hide) echo "    depend_all"
+	$(hide) echo "    depend_debug"
+	$(hide) echo "    depend_default"
+	$(hide) echo "    debug"
+	$(hide) echo "    default"
+	$(hide) echo "    test (testing version)"
+	$(hide) echo "    shared"
+	$(hide) echo "    all"
+	$(hide) echo "    check (run tests)"
+	$(hide) echo "    clean"
+	$(hide) echo "    realclean"
+	$(hide) echo "    install_docs"
+	$(hide) echo "    install_default"
+	$(hide) echo "    install_debug"
+	$(hide) echo "    install"
+	$(hide) echo "    install_all"
+	$(hide) echo
+	$(hide) echo " + Use the help_config target to see the available"
+	$(hide) echo "   configuration overides."
+	$(hide) echo
 
 help_config:
-	@ if [ -f $(CFG_DIR)/Setup.cfg ] ; then				      \
+	$(hide) if [ -f $(CFG_DIR)/Setup.cfg ] ; then			      \
 	  $(MAKE) -f $(CFG_DIR)/Setup.cfg help_config ;			      \
 	else								      \
 	  if [ -f $(PROJECT)/$(CFG_DIR) ] ; then			      \
@@ -170,6 +170,10 @@ help_config:
 
 #
 # $Log$
+# Revision 3.4  1999/11/08 15:13:02  houghton
+# Change: reworked setup to create src/config/Setup.cfg.
+# Added install_lib_all target.
+#
 # Revision 3.3  1999/11/04 17:23:14  houghton
 # Added dejagnu support to setup.
 #
