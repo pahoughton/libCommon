@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/11/12 17:47:06  houghton
+ * Cleanup output.
+ *
  * Revision 2.1  1995/11/10  00:56:08  houghton
  * Initial Version
  *
@@ -47,10 +50,10 @@ _LoggerLogIt(
       time_t  nowSec = time(0);
       struct tm * now = localtime( &nowSec );
       
-      fprintf( log,"%02d/%02d/%02d %02d:%02d:%02d ",
+      fprintf( log,"%02d/%02d/%04d %02d:%02d:%02d ",
 	       now->tm_mon + 1,
 	       now->tm_mday,
-	       now->tm_year,
+	       now->tm_year + 1900,
 	       now->tm_hour,
 	       now->tm_min,
 	       now->tm_sec );
