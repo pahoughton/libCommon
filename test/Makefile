@@ -39,21 +39,24 @@ exports	    = 					\
 	check_install=$(check_install)		\
 
 depend depend_all depend_test depend_default depend_debug:
-	$(hide) if ! $(MAKE) -C Base/src $@ $(exports); then exit; fi
+	$(hide) $(MAKE) -C Base/src $@ $(exports)
 
-all default debug:
-	$(hide) if ! $(MAKE) -C Base/src $@ $(exports); then exit; fi
+all default debug test shared:
+	$(hide) $(MAKE) -C Base/src $@ $(exports)
 
 clean realclean:
-	$(hide) if ! $(MAKE) -C Base/src $@ $(exports); then exit; fi
+	$(hide) $(MAKE) -C Base/src $@ $(exports)
 
-test:
-	$(hide) if ! $(MAKE) -C Base/src check $(exports); then exit; fi
+check:
+	$(hide) $(MAKE) -C Base/src $@ $(exports)
 
 
 
 #
 # $Log$
+# Revision 3.1  1999/10/29 16:56:25  houghton
+# Changed Version to 3
+#
 # Revision 1.2  1998/10/23 11:41:34  houghton
 # Changed to use MakeConfigs 5.06.
 #
