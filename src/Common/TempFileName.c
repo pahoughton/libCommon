@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/12/02 02:08:05  houghton
+ * Reorder includes.
+ *
  * Revision 2.1  1995/11/10  00:56:06  houghton
  * Initial Version
  *
@@ -27,6 +30,7 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <paths.h>
 
 COMMON_VERSION(
   TempFileName,
