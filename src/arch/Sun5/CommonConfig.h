@@ -138,7 +138,7 @@ extern "C" {
 
 
 #if defined( __cplusplus )
-};
+}
 #endif
 
 /*
@@ -146,6 +146,9 @@ extern "C" {
  * Revision Log:
  *
  * $Log$
+ * Revision 2.1  1997/09/21 19:14:48  houghton
+ * Changed to Version 2
+ *
  * Revision 1.3  1997/09/21 12:18:03  houghton
  * Added portable types COMMON_*_T.
  *

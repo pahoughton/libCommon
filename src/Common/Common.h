@@ -666,7 +666,7 @@ FileModeString( mode_t	mode, char * modeString );
 
 
 #ifdef __cplusplus
-};
+}
 #endif
 
 
@@ -674,6 +674,9 @@ FileModeString( mode_t	mode, char * modeString );
  * Modification History
  *     			
  * $Log$
+ * Revision 2.18  1998/02/18 15:46:22  houghton
+ * Bug-Fix: MIN_YEAR and MAX_YEAR need to be based of 1970.
+ *
  * Revision 2.17  1997/09/19 09:00:20  houghton
  * Changed: renamed CommonError* variables to CommonErr becuase of conflict with
  *     enum names.
