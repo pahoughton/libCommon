@@ -100,14 +100,14 @@ CPP_FLAGS		= $(ARCH_CPP_FLAGS)
 #
 
 
-CC_FLAGS		= $(cc_warn_all) $(ARCH_CC_FLAGS)
+CC_FLAGS		= $(cc_warn) $(ARCH_CC_FLAGS)
 
 DEFAULT_CC_FLAGS	= $(cc_optimize)
 DEBUG_CC_FLAGS		= $(cc_debug)
 PROFILE_CC_FLAGS	= $(cc_profile)
 SHARED_CC_FLAGS		= $(cc_shared) $(cc_optimize)
 
-CXX_FLAGS		= $(cxx_warn_all) $(ARCH_CXX_FLAGS)
+CXX_FLAGS		= $(cxx_warn) $(ARCH_CXX_FLAGS)
 
 DEFAULT_CXX_FLAGS	= $(cxx_optimize)
 DEBUG_CXX_FLAGS		= $(cxx_debug)
@@ -269,6 +269,10 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.28  1997/09/19 10:05:17  houghton
+# Changed version num.
+# Changed INSTALL*FLAGS to 444.
+#
 # Revision 2.27  1997/09/19 09:53:19  houghton
 # Cleanup.
 #
