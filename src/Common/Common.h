@@ -18,6 +18,9 @@
  *
  *     			
  * $Log$
+ * Revision 1.14  1995/02/13  15:34:13  houghton
+ * New functions and many enhancements to existing functions.
+ *
  * Revision 1.13  1994/12/02  17:25:41  dpotluri
  * Added locking to Avl Trees
  *
@@ -283,6 +286,10 @@ char * strupr( char * str );
 char * strdup( const char *);
 #endif
 
+extern const char EtoA[];
+
+#define E2A( _c_ ) (EtoA[((unsigned char)(_c_))])
+
 int   	    	StringToInt( const char * str, int base, int len );
 unsigned int   	StringToUInt( const char * str, int base, int len );
 short	    	StringToShort( const char * str, int base, int len );
@@ -294,6 +301,7 @@ double 	    	StringToDouble( const char * str, int bash, int len );
 char * CenterLine( char * dest, const char * src, int width );
 void StripSpaces( char * buffer );
 
+void EbcdicToAscii( unsigned char * buf, int len );
 
 /**************************************************************
  * D A T E / T I M E   P r o c e s s i n g 
@@ -423,6 +431,10 @@ const char * CommonGetVersion( void );
 #ifndef max
 #define max( _a_, _b_ ) ( ( (_a_) < (_b_) ) ? (_b_) : (_a_) )
 #endif 
+
+#define DWORD_ALIGN( _addr_ ) \
+  ( ((_addr_ % 4) == 0) ? _addr_ :  ( _addr_  + ( 4 - ( _addr_ % 4 ) ) ) )
+
 
 #ifdef __cplusplus
 };
