@@ -63,7 +63,7 @@ INSTALL_INC_DIR		= $(beta_incdir)
 
 VER_MAJOR	= 2
 VER_MINOR	= 02
-VER_RELEASE	= 00.b.02
+VER_RELEASE	= 01
 VERSION		= $(VER_MAJOR).$(VER_MINOR).$(VER_RELEASE)
 
 LIBRARY_DEFAULT	= lib$(NAME).a
@@ -305,6 +305,10 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.32  1998/09/22 14:28:00  houghton
+# Changed version number
+# Added strptime as a primary source.
+#
 # Revision 2.31  1998/03/23 10:40:11  houghton
 # Changed to work with MakeConfigs 5.05.
 #
