@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/29  12:01:18  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:25  houghton
  * Move to Version 2.0
  *
@@ -42,162 +45,37 @@
  *
  *
  *********************************************************************/
+
 #include "_Common.h"
-
 #include <stdio.h>
-#include <stdarg.h>
-
-#if defined( OPENVMS )
-#include <unixio.h>
-#else
-#include <sys/stat.h>
-#endif
 
 COMMON_VERSION(
   Logger,
   "$Id$" );
 
 
-
-extern char _CLogFilePath[];  /* = "." */
-extern char _CLogFileName[];  /* = "prog.log" */
-
-extern int _CLogFileType;     /* = LOG_REOPEN */
-extern long _CLogMaxSize;     /* = 0 */
-extern long _CLogTrim;        /* = 0 */
-
-extern int _CLogOutputLevel;  /* = LOG_WARN | LOG_ERROR */
-extern BOOL _CLogDate;        /* = TRUE */
-extern BOOL _CLogLoc ;        /* = TRUE */
-extern BOOL _CLogTee;	      /* = TRUE */
-
-
-extern FILE * _CLogFP;
+LogLevelBit	_CLogCurMesgLevel;
+const char *	_CLogLocFile;
+long		_CLogLocLine;
 
 void
-Logger(
-    const char * mesgFmt,
-    ...
-    )
+Logger( const char * mesgFmt, ... )
 {
   
   va_list   args;
-  
+
   va_start( args, mesgFmt );
-  
-  if( _CLogMaxSize != 0 )
-    {
-      if( _CLogFP != NULL )
-	{
-	  struct stat statBuf;
-	  
-	  if( fstat( fileno( _CLogFP ), &statBuf ) == 0 )
-	    {
-	      if( statBuf.st_size > _CLogMaxSize )
-		{
-		  fclose( _CLogFP );
-		  _CLogFP = NULL;
-		  LoggerTrim();
-		}
-	    }
-	}
-      else
-	{
-	  char logFn[1024];
-	  struct stat statBuf;
-	  
-	  _LoggerFileName( logFn, sizeof( logFn ) );
-	  
-	  if( stat( logFn, &statBuf ) == 0 )
-	    {
-	      if( statBuf.st_size > _CLogMaxSize )
-		{
-		  LoggerTrim();
-		}
-	    }
-	}
-    }
-  
-  
-  if( _CLogFP == NULL )
-    {
-      char logFn[ 1024 ];
-      
-      _LoggerFileName( logFn, sizeof( logFn ) );
-      _CLogFP = fopen( logFn, "a" );
-      
-    }
-  
-  if( _CLogFP == NULL )
-    {
-      _CLogFP = stderr;
-    }
-  
-  if( _CLogDate == TRUE )
-    {
-      time_t  nowSec = time(0);
-      struct tm * now = localtime( &nowSec );
-      
-      fprintf( _CLogFP,"%02d/%02d/%02d %02d:%02d:%02d ",
-	       now->tm_mon + 1,
-	       now->tm_mday,
-	       now->tm_year,
-	       now->tm_hour,
-	       now->tm_min,
-	       now->tm_sec );
-      
-      if( _CLogTee == TRUE )
-	{
-	  
-	  fprintf( stderr,"%02d/%02d/%02d %02d:%02d:%02d ",
-		   now->tm_mon + 1,
-		   now->tm_mday,
-		   now->tm_year,
-		   now->tm_hour,
-		   now->tm_min,
-		   now->tm_sec );
-	}
-    }
-  
-  if( _CLogLoc == TRUE )
-    {
-      fprintf( _CLogFP,"%s (%d): ",
-	       _CLogLocFile,
-	       _CLogLocLine );
-      if( _CLogTee == TRUE )
-	{
-	  fprintf( stderr,"%s (%d): ",
-		   _CLogLocFile,
-		   _CLogLocLine );
-	}
-    }
-  
-  fprintf( _CLogFP, "%s: ", LogLevelString( _CLogCurMesgLevel ) );
-  
-  vfprintf( _CLogFP, mesgFmt, args );
-  fputc( '\n', _CLogFP );
-  
-  if( _CLogTee == TRUE )
-    {
-      fprintf( stderr, "%s: ", LogLevelString( _CLogCurMesgLevel ) );
-      
-      vfprintf( stderr, mesgFmt, args );
-      fputc( '\n', stderr );
-      
-    }      
+
+  LoggerArgs( _CLogLocFile,
+	      _CLogLocLine,
+	      _CLogCurMesgLevel,
+	      NULL,
+	      mesgFmt,
+	      args );
+
   va_end( args );
-  
-  if( _CLogFileType == LOG_REOPEN )
-    {
-      fclose( _CLogFP );
-      _CLogFP = NULL;
-    }
-  else
-    {
-      fflush( _CLogFP );
-    }
-  
 }
+
 	       
   
   
