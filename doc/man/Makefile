@@ -150,6 +150,7 @@ install_man3: $(MAN_3_PAGES)
 
 install		\
 install_all	\
+install_doc	\
 install_man: install_man3
 
 clean:
@@ -160,6 +161,9 @@ realclean:
 
 #
 # $Log$
+# Revision 2.5  1998/09/24 14:29:23  houghton
+# Reworked to replace directory names with Makefile variable value.
+#
 # Revision 2.4  1998/09/22 14:26:59  houghton
 # Changed to use MakeConfigs 5.05.
 # Added install & install_all targets.
