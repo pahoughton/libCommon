@@ -1,30 +1,33 @@
 /*********************************************************************
-*
-*	Title:			CenterLine
-*
-*	Description:
-*
-*		center text line
-*
-*	Input Agrs:
-*
-*		char *dest		dest buffer
-*		char *src		source buffer
-*		int width		width to center for
-*
-*	Return Values:
-*
-*		char * dest;
-*
-*	Notes:
-*
-*	Programmer:		Paul Houghton
-*
-*	Start Date:		10-14-1991
-*
-*	Modification History:
-*
-*	$Log$
+ *
+ * Title:			CenterLine
+ *
+ * Description:
+ *
+ *	center text line
+ *
+ * Input Agrs:
+ *
+ *	char *dest		dest buffer
+ *	char *src		source buffer
+ *	int width		width to center for
+ *
+ * Return Values:
+ *
+ *	char * dest;
+ *
+ * Notes:
+ *
+ * Programmer:		Paul Houghton
+ *
+ * Start Date:		10-14-1991
+ *
+ * Modification History:
+ *
+ * $Log$
+ * Revision 2.1  1995/10/28  19:11:38  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:15  houghton
  * Move to Version 2.0
  *
@@ -49,12 +52,12 @@
  * Revision 1.1  1992/01/01  20:49:50  paulh
  * Initial revision
  *
-*
-*********************************************************************/
-
-#include <string.h>
+ *
+ *********************************************************************/
 
 #include "_Common.h"
+
+#include <string.h>
 
 COMMON_VERSION(
   CenterLine,
