@@ -111,7 +111,7 @@ $(tools_build_dir)/$(DEJAGNU):
 	cd $(tools_build_dir)						      \
 	&& cvs $(tools_cvsroot) co $(DEJAGNU)
 
-$(dejagnu): $(tools_build_dir)/$(DEJAGNU)
+$(dejagnu_lib): $(tools_build_dir)/$(DEJAGNU)
 	cd $(tools_build_dir)						      \
 	&& $(MAKE) -f $(DEJAGNU)/Makefile setup
 	$(TOOL_DIR)/bin/make						      \
@@ -128,11 +128,14 @@ gen_setup_cfg:
 	  > $(CFG_DIR)/Setup.cfg
 	chmod 444 $(CFG_DIR)/Setup.cfg
 
-setup: check_cvs $(tools_build_dir) $(make_cfg_file) $(dejagnu) gen_setup_cfg
+setup: check_cvs $(tools_build_dir) $(make_cfg_file) $(dejagnu_lib) gen_setup_cfg
 
 
 #
 # $Log$
+# Revision 1.7  2000/05/30 15:28:14  houghton
+# Changed to use MAKCCONFIGS and DEJAGNU variables.
+#
 # Revision 1.6  1999/11/08 15:13:58  houghton
 # Added get_setup_cfg target.
 #
