@@ -445,7 +445,9 @@ typedef enum {
 
 /* function in DataTimeData.c needed for some linkers */
 void LinkDateData( void );  
- 
+
+#if ! defined( COMMON_DATETIME_VALUES )
+#define COMMON_DATETIME_VALUES 1
 extern const int    DaysInMonth[];
 extern const int    DaysInMonthLeap[];
 extern const int    MonthDayOfYear[];
@@ -454,6 +456,7 @@ extern const char * Months[];
 extern const char * AbbrMonths[];
 extern const char * WeekDays[];
 extern const char * AbbrWeekDays[];
+#endif
 
 #if !defined( STLUTILS_IsLeapYear )
 #define COMMON_IsLeapYear 1
@@ -679,6 +682,9 @@ FileModeString( mode_t	mode, char * modeString );
  * Modification History
  *     			
  * $Log$
+ * Revision 3.2  2000/03/03 13:04:52  houghton
+ * Added prototypes for A2E() and AsciiToEbcdic().
+ *
  * Revision 3.1  1999/10/29 16:56:16  houghton
  * Changed Version to 3
  *
