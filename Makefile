@@ -15,9 +15,9 @@ show_commands 	= # true
 include Make/make.cfg.$(make_cfg_ver)
 
 
-INSTALL_BIN_DIR	= $(local_bindir)
 INSTALL_INC_DIR = $(local_incdir)
 INSTALL_LIB_DIR = $(local_libdir)
+INSTALL_BIN_DIR	= $(local_bindir)
 INSTALL_MAN_DIR = $(local_mandir)
 
 SRC_DIR		= src
@@ -28,6 +28,14 @@ exports	    = 					\
 	INSTALL_BIN_DIR=$(INSTALL_BIN_DIR)	\
 	INSTALL_INC_DIR=$(INSTALL_INC_DIR)	\
 	INSTALL_LIB_DIR=$(INSTALL_LIB_DIR)	\
+	INSTALL_MAN_DIR=$(INSTALL_MAN_DIR)	\
+	show_commands=$(show_commands)		\
+	check_install=$(check_install)		\
+
+beta_exports	=				\
+	INSTALL_BIN_DIR=$(INSTALL_BIN_DIR)	\
+	INSTALL_INC_DIR=$(beta_incdir)		\
+	INSTALL_LIB_DIR=$(beta_libdir)		\
 	INSTALL_MAN_DIR=$(INSTALL_MAN_DIR)	\
 	show_commands=$(show_commands)		\
 	check_install=$(check_install)		\
@@ -52,12 +60,21 @@ test:
 install_doc:
 	$(hide) if ! $(MAKE) -C $(DOC_DIR) $@ $(exports); then exit; fi
 
-install_all install install_default install_debug: install_doc
+install_all install: install_doc
+	$(hide) if ! $(MAKE) -C $(SRC_DIR) $@ $(exports); then exit; fi
+
+install_beta:
+	$(hide) if ! $(MAKE) -C $(SRC_DIR) install_all $(beta_exports); then exit; fi
+
+install_default install_debug: 
 	$(hide) if ! $(MAKE) -C $(SRC_DIR) $@ $(exports); then exit; fi
 
 
 #
 # $Log$
+# Revision 2.3  1998/09/24 14:36:03  houghton
+# Complete rework.
+#
 # Revision 2.2  1998/09/22 14:26:08  houghton
 # Complete rework.
 #
