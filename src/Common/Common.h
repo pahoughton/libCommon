@@ -503,6 +503,12 @@ strptime( char *buf, const char *format, struct tm *tm);
 #define Net2HostUShort( us ) COMMON_n2hs( us )
 #define Host2NetUShort( us ) COMMON_n2hs( us )
 
+#define Net2HostInt( i )  COMMON_n2hi( i )
+#define Host2NetInt( i )  COMMON_n2hi( i )
+
+#define Net2HostUInt( ui ) COMMON_n2hi( ui )
+#define Host2NetUInt( ui ) COMMON_n2hi( ui )
+  
 #define Net2HostLong( l )  COMMON_n2hl( l )
 #define Host2NetLong( l )  COMMON_n2hl( l )
 
@@ -645,6 +651,9 @@ const char * CommonGetVersion( void );
  * Modification History
  *     			
  * $Log$
+ * Revision 2.7  1995/12/02 02:03:53  houghton
+ * Add test and define for using libCommon with libClue.
+ *
  * Revision 2.6  1995/11/10  00:44:32  houghton
  * Modified to use new Error processing routines
  * Modified for enhanced Logging routines
