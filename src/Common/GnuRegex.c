@@ -1887,6 +1887,8 @@ regex_compile (
 
                 if (c == ',')
                   {
+		    if( lower_bound == -1 )
+		      lower_bound = 0;
                     GET_UNSIGNED_NUMBER (upper_bound);
                     if (upper_bound < 0) upper_bound = RE_DUP_MAX;
                   }
