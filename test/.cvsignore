@@ -1,4 +1,6 @@
 .depend
+.depend_debug
 _t_Proto.h
 objects
 t
+t_g
