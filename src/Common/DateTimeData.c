@@ -16,6 +16,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:19  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.5  1995/02/13  15:34:15  houghton
  * New functions and many enhancements to existing functions.
  *
@@ -33,8 +36,12 @@
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
+
+#include "_Common.h"
+
+COMMON_VERSION(
+  DateTimeData,
+  "$Id$");
 
 #include <DateTime.h>
 

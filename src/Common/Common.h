@@ -18,6 +18,9 @@
  *
  *     			
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:15  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.15  1995/03/02  16:39:55  houghton
  * minor mods
  *
@@ -64,42 +67,38 @@
  *
  *********************************************************************/
 
-
-#include <errno.h>
-#include <time.h>
-
-#ifdef OPENVMS
-#include <types.h>
+#if !defined( COMMON_SHORT_FN )
+#include <CommonConfig.h>
 #else
-#include <sys/types.h>
+#include <CmmnCfg.h>
 #endif
-
-#include <string.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+#if !defined( BOOL )
+#define BOOL	int
+#endif
 
-#ifndef TRUE
+#if !defined( TRUE )
 #define TRUE 1
+#endif
+
+#if !defined( FALSE )
 #define FALSE 0
 #endif
 
-#ifndef ON
-#define ON 1
-#define OFF 0
+#if !defined( ON )
+#define ON TRUE
+#define OFF FALSE
 #endif
 
-#ifndef NO
-#define NO  	0
-#define YES 	1
+#if !defined( NO )
+#define NO  	FALSE
+#define YES 	TRUE
 #endif
-
-#ifndef Bool
-#define Bool int   /* wanted to do an enum, but to common */
-#endif
-
+  
 /**************************************************************
  * E R R O R   P r o c e s s i n g 
  **************************************************************/
@@ -183,7 +182,7 @@ Ret_Status ArgEnvBool( int * argc, char *argv[],
 
 Ret_Status ArgEnvFlag( int * argc, char *argv[],
 		       const char * argid, const char * envVar,
-		       Bool * paramVar );
+		       BOOL * paramVar );
 
 Ret_Status ArgEnvString( int * argc, char *argv[],
 			 const char * argid, const char * envVar,
@@ -234,15 +233,15 @@ void LoggerInit( const char *	logPath,
 		 long	    	trimIncrement,
 		 LogSetLevelType setType,
 		 int		 outputLevels,
-		 Bool		 outputDate,
-		 Bool		 outputSourceLoc
+		 BOOL		 outputDate,
+		 BOOL		 outputSourceLoc
 		 );
 
-Bool LoggerTee( Bool state );
+BOOL LoggerTee( BOOL state );
 
 void Logger( const char * msgFmt, ... );
 
-Bool LoggerLoc( Bool state );
+BOOL LoggerLoc( BOOL state );
 void LoggerTrim( void );
 int  LogLevelFromString( const char * levelString );
 const char * LogLevelString( LogBit lvl );
@@ -271,23 +270,15 @@ extern int  	    _CLogLocLine;
  **************************************************************/
   
 
-#define CharToInt( _d_ ) \
+#define CHAR_TO_INT( _d_ ) \
 ( ( _d_ <= '9' ) ? _d_ - '0' : ( 10 + ( (_d_ | 0x20) - 'a' ) ))
 
-#define IsBaseDigit( _d_, _b_ ) (CharToInt(_d_) >= 0 && CharToInt(_d_) < _b_ )
+#define IS_BASE_DIGIT( _d_, _b_ ) \
+(CHAR_TO_INT(_d_) >= 0 && CHAR_TO_INT(_d_) < _b_ )
 
-#define SafeStrcpy( _dest_, _src_, _size_ );    \
+#define SAFE_STRCPY( _dest_, _src_, _size_ );    \
 strncpy( _dest_, _src_, _size_); _dest_[_size_ - 1] = 0;
     
-#if !defined( Linux )
-const char * basename( const char * path );
-#endif
-
-char * strlwr( char * str );
-char * strupr( char * str );
-#if defined( NeXT )
-char * strdup( const char *);
-#endif
 
 extern const char EtoA[];
 
@@ -387,53 +378,24 @@ void * AvlFindMin( AvlTree  tree );
 void * AvlDelMax( AvlTree  tree );
 void * AvlFindMax ( AvlTree  tree );
 
-/************************************************************/
-/* AvlTree Locking Mechanisms */
-/************************************************************/
-  
-int    AvlLockTree( AvlTree tree, int semId );
-int    AvlUnlockTree( AvlTree tree, int semId  );
-int    AvlWaitForUnlock( AvlTree tree, int semId  );
-int    AvlGetNumberOfUsers( AvlTree tree );
-int    InitLocking(
-    	    	const char * fileName ,
-		int 	     accessFlag,
-    	        const char  keyID );
-
+void * AvlSetTreeData( AvlTree * tree, void * data );
+void * AvlGetTreeData( AvlTree * tree );
 
 /**************************************************************
  * M I S C   
  **************************************************************/
       
 
-Ret_Status ForeachFile(
-    const char *    name,
-    Ret_Status      (*fileProc)( const char * name, void * closure ),
-    Bool    	    recurs,
-    void *  	    closure 
-    );
-
-char * FindPath( const char * fileName, const char * path );
-Bool CanExecute( const char * fullFileName );
-#if defined(AIX)
-typedef unsigned short umode_t;
-#endif
-const char * FileModeString( umode_t mode, char * modeString ); 
+Ret_Status ForeachFile( const char *	name,
+			Ret_Status      (*fileProc)( const char * name,
+						     void * closure ),
+			BOOL    	recurs,
+			void *  	closure );
 
 
-#ifdef _POSIX_SOURCE
-Bool MemberOfGroup( gid_t grp );
-#endif
+extern const char CommonVersion[];
 
 const char * CommonGetVersion( void );
-
-#ifndef min
-#define min( _a_, _b_ ) ( ( (_a_) > (_b_) ) ? (_b_) : (_a_) )
-#endif 
-
-#ifndef max
-#define max( _a_, _b_ ) ( ( (_a_) < (_b_) ) ? (_b_) : (_a_) )
-#endif 
 
 #define DWORD_ALIGN( _addr_ ) \
   ( ((_addr_ % 4) == 0) ? _addr_ :  ( _addr_  + ( 4 - ( _addr_ % 4 ) ) ) )

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:09  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.3  1995/02/13  15:34:11  houghton
  * New functions and many enhancements to existing functions.
  *
@@ -27,13 +30,15 @@
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
 
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "_Common.h"
+
+COMMON_VERSION(
+  ArgEnvFlag,
+  "$Id$");
 
 
 Ret_Status
@@ -80,13 +85,6 @@ ArgEnvFlag(
     }
   return( RET_SUCCEED );
 }
-
-
-
-
-
-
-
 
 
 /**

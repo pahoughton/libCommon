@@ -21,6 +21,9 @@
  * Modification History
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:22  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.3  1995/02/13  15:34:17  houghton
  * New functions and many enhancements to existing functions.
  *
@@ -33,32 +36,16 @@
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
 
-#undef _POSIX_SOURCE
-
-#ifdef _AIX
-#define _ALL_SOURCE
-#endif
-
-#ifdef Linux
-#define BSD
-#endif
+#include "_Common.h"
 
 #include <string.h>
 #include <stdlib.h>
 
-#include "_Common.h"
+static const char * RcsId =
+"$Id$";
 
-#define DIR_SEP_CHAR	'/'
-#define DIR_SEP_STRING	"/"
-#define PATH_ENV_VAR	"PATH"
-#define PATH_SEP	":"
 
-/*
- * find it
- */
 char *
 FindPath(
   const char * fileName,	/* name of file to look for (no wild cards) */
@@ -71,32 +58,24 @@ FindPath(
   char * pathDir;
 
   if( path == NULL )
-    {
-      envPath = getenv( PATH_ENV_VAR );
-    }
+    envPath = getenv( COMMON_PATH_ENV_VAR );
   else
-    {
-      envPath = (char *)path;
-    }
+    envPath = (char *)path;
   
-  if( strchr( fileName, DIR_SEP_CHAR ) != NULL ||
+  if( strchr( fileName, COMMON_DIR_SEP_CHAR ) != NULL ||
       envPath == NULL )
     {
       if( CanExecute( fileName )  )
-	{
-	  return( strdup( (char *)fileName ) );
-	}
+	return( strdup( (char *)fileName ) );
       else
-	{
-	  return( NULL );
-	}
+	return( NULL );
     }
 
   envPath = strdup( envPath );	/* need private copy */
 
-  for( pathDir = strtok( envPath, PATH_SEP ) ;
+  for( pathDir = strtok( envPath, COMMON_PATH_SEP ) ;
        pathDir != NULL ;
-       pathDir = strtok( NULL, PATH_SEP ) )
+       pathDir = strtok( NULL, COMMON_PATH_SEP ) )
     {
       char * fullName;
 
@@ -107,9 +86,8 @@ FindPath(
 	  return( NULL );
 	}
       
-
       strcpy( fullName, pathDir );
-      strcat( fullName, DIR_SEP_STRING );
+      strcat( fullName, COMMON_DIR_SEP_STRING );
       strcat( fullName, fileName );
       
       if( CanExecute( fullName ) ) 
@@ -123,12 +101,6 @@ FindPath(
   return( NULL );
 }
 	
-
-
-
-
-
-
 
 
 /*

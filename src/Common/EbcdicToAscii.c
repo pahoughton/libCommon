@@ -15,13 +15,20 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:21  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.1  1995/02/13  15:34:16  houghton
  * New functions and many enhancements to existing functions.
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
+
+#include "_Common.h"
+
+COMMON_VERSION(
+  EbcdicToAscii,
+  "$Id$");
 
 
 const char EtoA[] =

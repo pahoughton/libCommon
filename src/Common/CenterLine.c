@@ -25,6 +25,9 @@
 *	Modification History:
 *
 *	$Log$
+ * Revision 2.0  1995/10/28  17:35:15  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.5  1995/02/13  15:34:13  houghton
  * New functions and many enhancements to existing functions.
  *
@@ -48,14 +51,14 @@
  *
 *
 *********************************************************************/
-static const char * RcsId = 
-{"$Id$"};
+
+#include <string.h>
 
 #include "_Common.h"
 
-#include <string.h>
-#include <stdlib.h>
-
+COMMON_VERSION(
+  CenterLine,
+  "$Id$" );
 
 char * CenterLine( char * dest, const char *src,int width)
 {

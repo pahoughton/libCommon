@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:19  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.4  1995/02/13  15:34:15  houghton
  * New functions and many enhancements to existing functions.
  *
@@ -43,15 +46,20 @@ extern "C" {
 #define MIN_PER_HOUR  60
 #include <time.h>
 
+#if !defined( DAYOFWEEK_ENUM )
+#define DAYOFWEEK_ENUM 1
+
 typedef enum {
-  SUNDAY = 0,
-  MONDAY,
-  TUESDAY,
-  WEDNESDAY,
-  THURSDAY,
-  FRIDAY,
-  SATURDAY
+  Sunday = 0,
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday
 } DayOfWeek;
+
+#endif
 
 /*
  * These constants are defined in DateTimeData.c if your linker
@@ -69,10 +77,11 @@ extern const char * AbbrMonths[];
 extern const char * WeekDays[];
 extern const char * AbbrWeekDays[];
 
-#define IsLeapYear(_year_)  \
-    ( !(_year_ % 4) && ( (_year_ % 100) || !(_year_ % 400) ) )
+BOOL
+IsLeapYear( short year );
 
-time_t	Difftm( struct tm * t1, struct tm * t2 );
+time_t
+Difftm( struct tm * t1, struct tm * t2 );
 
 time_t
 YYYYMMDDtoTimeT( const char * yymmdd );

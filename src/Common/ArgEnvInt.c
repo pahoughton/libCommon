@@ -22,6 +22,9 @@
  * 6/7/94 - use StringToInt for conversion, allows using different bases.
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:10  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.5  1994/07/13  14:53:59  houghton
  * Sequent port
  *
@@ -36,13 +39,14 @@
  *
  *
  *********************************************************************/
-static const char * RcsID =
-"$Id$";
-
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "_Common.h"
+
+COMMON_VERSION(
+  ArgEnvInt,
+  "$Id$");
 
 
 Ret_Status
@@ -58,7 +62,6 @@ ArgEnvInt(
 {
   
   int	paramValue;
-  
   
   if( argId != NULL )
     {

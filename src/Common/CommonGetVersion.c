@@ -19,6 +19,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:16  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.5  1994/08/15  19:57:00  houghton
  * Fix RcsId so ident will work
  *
@@ -36,30 +39,36 @@
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
+
+#include "_Common.h"
+
+COMMON_VERSION(
+  CommonGetVersion,
+  "$Id$" );
 
 
-#ifdef OPENVMS
-const char _CommonVersionString[] =
-{
-  "libCommon Version: Prod 1.0
-   Compiled: __DATE__ __TIME__ 				\
-   CVS Tag: PROD_1_0 $Id$				"
-};
+const char CommonVersion[] =
+#if !defined( OPENVMS )
+
+  "@(#) " COMMON_PRJ_NAME " - " COMMON_PRJ_VER "\n"			      
+  "    Compiled: " __DATE__ " "__TIME__ "\n"
+  "    CVS Tag: BETA_2_0\n"
+  "    $Id$ "; 
+
 #else
-const char _CommonVersionString[] = 
-{
-      "libCommon Version: PROD 1.0\n"
-      "Compiled: " __DATE__ " " __TIME__ "\n"
-      "CVS Tag: PROD_1_0 $Id$ \n"
-};
+
+"@(#) libCommon - 2.00.00.b.02
+    Compiled: after $Date$
+    CVS Tag: BETA_2_0
+    $Id$\n";
+
 #endif
+
 
 const char *
 CommonGetVersion( void )
 {
-  return( _CommonVersionString );
+  return( CommonVersion );
 }
 
 
