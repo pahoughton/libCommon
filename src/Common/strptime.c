@@ -98,7 +98,7 @@ MonthAbbr[] =
     do {								      \
       val *= 10;							      \
       val += *rp++ - '0';						      \
-    } while ( (rp - frp) <= max_digits && *rp >= '0' && *rp <= '9');	      \
+    } while ( (rp - frp) < max_digits && *rp >= '0' && *rp <= '9');	      \
     if (val < from || val > to)						      \
       return NULL;							      \
   } while (0)
@@ -254,7 +254,7 @@ strptime(
 	  break;
 	case 'm':
 	  /* Match number of month.  */
-	  get_number (1, 12);
+	  get_number_width (1, 12, 2);
 	  tm->tm_mon = val - 1;
 	  break;
 	case 'M':
@@ -370,6 +370,9 @@ Boston, MA 02111-1307, USA.  */
  * Revision Log:
  *
  * $Log$
+ * Revision 1.1  1998/09/22 14:36:46  houghton
+ * initial version.
+ *
  * Revision 4.2  1998/05/19 15:27:48  houghton
  * Bug-Fix: '%I' was off by 1.
  *
