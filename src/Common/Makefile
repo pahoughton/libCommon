@@ -15,6 +15,8 @@ make_cfg_ver	= 5.01
 make_target	= default
 # Uncomment 'show_compile_command' to output compile command.
 show_commands 	= # true
+proto_dep	= true
+check_install	= true
 
 # Include standard MakeConfig configuration for GNU make required
 include Make/make.cfg.$(make_cfg_ver)
@@ -261,6 +263,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.21  1997/04/26 12:30:11  houghton
+# Changed version num.
+#
 # Revision 2.20  1997/03/26 12:33:38  houghton
 # Changed version number.
 #
