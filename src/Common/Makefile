@@ -1,10 +1,27 @@
-# -*- makefile -*- for Common
 #
-# Created: 3/2/97 using MakeConfigs 5.01.00.a.07
 #
-# $Id$
+# Title:        Makefile
+# Project:	
+# Desc:
+# 
+#   Makefile for Common
+# 
+# Notes:
 #
-# (see end of file for Log info)
+#   Try 'make help' for a list of standard targets.
+# 
+# Author:	Paul Houghton 719-527-7834 (paul.houghton@wcom.com)
+# Created:	3/2/97 using MakeConfigs 5.01.00.a.07
+# ReCreated:	3/3/98 useing MakeConfigs 5.04.00.b.02
+#
+# Revision History: (See end of file for Revision Log)
+#
+#   Last Mod By:    $Author$
+#   Last Mod:	    $Date$
+#   Version:	    $Revision$
+#
+#   $Id$
+# 
 
 #
 # The following variables control the behavior of MakeConfigs.
@@ -19,7 +36,7 @@
 #
 
 makefile_type   = lib
-make_cfg_ver	= 5.02
+make_cfg_ver	= 5.04
 make_target	= default
 show_commands 	= # true
 proto_dep	= true
@@ -37,8 +54,11 @@ include Make/make.cfg.$(make_cfg_ver)
 
 NAME		= Common
 
-INSTALL_LIBDIR	= $(beta_libdir)
-INSTALL_INCDIR	= $(beta_incdir)
+PRJ_TOPDIR	= ../..
+
+INSTALL_BASE_DIR	= $(TOOL_DIR)
+INSTALL_LIB_DIR		= $(beta_libdir)
+INSTALL_INC_DIR		= $(beta_incdir)
 
 VER_MAJOR	= 2
 VER_MINOR	= 02
@@ -47,12 +67,11 @@ VERSION		= $(VER_MAJOR).$(VER_MINOR).$(VER_RELEASE)
 
 LIBRARY_DEFAULT	= lib$(NAME).a
 LIBRARY_DEBUG	= lib$(NAME)_g.a
+LIBRARY_TEST	= lib$(NAME)_tg.a
 LIBRARY_PROFILE	= lib$(NAME)_pg.a
 LIBRARY_SHARED	= lib$(NAME)$(shlib_ext)
 
 PROTO_H		= _$(NAME)_Proto.h
-PRJ_TOPDIR	= ../..
-
 # include any arch specific makefile component
 -include $(PRJ_TOPDIR)/src/arch/$(arch)/Makefile.$(NAME)
 
@@ -70,6 +89,7 @@ PRJ_DEFINES	= -DVERSION=\"$(VERSION)\" $(ARCH_DEFINES)
 
 DEFAULT_DEFINES = -DCOMMON_DEFAULT=1
 DEBUG_DEFINES	= -DCOMMON_DEBUG=1
+TEST_DEFINES	= -DCOMMON_TEST=1 $(DEBUG_DEFINES)
 PROFILE_DEFINES	= -DCOMMON_PROFILE=1
 SHARED_DEFINES	= -DCOMMON_SHARED=1
 
@@ -81,38 +101,43 @@ SHARED_DEFINES	= -DCOMMON_SHARED=1
 #
 
 
-SRC_INC		= $(ARCH_INC) -I.
-PRJ_INC		= 
+SRC_INC		= $(ARCH_INC) -I. -I$(PRJ_TOPDIR)
+PRJ_INC		= -I$(beta_incdir)
 
 
 # Any other cpp flags to use on for all targets
 
 CPP_FLAGS		= $(ARCH_CPP_FLAGS)
 
+FLEX_FLAGS		=
+BISON_FLAGS		=
+
 ###### C O M P I L E / C P P #####
 #
 # Config flags available
 #
-# $(cc_optimize) $(cxx_optimize)
-# $(cc_debug)	 $(cxx_debug)
-# $(cc_profile)	 $(cxx_profile)
-# $(cc_warn)	 $(cxx_warn)
+# $(cc_optimize_flags) $(cxx_optimize_flags)
+# $(cc_debug_flags)    $(cxx_debug_flags)
+# $(cc_profile_flags)  $(cxx_profile_fllags)
+# $(cc_warn)           $(cxx_warn)
 #
 
 
 CC_FLAGS		= $(cc_warn) $(ARCH_CC_FLAGS)
 
-DEFAULT_CC_FLAGS	= $(cc_optimize)
-DEBUG_CC_FLAGS		= $(cc_debug)
-PROFILE_CC_FLAGS	= $(cc_profile)
-SHARED_CC_FLAGS		= $(cc_shared) $(cc_optimize)
+DEFAULT_CC_FLAGS	= $(cc_default) $(cc_optimize_flags)
+DEBUG_CC_FLAGS		= $(cc_debug) $(cc_debug_flags)
+TEST_CC_FLAGS		= $(cc_test) $(cc_debug_flags)
+PROFILE_CC_FLAGS	= $(cc_profile) $(cc_profile_flags)
+SHARED_CC_FLAGS		= $(cc_shared) $(cc_shared_flags) $(cc_optimize_flags)
 
 CXX_FLAGS		= $(cxx_warn) $(ARCH_CXX_FLAGS)
 
-DEFAULT_CXX_FLAGS	= $(cxx_optimize)
-DEBUG_CXX_FLAGS		= $(cxx_debug)
-PROFILE_CXX_FLAGS	= $(cxx_profile)
-SHARED_CXX_FLAGS	= $(cxx_shared) $(cxx_optimize)
+DEFAULT_CXX_FLAGS	= $(cxx_default) $(cxx_optimize_flags)
+DEBUG_CXX_FLAGS		= $(cxx_debug) $(cxx_debug_flags)
+TEST_CXX_FLAGS		= $(cxx_test) $(cxx_debug_flags)
+PROFILE_CXX_FLAGS	= $(cxx_profile) $(cxx_profile_flags)
+SHARED_CXX_FLAGS	= $(cxx_shared) $(cxx_shared_flags) $(cxx_optimize_flags)
 
 # **** S H A R E D   D E P   L I B S *****
 
@@ -120,10 +145,11 @@ SHDEP_LIBS		= -lc -lm
 
 # **** I N S T A L L ****
 
-INSTALL_LIB_FLAGS	= -m 444
-INSTALL_INC_FLAGS	= -m 444
+INSTALL_LIB_PERM	= 444
+INSTALL_INC_PERM	= 444
 
-objects/$(make_target)/CommonGetVersion.o: FORCE
+INSTALL_LIB_FLAGS	= -m $(INSTALL_LIB_PERM)
+INSTALL_INC_FLAGS	= -m $(INSTALL_INC_PERM)
 
 #
 # =USE_CURRENT_MAKEFILE=
@@ -131,6 +157,12 @@ objects/$(make_target)/CommonGetVersion.o: FORCE
 
 # **** S O U R C E   F I L E S ****
 
+GENERATED_SOURCES	=			
+
+FLEX_C_SOURCES	=			
+BISON_C_SOURCES	=			
+FLEX_CXX_C_SOURCES	=			
+BISON_CXX_C_SOURCES	=			
 C_SOURCES	=			\
 	ArgEnvBool.c                    \
 	ArgEnvDouble.c                  \
@@ -195,6 +227,9 @@ C_SOURCES	=			\
 	_LoggerLogIt.c                  \
 	$(ARCH_C_SOURCES)               \
 
+CXX_C_SOURCES	=			
+CXX_CC_SOURCES	=			
+CXX_CPP_SOURCES	=			
 
 USER_H_INCS	=			\
 	Common.h                        \
@@ -209,6 +244,7 @@ C_HEADERS	=			\
 	Common.h                        \
 	_AvlTypes.h                     \
 	_Common.h                       \
+	_Common_Proto.h                 \
 	$(ARCH_C_HEADERS)               \
 
 
@@ -230,32 +266,30 @@ C_HEADERS	=			\
 include Make/make.cfg.targets.$(makefile_type).$(make_cfg_ver)
 
 
-default debug profile shared:: $(generated_files)
+default debug test profile shared:: $(generated_files)
 
-default:: $(LIBRARY_DEFAULT)
+default:: $(LIBRARY_$($(make_target)))
 
-debug profile shared:: 
+debug test profile shared:: 
 	$(hide) $(MAKE) make_target=$@ $(LIBRARY_$($@))
 
-all::	default debug profile shared
+all::	default debug test profile shared
 
 
 install:: install_lib_check install_$(make_target)
-	$(hide) echo Installation Complete!
+	$(hide) echo + Installation Complete!
 
 install_all:: install_lib_check
 
 install_all:: install_default install_debug install_profile install_shared
-	$(hide) echo Installation Complete!
+	$(hide) echo + Installation Complete!
 
-install_default:: default $(INSTALL_LIBDIR)/$(LIBRARY_DEFAULT)
-install_debug::   debug   $(INSTALL_LIBDIR)/$(LIBRARY_DEBUG)
-install_profile:: profile $(INSTALL_LIBDIR)/$(LIBRARY_PROFILE)
-install_shared::  shared  $(INSTALL_LIBDIR)/$(LIBRARY_SHARED)
-	$(hide) chmod +x $(INSTALL_LIBDIR)/$(LIBRARY_SHARED)
-
-
-test::	default
+install_default:: default $(INSTALL_LIB_DIR)/$(LIBRARY_DEFAULT)
+install_debug::   debug   $(INSTALL_LIB_DIR)/$(LIBRARY_DEBUG)
+install_test::    test    $(INSTALL_LIB_DIR)/$(LIBRARY_TEST)
+install_profile:: profile $(INSTALL_LIB_DIR)/$(LIBRARY_PROFILE)
+install_shared::  shared  $(INSTALL_LIB_DIR)/$(LIBRARY_SHARED)
+	$(hide) chmod +x $(INSTALL_LIB_DIR)/$(LIBRARY_SHARED)
 
 FORCE: 
 
@@ -269,106 +303,11 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
-# Revision 2.28  1997/09/19 10:05:17  houghton
-# Changed version num.
-# Changed INSTALL*FLAGS to 444.
-#
-# Revision 2.27  1997/09/19 09:53:19  houghton
-# Cleanup.
-#
-# Revision 2.26  1997/09/19 09:09:10  houghton
-# Changed minor version num and release.
-# Removed referances to GnuRegex.h (no longer part of libCommon).
-#
-# Revision 2.25  1997/09/02 21:33:09  houghton
-# Changed to use MakeConfigs 5.02.
-#
-# Revision 2.24  1997/08/24 21:50:04  houghton
-# Changed version number.
-#
-# Revision 2.23  1997/05/07 11:37:12  houghton
-# Changed version number.
-#
-# Revision 2.22  1997/04/26 12:50:59  houghton
-# Added proto_dep and check_install variables.
-#
-# Revision 2.21  1997/04/26 12:30:11  houghton
-# Changed version num.
-#
-# Revision 2.20  1997/03/26 12:33:38  houghton
-# Changed version number.
-#
-# Revision 2.19  1997/03/13 02:45:39  houghton
-# Changed ver num.
-#
-# Revision 2.18  1997/03/03 14:17:10  houghton
-# Changed ver num.
-#
-# Revision 2.17  1997/03/02 15:04:05  houghton
-# Removed GnuRegex.h.
-#
-# Revision 2.16  1997/03/02 15:03:14  houghton
-# Removed GnuReges (now in libGnuRegex).
-#
-# Revision 2.15  1997/03/02 12:29:36  houghton
-# Updated with latest MakeConfigs fixes.
-#
-# Revision 2.14  1996/11/06 18:23:16  houghton
-# Changed install dir for personal use.
-#
-# Revision 2.13  1996/05/03 16:10:17  houghton
-# Change SHDEP_LIBS
-#
-# Revision 2.12  1996/04/27 12:26:32  houghton
-# Changed to use MakeConfigs 5
-#
-# Revision 2.11  1996/03/04 11:45:22  houghton
-# Bug Fix: profile change dependancy to objects/profile
-#
-# Revision 2.10  1996/02/29 16:21:12  houghton
-# Changed to use MakeConfigs 4.01
-#
-# Revision 2.9  1995/12/31 11:27:10  houghton
-# Bug Fix - changed shared lib name for AIX port.
-#
-# Revision 2.8  1995/12/02 02:06:59  houghton
-# Changed to use MakeConfigs Ver 4.
-#
-# Revision 2.7  1995/11/12  17:45:58  houghton
-# Changed to use MakeConfigs 3.5.
-# Added NAME macro for install targets.
-# Added sources for GnuRegex.
-#
-# Revision 2.6  1995/11/10  12:08:33  houghton
-# Added MKDIRHIER to install target for missing directories
-#
-# Revision 2.5  1995/11/10  01:02:09  houghton
-# Now using MakeConfigs 3.4 with improved install targets.
-#
-# Revision 2.4  1995/10/31  13:07:00  houghton
-# Added arch components
-#
-# Revision 2.3  1995/10/31  12:38:30  houghton
-# Move version info from CommonVersion.h to _Common.h
-# Use MakeConfigs 3.3
-# Update ErrorStrings for all CommonErrorType values
-#
-# Revision 2.2  1995/10/30  14:55:15  houghton
-# Move contents of Bit.h & DateTime.h to Common.h
-# Add Net2Host
-#
-# Revision 2.1  1995/10/29  13:33:44  houghton
-# Initial Linux Build of Version 2
-#
-# Revision 1.2  1995/02/13  17:35:10  houghton
-# Major enhancements much cleaner
-#
-# Revision 1.1  1994/01/23  18:16:55  houghton
-# Production release 1.0 of MakeConfig system
 #
 # =MAKEFILE_LOG=
 #
 
-
-
+# Local Variables:
+# mode:makefile
+# End:
 
