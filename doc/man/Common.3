@@ -46,6 +46,15 @@ Value out of range.
 C_EBADPARAM
 invalid parameter passed
 .TP
+C_ESYBERR
+Sybase error should be set in Sybase Error handler
+.TP
+C_ESYBMSG
+Sybase message should be set in Sybase Message Handler
+.TP
+C_ESYBOC
+Syboc library error
+.TP
 C_EAPP
 application error.
 .TP
@@ -126,12 +135,19 @@ ArgEnvBool(3)
 translate command line argument or environment variable to a boolean
 value.
 .TP
+.TP
+ArgEnvDouble(3)
+translate command line argument or environment variable to a double.
+.TP
+ArgEnvFlag(3)
+translate command line argeuemnt or environment variable to a flag.
+.TP
 ArgEnvInt(3)
 translate command line argument or environment variable to an integer
 value.
 .TP
-ArgEnvDouble(3)
-translate command line argument or environment variable to a double.
+ArgEnvLong(3)
+translate command line argument or environment variable to a long.
 .TP
 ArgEnvString(3)
 translate command line argument or environment variable to a char
@@ -181,8 +197,14 @@ convert a string to upper case.
 strdup(3)
 duplicate a string into a malloc'ed space.
 .TP
+StringToDouble(3)
+convert a string to a double.
+.TP
 StringToInt(3)
-convert a string to a integer.
+convert a string to an integer.
+.TP
+StringToLong(3)
+convert a string to a long.
 .TP
 CenterLine(3)
 prefix a string buffer with spaces to center it on a line.
@@ -264,11 +286,20 @@ ErrorString(3)
 translate a CommonErrorType value to a string.
 .SH MISC FUNCTIONS
 .TP
-ForeachFile(3)
-execute a function for each file in a directory.
+CanExecute(3)
+can a specific file be executed.
 .TP
 CommonGetVersion(3)
 return the version string to identify the version of the library.
+.TP
+FindPath(3)
+search for a file in using a path and return the full file name.
+.TP
+ForeachFile(3)
+execute a function for each file in a directory.
+.TP
+MemberOfGroup(3)
+is the current user a member of the specified group.
 .SH FILES
 .nf
 /usr/local/lib/libCommon.a

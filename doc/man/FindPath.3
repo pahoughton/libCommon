@@ -1,0 +1,76 @@
+.\"
+.\" Man page for FindPath
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH FindPath 3  "19 Aug 94"
+.SH NAME
+FindPath \- create a full file name from a path and file name.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+char * FindPath(
+.PD 0
+.RS
+.TP 15
+const char *
+fileName,
+.TP 15
+const char *
+path )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+fileName
+the file name to searh the path for.
+.TP
+path
+the path to search for the file in. If it is null, the PATH
+environment variable will be used.
+.SH DESCRIPTION
+FindPath will search the colon (:) seperated path for the specificed
+fileName. If the file is found, a malloc full file name will be
+returned. When your done with the return value, it should be free'd.
+.SH RETURNS
+.TP
+char * fullFileName
+the fullFileName found for the file.
+.TP
+NULL
+the file was not found in the path.
+.SH EXAMPLE
+.nf
+
+#include <Common.h>
+
+const char * fileName   = "findMe";
+const char * pathString = "/usr/local:/home:/usr:.";
+
+char * fullFileName;
+
+if( (fullFileName = FindPath( fileName,pathString ) ) == NULL )
+  {
+    fprintf( stderr, "Not found\n" );
+  }
+else
+  {
+    printf( "Full path for '%s' is '%s'\n",fileName, fullFileName );
+  }
+
+/* if findMe was in /home, the output would be:
+ * Full path for 'findMe' is '/home/findMe'
+ */
+.fn   
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+Common(3)
+.SH AUTHORS
+Paul Houghton x2309 - (houghton@shoe.wiltel.com) 
+

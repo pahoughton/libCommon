@@ -1,0 +1,44 @@
+.\"
+.\" Man page for CanExecute
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH CanExecute 3  "19 Aug 94"
+.SH NAME
+CanExecute \- detects if a specific file can be executed.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+Bool CanExecute(
+.PD 0
+.RS
+.TP 15
+const char *
+fileName )
+.PD
+.RE
+.SH ARGUMENTS
+fileName
+the full path of the file to check.
+.SH DESCRIPTION
+This function determines if the fileName can be executed. It check
+file's permition bits to make the determination.
+.SH RETURNS
+.TP
+TRUE
+the file can be executed.
+.TP
+FALSE
+the file can not be executed.
+.SH FILES
+.nf
+/usr/local/lib/libCommon.a
+/usr/local/include/Common.h
+.fn
+.SH SEE ALSO
+Common(3)
+.SH AUTHORS
+Paul Houghton x2309 - (houghton@shoe.wiltel.com) 
+

@@ -1,0 +1,74 @@
+.\"
+.\" Man page for ArgEnvFlag
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH ArgEnvFlag 3  "19 Aug 94"
+.SH NAME
+ArgEnvFlag \- Translate argument or environment variable to
+a flag.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+Ret_Status ArgEnvFlag(
+.PD 0
+.RS
+.TP 15
+int *
+argc,
+.TP 15
+char *
+argv[],
+.TP 15
+const char *
+argId,
+.TP 15
+const char *
+envVar,
+.TP
+int *
+paramVar )
+.SH ARGUMENTS
+argc
+A pointer to the argc parameter of main. It will be decremented by 2
+if argv contains the argId and associated value.
+.TP
+argv
+The argv parameter of main. If argId is found, it will be removed
+along with its associated value.
+.TP
+argId
+This is the argument identifier. It specifies the command line flag
+used to set the paramVar.
+.TP
+envVar
+The envVar string specifies the environment variable to use as an
+alternative to the command line argument.
+.TP
+paramVar
+This variable will be set to true if the environment variable or
+command line argument is set.
+.SH DESCRIPTION
+This function sets the paramVar value to TRUE if the argId or
+envVar is set. The paramVar should be set to FALSE before it
+is passed to this function so the change can be detected.
+.SH RETURNS
+.TP
+RET_SUCCEED
+the value was set or not found in either the command line or
+the environment.
+.SH ENVIRONMENT
+.SH FILES
+.fn
+/usr/local/lib/libCommon.a
+/usr/local/include/Common.h
+.fn
+.SH "SEE ALSO"
+ArgEnvDouble(3), ArgEnvInt(3), ArgEnvString(3), ArgEnvBool(3),
+ArgEnvLong(3), ArgEnvDouble(3),
+SetErrorHandler(3), LibError(3), LIB_ERROR(3)
+.SH AUTHORS
+Paul Houghton \- 8/19/94 \- (paul_houghton@wiltel.com) 
+

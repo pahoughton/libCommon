@@ -1,0 +1,44 @@
+.\"
+.\" Man page for MemberOfGroup
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH MemberOfGroup 3  "19 Aug 94"
+.SH NAME
+MemberOfGroup \- is the current user a member of a specific group.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+Bool MemberOfGroup(
+.PD 0
+.RS
+.TP 15
+gid_t
+group )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+group
+the group id to check.
+.SH DESCRIPTION
+Returns TRUE if the current user id is a member of the group.
+.SH RETURNS
+.TP
+TRUE
+the use is a member of the group
+.TP
+FALSE
+the use is not a member of the group.
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+Common(3)
+.SH AUTHORS
+Paul Houghton x2309 - (houghton@shoe.wiltel.com) 
+
