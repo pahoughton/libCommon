@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.8  1997/03/02 12:13:47  houghton
+ * Added support for turning threads on or off.
+ *
  * Revision 2.7  1996/03/08 16:28:17  houghton
  * Bug Fix: n2hs parens missing
  *
@@ -118,6 +121,8 @@ extern "C" {
 #define INT_ALL_BITS	((unsigned int)(~0))   /* 0xffff | 0xffffffff */
 
 #endif
+
+#define COMMON_NET_HOST_CONVERTION  1
   
   /* LITTLE_ENDIAN (1234) */
 #define COMMON_n2hs( s ) \

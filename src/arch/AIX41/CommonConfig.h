@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1997/04/26 12:28:58  houghton
+ * Changed to Version 2
+ *
  * Revision 1.3  1997/03/02 12:13:27  houghton
  * Added support for turning threads on or off.
  *
@@ -122,6 +125,8 @@ extern "C" {
 #define INT_ALL_BITS	((unsigned int)(~0))   /* 0xffff | 0xffffffff */
 
 #endif
+  
+#define COMMON_NET_HOST_CONVERTION  0
   
   /* BIG_ENDIAN (4321) */
 #define COMMON_n2hs( s ) ( s ) 

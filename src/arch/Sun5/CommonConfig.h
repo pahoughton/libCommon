@@ -98,7 +98,10 @@ extern "C" {
 #define INT_ALL_BITS	((unsigned int)(~0))   /* 0xffff | 0xffffffff */
 
 #endif
+  
 #if defined(_BIG_ENDIAN)
+  
+#define COMMON_NET_HOST_CONVERTION  0
   
 #define COMMON_n2hs( s ) s
 #define COMMON_n2hl( l ) l
@@ -107,6 +110,9 @@ extern "C" {
 #else
 #error check little endian
   /* LITTLE_ENDIAN (1234) */
+  
+#define COMMON_NET_HOST_CONVERTION  1
+  
 #define COMMON_n2hs( s ) \
     ((unsigned short)( ( (((unsigned short)(s)) & 0x00ff) << 8 ) | \
 		       ( (((unsigned short)(s)) & 0xff00) >> 8 ) ) )
@@ -132,6 +138,9 @@ extern "C" {
  * Revision Log:
  *
  * $Log$
+ * Revision 1.1  1997/07/18 18:47:37  houghton
+ * Initial Version.
+ *
  *
  */
 
