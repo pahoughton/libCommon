@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1995/12/02 02:10:36  houghton
+ * Cleanup error messages.
+ *
  * Revision 2.2  1995/11/10  01:03:51  houghton
  * Moved Global variables
  *
@@ -63,12 +66,12 @@ _LoggerFileName(
 
   if( _CLogFileType == LOG_BY_DATE )
     {
-      char timeStr[10];
+      char timeStr[16];
       time_t  nowSec = time(0);
       struct tm * now = localtime( &nowSec );
 	   
-      sprintf( timeStr, "%02d%02d%02d.",
-	       now->tm_year,
+      sprintf( timeStr, "%04d%02d%02d.",
+	       now->tm_year + 1900,
 	       now->tm_mon + 1,
 	       now->tm_mday );
 
