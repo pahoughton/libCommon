@@ -410,6 +410,10 @@ const char * basename( const char * path );
 #define SEC_PER_DAY   (24 * SEC_PER_HOUR)
 #define SEC_PER_YEAR  (365 * SEC_PER_DAY)
 #define MIN_PER_HOUR  60
+#define MIN_TIMET     LONG_MIN
+#define MAX_TIMET     LONG_MAX
+#define MIN_YEAR      (MIN_TIMET / SEC_PER_YEAR)
+#define MAX_YEAR      (MAX_TIMET / SEC_PER_YEAR)
 
 #if !defined( DAYOFWEEK_ENUM )
 #define DAYOFWEEK_ENUM 1
@@ -666,6 +670,9 @@ FileModeString( mode_t	mode, char * modeString );
  * Modification History
  *     			
  * $Log$
+ * Revision 2.15  1997/07/18 18:44:24  houghton
+ * Port(Sun5): Changed EtoA to unsigned char.
+ *
  * Revision 2.14  1997/05/07 11:36:33  houghton
  * Cleanup
  * Added FindPath declaration.
