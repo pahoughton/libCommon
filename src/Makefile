@@ -45,9 +45,14 @@ install_docs:
 install_all install install_default install_debug: install_docs
 	$(hide) $(MAKE) -C Common $@ $(exports)
 
+install_lib_all:
+	$(hide) $(MAKE) -C Common install_all $(exports)
 
 #
 # $Log$
+# Revision 3.2  1999/10/29 21:42:37  houghton
+# Chagned to support 'setup' and other new targets in ../Makefile.
+#
 # Revision 3.1  1999/10/29 16:56:14  houghton
 # Changed Version to 3
 #
