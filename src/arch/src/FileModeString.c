@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/29  13:33:56  houghton
+ * Initial Linux Build of Version 2
+ *
  * Revision 2.0  1995/10/28  17:35:47  houghton
  * Move to Version 2.0
  *
@@ -34,7 +37,7 @@ COMMON_VERSION(
 static char ModeString[15];
 
 const char * 
-FileModeString( umode_t	mode, char * modeString )
+FileModeString( mode_t	mode, char * modeString )
 {
     char * str = ModeString;
 
