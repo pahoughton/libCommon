@@ -1,0 +1,250 @@
+.\" $Id$
+.TH Common 3 Common
+.SH NAME
+Common - Common C Function Library
+.SH DESCRIPTION
+libCommon is a collection of C generic funtions that should be usefull
+for most projects. It is available for Aix, Sun, HP, Sequent,
+Vax & MS-Win.
+.SH DATA TYPES, CONSTANTS & GLOBALS
+.TP
+TRUE
+macro defined as 1.
+.TP
+FALSE
+macro defined as 0.
+.TP
+YES
+macro defined as 1.
+.TP
+NO
+macro defined as 0.
+.TP
+ON
+macro defined as 1.
+.TP
+OFF
+macro defined as 0.
+.TP
+Ret_Status
+enum used for return status. Values are RET_SUCCEED, RET_DATA,
+RET_DONE, RET_ERROR, RET_FATAL
+.TP
+CommonErrorType
+enum used for library error codes. Values are:
+.RS
+.TP
+C_ENONE
+No Error.
+.TP
+C_EOSERROR
+Operating system error; errno has been set by system library.
+.TP
+C_ERANGE
+Value out of range.
+.TP
+C_EBADPARAM
+invalid parameter passed
+.TP
+C_EAPP
+application error.
+.TP
+C_EUNDEFINED
+last valid error value.
+.RE
+.TP
+CommonErrFile
+char string containing the name of the source file where the last
+error occured.
+.TP
+CommonErrLine
+int line number of source file where the last error occured.
+.TP
+CommonOsErr
+the errno value if CommonErrno is set to C_EOSERROR.
+.TP
+CommonErrno
+CommonErrorType value of the last error.
+.TP
+CommonAppErrno
+int to be used by applications for application errors.
+.TP
+AvlTree
+typedef used to declare avl tree identifiers.
+.TP
+AvlVisit
+typedef definition of traversal type.
+.TP
+AvlSiblingOrder
+typedef definition of sibling order type.
+.TP
+AvlNodeType
+typedef definition of node type.
+.TP
+SEC_PER_MIN
+macro defined as the number of seconds in a minute.
+.TP
+SEC_PER_HOUR
+macro defined as the number of seconds in a hour.
+.TP
+SEC_PER_DAY
+macro defined as the number of seconds in a day.
+.TP
+SEC_PER_YEAR
+macro defined as the number of seconds in a (non-leap) year.
+.TP
+DayOfWeek
+enum of the days of the week; SUNDAY=0, MONDAY, TUESDAY, WEDNESDAY,
+THURSDAY, FRIDAY, SATURDAY.
+.TP
+DaysInMonth
+int array with number of days in each month (Jan=0).
+.TP
+Months
+string array with names of the month (Jan=0).
+.TP
+AbbrMonths
+string array with month abbreviations (Jan=0).
+.TP
+WeekDays
+string arrary with names of the days of the week (Sun=0).
+.TP
+AbbrWeekDays
+string arrary with day of week abbreviations (Sun=0).
+.SH ARG / ENV FUNCTIONS
+.TP
+ArgEnvBool
+translate command line argument or environment variable to a boolean
+value.
+.TP
+ArgEnvInt
+translate command line argument or environment variable to an integer
+value.
+.TP
+ArgEnvDouble
+translate command line argument or environment variable to a double.
+.TP
+ArgEnvString
+translate command line argument or environment variable to a char string.
+.SH STRING FUNCTIONS
+.TP
+CharToInt
+translate a single char to an integer value.
+.TP
+IsBaseDigit
+true or false, is a char value a valid digit of the specified base.
+.TP
+basename
+return a pointer to the filename portion of a pathname.
+.TP
+strlwr
+convert a string to lower case.
+.TP
+strupr
+conver a string to upper case.
+.TP
+strdup
+duplcate a string into a malloc'ed space.
+.TP
+StringToInt
+convert a string to a integer.
+.TP
+CenterLine
+prefix a string buffer with spaces to center it on a line.
+.TP
+StrinpSpaces
+remove leading and trailing spaces from a string.
+.SH DATE/TIME FUNCTIONS
+.TP
+IsLeapYear
+true or false, is the specified year a leap year.
+.TP
+YYMMDDtoTimeT
+convert a YYMMDD string to time_t.
+.TP
+HHMMSStoTimeT
+convert a HHMMSS string to time_t.
+.TP
+TimeStringToTimeT
+convert date/time string to time_t.
+.SH AVL FUNCTIONS
+.TP
+AvlInit
+initialize an AVL (balanced binary) tree.
+.TP
+AvlAttach
+attach to an existing AVL tree.
+.TP
+AvlGetRoot
+return the root pointer of an AVL tree.
+.TP
+AvlAdd
+add a new record (node) to an AVL tree.
+.TP
+AvlDel
+delete a record from an AVL tree.
+.TP
+AvlFind
+find a record in an AVL tree.
+.TP
+AvlCount
+return the number of records in an AVL tree.
+.TP
+AvlDispose
+destroy an AVL tree.
+.TP
+AvlWalk
+execute a specified function for each record of an AVL tree.
+.TP
+AvlDelMin
+delete the first (smallest) record of an AVL tree.
+.TP
+AvlFindMin
+find the first record of an AVL tree.
+.TP
+AvlDelMax
+delete the last record of an AVL tree.
+.TP
+AvlFindMax
+find the last record of an AVL tree.
+.SH ERROR FUNCTIONS
+.TP
+SET_ERROR
+macro to specify a library error has occured.
+.TP
+SET_APP_ERROR
+macro to specify an application error has occured.
+.TP
+LIB_ERROR
+macro to call LibError with default parameters.
+.TP
+SetErrorHandler
+specify the function to call whan an error occures and/or when
+LibError is called.
+.TP
+LibError
+call the error handler or output an error message to stderr.
+.TP
+ErrorString
+translate a CommonErrorType value to a string.
+.SH MISC FUNCTIONS
+.TP
+ForeachFile
+execute a function for each file in a directory.
+.TP
+CommonGetVersion
+return the version string to identify the version of the library.
+.SH FILES
+.nf
+/usr/local/lib/libCommon.a
+/usr/local/include/Common.h
+/usr/local/include/DateTime.h
+.fn
+.SH SEE ALSO
+Clue(3)
+.SH AUTHORS
+Paul Houghton \- 6/6/94
+.nf
+Avl - Brad Appleton	<brad@ssd.csd.Harris.COM>
+Harris Computer Systems, Fort Lauderdale, FL USA
+.fi

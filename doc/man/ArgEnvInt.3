@@ -1,0 +1,125 @@
+.\" $Id$
+.TH ArgEnvInt 3 Common
+.SH NAME
+ArgEnvInt \- Translate argument or environment variable to
+a integer value.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+Ret_Status ArgEnvInt(
+.PD 0
+.RS
+.TP 15
+int *
+argc,
+.TP 15
+char *
+argv[],
+.TP 15
+const char *
+argId,
+.TP 15
+const char *
+envVar,
+.TP
+int
+min,
+.TP
+int
+max,
+.TP
+int *
+paramVar )
+.RE
+.PD
+.SH ARGUMENTS
+.TP
+argc
+A pointer to the argc parameter of main. It will be decremented by 2
+if argv contains the argId and associated value.
+.TP
+argv
+The argv parameter of main. If argId is found, it will be removed
+along with its associated value.
+.TP
+argId
+This is the argument identifier. It specifies the command line flag
+used to set the paramVar.
+.TP
+envVar
+The envVar string specifies the environment variable to use as an
+alternative to the command line argument.
+.TP
+min
+minimal legal value.
+.TP
+max
+maximum legal value.
+.TP
+paramVar
+This variable will be set to the value specified by either the command
+line argument or environment variable.
+.SH DESCRIPTION
+This function translates integer flags from either a command line
+argument or an environment variable. It uses the same base syntax as
+C. If the flag is prefixed with '0x' it will be translated as a
+hexidecimal value. If it is prefixed with '0' it will be translated as
+octal. Otherwise it will be translated as decimal.
+.LP
+If both the environment variable and command line argument is set, the
+command line argument value will be used.
+.SH RETURN
+.TP
+RET_SUCCEED
+the value was set or not found in either the command line or
+environment.
+.TP
+RET_ERROR
+incorrect value specified.
+.SH EXAMPLE
+.nf
+#include <stdlib.h>
+#include <Common.h>
+
+int	 JustANumber = 5;
+
+int main( int argc, char * argv[] )
+{
+  if( ArgEnvDouble( &argc, argv, "num", "NUMBER", 0, 1000, &JustANumber )
+      != RET_SUCCEED )
+    {
+      LIB_ERROR( NULL, "testarg: bad argument" );
+      exit(1);
+    }
+
+  printf( "Number is: %d\n", JustANumber );
+}
+
+$ testarg
+Number is: 5
+
+$ testarg -num 23
+Number is: 23
+
+$ testarg -num 0xc
+Number is: 12
+
+$ export NUMBER=33
+$ testarg
+Number is: 33
+
+$ testarg -num 011
+Number is: 9
+
+
+.fn
+.SH FILES
+.nf
+/usr/local/lib/libCommon.a
+/usr/local/include/Common.h
+.fn
+.SH SEE ALSO
+ArgEnvBool(3), ArgEnvDouble(3), ArgEnvString(3)
+SetErrorHandler(3), LibError(3), LIB_ERROR(3)
+.SH AUTHOR
+Paul Houghton \- 6/7/94

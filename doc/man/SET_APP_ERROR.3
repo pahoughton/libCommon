@@ -1,0 +1,59 @@
+.\"
+.\" Man page for SET_APP_ERROR
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH SET_APP_ERROR 3  "18 Jul 94 (Common)"
+.SH NAME
+SET_APP_ERROR \- macro to specify a application error has occured
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+void SET_APP_ERROR(
+.PD 0
+.RS
+.TP 20
+int
+appErrNumber)
+.RE
+.PD
+.SH ARGUMENTS
+.TP
+appErrNumber
+the type of error that has occured.
+.SH DESCRIPTION
+This macro should be used by applications to indicate an error has
+occured.
+It set the global CommonAppErrno to appErrNumber, CommonErrno variable
+to C_EAPP and sets the current source filename and line number. 
+.SH RETURNS
+None.
+.SH EXAMPLE
+.nf
+
+typedef enum
+{
+  A_EBADERROR,
+  A_EUNDEFINED
+} AppErrorType;
+
+    ...
+    if( j < k  )
+      {
+        SET_APP_ERROR( A_EBADERROR );
+	return( RET_ERROR );
+      }
+    ...
+.fn
+.SH FILES
+.nf
+/usr/local/include/Common.h
+.fn
+.SH "SEE ALSO"
+Common(3), SET_ERROR(3), LibError(3), LIB_ERROR(3),
+SetErrorHandler(3)
+.SH AUTHORS
+Paul Houghton \- 6/8/94
+

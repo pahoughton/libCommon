@@ -1,0 +1,112 @@
+.\" $Id$
+.TH ArgEnvBool 3 Common
+.SH NAME
+ArgEnvBool \- Translate argument or environment variable to
+a boolean value.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+Ret_Status ArgEnvBool(
+.PD 0
+.RS
+.TP 15
+int *
+argc,
+.TP 15
+char *
+argv[],
+.TP 15
+const char *
+argId,
+.TP 15
+const char *
+envVar,
+.TP
+int *
+paramVar )
+.RE
+.PD
+.SH ARGUMENTS
+.TP
+argc
+A pointer to the argc parameter of main. It will be decremented by 2
+if argv contains the argId and associated value.
+.TP
+argv
+The argv parameter of main. If argId is found, it will be removed
+along with its associated value.
+.TP
+argId
+This is the argument identifier. It specifies the command line flag
+used to set the paramVar.
+.TP
+envVar
+The envVar string specifies the environment variable to use as an
+alternative to the command line argument.
+.TP
+paramVar
+This variable will be set to the value specified by either the command
+line argument or environment variable.
+.SH DESCRIPTION
+This function translates boolean flags from either a command line
+argument or an environment variable. The flag can be 'ON', 'YES',
+'TRUE','OFF', 'NO' or 'FALSE' to specify the desired boolean state.
+.LP
+If both the environment variable and command line argument is set, the
+command line argument value will be used.
+.SH RETURN
+.TP
+RET_SUCCEED
+the value was set or not found in either the command line or
+environment.
+.TP
+RET_ERROR
+incorrect value specified.
+.SH EXAMPLE
+.nf
+#include <stdlib.h>
+#include <Common.h>
+
+Bool  Logging = OFF;
+
+int main( int argc, char * argv[] )
+{
+  if( ArgEnvBool( &argc, argv, "log", "LOGGING", &Logging ) != RET_SUCCEED )
+    {
+      LIB_ERROR( NULL, "testarg: bad argument" );
+      exit(1);
+    }
+
+  printf( "Logging is: %s\n",(Logging == 0) ? "OFF" : "ON" );
+}
+
+$ testarg
+Logging is: OFF
+
+$ testarg -log ON
+Logging is: ON
+
+$ testarg -log DOIT
+testarg: bad argument
+
+$ testarg -log FALSE
+Logging is: OFF
+
+$ export LOGGING=ON
+$ testarg
+Logging is: ON
+
+$testarg -log OFF
+Logging is: OFF
+
+.fn
+.SH FILES
+.nf
+/usr/local/lib/libCommon.a
+/usr/local/include/Common.h
+.fn
+.SH SEE ALSO
+ArgEnvDouble(3), ArgEnvInt(3), ArgEnvString(3)
+SetErrorHandler(3), LibError(3), LIB_ERROR(3)
+.SH AUTHOR
+Paul Houghton \- 6/7/94

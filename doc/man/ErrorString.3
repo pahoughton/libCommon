@@ -1,0 +1,50 @@
+.\"
+.\" Man page for ErrorString
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH ErrorString 3  "18 Jul 94 (Common)"
+.SH NAME
+ErrorString \- translate a CommonErrorType into a string description.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+const char * ErrorString(
+.PD 0
+.RS
+.TP 15
+CommonErrorType
+error )
+.RE
+.PD
+.SH ARGUMENTS
+error
+the error number to be translated.
+.SH DESCRIPTION
+Translates CommonErrorType values into string descriptions.
+.SH RETURNS
+the string description of the error value.
+.SH EXAMPLE
+.nf
+
+   ...
+   
+   LOGIT( LOG_ERROR, Logger( "%s (%d): Lib Error (%s): %s",
+  	    	    	     CommonErrFile,
+			     CommonErrLine,
+			     ErrorString( libErrno ),
+			     message ) );
+			     
+   ...
+   
+.SH FILES
+/usr/local/lib/libCommon.a
+/usr/local/include/Common.h
+.SH "SEE ALSO"
+Common(3), SET_ERROR(3), SET_APP_ERROR(3), LIB_ERROR(3),
+LibError(3), SetErrorHandler(3)
+.SH AUTHORS
+Paul Houghton - 6/8/94
+

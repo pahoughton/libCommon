@@ -1,0 +1,78 @@
+.\"
+.\" Man page for LibError
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH LibError 3  "18 Jul 94 (Common)"
+.SH NAME
+LibError \- execute the error handler to process errors
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+void LibError(
+.PD 0
+.RS
+.TP 15
+CommonErrorType
+errorType,
+.TP 15
+int
+appErrno,
+.TP 15
+void *
+closure,
+.TP 15
+const char *
+errMesgFormat,
+.TP 15
+... )
+.SH ARGUMENTS
+.TP
+errorType
+library error number or type of error.
+.TP
+appErrno
+application error number.
+.TP
+closure
+the closure value to pass to the error handler.
+.TP
+errMesgFormat
+format string like printf.
+.TP
+...
+args for the format string.
+.SH DESCRIPTION
+You should use this function throughout your program to execute the
+error handler. It utilizes format strings so your error messages can
+be descriptive.
+.LP
+Using LibError and an error handler centralizes exception processing.
+.SH RETURNS
+None.
+.SH EXAMPLE
+.nf
+
+  ...
+
+  if( DoItToIt( arg ) != RET_SUCCEED )
+    {
+      LibError( CommonErrno, CommonAppErrno, NULL,
+                "DoItToIt failed: current state: %d",state );
+      return( RET_ERROR );
+    }
+
+  ...
+.fn
+.SH FILES
+.nf
+/usr/local/lib/libCommon.a
+/usr/local/include/Common.h
+.SH "SEE ALSO"
+Common(3), SET_ERROR(3), SET_APP_ERROR(3), LIB_ERROR(3),
+SetErrorHandler(3)
+.SH AUTHORS
+Paul Houghton - 6/8/94
+

@@ -1,0 +1,46 @@
+.\"
+.\" Man page for LIB_ERROR
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH LIB_ERROR 3  "18 Jul 94 (Common)"
+.SH NAME
+LIB_ERROR \- macro for simple calls to LibError
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+void LIB_ERROR(
+.PD 0
+.RS
+.TP 15
+void *
+closure,
+.TP 15
+const char *
+errMesg )
+.RE
+.PD
+.SH ARGUMENTS
+.TP
+closure
+the closure value that will be passed to the error handler.
+.TP
+errMesg
+the error message to pass to the error handler.
+.SH DESCRIPTION
+LIB_ERROR is just a quick macro to call LibError. It defaults to first
+two parameters to CommonErrno and CommonAppErrno. See LibError(3) for
+more info.
+.SH RETURNS
+None.
+.SH FILES
+.nf
+/usr/local/lib/libCommon.a
+/usr/local/include/Common.h
+.SH "SEE ALSO"
+Common(3), LibError(3)
+.SH AUTHORS
+Paul Houghton - 6/8/94
+

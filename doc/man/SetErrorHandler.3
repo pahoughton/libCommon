@@ -1,0 +1,141 @@
+.\"
+.\" Man page for SetErrorHandler
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH SetErrorHandler 3  "18 Jul 94 (Common)"
+.SH NAME
+SetErrorHandler \- specify the function to call when an error occures.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+void SetErrorHandler(
+.PD 0
+.RS
+.TP 15
+void (*errorHandler)(
+.RS
+.RS
+.TP 15
+CommonErrorType
+error
+.TP 15
+int
+appErrno
+.TP 15
+void *
+closure
+.TP 15
+const char *
+errMesg ),
+.RE
+.RE
+.TP 15
+void *
+closure )
+.RE
+.PD
+.SH ARGUMENTS
+.TP
+errorHandler
+the function to execut when an error occurs.
+.RS
+.TP
+error
+type of error
+.TP
+appErrno
+the application error number. This is only valid if error is set to
+C_EAPP.
+.TP
+closure
+either the closure value passed to SetErrorHandler or LibError.
+.TP
+errMessage
+string description of the error.
+.RE
+.TP
+closure
+The default closure value to pass to the error handler.
+.SH DESCRIPTION
+The errorHandler function will be executed when a library error
+occures or when the LibError function is called. 
+.SH RETURNS
+None.
+.SH EXAMPLE
+.nf
+
+void
+ErrorHandler(
+    CommonErrorType libErrno,
+    int	    	    appErrno,
+    void *  	    closure,
+    char *	    message
+    )
+{
+  int oldLogLoc;
+  oldLogLoc = LoggerLoc( OFF );
+
+  switch( libErrno )
+    {
+    case C_EAPP:
+    
+       LOGIT( LOG_ERROR, Logger( "%s (%d): App Error (%d): %s",
+       	    	    	    	 CommonErrFile,
+				 CommonErrLine,
+				 CommonAppErrno,
+				 message ) );
+       break;
+       
+    case C_EOSERROR:
+    
+      LOGIT( LOG_ERROR, Logger( "%s (%d): OS Error (%s): %s",
+      	    	    	    	CommonErrFile,
+				CommonErrLine,
+				strerror( CommonOsErr ),
+				message ) );
+      break;
+
+    default:
+
+      LOGIT( LOG_ERROR, Logger( "%s (%d): Lib Error (%s): %s",
+      	    	    	    	CommonErrFile,
+				CommonErrLine,
+				ErrorString( libErrno ),
+				message ) );
+      break;
+    }
+   
+  LoggerLoc( oldLogLoc );
+
+  exit(1);
+}
+
+int main( int argc, char * argv[] )
+{
+   ...
+
+   SetErrorHandler( ErrorHandler, NULL );
+
+   ...
+
+   if( DoSomeWork() == RET_ERROR )
+     {
+        LIB_ERROR( NULL, "Bad things Happend" );
+	exit(1);
+     }
+}
+.fn
+.SH FILES
+.nf
+/usr/local/lib/libCommon.a
+/usr/local/include/Common.h
+.fn
+.SH "SEE ALSO"
+Common(3), SET_ERROR(3), SET_APP_ERROR(3), LIB_ERROR(3),
+LibError(3), ErrorString(3)
+.SH AUTHORS
+Paul Houghton - 6/8/94
+
