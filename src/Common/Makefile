@@ -103,7 +103,7 @@ SHARED_DEFINES	= -DCOMMON_SHARED=1
 
 
 SRC_INC		= $(ARCH_INC) -I. -I$(PRJ_TOPDIR)
-PRJ_INC		= -I$(beta_incdir)
+PRJ_INC		= -I$(INSTALL_INC_DIR)
 
 
 # Any other cpp flags to use on for all targets
@@ -305,6 +305,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.33  1998/09/24 15:39:46  houghton
+# Changed version number.
+#
 # Revision 2.32  1998/09/22 14:28:00  houghton
 # Changed version number
 # Added strptime as a primary source.
