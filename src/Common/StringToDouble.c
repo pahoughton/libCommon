@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1995/12/02 02:07:49  houghton
+ * Fix to eliminate compiler warnings.
+ *
  * Revision 2.2  1995/10/29  13:33:44  houghton
  * Initial Linux Build of Version 2
  *
@@ -48,30 +51,30 @@ StringToDouble(
     )
 {
 
-  int index = 0;
+  int pos = 0;
   int base = 0;
   int	fract = -1;
   double value = 0;
   
   if( baseToUse == 0 )
     {
-      for( index = 0;
-	   ! isdigit( string[index] ) &&
-	   ( (len != 0 && index < len ) ||
-	     (len == 0 && string[index] != 0) )
-	   ; index++ );
+      for( pos = 0;
+	   ! isdigit( string[pos] ) &&
+	   ( (len != 0 && pos < len ) ||
+	     (len == 0 && string[pos] != 0) )
+	   ; pos++ );
 
-      if( string[index] == '0' )
+      if( string[pos] == '0' )
 	{
-	  if( string[index + 1] == 'x' || string[index + 1] == 'X' )
+	  if( string[pos + 1] == 'x' || string[pos + 1] == 'X' )
 	    {
 	      base = 16;
-	      index += 2;
+	      pos += 2;
 	    }
 	  else	
 	    {
 	      base = 8;
-	      index += 1; 
+	      pos += 1; 
 	    }
 	}
       else
@@ -84,21 +87,21 @@ StringToDouble(
       base = baseToUse;
     }
 
-  for( ; (len != 0 && index < len ) || (len == 0 && string[index] != 0); index++ )
+  for( ; (len != 0 && pos < len ) || (len == 0 && string[pos] != 0); pos++ )
     {
       
-      if( IS_BASE_DIGIT( string[index], base ) )
+      if( IS_BASE_DIGIT( string[pos], base ) )
 	{
 	  if( fract > -1 )
 	    {
 	      fract++;
 	    }
 	  value *= base;
-	  value += CHAR_TO_INT( string[index] );
+	  value += CHAR_TO_INT( string[pos] );
 	}
       else
 	{
-	  if( string[index] == '.' )
+	  if( string[pos] == '.' )
 	    {
 	      fract = 0;
 	    }

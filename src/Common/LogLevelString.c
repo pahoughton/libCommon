@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1997/05/07 11:36:57  houghton
+ * Cleanup
+ *
  * Revision 2.2  1995/11/10 00:57:21  houghton
  * Restructured to improve readability and move Global Values
  *
@@ -67,34 +70,34 @@ const char *
 LogLevelString( LogLevelBit level )
 {
 
-  size_t	index;
+  size_t	levNameIndex;
   
   switch( level )
     {
-    case LOG_NONE:      index =  0;  break;
-    case LOG_ERROR:     index =  1;  break;
-    case LOG_WARN:      index =  2;  break;
-    case LOG_APP1:      index =  3;  break;
-    case LOG_APP2:      index =  4;  break;
-    case LOG_APP3:      index =  5;  break;
-    case LOG_APP4:      index =  6;  break;
-    case LOG_APP5:      index =  7;  break;
-    case LOG_APP6:      index =  8;  break;
-    case LOG_WCF1:      index =  9;  break;
-    case LOG_WCF2:      index = 10;  break;
-    case LOG_WCF3:      index = 11;  break;
-    case LOG_WCF4:      index = 12;  break;
-    case LOG_INFO:      index = 13;  break;
-    case LOG_TEST:      index = 14;  break;
-    case LOG_DEBUG:     index = 15;  break;
-    case LOG_FUNCT:     index = 16;  break;
-    case LOG_ALL:	index = 17;  break;
+    case LOG_NONE:      levNameIndex =  0;  break;
+    case LOG_ERROR:     levNameIndex =  1;  break;
+    case LOG_WARN:      levNameIndex =  2;  break;
+    case LOG_APP1:      levNameIndex =  3;  break;
+    case LOG_APP2:      levNameIndex =  4;  break;
+    case LOG_APP3:      levNameIndex =  5;  break;
+    case LOG_APP4:      levNameIndex =  6;  break;
+    case LOG_APP5:      levNameIndex =  7;  break;
+    case LOG_APP6:      levNameIndex =  8;  break;
+    case LOG_WCF1:      levNameIndex =  9;  break;
+    case LOG_WCF2:      levNameIndex = 10;  break;
+    case LOG_WCF3:      levNameIndex = 11;  break;
+    case LOG_WCF4:      levNameIndex = 12;  break;
+    case LOG_INFO:      levNameIndex = 13;  break;
+    case LOG_TEST:      levNameIndex = 14;  break;
+    case LOG_DEBUG:     levNameIndex = 15;  break;
+    case LOG_FUNCT:     levNameIndex = 16;  break;
+    case LOG_ALL:	levNameIndex = 17;  break;
 
     default:
       return( "UNKNOWN" );
       
     }
 
-  return( _CLogLevelNames[ index ] );
+  return( _CLogLevelNames[ levNameIndex ] );
 }
 
