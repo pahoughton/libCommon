@@ -28,8 +28,8 @@ include Make/make.cfg.$(make_cfg_ver)
 
 NAME		= Common
 
-INSTALL_LIBDIR	= $(alpha_libdir)
-INSTALL_INCDIR	= $(alpha_incdir)
+INSTALL_LIBDIR	= /usr/local/lib/pers
+INSTALL_INCDIR	= /usr/local/include/pers
 
 VER_MAJOR	= 2
 VER_MINOR	= 00
@@ -262,6 +262,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.13  1996/05/03 16:10:17  houghton
+# Change SHDEP_LIBS
+#
 # Revision 2.12  1996/04/27 12:26:32  houghton
 # Changed to use MakeConfigs 5
 #
