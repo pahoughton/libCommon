@@ -30,8 +30,18 @@
 
 #define MAX_ERR_MESG	2048
 
-extern void (*CommonErrorHandler_)( CommonErrorType error,
-				    const char * mesg );
+char *	    	 CommonErrFile;
+int  	    	 CommonErrLine;
+int  	    	 CommonOsErr;
+CommonErrorType  CommonErrno;
+int		 CommonAppErrno;
+
+void (*CommonErrorHandler_)( CommonErrorType error,
+			     int 	     appErrno,
+			     void * 	     closure,
+        		     const char *    mesg ) = NULL;
+
+void * CommonErrorClosure_ = NULL;
 /*
  * Other available error info:
  *  CommonErrFile, CommonErrLine, CommonOsErr
@@ -43,6 +53,8 @@ static char  ErrorMesgBuffer[ MAX_ERR_MESG ];
 void
 LibError(
     CommonErrorType error,
+    int             appError,
+    void *	    closure,
     const char * message,
     ...
     )
@@ -55,11 +67,14 @@ LibError(
     {
       if( CommonErrFile != NULL )
 	{
+	  char   appErrStr[25];
+	  sprintf( appErrStr,"App Err: %d",appError );
 	  fprintf( stderr, "%s(%d): %s ",
 		   CommonErrFile,
 		   CommonErrLine,
 		   (error == C_EOSERROR) ?
-		       (const char *)strerror( CommonOsErr ) :  ErrorString( error ) );
+		   (const char *)strerror( CommonOsErr ) :
+		   (error == C_EAPP ) ? appErrStr : ErrorString( error ) );
 	}
       
       vfprintf( stderr, message, args );
@@ -67,7 +82,16 @@ LibError(
   else
     {
       vsprintf( ErrorMesgBuffer, message, args );
-      CommonErrorHandler_( error, ErrorMesgBuffer );
+      if( closure == NULL )
+	{
+	  CommonErrorHandler_( error, appError,
+			       CommonErrorClosure_,
+			       ErrorMesgBuffer );
+	}
+      else
+	{
+	  CommonErrorHandler_( error, appError, closure, ErrorMesgBuffer );
+	}
     }
 
   va_end( args );

@@ -15,11 +15,14 @@
 static const char RcsId[] =
 {"$Id$"};
 
-	/* some common #defines used throughout most of my files */
-#define  PUBLIC   /* default */
-#define  PRIVATE  static
-#define  FALSE    0
-#define  TRUE     !FALSE
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <Common.h>
+#include "avl_typs.h"    /* private types for avl trees */
+
+#define AVL_VERSION	0x41766c01	/* version id Avl1 */
+
   
 	/* some defines for debugging purposes */
 #ifdef NDEBUG
@@ -28,15 +31,10 @@ static const char RcsId[] =
 #define DBG(x)		x
 #endif
 
-#define  NEXTERN   /* dont include "extern" declarations from header files */
-
-#include  <stdio.h>
-#include <stdlib.h>
-#include  "avl.h"         /* public types for avl trees */
-#include  "avl_typs.h"    /* private types for avl trees */
 
 
-PRIVATE void *
+
+static void *
 avlMalloc(
     size_t size,
     void * closure
@@ -45,7 +43,7 @@ avlMalloc(
   return( malloc( size ) );
 }
 
-PRIVATE void
+static void
 avlFree(
     void * data,
     void * closure
@@ -58,12 +56,12 @@ avlFree(
 * new_node() -- get space for a new node and its data;
 *               return the address of the new node
 */
-PRIVATE   AVLtree
+static   AVLtree
 new_node( AVLdescriptor * avlDesc, void * data )
 {
   AVLtree  	   node;
   
-  node = avlDesc->malloc( sizeof( AVLnode ), avlDesc->memClosure );
+  node = avlDesc->getMem( sizeof( AVLnode ), avlDesc->memClosure );
   
   if( node != NULL )
     {      
@@ -79,11 +77,11 @@ new_node( AVLdescriptor * avlDesc, void * data )
 * free_node()  --  free space for a node and its data!
 *                  reset the node pointer to NULL
 */
-PRIVATE    void
+static    void
 free_node( AVLdescriptor * avlDesc,  AVLtree * rootp )
 {
-
-  avlDesc->free( *rootp, avlDesc->memClosure );
+  
+  avlDesc->freeMem( *rootp, avlDesc->memClosure );
   *rootp = NULL_TREE;
   
 }/* free_node */
@@ -91,32 +89,33 @@ free_node( AVLdescriptor * avlDesc,  AVLtree * rootp )
   
 /*
 * node_type() -- determine the number of null pointers for a given
-*                node in an AVL tree, Returns a value of type NODE
+*                node in an AVL tree, Returns a value of type AvlNodeType
 *                which is an enumeration type with the following values:
 *
-*                  IS_TREE     --  both subtrees are non-empty
-*                  IS_LBRANCH  --  left subtree is non-empty; right is empty
-*                  IS_RBRANCH  --  right subtree is non-empty; left is empty
-*                  IS_LEAF     --  both subtrees are empty
-*                  IS_NULL     --  given tree is empty
+*                  AVL_IS_TREE     --  both subtrees are non-empty
+*                  AVL_IS_LBRANCH  --  left subtree is non-empty; right is empty
+*                  AVL_IS_RBRANCH  --  right subtree is non-empty; left is empty
+*                  AVL_IS_LEAF     --  both subtrees are empty
+*                  AVL_IS_NULL     --  given tree is empty
 */
-PRIVATE     NODE
+static     AvlNodeType
 node_type( AVLtree    tree )
 {
-    if ( tree == NULL_TREE )
-        return  IS_NULL;
+  if ( tree == NULL_TREE )
+    return  AVL_IS_NULL;
   
-    else if ( (tree -> subtree[ LEFT ] != NULL_TREE)  &&  (tree -> subtree[ RIGHT ] != NULL_TREE) )
-        return  IS_TREE;
+  else if ( (tree -> subtree[ LEFT ] != NULL_TREE)  &&
+	    (tree -> subtree[ RIGHT ] != NULL_TREE) )
+    return  AVL_IS_TREE;
   
-    else if ( tree -> subtree[ LEFT ] != NULL_TREE )
-        return  IS_LBRANCH;
+  else if ( tree -> subtree[ LEFT ] != NULL_TREE )
+    return  AVL_IS_LBRANCH;
   
-    else if ( tree -> subtree[ RIGHT ] != NULL_TREE )
-        return  IS_RBRANCH;
+  else if ( tree -> subtree[ RIGHT ] != NULL_TREE )
+    return  AVL_IS_RBRANCH;
   
-    else
-	return  IS_LEAF;
+  else
+    return  AVL_IS_LEAF;
 }/* node_type */
 
 
@@ -148,29 +147,29 @@ node_type( AVLtree    tree )
 /*
 * avl_min() -- compare function used to find the minimal element in a tree
 */
-PRIVATE int
+static int
 avl_min( elt1, elt2, nd_typ )
-void  *elt1, *elt2;
-NODE  nd_typ;
+const void  *elt1, *elt2;
+AvlNodeType  nd_typ;
 {
-    if ( nd_typ == IS_RBRANCH  ||  nd_typ == IS_LEAF )
-        return   0;   /* left subtree is empty -- this is the minimum */
-	
-    else  return  -1;   /* keep going left */
+  if ( nd_typ == AVL_IS_RBRANCH  ||  nd_typ == AVL_IS_LEAF )
+    return   0;   /* left subtree is empty -- this is the minimum */
+  
+  else  return  -1;   /* keep going left */
 }/* avl_min */
 
 
 /*
 * avl_max() -- compare function used to find the maximal element in a tree
 */
-PRIVATE int avl_max( elt1, elt2, nd_typ )
-void  *elt1, *elt2;
-NODE  nd_typ;
+static int avl_max( elt1, elt2, nd_typ )
+const void  *elt1, *elt2;
+AvlNodeType  nd_typ;
 {
-    if ( nd_typ == IS_RBRANCH  ||  nd_typ == IS_LEAF )
-        return  0;   /* right subtree is empty -- this is the maximum */
-	
-    else  return  1;   /* keep going right */
+  if ( nd_typ == AVL_IS_RBRANCH  ||  nd_typ == AVL_IS_LEAF )
+    return  0;   /* right subtree is empty -- this is the maximum */
+  
+  else  return  1;   /* keep going right */
 }/* avl_max */
 
 
@@ -182,29 +181,29 @@ NODE  nd_typ;
 * rotate_once()  --  rotate a given node in the given direction
 *                    to restore the balance of a tree
 */
-PRIVATE     short
+static     short
 rotate_once(
     AVLtree    *rootp,
     DIRECTION  dir
     )
 {
-    DIRECTION   other_dir = OPPOSITE( dir );	/* opposite direction to "dir" */
-    AVLtree     old_root  = *rootp;		/* copy of original root of tree */
-    short	ht_unchanged;			/* true if height unchanged */
-
-    ht_unchanged = ( (*rootp) -> subtree[ other_dir ] -> bal ) ? FALSE : TRUE;
+  DIRECTION   other_dir = OPPOSITE( dir );	/* opposite direction to "dir" */
+  AVLtree     old_root  = *rootp;		/* copy of original root of tree */
+  short	ht_unchanged;			/* true if height unchanged */
   
-        /* assign new root */
-    *rootp = old_root -> subtree[ other_dir ];
+  ht_unchanged = ( (*rootp) -> subtree[ other_dir ] -> bal ) ? FALSE : TRUE;
   
-        /* new-root exchanges it's "dir" subtree for it's parent */
-    old_root -> subtree[ other_dir ]   =   (*rootp) -> subtree[ dir ];
-    (*rootp) -> subtree[ dir ]         =   old_root;
+      /* assign new root */
+  *rootp = old_root -> subtree[ other_dir ];
   
-        /* update balances */
-    old_root -> bal = -( dir == LEFT ? --( (*rootp) -> bal ) : ++( (*rootp) -> bal )  );
+      /* new-root exchanges it's "dir" subtree for it's parent */
+  old_root -> subtree[ other_dir ]   =   (*rootp) -> subtree[ dir ];
+  (*rootp) -> subtree[ dir ]         =   old_root;
   
-    return  ht_unchanged;
+      /* update balances */
+  old_root -> bal = -( dir == LEFT ? --( (*rootp) -> bal ) : ++( (*rootp) -> bal )  );
+  
+  return  ht_unchanged;
 }/* rotate_once */
   
   
@@ -213,32 +212,32 @@ rotate_once(
 *                     and then in the opposite direction
 *                     to restore the balance of a tree
 */
-PRIVATE     void
+static     void
 rotate_twice( 
     AVLtree    *rootp,
     DIRECTION  dir
     )
 {
-    DIRECTION   other_dir		= OPPOSITE( dir );
-    AVLtree     old_root		= *rootp,
-                old_other_dir_subtree	= (*rootp) -> subtree[ other_dir ];
-    
-        /* assign new root */
-    *rootp = old_root -> subtree[ other_dir ] -> subtree[ dir ];
+  DIRECTION   other_dir		= OPPOSITE( dir );
+  AVLtree     old_root		= *rootp,
+    old_other_dir_subtree	= (*rootp) -> subtree[ other_dir ];
   
-        /* new-root exchanges it's "dir" subtree for it's grandparent */
-    old_root -> subtree[ other_dir ]  =   (*rootp) -> subtree[ dir ];
-    (*rootp) -> subtree[ dir ]        =   old_root;
+      /* assign new root */
+  *rootp = old_root -> subtree[ other_dir ] -> subtree[ dir ];
   
-        /* new-root exchanges it's "other-dir" subtree for it's parent */
-    old_other_dir_subtree -> subtree[ dir ]	=   (*rootp) -> subtree[ other_dir ];
-    (*rootp) -> subtree[ other_dir ]		=   old_other_dir_subtree;
+      /* new-root exchanges it's "dir" subtree for it's grandparent */
+  old_root -> subtree[ other_dir ]  =   (*rootp) -> subtree[ dir ];
+  (*rootp) -> subtree[ dir ]        =   old_root;
   
-        /* update balances */
-    (*rootp) -> subtree[ LEFT ] -> bal   =  -MAX( (*rootp) -> bal, 0 );
-    (*rootp) -> subtree[ RIGHT ] -> bal  =  -MIN( (*rootp) -> bal, 0 );
-    (*rootp) -> bal                      =  0;
-
+      /* new-root exchanges it's "other-dir" subtree for it's parent */
+  old_other_dir_subtree -> subtree[ dir ]	= (*rootp) -> subtree[ other_dir ];
+  (*rootp) -> subtree[ other_dir ]		= old_other_dir_subtree;
+  
+      /* update balances */
+  (*rootp) -> subtree[ LEFT ] -> bal   =  -MAX( (*rootp) -> bal, 0 );
+  (*rootp) -> subtree[ RIGHT ] -> bal  =  -MIN( (*rootp) -> bal, 0 );
+  (*rootp) -> bal                      =  0;
+  
 }/* rotate_twice */
 
 
@@ -252,30 +251,30 @@ rotate_twice(
 *
 *     Returns 1 if tree height changed due to rotation; 0 otherwise
 */
-PRIVATE    short
+static    short
 balance( AVLtree    *rootp )
 {
-    short  special_case = FALSE;
-
-    if ( LEFT_IMBALANCE( *rootp )  )  {   /* need a right rotation */
-        if ( (*rootp) -> subtree[ LEFT ] -> bal  ==  RIGHT_HEAVY )
-            rotate_twice( rootp, RIGHT );    /* double RL rotation needed */
-
-        else	/* single RR rotation needed */
-            special_case = rotate_once( rootp, RIGHT );
-    }/* if */
+  short  special_case = FALSE;
   
-    else if ( RIGHT_IMBALANCE( *rootp )  )  {   /* need a left rotation */
-        if ( (*rootp) -> subtree[ RIGHT ] -> bal  ==  LEFT_HEAVY )
-            rotate_twice( rootp, LEFT );     /* double LR rotation needed */
-
-        else	/* single LL rotation needed */
-            special_case = rotate_once( rootp, LEFT );
-    }/* elif */
+  if ( LEFT_IMBALANCE( *rootp )  )  {   /* need a right rotation */
+    if ( (*rootp) -> subtree[ LEFT ] -> bal  ==  RIGHT_HEAVY )
+      rotate_twice( rootp, RIGHT );    /* double RL rotation needed */
+    
+    else	/* single RR rotation needed */
+      special_case = rotate_once( rootp, RIGHT );
+  }/* if */
   
-    else  return  HEIGHT_UNCHANGED;	/* no rotation occurred */
+  else if ( RIGHT_IMBALANCE( *rootp )  )  {   /* need a left rotation */
+    if ( (*rootp) -> subtree[ RIGHT ] -> bal  ==  LEFT_HEAVY )
+      rotate_twice( rootp, LEFT );     /* double LR rotation needed */
+    
+    else	/* single LL rotation needed */
+      special_case = rotate_once( rootp, LEFT );
+  }/* elif */
   
-    return  ( special_case ) ? HEIGHT_UNCHANGED : HEIGHT_CHANGED;
+  else  return  HEIGHT_UNCHANGED;	/* no rotation occurred */
+  
+  return  ( special_case ) ? HEIGHT_UNCHANGED : HEIGHT_CHANGED;
 }/* balance */
 
 
@@ -293,21 +292,21 @@ balance( AVLtree    *rootp )
 *                rootp      --  a pointer to an AVL tree
 *                compar     --  name of a function to compare 2 data items
 */
-PRIVATE      void *
+static      void *
 avl_find( 
     void      *data,
     AVLtree   tree,
-    int       (*compar)( void * data1, void * data2, NODE nd )
+    int       (*compar)( void * data1, void * data2, AvlNodeType nd )
     )
 {
-    NODE       nd_typ = node_type( tree );
-    int        cmp;
+  AvlNodeType       nd_typ = node_type( tree );
+  int        cmp;
   
-    while ( (cmp = (*compar)( data, tree -> data, nd_typ ))  &&
-	    (tree != NULL_TREE) )
-        tree = tree -> subtree[ (cmp < 0) ? LEFT : RIGHT ];
+  while ( (tree != NULL_TREE) && 
+          (cmp = (*compar)( data, tree -> data, nd_typ ))  )
+    tree = tree -> subtree[ (cmp < 0) ? LEFT : RIGHT ];
   
-    return  ( tree == NULL_TREE ) ? NULL : tree -> data;
+  return  ( tree == NULL_TREE ) ? NULL : tree -> data;
 }/* avl_find */
   
  
@@ -321,50 +320,50 @@ avl_find(
 *                rootp      --  a pointer to an AVL tree
 *                compar     --  name of the function to compare 2 data items
 */
-PRIVATE     short avl_insert(
+static     short avl_insert(
     AVLdescriptor * avlDesc,
     void     **data,
     AVLtree  *rootp,
-    int      (*compar)( void * data1, void * data2, NODE nd)
+    int      (*compar)( const void * data1, const void * data2, AvlNodeType nd)
     )
 {
-    short increase;
-    int   cmp;
+  short increase;
+  int   cmp;
   
-    if ( *rootp == NULL_TREE )  {  /* insert new node here */
-        *rootp = new_node( avlDesc, *data );
-        *data  = NULL;     /* set return value in data */
-        return  HEIGHT_CHANGED;
-      }/* if */
-    
-	/* compare data items */
-    cmp = (*compar)( *data, (*rootp) -> data, node_type( *rootp ) );  
+  if ( *rootp == NULL_TREE )  {  /* insert new node here */
+    *rootp = new_node( avlDesc, *data );
+    *data  = NULL;     /* set return value in data */
+    return  HEIGHT_CHANGED;
+  }/* if */
   
-    if ( cmp < 0 )  {  /* insert into the left subtree */
-        increase =  -avl_insert( avlDesc, data, &( (*rootp) -> subtree[ LEFT ] ), compar );
-        if ( *data != NULL )     return  HEIGHT_UNCHANGED;
-    }/* elif */
+      /* compare data items */
+  cmp = (*compar)( *data, (*rootp) -> data, node_type( *rootp ) );  
   
-    else if ( cmp > 0 )  {  /* insert into the right subtree */
-        increase =  avl_insert( avlDesc, data, &( (*rootp) -> subtree[ RIGHT ] ), compar );
-        if ( *data != NULL )     return  HEIGHT_UNCHANGED;
-    }/* elif */
+  if ( cmp < 0 )  {  /* insert into the left subtree */
+    increase =  -avl_insert( avlDesc, data, &( (*rootp) -> subtree[ LEFT ] ), compar );
+    if ( *data != NULL )     return  HEIGHT_UNCHANGED;
+  }/* elif */
   
-    else  {   /* data already exists */
-        *data = (*rootp) -> data;   /* set return value in data */
-        return  HEIGHT_UNCHANGED;
-    } /* else */
+  else if ( cmp > 0 )  {  /* insert into the right subtree */
+    increase =  avl_insert( avlDesc, data, &( (*rootp) -> subtree[ RIGHT ] ), compar );
+    if ( *data != NULL )     return  HEIGHT_UNCHANGED;
+  }/* elif */
   
-    (*rootp) -> bal += increase;    /* update balance factor */
-
-  /************************************************************************
-  * re-balance if needed -- height of current tree increases only if its
-  * subtree height increases and the current tree needs no rotation.
-  ************************************************************************/
-    if ( increase  &&  (*rootp) -> bal )
-        return  (  1 - balance( rootp )  );
-    else
-        return  HEIGHT_UNCHANGED;
+  else  {   /* data already exists */
+    *data = (*rootp) -> data;   /* set return value in data */
+    return  HEIGHT_UNCHANGED;
+  } /* else */
+  
+  (*rootp) -> bal += increase;    /* update balance factor */
+  
+      /************************************************************************
+       * re-balance if needed -- height of current tree increases only if its
+       * subtree height increases and the current tree needs no rotation.
+       ************************************************************************/
+  if ( increase  &&  (*rootp) -> bal )
+    return  (  1 - balance( rootp )  );
+  else
+    return  HEIGHT_UNCHANGED;
 }/* avl_insert */
 
 
@@ -378,92 +377,92 @@ PRIVATE     short avl_insert(
 *                rootp      --  a pointer to an AVL tree
 *                compar     --  name of function to compare 2 data items
 */
-PRIVATE     short
+static     short
 avl_delete(
     AVLdescriptor * avlDesc,    
     void      **data,
     AVLtree   *rootp,
-    int       (*compar)( void * data1, void * data2, NODE nd )
+    int       (*compar)( const void * data1, const void * data2, AvlNodeType nd )
     )
 {
-    short      decrease = 0;
-    int        cmp;
-    AVLtree    old_root  = *rootp;
-    NODE       nd_typ    = node_type( *rootp );
-    DIRECTION  dir       = (nd_typ == IS_LBRANCH) ? LEFT : RIGHT;
+  short      decrease = 0;
+  int        cmp;
+  AVLtree    old_root  = *rootp;
+  AvlNodeType       nd_typ    = node_type( *rootp );
+  DIRECTION  dir       = (nd_typ == AVL_IS_LBRANCH) ? LEFT : RIGHT;
   
-    if ( *rootp == NULL_TREE )  {  /* data not found */
-        *data = NULL;    /* set return value in data */
-        return  HEIGHT_UNCHANGED;
-    }/* if */
+  if ( *rootp == NULL_TREE )  {  /* data not found */
+    *data = NULL;    /* set return value in data */
+    return  HEIGHT_UNCHANGED;
+  }/* if */
   
-    cmp = compar( *data, (*rootp) -> data, nd_typ );   /* compare data items */
+  cmp = compar( *data, (*rootp) -> data, nd_typ );   /* compare data items */
   
-    if ( cmp < 0 )  {  /* delete from left subtree */
-        decrease =  -avl_delete( avlDesc, data, &( (*rootp) -> subtree[ LEFT ] ), compar );
-        if ( *data == NULL )     return  HEIGHT_UNCHANGED;
-    }/* elif */
+  if ( cmp < 0 )  {  /* delete from left subtree */
+    decrease =  -avl_delete( avlDesc, data, &( (*rootp) -> subtree[ LEFT ] ), compar );
+    if ( *data == NULL )     return  HEIGHT_UNCHANGED;
+  }/* elif */
   
-    else if ( cmp > 0 )  {  /* delete from right subtree */
-        decrease =  avl_delete( avlDesc, data, &( (*rootp) -> subtree[ RIGHT ] ), compar );
-        if ( *data == NULL )     return  HEIGHT_UNCHANGED;
-    }/* elif */
-	
-  /************************************************************************
-  *  At this point we know that if "cmp" is zero then "*rootp" points to
-  *  the node that we need to delete.  There are three cases:
-  *
-  *     1) The node is a leaf.  Remove it and return.
-  *
-  *     2) The node is a branch (has only 1 child). Make "*rootp"
-  *        (the pointer to this node) point to the child.
-  *
-  *     3) The node has two children. We swap data with the successor of
-  *        "*rootp" (the smallest item in its right subtree) and delete
-  *        the successor from the right subtree of "*rootp".  The
-  *        identifier "decrease" should be reset if the subtree height
-  *        decreased due to the deletion of the sucessor of "rootp".
-  ************************************************************************/
+  else if ( cmp > 0 )  {  /* delete from right subtree */
+    decrease =  avl_delete( avlDesc, data, &( (*rootp) -> subtree[ RIGHT ] ), compar );
+    if ( *data == NULL )     return  HEIGHT_UNCHANGED;
+  }/* elif */
   
-    else  {  /* cmp == 0 */
-        *data = (*rootp) -> data;  /* set return value in data */
+      /************************************************************************
+       *  At this point we know that if "cmp" is zero then "*rootp" points to
+       *  the node that we need to delete.  There are three cases:
+       *
+       *     1) The node is a leaf.  Remove it and return.
+       *
+       *     2) The node is a branch (has only 1 child). Make "*rootp"
+       *        (the pointer to this node) point to the child.
+       *
+       *     3) The node has two children. We swap data with the successor of
+       *        "*rootp" (the smallest item in its right subtree) and delete
+       *        the successor from the right subtree of "*rootp".  The
+       *        identifier "decrease" should be reset if the subtree height
+       *        decreased due to the deletion of the sucessor of "rootp".
+       ************************************************************************/
   
-        switch ( nd_typ )  {  /* what kind of node are we removing? */
-            case  IS_LEAF :
-	        free_node( avlDesc, rootp );  /* free the leaf, its height     */
-                return  HEIGHT_CHANGED;       /* changes from 1 to 0, return 1 */
+  else  {  /* cmp == 0 */
+    *data = (*rootp) -> data;  /* set return value in data */
+    
+    switch ( nd_typ )  {  /* what kind of node are we removing? */
+    case  AVL_IS_LEAF :
+      free_node( avlDesc, rootp );  /* free the leaf, its height     */
+      return  HEIGHT_CHANGED;       /* changes from 1 to 0, return 1 */
+      
+    case  AVL_IS_RBRANCH :       /* only child becomes new root */
+    case  AVL_IS_LBRANCH :
+      *rootp = (*rootp) -> subtree[ dir ];
+      free_node( avlDesc, &old_root );      /* free the deleted node */
+      return  HEIGHT_CHANGED;      /* we just shortened the "dir" subtree */
+      
+    case  AVL_IS_TREE  :
+      decrease = avl_delete( avlDesc,
+			     &( (*rootp) -> data ),
+			     &( (*rootp) -> subtree[ RIGHT ] ),
+			     avl_min				);
+    } /* switch */
+  } /* else */
   
-            case  IS_RBRANCH :       /* only child becomes new root */
-            case  IS_LBRANCH :
-	        *rootp = (*rootp) -> subtree[ dir ];
-                free_node( avlDesc, &old_root );      /* free the deleted node */
-                return  HEIGHT_CHANGED;      /* we just shortened the "dir" subtree */
+  (*rootp) -> bal -= decrease;       /* update balance factor */
   
-            case  IS_TREE  :
-                decrease = avl_delete( avlDesc,
-				       &( (*rootp) -> data ),
-                                        &( (*rootp) -> subtree[ RIGHT ] ),
-                                        avl_min				);
-        } /* switch */
-    } /* else */
- 
-    (*rootp) -> bal -= decrease;       /* update balance factor */
+      /**********************************************************************
+       * Rebalance if necessary -- the height of current tree changes if one
+       * of two things happens: (1) a rotation was performed which changed
+       * the height of the subtree (2) the subtree height decreased and now
+       * matches the height of its other subtree (so the current tree now
+       * has a zero balance when it previously did not).
+       **********************************************************************/
+  if ( decrease  &&  (*rootp) -> bal )	/* return 1 if height      */
+    return  balance( rootp );		/* changed due to rotation */
   
-  /**********************************************************************
-  * Rebalance if necessary -- the height of current tree changes if one
-  * of two things happens: (1) a rotation was performed which changed
-  * the height of the subtree (2) the subtree height decreased and now
-  * matches the height of its other subtree (so the current tree now
-  * has a zero balance when it previously did not).
-  **********************************************************************/
-    if ( decrease  &&  (*rootp) -> bal )	/* return 1 if height      */
-        return  balance( rootp );		/* changed due to rotation */
+  else if ( decrease  && !(*rootp) -> bal )	/* or if balance is 0 from    */
+    return  HEIGHT_CHANGED;			/* height decrease of subtree */
   
-    else if ( decrease  && !(*rootp) -> bal )	/* or if balance is 0 from    */
-        return  HEIGHT_CHANGED;			/* height decrease of subtree */
-  
-    else
-        return  HEIGHT_UNCHANGED;
+  else
+    return  HEIGHT_UNCHANGED;
   
 }/* avl_delete */
 
@@ -477,8 +476,8 @@ avl_delete(
 *
 *   void action( data, order, node, level, bal )
 *       void   *data
-*       VISIT   order;
-*       NODE    node;
+*       AvlVisit   order;
+*       AvlNodeType    node;
 *	short	bal;
 *       int     level;
 *
@@ -503,34 +502,34 @@ avl_delete(
 *            upon each data item encountered.
 *
 */
-PRIVATE     void
+static     void
 avl_walk( 
     AVLtree        tree,
-    void           (*action)( void * data, VISIT order, NODE node,
+    void           (*action)( void * data, AvlVisit order, AvlNodeType node,
 			      int level, short bal, void * closure),
     void * 	   closure,
-    SIBLING_ORDER  sibling_order,
+    AvlSiblingOrder  sibling_order,
     int            level
     )
 {
-    DIRECTION  dir1 = (sibling_order == LEFT_TO_RIGHT) ? LEFT : RIGHT,
-               dir2 = OPPOSITE( dir1 );
-    NODE       node = node_type( tree );
+  DIRECTION  dir1 = (sibling_order == AVL_LEFT_TO_RIGHT) ? LEFT : RIGHT,
+    dir2 = OPPOSITE( dir1 );
+  AvlNodeType       node = node_type( tree );
   
-    if ( (tree != NULL_TREE)  &&  (action != NULL) )  {
-        (*action)( tree -> data, PREORDER, node, level, tree -> bal, closure );
-  
-        if ( tree -> subtree[ dir1 ]  !=  NULL_TREE )
-            avl_walk( tree -> subtree[ dir1 ], action, closure, sibling_order, level+1 );
-  
-        (*action)( tree -> data, INORDER, node, level, tree -> bal, closure );
-  
-        if ( tree -> subtree[ dir2 ]  !=  NULL_TREE )
-	  avl_walk( tree -> subtree[ dir2 ], action, closure,
-		    sibling_order, level+1 );
-  
-        (*action)( tree -> data, POSTORDER, node, level, tree -> bal, closure );
-    }/* if non-empty tree */
+  if ( (tree != NULL_TREE)  &&  (action != NULL) )  {
+    (*action)( tree -> data, AVL_PREORDER, node, level, tree -> bal, closure );
+    
+    if ( tree -> subtree[ dir1 ]  !=  NULL_TREE )
+      avl_walk( tree -> subtree[ dir1 ], action, closure, sibling_order, level+1 );
+    
+    (*action)( tree -> data, AVL_INORDER, node, level, tree -> bal, closure );
+    
+    if ( tree -> subtree[ dir2 ]  !=  NULL_TREE )
+      avl_walk( tree -> subtree[ dir2 ], action, closure,
+		sibling_order, level+1 );
+    
+    (*action)( tree -> data, AVL_POSTORDER, node, level, tree -> bal, closure );
+  }/* if non-empty tree */
   
 }/* avl_walk */
 
@@ -550,41 +549,41 @@ avl_walk(
 *	(only perform "action" if it is a non-null function) 
 */
 
-PRIVATE     void
+static     void
 avl_free( 
     AVLdescriptor  *avlDesc,
     AVLtree        *rootp,
     void           (*action)( void * data, void * closure),
     void *	   closure,
-    SIBLING_ORDER  sibling_order,
+    AvlSiblingOrder  sibling_order,
     int            level
     )
 {
-    DIRECTION  dir1 = (sibling_order == LEFT_TO_RIGHT) ? LEFT : RIGHT,
-               dir2 = OPPOSITE( dir1 );
-    NODE       node = node_type( *rootp );
+  DIRECTION  dir1 = (sibling_order == AVL_LEFT_TO_RIGHT) ? LEFT : RIGHT,
+    dir2 = OPPOSITE( dir1 );
+  AvlNodeType       node = node_type( *rootp );
   
-    if ( *rootp != NULL_TREE )  {
-  
-        if ( action != NULL_ACTION )
-	   (*action)( (*rootp) -> data, closure );
-  
-        if ( (*rootp) -> subtree[ dir1 ]  !=  NULL_TREE )
-            avl_free( avlDesc, &( (*rootp) -> subtree[ dir1 ] ),
-			action, closure, sibling_order, level+1 );
-  
-        if ( action != NULL_ACTION )
-	   (*action)( (*rootp) -> data, closure );
-  
-        if ( (*rootp) -> subtree[ dir2 ]  !=  NULL_TREE )
-            avl_free( avlDesc, &( (*rootp) -> subtree[ dir2 ] ),
-			action, closure, sibling_order, level+1 );
-  
-        if ( action != NULL_ACTION )
-	   (*action)( (*rootp) -> data, closure );
-  
-	free_node( avlDesc,  rootp );
-    }/* if non-empty tree */
+  if ( *rootp != NULL_TREE )  {
+    
+    if ( action != NULL_ACTION )
+      (*action)( (*rootp) -> data, closure );
+    
+    if ( (*rootp) -> subtree[ dir1 ]  !=  NULL_TREE )
+      avl_free( avlDesc, &( (*rootp) -> subtree[ dir1 ] ),
+		action, closure, sibling_order, level+1 );
+    
+    if ( action != NULL_ACTION )
+      (*action)( (*rootp) -> data, closure );
+    
+    if ( (*rootp) -> subtree[ dir2 ]  !=  NULL_TREE )
+      avl_free( avlDesc, &( (*rootp) -> subtree[ dir2 ] ),
+		action, closure, sibling_order, level+1 );
+    
+    if ( action != NULL_ACTION )
+      (*action)( (*rootp) -> data, closure );
+    
+    free_node( avlDesc,  rootp );
+  }/* if non-empty tree */
   
 }/* avl_free */
 
@@ -605,10 +604,10 @@ avl_free(
 *	begin with "avl_" (the underscore character is added).
 *
 *	Each public routine must convert (cast) any argument of the 
-*	public type "AVL_TREE" to a pointer to on object of the 
+*	public type "AvlTree" to a pointer to on object of the 
 *	private type "AVLdescriptor" before passing the actual 
 *	AVL tree to any of the private routines. In this way, the
-*	type "AVL_TREE" is implemented as an opaque type.
+*	type "AvlTree" is implemented as an opaque type.
 * 
 *	An "AVLdescriptor" is merely a container for AVL-tree
 *	objects which contains the pointer to the root of the 
@@ -620,62 +619,145 @@ avl_free(
 ***********************************************************************/
 
 
-
 /*
-* avlinit() -- get space for an AVL descriptor for the given tree
+* AvlInit() -- get space for an AVL descriptor for the given tree
 *              structure and initialize its fields.
 */
-PUBLIC AVL_TREE
-avlinit(
-    int    (*compar)(void * data1, void * data2, NODE nd),
+AvlTree
+AvlInit(
+    int    (*compar)( const void * data1, const void * data2, AvlNodeType nd),
     void * (*getMem)( size_t size, void * closure ),
     void   (*freeMem)( void * data, void * closure ),
     void * memClosure 
     )
 {
-    AVLdescriptor  *avl_desc = NULL;
-  
+    AVLdescriptor  *avl_desc;
+
+    avl_desc = (AVLdescriptor *) avlMalloc( sizeof( AVLdescriptor ), NULL );
+    
     if( getMem != NULL && freeMem != NULL )
       {
-    	avl_desc = (AVLdescriptor *) getMem( sizeof (AVLdescriptor), memClosure );
-	avl_desc -> malloc  = getMem;
-	avl_desc -> free = freeMem;
-	avl_desc -> memClosure = memClosure;
+    	avl_desc->root = (AVLroot *) getMem( sizeof (AVLroot), memClosure );
+	
+	avl_desc->getMem     = getMem;
+	avl_desc->freeMem    = freeMem;
+	avl_desc->memClosure = memClosure;
       }
     else
       {
-    	avl_desc = (AVLdescriptor *) avlMalloc( sizeof (AVLdescriptor), NULL );
-	avl_desc -> malloc  = avlMalloc;
-	avl_desc -> free = avlFree;
-	avl_desc -> memClosure = NULL;
+    	avl_desc->root = (AVLroot *) avlMalloc( sizeof (AVLroot), NULL );
+
+	avl_desc->getMem     = avlMalloc;
+	avl_desc->freeMem    = avlFree;
+	avl_desc->memClosure = NULL;
       }
     
-    avl_desc -> root	= NULL_TREE;
-    avl_desc -> compar	= compar;
-
-    avl_desc -> count	= 0;
+    avl_desc->compar	= compar;
+    
+    avl_desc->root->root	= NULL_TREE;
+    avl_desc->root->count	= 0;
+    avl_desc->root->versionId = AVL_VERSION;
   
-    return  (AVL_TREE) avl_desc;
+    return  (AvlTree) avl_desc;
 }/* avlinit */
 
+/*
+ * AvlAttach - Attach to an exsisting root
+ */
 
+AvlTree
+AvlAttach(
+    void * avlRoot,
+    int    (*compar)( const void * data1, const void * data2, AvlNodeType nd),
+    void * (*getMem)( size_t size, void * closure ),
+    void   (*freeMem)( void * data, void * closure ),
+    void * memClosure
+    )
+{
+  AVLroot * 		root = (AVLroot *) avlRoot;
+  AVLdescriptor *  	avl_desc;
+  
+  avl_desc = (AVLdescriptor *) avlMalloc( sizeof( AVLdescriptor ), NULL );
+
+  if( avl_desc == NULL )
+    {
+      SET_ERROR( C_EOSERROR );
+      return( NULL );
+    }
+  
+  if( root->versionId != AVL_VERSION )
+    {
+      SET_ERROR( C_EBADPARAM );
+      return( NULL );
+    }
+
+  avl_desc->root = root;
+  
+  if( getMem != NULL && freeMem != NULL )
+    {	
+      avl_desc->getMem     = getMem;
+      avl_desc->freeMem    = freeMem;
+      avl_desc->memClosure = memClosure;
+    }
+  else
+    {
+      avl_desc->getMem     = avlMalloc;
+      avl_desc->freeMem    = avlFree;
+      avl_desc->memClosure = NULL;
+    }
+  
+  avl_desc->compar	= compar;
+  
+  return( avl_desc );
+  
+}/* AvlAttach */
+
+void *
+AvlDetach( AvlTree * avlTree )
+{
+  AVLdescriptor *  avl_desc = (AVLdescriptor *) avlTree;
+  
+  AVLroot * root = avl_desc->root;
+
+  avlFree( avl_desc, NULL );
+
+  avlTree = NULL;
+  
+  return( root );
+}
+ 
+void *
+AvlGetRoot( AvlTree  avlTree )
+{
+  AVLdescriptor *  avl_desc = (AVLdescriptor *) avlTree;
+
+  return( avl_desc->root );
+}
 
 /*
 * avldispose() -- free up all space associated with the given tree structure.
 */
-PUBLIC void
-avldispose( 
-    AVL_TREE       *treeptr,
-    void           (*action)( void * data, void * closure ),
-    SIBLING_ORDER  sibling_order,
-    void *	   closure
+void
+AvlDispose( 
+    AvlTree *        treeptr,
+    void             (*action)( void * data, void * closure ),
+    AvlSiblingOrder  sibling_order,
+    void *	     closure
     )
 {
-    AVLdescriptor  *avl_desc;
+  AVLdescriptor * avl_desc = (AVLdescriptor *) *treeptr;
   
-    avl_desc = (AVLdescriptor *) *treeptr;
-    avl_free( avl_desc,  &(avl_desc -> root), action, closure, sibling_order, 1 );
-    *treeptr = (AVL_TREE) NULL;
+  avl_free( avl_desc,
+	    &(avl_desc->root->root),
+	    action,
+	    closure,
+	    sibling_order,
+	    1 );
+
+  avlFree( avl_desc, NULL );
+  
+  *treeptr = (AvlTree) NULL;
+  
 }/* avldispose */
 
 
@@ -684,53 +766,51 @@ avldispose(
 * avlwalk() -- traverse the given tree structure and perform the
 *              given action on each data item in the tree.
 */
-PUBLIC void
-avlwalk( 
-    AVL_TREE       tree,
-    void           (*action)( void * data, VISIT order,
-			      NODE node, int level, short bal, void * closure),
-    SIBLING_ORDER  sibling_order,
+void
+AvlWalk( 
+    AvlTree       tree,
+    void          (*action)( void * data, AvlVisit order, AvlNodeType node,
+			     int level, short bal, void * closure),
+    AvlSiblingOrder  sibling_order,
     void * 	   closure
     )
 {
-    AVLdescriptor  *avl_desc;
+  AVLdescriptor * avl_desc = (AVLdescriptor *) tree;
   
-    avl_desc = (AVLdescriptor *) tree;
-    avl_walk( avl_desc -> root, action, closure, sibling_order, 1 );
+  avl_walk( avl_desc->root->root, action, closure, sibling_order, 1 );
+  
 }/* avlwalk */
   
    
-
 /*
 * avlcount () --  return the number of nodes in the given tree
 */
-PUBLIC int  avlcount( AVL_TREE tree )
+unsigned long
+AvlCount( AvlTree tree )
 {
-    AVLdescriptor  *avl_desc;
+  AVLdescriptor * avl_desc = (AVLdescriptor *) tree;
   
-    avl_desc = (AVLdescriptor *) tree;
-    return  avl_desc -> count;
+  return  avl_desc->root->count;
 }/* avlcount */
 
  
 
 /*
-* avlins() -- insert the given item into the tree structure
+* AvlAdd() -- insert the given item into the tree structure
 */
-PUBLIC void *
-avlins( 
-    AVL_TREE  tree,
+void *
+AvlAdd( 
+    AvlTree  tree,
     void      *data
     )
 {
-    AVLdescriptor  *avl_desc;
-    void *	   avlData;
+    AVLdescriptor  *avl_desc = (AVLdescriptor *) tree;
+    void *	   avlData = data;
 
     avlData = data;
     
-    avl_desc = (AVLdescriptor *) tree;
-    avl_insert( avl_desc, &avlData, &(avl_desc -> root), avl_desc -> compar );
-    if ( avlData == NULL )    ++(avl_desc -> count);
+    avl_insert( avl_desc, &avlData, &(avl_desc->root->root), avl_desc->compar );
+    if ( avlData == NULL )    ++(avl_desc->root->count);
 
     return  avlData;
 }/* avlins */
@@ -738,22 +818,19 @@ avlins(
 
 
 /*
-* avldel() -- delete the given item from the given tree structure
+* AvlDel() -- delete the given item from the given tree structure
 */
-PUBLIC void  *
-avldel( 
-    AVL_TREE  tree,
+void  *
+AvlDel( 
+    AvlTree  tree,
     void      *data
     )
 {
-    AVLdescriptor  *avl_desc;
-    void *	   avlData;
+    AVLdescriptor  *avl_desc = (AVLdescriptor *) tree;
+    void *	   avlData = data;
 
-    avlData = data;
-    
-    avl_desc = (AVLdescriptor *) tree;
-    avl_delete( avl_desc, &avlData, &(avl_desc -> root), avl_desc -> compar );
-    if ( avlData != NULL )     --(avl_desc -> count);
+    avl_delete( avl_desc, &avlData, &(avl_desc->root->root), avl_desc->compar );
+    if ( avlData != NULL )     --(avl_desc->root->count);
   
     return  avlData;
 }/* avldel */
@@ -761,34 +838,33 @@ avldel(
 
 
 /*
-* avlfind() -- find the given item in the given tree structure
+* AvlFind() -- find the given item in the given tree structure
 *              and return its address (NULL if not found).
 */
-PUBLIC void  *
-avlfind( 
-    AVL_TREE  tree,
-    void      *data
+void *
+AvlFind( 
+    AvlTree       tree,
+    const void *  data
     )
 {
-    AVLdescriptor  *avl_desc;
+    AVLdescriptor  *avl_desc = (AVLdescriptor *) tree;
   
-    avl_desc = (AVLdescriptor *) tree;
-    return  avl_find( data, avl_desc -> root, avl_desc -> compar );
+    return  avl_find( data, avl_desc->root->root, avl_desc->compar );
 }/* avlfind */
 
   
 /*
-* avldelmin() -- delete the minimal item from the given tree structure
+* AvlDelMin() -- delete the minimal item from the given tree structure
 */
-PUBLIC void  *
-avldelmin( AVL_TREE  tree )
+void *
+AvlDelMin( AvlTree  tree )
 {
+    AVLdescriptor  *avl_desc = (AVLdescriptor *) tree;
     void  *data;
-    AVLdescriptor  *avl_desc;
   
-    avl_desc = (AVLdescriptor *) tree;
-    avl_delete( avl_desc, &data, &(avl_desc -> root), avl_min );
-    if ( data != NULL )     --(avl_desc -> count);
+
+    avl_delete( avl_desc, &data, &(avl_desc->root->root), avl_min );
+    if ( data != NULL )     --(avl_desc->root->count);
   
     return  data;
 }/* avldelmin */
@@ -796,32 +872,30 @@ avldelmin( AVL_TREE  tree )
 
 
 /*
-* avlfindmin() -- find the minimal item in the given tree structure
+* AvlFindMin() -- find the minimal item in the given tree structure
 *              and return its address (NULL if not found).
 */
-PUBLIC void  *
-avlfindmin( AVL_TREE  tree )
+void *
+AvlFindMin( AvlTree  tree )
 {
-    AVLdescriptor  *avl_desc;
+    AVLdescriptor  *avl_desc = (AVLdescriptor *) tree;
   
-    avl_desc = (AVLdescriptor *) tree;
-    return  avl_find( NULL, avl_desc -> root, avl_min );
+    return  avl_find( NULL, avl_desc->root->root, avl_min );
 }/* avlfindmin */
 
   
 
 /*
-* avldelmax() -- delete the maximal item from the given tree structure
+* AvlDelMax() -- delete the maximal item from the given tree structure
 */
-PUBLIC void  *
-avldelmax( AVL_TREE  tree )
+void *
+AvlDelMax( AvlTree  tree )
 {
+    AVLdescriptor  *avl_desc = (AVLdescriptor *) tree;
     void  *data;
-    AVLdescriptor  *avl_desc;
   
-    avl_desc = (AVLdescriptor *) tree;
-    avl_delete( avl_desc, &data, &(avl_desc -> root), avl_max );
-    if ( data != NULL )     --(avl_desc -> count);
+    avl_delete( avl_desc, &data, &(avl_desc->root->root), avl_max );
+    if ( data != NULL )     --(avl_desc->root->count);
   
     return  data;
 }/* avldelmax */
@@ -829,17 +903,20 @@ avldelmax( AVL_TREE  tree )
   
 
 /*
-* avlfindmax() -- find the maximal item in the given tree structure
+* AvlFindMax() -- find the maximal item in the given tree structure
 *              and return its address (NULL if not found).
 */
-PUBLIC void  *
-avlfindmax ( AVL_TREE  tree )
+void *
+AvlFindMax ( AvlTree  tree )
 {
-    AVLdescriptor  *avl_desc;
+    AVLdescriptor  *avl_desc = (AVLdescriptor *) tree;
   
-    avl_desc = (AVLdescriptor *) tree;
-    return  avl_find( NULL, avl_desc -> root, avl_max );
+    return  avl_find( NULL, avl_desc->root->root, avl_max );
 }/* avlfindmax */
+
+
+
+
 
 
 

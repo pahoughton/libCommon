@@ -1,0 +1,54 @@
+.\"
+.\" Man page for AvlAdd
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH AvlAdd 3  "09 Feb 94" Common
+.SH NAME
+AvlAdd \- Add a data item to the tree
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+void * AvlAdd(
+.PD 0
+.RS
+.TP 7
+AvlTree
+avl,
+.TP 7
+void *
+data )
+.RE
+.PD
+.SH ARGUMENTS
+.TP
+avl
+This is the avl token returned from AvlInit(3) for the tree you want the
+data added to.
+data
+The data you want to add to the tree. This value is passed to the
+compare funtion to determine its position in the tree. 
+.SH DESCRIPTION
+AvlAdd will add a data item to the AVL tree. Each item added must
+be unique (as determined by the compare funtion). 
+.SH RETURNS
+.TP
+NULL
+The item was successfully added.
+.TP
+data
+The value of data will be returned if the data could not be added to
+the tree.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+AvlInit(3), AvlDel(3), AvlFind(3)
+.SH AUTHORS
+Brad Appleton,
+Paul Houghton x2309 - (houghton@shoe) 
+

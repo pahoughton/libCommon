@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * Title:            _Common.h
+ * Title:            HHMMSStoTimeT.c
  *
  * Description:
  *
@@ -8,25 +8,36 @@
  *
  * Notes:
  *
- * Programmer:	    Paul Houghton (pah)
+ * Programmer:	    Paul Houghton - (houghton@cworld)
  *
- * Start Date:	    01/29/94 21:06
+ * Start Date:	    02/19/94 12:55
  *
  * Modification History:
  *
  * $Log$
- * Revision 1.2  1994/01/31  14:06:16  houghton
- * Add avl and some other minor functions
- *
  *
  *********************************************************************/
+static const char RcsId[] =
+"$Id$";
 
+#include <time.h>
+#include <DateTime.h>
 
-#include <Common.h>
+time_t 
+HHMMSStoTimeT( const char * hhmmss )  
+{
+  long  timeSeconds = 0;
+  
+  int	hour = ( ( (hhmmss[0] - '0') * 10) + (hhmmss[1] - '0') );
+  int	min = ( ( (hhmmss[2] - '0') * 10) + (hhmmss[3] - '0') );
+  int	sec = ( ( (hhmmss[4] - '0') * 10) + (hhmmss[5] - '0') );
 
-#include "_CommonProto.h"
+  timeSeconds = hour * SEC_PER_HOUR;
+  timeSeconds += min * SEC_PER_MIN;
+  timeSeconds += sec;
 
-
+  return( timeSeconds );
+}
 
 
 
@@ -47,4 +58,3 @@
  *                      All Rights Reserved.  
  *
  **/
-    

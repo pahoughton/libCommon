@@ -19,6 +19,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1994/01/31  14:06:15  houghton
+ * Add avl and some other minor functions
+ *
  *
  *********************************************************************/
 static const char RcsId[] =
@@ -27,12 +30,26 @@ static const char RcsId[] =
 #include <_Common.h>
 #include <Common.h>
 
+/* both these are defined in LibError.c */
+
+extern void (*CommonErrorHandler_)( CommonErrorType error,
+				    int 	    appErrno,
+				    void *          closure,
+				    const char *    mesg );
+
+extern void * CommonErrorClosure_;
+
 void
 SetErrorHandler(
-    void (*errorHandler)( CommonErrorType error, const char * mesg )
+    void (*errorHandler)( CommonErrorType error,
+			  int             appErrno,
+			  void *          closure,
+			  const char *	  mesg),
+    void * closure
     )
 {
   CommonErrorHandler_ = errorHandler;
+  CommonErrorClosure_ = closure;
   return;
 }
 

@@ -46,16 +46,22 @@ typedef struct avl_node {
     short	bal;             /* balance factor */
     struct avl_node  *subtree[2];      /* LEFT and RIGHT subtrees */
 } AVLnode, *AVLtree;
-  
-  
+
+
+typedef struct
+{
+  unsigned long	versionId;
+  AVLtree	root;	/* pointer to the root node of the tree */
+  unsigned long count;	/* number of nodes in the tree */
+} AVLroot;
+
   /* structure which holds information about an AVL tree */
 typedef struct avl_descriptor {
-  AVLtree	root;           /* pointer to the root node of the tree */
-  int		(*compar)( void * data1, void * data2, NODE nd);
-  void * 	(*malloc)( size_t size, void * closure );
-  void  	(*free)( void * data, void * closure );
+  int		(*compar)(const void * data1, const void * data2, AvlNodeType nd);
+  void * 	(*getMem)( size_t size, void * closure );
+  void  	(*freeMem)( void * data, void * closure );
   void *	memClosure;
-  long		count;		/* number of nodes in the tree */
+  AVLroot *	root;           /* pointer to the root node of the tree */
 } AVLdescriptor;
 
 

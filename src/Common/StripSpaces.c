@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * Title:            _Common.h
+ * Title:            StripSpaces.c
  *
  * Description:
  *
@@ -8,24 +8,50 @@
  *
  * Notes:
  *
- * Programmer:	    Paul Houghton (pah)
+ * Programmer:	    Paul Houghton x2309 - (houghton@shoe)
  *
- * Start Date:	    01/29/94 21:06
+ * Start Date:	    02/18/94 16:33
  *
  * Modification History:
  *
  * $Log$
- * Revision 1.2  1994/01/31  14:06:16  houghton
- * Add avl and some other minor functions
- *
  *
  *********************************************************************/
-
+static const char RcsId[] =
+"$Id$";
 
 #include <Common.h>
 
-#include "_CommonProto.h"
+void
+StripSpaces( char * buffer )
+{
 
+  int	cnt;
+  int   pos = 0;
+  
+  for( cnt = 0; buffer[cnt] != 0 && buffer[cnt] == ' '; cnt++ );
+
+  if( cnt != 0 )
+    {
+      for( pos = 0; buffer[cnt] != 0; pos++, cnt++ )
+	{
+	  buffer[pos] = buffer[cnt];
+	}
+      buffer[pos] = 0;
+    }
+  else
+    {
+      pos = strlen( buffer );
+    }
+  pos--;  
+  cnt = pos;
+  for( ; pos != 0 && buffer[pos] == ' ' ; pos-- );
+
+  pos++;
+  buffer[pos] = 0;
+}
+      
+      
 
 
 
@@ -47,4 +73,3 @@
  *                      All Rights Reserved.  
  *
  **/
-    

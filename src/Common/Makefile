@@ -29,13 +29,19 @@ LIB_C_SOURCES   =   	\
 	ErrorString.c	\
 	strlwr.c	\
 	strupr.c	\
-	Error.c		\
+	LibError.c	\
 	_ArgString.c	\
 	CommonGetVersion.c \
 	CenterLine.c	\
 	Difftm.c	\
 	ForeachFile.c	\
 	avl.c           \
+	StripSpaces.c	\
+	StringToInt.c   \
+	SetErrorHandler.c \
+	YYMMDDtoTimeT.c \
+	HHMMSStoTimeT.c \
+	DateTimeData.c  \
 	$(ARCH_C_SOURCES)
 
 
@@ -62,7 +68,8 @@ INCDIRS		= $(SRCINCDIR)	\
 # **** C O M P I L E / C P P ****
 
 CPPOTHER 	=
-CCDEBUG		= -g
+CCDEBUG		= -pg
+#CCDEBUG		= -Q -O3
 CCOTHER		=
 
 # ***** L I B R A R I E S *****
@@ -126,7 +133,7 @@ install_production:
 	echo 'Production Install Complete!'
 
 $(PROTO_H): $(LIB_C_SOURCES)
-	$(MKPROTO) -p $(LIB_C_SOURCES) >$@
+	$(CPROTO) $(CPPFLAGS) $(LIB_C_SOURCES) >$@
 	
 
 tags: 
