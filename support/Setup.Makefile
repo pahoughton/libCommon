@@ -19,104 +19,102 @@
 #   $Id$
 # 
 
+hide		= @
 
 SHELL		= /bin/ksh
 
-PROJECT		= libCommon-3
+VER_MAJOR	= 3
+PROJECT		= libCommon-$(VER_MAJOR)
 CFG_DIR		= $(PROJECT)/src/config
 
 make_cfg_ver	= 5.06
 make_cfg_file	= $(TOOL_DIR)/include/Make/make.cfg.$(make_cfg_ver)
-
-dejagnu_lib	= $(TOOL_DIR)/share/dejagnu/lib/libSupport.exp
-
 MAKECONFIGS	= MakeConfigs-$(make_cfg_ver)
-DEJAGNU		= DejagnuSupport-1
 
-
-tools_archive_dir	= $(TOOL_DIR)/src/Tools
+tools_bin_dir		= $(TOOL_DIR)/bin
+tools_archive_dir	= $(TOOL_DIR)/src/Archives
 tools_build_dir		= $(TOOL_DIR)/src/Build/Tools
 libs_build_dir		= $(TOOL_DIR)/src/Build/Libs
 
+anon_ftp		= $(tools_bin_dir)/AnonFtp.ksh
+
+cvs_ver			= 1.10
+
+tools_cvs_pkg		= cvs-$(cvs_ver).tar.gz
+tools_gzip_pkg		= gzip-1.2.4.tar
+
 tools_host		= sideswipe.wcom.com
-tools_cvs		= cvs-1.10.tar.gz
-tools_gzip		= gzip-1.2.4.tar
 
 no_default:
+	$(hide) echo " ++ ERROR: No default target available!"
+	$(hide) exit 1;
 
-$(TOOL_DIR)/src								      \
-$(TOOL_DIR)/src/Build							      \
+
+$(tools_bin_dir)							      \
 $(tools_archive_dir)							      \
 $(tools_build_dir):
-	mkdir $@
+	$(hide) $(PROJECT)/support/mkdirhier.sh $@
 
-$(tools_build_dir): $(TOOL_DIR)/src/Build
-
-$(tools_archive_dir)/$(tools_gzip): $(tools_archive_dir)
-	cd $(libs_build_dir)						      \
-	&& $(PROJECT)/support/AnonFtp.ksh				      \
-	      $(tools_host)						      \
-	      pub/tools/$(tools_gzip)					      \
-	      $(tools_archive_dir)
-
-$(TOOL_DIR)/bin/gzip: $(tools_build_dir) $(tools_archive_dir)/$(tools_gzip)
-	cd $(tools_build_dir)						      \
-	&& tar xf $(tools_archive_dir)/$(tools_gzip)
-	cd $(tools_build_dir)/gzip*					      \
+$(TOOL_DIR)/bin/gzip: 
+	$(hide)	[ -f $(tools_archive_dir)/$(tools_gzip) ]		      \
+	  || $(anon_ftp) $(tools_host)					      \
+	         pub/tools/$(tools_gzip)				      \
+	         $(tools_archive_dir) )
+	$(hide) cd $(tools_build_dir)					      \
+	&& tar xf $(tools_archive_dir)/$(tools_gzip)			      \
+	&& cd gzip*							      \
 	&& ./configure --prefix=$(TOOL_DIR)				      \
 	&& make								      \
 	&& make install
 
-gzip: $(TOOL_DIR)/bin/gzip
-
-$(tools_archive_dir)/$(tools_cvs):
-	cd $(libs_build_dir)						      \
-	&& $(PROJECT)/support/AnonFtp.ksh				      \
-	      $(tools_host)						      \
-	      pub/tools/$(tools_cvs)					      \
-	      $(tools_archive_dir)
-
-$(TOOL_DIR)/bin/cvs: $(tools_build_dir) $(tools_archive_dir)/$(tools_cvs)     \
-		$(TOOL_DIR)/bin/gzip
-	cd $(tools_build_dir)						      \
-	&& zcat $(tools_archive_dir)/$(tools_cvs) | tar xf -
-	cd $(tools_build_dir)/cvs*					      \
+$(TOOL_DIR)/bin/cvs:
+	$(hide)	[ -f $(tools_archive_dir)/$(tools_cvs) ]		      \
+	  || $(anon_ftp) $(tools_host)					      \
+	         pub/tools/$(tools_cvs)					      \
+	         $(tools_archive_dir) )
+	$(hide) cd $(tools_build_dir)					      \
+	&& tar xf $(tools_archive_dir)/$(tools_cvs)			      \
+	&& cd cvs-$(cvs_ver)						      \
 	&& ./configure --prefix=$(TOOL_DIR)				      \
 	&& make								      \
 	&& make install
 
-cvs: $(TOOL_DIR)/bin/cvs
+cvs: 		$(tools_archive_dir)					      \
+		$(tools_bin_dir)					      \
+		$(tools_build_dir)					      \
+		$(anon_ftp)						      \
+		$(TOOL_DIR)/bin/gzip					      \
+		$(TOOL_DIR)/bin/cvs
+	$(hide) echo; echo " + CVS installation complete."; echo
+
 
 check_cvs:
-	@if type cvs ; then						      \
-	  echo " + cvs found.";						      \
+	$(hide) if type cvs ; then					      \
+	  cvs_verstr=`cvs --version`;					      \
+	  cvs_vernum=`echo $$cvs_verstr |				      \
+	      sed 's/.* (CVS) \($(cvs_ver)\).*/\1/'`;			      \
+	  if [ "$$cvs_vernum" != "$(cvs_ver)" ] ; then			      \
+	     echo "+ ERROR: wrong version of cvs found - $(cvs_ver) needed:"; \
+	     cvs --version;						      \
+	     echo "+ please install the $(cvs_ver) version using the";	      \
+	     echo "  cvs target of this makefile:"; 			      \
+	     echo "  (i.e. make -f $(PROJECT)/support/Setup.Makefile cvs";    \
+	     exit 1;							      \
+	  else								      \
+	    echo "+ cvs $(cvs_ver) found.";				      \
+	  fi;								      \
 	else								      \
-	  echo " + cvs not found please install using the cvs target.";       \
+	  echo "+ ERROR: cvs not found please install the $(cvs_ver) of";     \
+	  echo "  cvs using the cvs target of this makefile.";		      \
 	  echo "   (i.e. make -f $(PROJECT)/support/Setup.Makefile cvs";      \
 	  exit 1;							      \
 	fi
 
-$(tools_build_dir)/$(MAKECONFIGS): 
+$(make_cfg_file): 
 	cd $(tools_build_dir)						      \
-	&& cvs $(tools_cvsroot) co $(MAKECONFIGS)
-
-$(make_cfg_file): $(tools_build_dir)/$(MAKECONFIGS)
-	cd $(tools_build_dir)						      \
-	&& $(MAKE) -f $(MAKECONFIGS)/Makefile setup
-	$(TOOL_DIR)/bin/make						      \
-		-C $(tools_build_dir)/MakeConfigs-$(make_cfg_ver)	      \
-		install
-
-$(tools_build_dir)/$(DEJAGNU): 
-	cd $(tools_build_dir)						      \
-	&& cvs $(tools_cvsroot) co $(DEJAGNU)
-
-$(dejagnu_lib): $(tools_build_dir)/$(DEJAGNU)
-	cd $(tools_build_dir)						      \
-	&& $(MAKE) -f $(DEJAGNU)/Makefile setup
-	$(TOOL_DIR)/bin/make						      \
-		-C $(tools_build_dir)/$(DEJAGNU)			      \
-		install
+	&& ( [ -d $(MAKECONFIGS) ] || cvs co $(MAKECONFIGS) )		      \
+	&& $(MAKE) -f $(MAKECONFIGS)/Makefile setup			      \
+	&& $(TOOL_DIR)/bin/make -C $(MAKECONFIGS) install
 
 gen_setup_cfg:
 	rm -f $(CFG_DIR)/Setup.cfg
@@ -128,11 +126,14 @@ gen_setup_cfg:
 	  > $(CFG_DIR)/Setup.cfg
 	chmod 444 $(CFG_DIR)/Setup.cfg
 
-setup: check_cvs $(tools_build_dir) $(make_cfg_file) $(dejagnu_lib) gen_setup_cfg
+setup: check_cvs $(tools_build_dir) $(make_cfg_file) gen_setup_cfg
 
 
 #
 # $Log$
+# Revision 1.8  2000/06/01 00:45:02  houghton
+# Bug-Fix: changed degagnu to dejagnu_lib.
+#
 # Revision 1.7  2000/05/30 15:28:14  houghton
 # Changed to use MAKCCONFIGS and DEJAGNU variables.
 #
