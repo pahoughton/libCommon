@@ -35,7 +35,7 @@ INSTALL_INCDIR	= $(beta_incdir)
 
 VER_MAJOR	= 2
 VER_MINOR	= 01
-VER_RELEASE	= 01
+VER_RELEASE	= 02
 VERSION		= $(VER_MAJOR).$(VER_MINOR).$(VER_RELEASE)
 
 LIBRARY_DEFAULT	= lib$(NAME).a
@@ -263,6 +263,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.22  1997/04/26 12:50:59  houghton
+# Added proto_dep and check_install variables.
+#
 # Revision 2.21  1997/04/26 12:30:11  houghton
 # Changed version num.
 #
