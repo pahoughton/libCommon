@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/11/10 12:09:51  houghton
+ * AIX Port. Change umode_t to mode_t.
+ *
  * Revision 2.1  1995/10/29  13:33:56  houghton
  * Initial Linux Build of Version 2
  *
@@ -26,8 +29,8 @@
  *
  *
  *********************************************************************/
-#include "_Common.h"
-#include <sys/stat.h>
+
+#include "_Stat.h"
 
 COMMON_VERSION(
   FileModeString,
