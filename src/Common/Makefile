@@ -37,7 +37,7 @@
 #
 
 makefile_type   = lib
-make_cfg_ver	= 5.05
+make_cfg_ver	= 5.06
 make_target	= default
 show_commands 	= # true
 proto_dep	= true
@@ -305,6 +305,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.34  1998/10/23 11:36:47  houghton
+# Changed includes from beta_incdir to INSTALL_INC_DIR.
+#
 # Revision 2.33  1998/09/24 15:39:46  houghton
 # Changed version number.
 #

@@ -8,7 +8,7 @@
 # $Id$
 #
 
-make_cfg_ver	= 5.05
+make_cfg_ver	= 5.06
 show_commands 	= # true
 
 # Include standard MakeConfig configuration for GNU make required
@@ -72,6 +72,10 @@ install_default install_debug:
 
 #
 # $Log$
+# Revision 2.4  1998/10/13 14:15:22  houghton
+# Added install_beta target.
+# Cleanup.
+#
 # Revision 2.3  1998/09/24 14:36:03  houghton
 # Complete rework.
 #

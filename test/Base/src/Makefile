@@ -36,7 +36,7 @@
 #
 
 makefile_type   = prog
-make_cfg_ver	= 5.05
+make_cfg_ver	= 5.06
 make_target	= default
 show_commands 	= # true
 proto_dep	= true
@@ -300,6 +300,9 @@ check: test
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 1.2  1998/09/24 14:36:38  houghton
+# Added more tests.
+#
 # Revision 1.1  1998/09/22 14:39:41  houghton
 # Initial version.
 #

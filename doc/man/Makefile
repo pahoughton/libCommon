@@ -19,7 +19,7 @@
 #   $Id$
 # 
 
-make_cfg_ver	= 5.05
+make_cfg_ver	= 5.06
 
 include Make/make.cfg.$(make_cfg_ver)
 
@@ -161,6 +161,9 @@ realclean:
 
 #
 # $Log$
+# Revision 2.6  1998/09/24 15:39:20  houghton
+# Added install_doc target.
+#
 # Revision 2.5  1998/09/24 14:29:23  houghton
 # Reworked to replace directory names with Makefile variable value.
 #
