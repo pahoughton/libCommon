@@ -66,6 +66,11 @@ extern "C" {
 #define COMMON_PID_FORMAT	"%05d"
 #define COMMON_TEMP_DIR		P_tmpdir
     
+#if !defined( TIMET_MAX )
+#define TIMET_MAX   LONG_MAX
+#define TIMET_MIN   LONG_MIN
+#endif
+  
 #if !defined( min ) && !defined( __cplusplus )
 #define min( _a_, _b_ ) ( ( (_a_) > (_b_) ) ? (_b_) : (_a_) )
 #endif 
@@ -146,6 +151,9 @@ extern "C" {
  * Revision Log:
  *
  * $Log$
+ * Revision 2.2  1998/03/21 17:13:31  houghton
+ * Removed ';' to eliminate compiler warning.
+ *
  * Revision 2.1  1997/09/21 19:14:48  houghton
  * Changed to Version 2
  *
