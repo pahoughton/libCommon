@@ -82,11 +82,11 @@ check_cvs:
 	  exit 1;							      \
 	fi
 
-$(tools_build_dir)/MakeConfigs: 
+$(tools_build_dir)/MakeConfigs-$(make_cfg_ver): 
 	cd $(tools_build_dir)						      \
-	&& cvs $(tools_cvsroot) co MakeConfigs
+	&& cvs $(tools_cvsroot) co MakeConfigs-$(make_cfg_ver)
 
-$(make_cfg_file): $(tools_build_dir)/MakeConfigs
+$(make_cfg_file): $(tools_build_dir)/MakeConfigs-$(make_cfg_ver)
 	cd $(tools_build_dir)						      \
 	&& $(MAKE) -f MakeConfigs/Makefile setup
 	$(TOOL_DIR)/bin/make -C $(tools_build_dir)/MakeConfigs install
@@ -98,6 +98,9 @@ setup: MakeConfigs
 
 #
 # $Log$
+# Revision 1.1  1999/10/29 21:43:59  houghton
+# Initial Version.
+#
 #
 
 # Local Variables:
