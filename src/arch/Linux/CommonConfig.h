@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.5  1995/12/02 02:11:04  houghton
+ * *** empty log message ***
+ *
  * Revision 2.4  1995/11/10  01:04:30  houghton
  * Added configuration defines for File names a sizes
  *
@@ -102,14 +105,22 @@ extern "C" {
 #endif
   
   /* LITTLE_ENDIAN (1234) */
-#define COMMON_n2hs( s ) ( (s << 8) | (s >> 8) )
-
+#define COMMON_n2hs( s ) \
+    ((unsigned short)( ( ((unsigned short)(s)) & 0x00ff << 8 ) | \
+		      ( ((unsigned short)(s)) & 0xff00 >> 8 ) ) )
+      
 #define COMMON_n2hl( l ) \
-  ( ( l << 24 ) | ( (l & 0xff00) << 8 ) |  \
-    (( l & 0xff0000L) >> 8 ) | ( l >> 24 ) )
+    ((unsigned long int)((((unsigned long int)(l) & 0x000000ffU) << 24) | \
+			 (((unsigned long int)(l) & 0x0000ff00U) <<  8) | \
+			 (((unsigned long int)(l) & 0x00ff0000U) >>  8) | \
+			 (((unsigned long int)(l) & 0xff000000U) >> 24)))
 
+#define COMMON_n2hi( i ) COMMON_n2hl( i )
+      
 #ifdef __cplusplus
 };
 #endif
 
 #endif /* ! def _CommonConfig_h_ */
+
+
