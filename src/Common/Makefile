@@ -30,7 +30,7 @@ INSTALL_INCDIR	= $(LOCAL_ALPHA_INCDIR)
 
 VER_MAJOR	= 2
 VER_MINOR	= 00
-VER_RELEASE	= 00.a.33
+VER_RELEASE	= 00.a.34
 VERSION		= $(VER_MAJOR).$(VER_MINOR).$(VER_RELEASE)
 
 LIBRARY_DEFAULT	= lib$(NAME).a
@@ -242,7 +242,7 @@ debug:: objects/debug
 	$(HIDE) $(MAKE) CCDEBUG='$(CC_DEBUG)' CXXDEBUG='$(CXX_DEBUG)' \
 			$(LIBRARY_DEBUG)
 
-profile:: objects/debug
+profile:: objects/profile
 	$(HIDE) $(MAKE) CCDEBUG='$(CC_PROFILE)' CXXDEBUG='$(CXX_PROFILE)' \
 			$(LIBRARY_PROFILE)
 
@@ -280,6 +280,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.10  1996/02/29 16:21:12  houghton
+# Changed to use MakeConfigs 4.01
+#
 # Revision 2.9  1995/12/31 11:27:10  houghton
 # Bug Fix - changed shared lib name for AIX port.
 #
