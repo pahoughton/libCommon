@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1995/10/30  14:55:22  houghton
+ * Add Net2Host
+ *
  * Revision 2.2  1995/10/29  18:16:15  houghton
  * Fixes for Borland 4.0 Port
  *
@@ -40,6 +43,8 @@
 #include <string.h>
 #include <time.h>
 #include <errno.h>
+#include <stdarg.h>
+#include <limits.h>
 
 #include <sys/types.h>
 
@@ -47,6 +52,7 @@
 extern "C" {
 #endif
 
+#define COMMON_PATH_MAX		_POSIX_PATH_MAX
 
 #define COMMON_MAX_ERR_MESG	2048
 
@@ -55,6 +61,10 @@ extern "C" {
 #define COMMON_PATH_ENV_VAR	"PATH"
 #define COMMON_PATH_SEP		":"
 
+#define COMMON_TEMPNAME_SIZE	8
+#define COMMON_PID_FORMAT	"%05d"
+#define COMMON_TEMP_DIR		P_tmpdir
+    
 #if !defined( min ) && !defined( __cplusplus )
 #define min( _a_, _b_ ) ( ( (_a_) > (_b_) ) ? (_b_) : (_a_) )
 #endif 
