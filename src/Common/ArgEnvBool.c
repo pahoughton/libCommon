@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:08  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.3  1994/06/17  18:03:55  houghton
  * Cleanup for beta release.
  *
@@ -28,14 +31,15 @@
  *
  *
  *********************************************************************/
-static const char * RcsID =
-"$Id$";
-
 
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "_Common.h"
+
+COMMON_VERSION(
+  ArgEnvBool,
+  "$Id$");
 
 
 Ret_Status
@@ -49,8 +53,7 @@ ArgEnvBool(
 {
   
   int	paramValue;
-  
-  
+    
   if( argId != NULL )
     {
       char *	argString = NULL;
@@ -124,16 +127,6 @@ ArgEnvBool(
   
   return( RET_SUCCEED );
 }
-
-
-
-
-
-
-
-
-
-
 
 
 /**
