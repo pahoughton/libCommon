@@ -22,7 +22,7 @@
 #if !defined( PROTO_GEN )
 
 /* AIX requires this to be the first thing in the file. */
-#include <regexcfg.h>
+#include <_GnuRegexCfg.h>
 
 #if defined (_AIX) && !defined (REGEX_MALLOC)
   #pragma alloca
@@ -85,14 +85,14 @@ char *realloc ();
 
 #ifdef SYNTAX_TABLE
 
-extern char *re_syntax_table;
+extern char *GnuRe_syntax_table;
 
 #else /* not SYNTAX_TABLE */
 
 /* How many characters in the character set.  */
 #define CHAR_SET_SIZE 256
 
-static char re_syntax_table[CHAR_SET_SIZE];
+static char GnuRe_syntax_table[CHAR_SET_SIZE];
 
 /* Prototypes */
 static void init_syntax_once( void );
@@ -106,30 +106,30 @@ init_syntax_once ()
    if (done)
      return;
 
-   bzero (re_syntax_table, sizeof re_syntax_table);
+   bzero (GnuRe_syntax_table, sizeof GnuRe_syntax_table);
 
    for (c = 'a'; c <= 'z'; c++)
-     re_syntax_table[c] = Sword;
+     GnuRe_syntax_table[c] = Sword;
 
    for (c = 'A'; c <= 'Z'; c++)
-     re_syntax_table[c] = Sword;
+     GnuRe_syntax_table[c] = Sword;
 
    for (c = '0'; c <= '9'; c++)
-     re_syntax_table[c] = Sword;
+     GnuRe_syntax_table[c] = Sword;
 
-   re_syntax_table['_'] = Sword;
+   GnuRe_syntax_table['_'] = Sword;
 
    done = 1;
 }
 
 #endif /* not SYNTAX_TABLE */
 
-#define SYNTAX(c) re_syntax_table[c]
+#define SYNTAX(c) GnuRe_syntax_table[c]
 
 #endif /* not emacs */
 
 /* Get the interface, including the syntax bits.  */
-#include "regex.h"
+#include "GnuRegex.h"
 
 /* isalpha etc. are used for the character classes.  */
 #include <ctype.h>
@@ -769,7 +769,7 @@ print_partial_compiled_pattern (start, end)
 
 void
 print_compiled_pattern (bufp)
-    struct re_pattern_buffer *bufp;
+    struct GnuRe_pattern_buffer *bufp;
 {
   unsigned char *buffer = bufp->buffer;
 
@@ -839,7 +839,7 @@ print_double_string (where, string1, size1, string2, size2)
 /* Set by `re_set_syntax' to the current regexp syntax to recognize.  Can
    also be assigned to arbitrarily: each pattern buffer stores its own
    syntax, so it can be changed between regex compilations.  */
-reg_syntax_t re_syntax_options = RE_SYNTAX_EMACS;
+GnuReg_syntax_t GnuRe_syntax_options = RE_SYNTAX_EMACS;
 
 
 /* Specify the precise syntax of regexps for compilation.  This provides
@@ -849,13 +849,13 @@ reg_syntax_t re_syntax_options = RE_SYNTAX_EMACS;
    The argument SYNTAX is a bit mask comprised of the various bits
    defined in regex.h.  We return the old syntax.  */
 
-reg_syntax_t
-re_set_syntax (syntax)
-    reg_syntax_t syntax;
+GnuReg_syntax_t
+GnuRe_set_syntax (syntax)
+    GnuReg_syntax_t syntax;
 {
-  reg_syntax_t ret = re_syntax_options;
+  GnuReg_syntax_t ret = GnuRe_syntax_options;
   
-  re_syntax_options = syntax;
+  GnuRe_syntax_options = syntax;
   return ret;
 }
 
@@ -1010,7 +1010,7 @@ static const char *re_error_msg[] =
 
 /* But patterns can have more than `MAX_REGNUM' registers.  We just
    ignore the excess.  */
-typedef unsigned int regnum_t;
+typedef unsigned int GnuRegnum_t;
 
 
 /* Macros for the compile stack.  */
@@ -1025,7 +1025,7 @@ typedef struct
   pattern_offset_t fixup_alt_jump;
   pattern_offset_t inner_group_offset;
   pattern_offset_t laststart_offset;  
-  regnum_t regnum;
+  GnuRegnum_t regnum;
 } compile_stack_elt_t;
 
 
@@ -1081,10 +1081,10 @@ typedef struct
 
 static boolean at_begline_loc_p( const char * pattern,
 				 const char * p,
-				 reg_syntax_t syntax );
+				 GnuReg_syntax_t syntax );
 static boolean at_endline_loc_p( const char * p,
 				 const char * pend,
-				 reg_syntax_t syntax);
+				 GnuReg_syntax_t syntax);
 static void store_op1( re_opcode_t op, unsigned char * loc, long arg);
 static void store_op2( re_opcode_t op, unsigned char * loc, long arg1, long arg2);
 static void insert_op1( re_opcode_t     op,
@@ -1096,14 +1096,14 @@ static void insert_op2( re_opcode_t     op,
 			long 	        arg1,
 			long 	        arg2,
 			unsigned char * end);
-static reg_errcode_t compile_range( const char **   p_ptr,
+static GnuReg_errcode_t compile_range( const char **   p_ptr,
 				    const char *    pend,
 				    char *          translate,
-				    reg_syntax_t    syntax,
+				    GnuReg_syntax_t    syntax,
 				    unsigned char * b);
 static boolean
 group_in_compile_stack( const compile_stack_type * compile_stack,
-			regnum_t regnum );
+			GnuRegnum_t regnum );
 
 
 /* `regex_compile' compiles PATTERN (of length SIZE) according to SYNTAX.
@@ -1124,12 +1124,12 @@ group_in_compile_stack( const compile_stack_type * compile_stack,
    The `fastmap' and `newline_anchor' fields are neither
    examined nor set.  */
 
-static reg_errcode_t
+static GnuReg_errcode_t
 regex_compile (pattern, size, syntax, bufp)
      const char *pattern;
      int size;
-     reg_syntax_t syntax;
-     struct re_pattern_buffer *bufp;
+     GnuReg_syntax_t syntax;
+     struct GnuRe_pattern_buffer *bufp;
 {
   /* We fetch characters from PATTERN here.  Even though PATTERN is
      `char *' (i.e., signed), we declare these variables as unsigned, so
@@ -1178,7 +1178,7 @@ regex_compile (pattern, size, syntax, bufp)
   /* Counts open-groups as they are encountered.  Remembered for the
      matching close-group on the compile stack, so the same register
      number is put in the stop_memory as the start_memory.  */
-  regnum_t regnum = 0;
+  GnuRegnum_t regnum = 0;
 
 #ifdef DEBUG
   DEBUG_PRINT1 ("\nCompiling pattern: ");
@@ -1508,7 +1508,7 @@ regex_compile (pattern, size, syntax, bufp)
                     && !(p - 3 >= pattern && p[-3] == '[' && p[-2] == '^')
                     && *p != ']')
                   {
-                    reg_errcode_t ret
+                    GnuReg_errcode_t ret
                       = compile_range (&p, pend, translate, syntax, b);
                     if (ret != REG_NOERROR)
 		      {
@@ -1519,7 +1519,7 @@ regex_compile (pattern, size, syntax, bufp)
 
                 else if (p[0] == '-' && p[1] != ']')
                   { /* This handles ranges made up of characters only.  */
-                    reg_errcode_t ret;
+                    GnuReg_errcode_t ret;
 
 		    /* Move past the `-'.  */
                     PATFETCH (c1);
@@ -1778,7 +1778,7 @@ regex_compile (pattern, size, syntax, bufp)
                 /* We don't just want to restore into `regnum', because
                    later groups should continue to be numbered higher,
                    as in `(ab)c(de)' -- the second group is #2.  */
-                regnum_t this_group_regnum;
+                GnuRegnum_t this_group_regnum;
 
                 compile_stack.avail--;		
                 begalt = bufp->buffer + COMPILE_STACK_TOP.begalt_offset;
@@ -2275,7 +2275,7 @@ insert_op2 (op, loc, arg1, arg2, end)
 static boolean
 at_begline_loc_p (pattern, p, syntax)
     const char *pattern, *p;
-    reg_syntax_t syntax;
+    GnuReg_syntax_t syntax;
 {
   const char *prev = p - 2;
   boolean prev_prev_backslash = prev > pattern && prev[-1] == '\\';
@@ -2294,7 +2294,7 @@ at_begline_loc_p (pattern, p, syntax)
 static boolean
 at_endline_loc_p (p, pend, syntax)
     const char *p, *pend;
-    reg_syntax_t syntax;
+    GnuReg_syntax_t syntax;
 {
   const char *next = p;
   boolean next_backslash = *next == '\\';
@@ -2316,7 +2316,7 @@ at_endline_loc_p (p, pend, syntax)
 static boolean
 group_in_compile_stack (compile_stack, regnum)
     const compile_stack_type * compile_stack;
-    regnum_t regnum;
+    GnuRegnum_t regnum;
 {
   int this_element;
 
@@ -2341,11 +2341,11 @@ group_in_compile_stack (compile_stack, regnum)
    We use these short variable names so we can use the same macros as
    `regex_compile' itself.  */
 
-static reg_errcode_t
+static GnuReg_errcode_t
 compile_range (p_ptr, pend, translate, syntax, b)
     const char **p_ptr, *pend;
     char *translate;
-    reg_syntax_t syntax;
+    GnuReg_syntax_t syntax;
     unsigned char *b;
 {
   unsigned this_char;
@@ -2674,8 +2674,8 @@ typedef struct
    Returns 0 if we succeed, -2 if an internal error.   */
 
 int
-re_compile_fastmap (bufp)
-     struct re_pattern_buffer *bufp;
+GnuRe_compile_fastmap (bufp)
+     struct GnuRe_pattern_buffer *bufp;
 {
   int j, k;
   fail_stack_type fail_stack;
@@ -2959,11 +2959,11 @@ re_compile_fastmap (bufp)
    freeing the old data.  */
 
 void
-re_set_registers (bufp, regs, num_regs, starts, ends)
-    struct re_pattern_buffer *bufp;
-    struct re_registers *regs;
+GnuRe_set_registers (bufp, regs, num_regs, starts, ends)
+    struct GnuRe_pattern_buffer *bufp;
+    struct GnuRe_registers *regs;
     unsigned num_regs;
-    regoff_t *starts, *ends;
+    GnuRegoff_t *starts, *ends;
 {
   if (num_regs)
     {
@@ -2976,7 +2976,7 @@ re_set_registers (bufp, regs, num_regs, starts, ends)
     {
       bufp->regs_allocated = REGS_UNALLOCATED;
       regs->num_regs = 0;
-      regs->start = regs->end = (regoff_t) 0;
+      regs->start = regs->end = (GnuRegoff_t) 0;
     }
 }
 
@@ -2986,13 +2986,13 @@ re_set_registers (bufp, regs, num_regs, starts, ends)
    doesn't let you say where to stop matching. */
 
 int
-re_search (bufp, string, size, startpos, range, regs)
-     struct re_pattern_buffer *bufp;
+GnuRe_search (bufp, string, size, startpos, range, regs)
+     struct GnuRe_pattern_buffer *bufp;
      const char *string;
      int size, startpos, range;
-     struct re_registers *regs;
+     struct GnuRe_registers *regs;
 {
-  return re_search_2 (bufp, NULL, 0, string, size, startpos, range, 
+  return GnuRe_search_2 (bufp, NULL, 0, string, size, startpos, range, 
 		      regs, size);
 }
 
@@ -3019,13 +3019,13 @@ re_search (bufp, string, size, startpos, range, regs)
    stack overflow).  */
 
 int
-re_search_2 (bufp, string1, size1, string2, size2, startpos, range, regs, stop)
-     struct re_pattern_buffer *bufp;
+GnuRe_search_2 (bufp, string1, size1, string2, size2, startpos, range, regs, stop)
+     struct GnuRe_pattern_buffer *bufp;
      const char *string1, *string2;
      int size1, size2;
      int startpos;
      int range;
-     struct re_registers *regs;
+     struct GnuRe_registers *regs;
      int stop;
 {
   int val;
@@ -3057,7 +3057,7 @@ re_search_2 (bufp, string1, size1, string2, size2, startpos, range, regs, stop)
 
   /* Update the fastmap now if not correct already.  */
   if (fastmap && !bufp->fastmap_accurate)
-    if (re_compile_fastmap (bufp) == -2)
+    if (GnuRe_compile_fastmap (bufp) == -2)
       return -2;
   
   /* Loop through the string, looking for a place to start matching.  */
@@ -3109,7 +3109,7 @@ re_search_2 (bufp, string1, size1, string2, size2, startpos, range, regs, stop)
           && !bufp->can_be_null)
 	return -1;
 
-      val = re_match_2 (bufp, string1, size1, string2, size2,
+      val = GnuRe_match_2 (bufp, string1, size1, string2, size2,
 	                startpos, regs, stop);
       if (val >= 0)
 	return startpos;
@@ -3277,13 +3277,13 @@ typedef union
 /* re_match is like re_match_2 except it takes only a single string.  */
 
 int
-re_match (bufp, string, size, pos, regs)
-     struct re_pattern_buffer *bufp;
+GnuRe_match (bufp, string, size, pos, regs)
+     struct GnuRe_pattern_buffer *bufp;
      const char *string;
      int size, pos;
-     struct re_registers *regs;
+     struct GnuRe_registers *regs;
  {
-  return re_match_2 (bufp, NULL, 0, string, size, pos, regs, size); 
+  return GnuRe_match_2 (bufp, NULL, 0, string, size, pos, regs, size); 
 }
 #endif /* not emacs */
 
@@ -3309,12 +3309,12 @@ static int bcmp_translate( const unsigned char * s1,
    matched substring.  */
 
 int
-re_match_2 (bufp, string1, size1, string2, size2, pos, regs, stop)
-     struct re_pattern_buffer *bufp;
+GnuRe_match_2 (bufp, string1, size1, string2, size2, pos, regs, stop)
+     struct GnuRe_pattern_buffer *bufp;
      const char *string1, *string2;
      int size1, size2;
      int pos;
-     struct re_registers *regs;
+     struct GnuRe_registers *regs;
      int stop;
 {
   /* General temporaries.  */
@@ -3594,8 +3594,8 @@ re_match_2 (bufp, string1, size1, string2, size2, pos, regs, stop)
                      extra element beyond `num_regs' for the `-1' marker
                      GNU code uses.  */
                   regs->num_regs = MAX (RE_NREGS, num_regs + 1);
-                  regs->start = TALLOC (regs->num_regs, regoff_t);
-                  regs->end = TALLOC (regs->num_regs, regoff_t);
+                  regs->start = TALLOC (regs->num_regs, GnuRegoff_t);
+                  regs->end = TALLOC (regs->num_regs, GnuRegoff_t);
                   if (regs->start == NULL || regs->end == NULL)
                     return -2;
                   bufp->regs_allocated = REGS_REALLOCATE;
@@ -3607,8 +3607,8 @@ re_match_2 (bufp, string1, size1, string2, size2, pos, regs, stop)
                   if (regs->num_regs < num_regs + 1)
                     {
                       regs->num_regs = num_regs + 1;
-                      RETALLOC (regs->start, regs->num_regs, regoff_t);
-                      RETALLOC (regs->end, regs->num_regs, regoff_t);
+                      RETALLOC (regs->start, regs->num_regs, GnuRegoff_t);
+                      RETALLOC (regs->end, regs->num_regs, GnuRegoff_t);
                       if (regs->start == NULL || regs->end == NULL)
                         return -2;
                     }
@@ -4778,12 +4778,12 @@ bcmp_translate(
    We call regex_compile to do the actual compilation.  */
 
 const char *
-re_compile_pattern (pattern, length, bufp)
+GnuRe_compile_pattern (pattern, length, bufp)
      const char *pattern;
      int length;
-     struct re_pattern_buffer *bufp;
+     struct GnuRe_pattern_buffer *bufp;
 {
-  reg_errcode_t ret;
+  GnuReg_errcode_t ret;
   
   /* GNU code is written to assume at least RE_NREGS registers will be set
      (and at least one extra will be -1).  */
@@ -4797,10 +4797,12 @@ re_compile_pattern (pattern, length, bufp)
   /* Match anchors at newline.  */
   bufp->newline_anchor = 1;
   
-  ret = regex_compile (pattern, length, re_syntax_options, bufp);
+  ret = regex_compile (pattern, length, GnuRe_syntax_options, bufp);
 
   return re_error_msg[(int) ret];
-}     
+}
+
+#if defined( BUILD_COMPATIBLE )
 
 /* Entry points compatible with 4.2 BSD regex library.  We don't define
    them if this is an Emacs or POSIX compilation.  */
@@ -4841,7 +4843,7 @@ re_comp (s)
   /* Match anchors at newlines.  */
   re_comp_buf.newline_anchor = 1;
 
-  ret = regex_compile (s, strlen (s), re_syntax_options, &re_comp_buf);
+  ret = regex_compile (s, strlen (s), GnuRe_syntax_options, &re_comp_buf);
   
   /* Yes, we're discarding `const' here.  */
   return (char *) re_error_msg[(int) ret];
@@ -5103,6 +5105,9 @@ regfree (preg)
 }
 
 #endif /* not emacs  */
+
+#endif /* COMPATIBLE */
+
 
 /*
 Local variables:
