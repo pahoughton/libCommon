@@ -1,5 +1,5 @@
 #
-# -*- Makefile -*- for Common
+# -*- makefile -*- for Common
 #
 # Created: 11/21/95 using MakeConfigs 4.00.00.a.08
 #
@@ -36,7 +36,7 @@ VERSION		= $(VER_MAJOR).$(VER_MINOR).$(VER_RELEASE)
 LIBRARY_DEFAULT	= lib$(NAME).a
 LIBRARY_DEBUG	= lib$(NAME)g.a
 LIBRARY_PROFILE	= lib$(NAME)pg.a
-LIBRARY_SHARED	= lib$(NAME).so
+LIBRARY_SHARED	= lib$(NAME)$(SHLIB_EXT)
 
 PROTO_H		= _$(NAME)_Proto.h
 
@@ -282,6 +282,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.8  1995/12/02 02:06:59  houghton
+# Changed to use MakeConfigs Ver 4.
+#
 # Revision 2.7  1995/11/12  17:45:58  houghton
 # Changed to use MakeConfigs 3.5.
 # Added NAME macro for install targets.
