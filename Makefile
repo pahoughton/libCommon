@@ -19,6 +19,10 @@
 #   $Id$
 # 
 
+show_commands	= false
+check_install	= true
+hide		= @
+
 PROJECT		= libCommon-3
 
 PRJ_TOPDIR	= .
@@ -26,7 +30,6 @@ CFG_DIR		= $(PRJ_TOPDIR)/src/config
 
 INSTALL_INC_DIR = $(TOOL_DIR)/include/prod
 INSTALL_LIB_DIR = $(TOOL_DIR)/lib/prod
-INSTALL_BIN_DIR	= $(TOOL_DIR)/bin
 INSTALL_MAN_DIR = $(TOOL_DIR)/man
 
 make_cfg_ver	= 5.06
@@ -34,18 +37,25 @@ make_cfg_file	= $(TOOL_DIR)/include/Make/make.cfg.$(make_cfg_ver)
 
 dejagnu		= $(TOOL_DIR)/share/dejagnu/lib/libSupport.exp
 
-exports	    = 					\
-	INSTALL_BIN_DIR=$(INSTALL_BIN_DIR)	\
+setup_exports	    = 				\
 	INSTALL_INC_DIR=$(INSTALL_INC_DIR)	\
 	INSTALL_LIB_DIR=$(INSTALL_LIB_DIR)	\
 	INSTALL_MAN_DIR=$(INSTALL_MAN_DIR)	\
 	show_commands=$(show_commands)		\
 	check_install=$(check_install)		\
 
+exports			=			\
+	show_commands=$(show_commands)		\
+	check_install=$(check_install)		\
+
 no_target: help
 
 setup:
-	$(MAKE) -f $(PROJECT)/support/Setup.Makefile setup
+	$(MAKE) -f $(PROJECT)/support/Setup.Makefile $(setup_exports) setup
+	$(TOOL_DIR)/bin/make -C $(PROJECT) realclean depend_all
+	@ echo 
+	@ echo "+ $(PROJECT) setup complete."
+	@ echo 
 
 verify_setup:
 	@ if [ -z "$$TOOL_DIR" ] ; then					      \
@@ -98,8 +108,11 @@ check									      \
 clean									      \
 realclean								      \
 install_docs								      \
+install_lib_all								      \
 install_default								      \
 install_debug								      \
+install_shared								      \
+install_test								      \
 install									      \
 install_all: verify_setup
 	@ $(TOOL_DIR)/bin/make -C $(PRJ_TOPDIR)/src $@ $(exports)
@@ -132,15 +145,23 @@ help targets:
 	@ echo
 
 help_config:
-	@ echo " + The following configuration variables are available:"
-	@ echo
-	@ echo "    INSTALL_BIN_DIR=$(INSTALL_BIN_DIR)"
-	@ echo "    INSTALL_INC_DIR=$(INSTALL_INC_DIR)"
-	@ echo "    INSTALL_LIB_DIR=$(INSTALL_LIB_DIR)"
-	@ echo "    INSTALL_MAN_DIR=$(INSTALL_MAN_DIR)"
-	@ echo "    show_commands=$(show_commands)"
-	@ echo "    check_install=$(check_install)"
-	@ echo
+	@ if [ -f $(CFG_DIR)/Setup.cfg ] ; then				      \
+	  $(MAKE) -f $(CFG_DIR)/Setup.cfg help_config ;			      \
+	else								      \
+	  if [ -f $(PROJECT)/$(CFG_DIR) ] ; then			      \
+	    $(MAKE) -f $(PROJECT)/$(CFG_DIR)/Setup.cfg help_config ;	      \
+	  else								      \
+	    echo ;							      \
+	    echo "+ The following configuration variables are available:" ;   \
+	    echo ;							      \
+	    echo "    INSTALL_INC_DIR=$(INSTALL_INC_DIR)" ;		      \
+	    echo "    INSTALL_LIB_DIR=$(INSTALL_LIB_DIR)" ;		      \
+	    echo "    INSTALL_MAN_DIR=$(INSTALL_MAN_DIR)" ;		      \
+	    echo "    show_commands=$(show_commands)" ;			      \
+	    echo "    check_install=$(check_install)" ;			      \
+	    echo ;							      \
+	  fi ;								      \
+	fi 
 
 
 
@@ -149,6 +170,9 @@ help_config:
 
 #
 # $Log$
+# Revision 3.3  1999/11/04 17:23:14  houghton
+# Added dejagnu support to setup.
+#
 # Revision 3.2  1999/10/29 21:41:27  houghton
 # Complete rewite to support 'setup' target.
 #
