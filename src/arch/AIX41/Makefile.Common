@@ -36,6 +36,9 @@ ARCH_C_HEADERS		= 		\
 
 #
 # $Log$
+# Revision 1.2  1996/05/03 16:10:34  houghton
+# Rework for MakeConfigs 5.
+#
 # Revision 1.1  1996/02/29 16:21:38  houghton
 # Initial Version
 #
