@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/29  12:01:17  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:24  houghton
  * Move to Version 2.0
  *
@@ -34,28 +37,21 @@ COMMON_VERSION(
   "$Id$");
 
 
-char * LogLevelNames[] =
-{
-  "NONE",
-  "ERROR",
-  "WARN",
-  "USER_1",
-  "USER_2",
-  "INFO",
-  "TEST",
-  "DEBUG",
-  "FUNCT",
-  "ALL",
-  NULL
-};
-
-LogBit  LogLevels[] =
+LogLevelBit  LogLevels[] =
 {
   LOG_NONE,
   LOG_ERROR,
   LOG_WARN,
-  LOG_USR1,
-  LOG_USR2,
+  LOG_APP1,
+  LOG_APP2,
+  LOG_APP3,
+  LOG_APP4,
+  LOG_APP5,
+  LOG_APP6,
+  LOG_WCF1,
+  LOG_WCF2,
+  LOG_WCF3,
+  LOG_WCF4,
   LOG_INFO,
   LOG_TEST,
   LOG_DEBUG,
@@ -63,20 +59,19 @@ LogBit  LogLevels[] =
   LOG_ALL
 };
     
+extern const char * _CLogLevelNames[];	/* LogLevelString.c */
 
 
 int
-LogLevelFromString(
-    const char * levelString
-    )
+LogLevelFromString( const char * levelString )
 {
 
   int level = 0;
   int l;
 
-  for( l = 0; LogLevelNames[l] != 0; l++ )
+  for( l = 0; _CLogLevelNames[l] != 0; l++ )
     {
-      if( strstr( levelString, LogLevelNames[l] ) != NULL )
+      if( strstr( levelString, _CLogLevelNames[l] ) != NULL )
 	{
 	  level |= LogLevels[l];
 	}
