@@ -1,51 +1,21 @@
 /*********************************************************************
  *
- * Title:            CommonGetVersion.c
- *
- * Description:
+ * File:        CommonGetVersion.c
+ * Project:	Common
+ * Desc:
  *
  *   Return a version String pointer.
  *
- * Error Handling:
- *
- *	
- *
  * Notes:
  *
- * Programmer:	    Paul Houghton (pah)
+ * Author:	Paul A. Houghton - (paul.houghton@wcom.com)
+ * Created:	04/26/97 06:34
  *
- * Start Date:	    01/25/94 12:48
+ * Revision History: (See end of file for Revision Log)
  *
- * Modification History:
- *
- * $Log$
- * Revision 2.3  1996/05/03 16:09:27  houghton
- * Cleanup for AIX port.
- *
- * Revision 2.2  1995/11/10 00:46:11  houghton
- * Fixed CVS Tag value
- *
- * Revision 2.1  1995/10/28  19:11:40  houghton
- * Change Version Id String
- *
- * Revision 2.0  1995/10/28  17:35:16  houghton
- * Move to Version 2.0
- *
- * Revision 1.5  1994/08/15  19:57:00  houghton
- * Fix RcsId so ident will work
- *
- * Revision 1.4  1994/08/15  19:40:17  houghton
- * Cleanup; Rating QA1 Checkin
- *
- * Revision 1.3  1994/06/20  15:28:38  dpotluri
- * LibCommon Port to OPENVMS
- *
- * Revision 1.2  1994/06/17  18:03:57  houghton
- * Cleanup for beta release.
- *
- * Revision 1.1  1994/01/31  14:06:13  houghton
- * Add avl and some other minor functions
- *
+ *  Last Mod By:    $Author$
+ *  Last Mod:	    $Date$
+ *  Version:	    $Revision$
  *
  *********************************************************************/
 
@@ -77,12 +47,42 @@ CommonGetVersion( void )
   return( CommonVersion );
 }
 
-
-
-
-
-
-
+/*
+ *
+ * Revision Log:
+ *
+ * $Log$
+ * Revision 2.4  1997/03/02 12:28:56  houghton
+ * Changed version info.
+ *
+ * Revision 2.3  1996/05/03 16:09:27  houghton
+ * Cleanup for AIX port.
+ *
+ * Revision 2.2  1995/11/10 00:46:11  houghton
+ * Fixed CVS Tag value
+ *
+ * Revision 2.1  1995/10/28  19:11:40  houghton
+ * Change Version Id String
+ *
+ * Revision 2.0  1995/10/28  17:35:16  houghton
+ * Move to Version 2.0
+ *
+ * Revision 1.5  1994/08/15  19:57:00  houghton
+ * Fix RcsId so ident will work
+ *
+ * Revision 1.4  1994/08/15  19:40:17  houghton
+ * Cleanup; Rating QA1 Checkin
+ *
+ * Revision 1.3  1994/06/20  15:28:38  dpotluri
+ * LibCommon Port to OPENVMS
+ *
+ * Revision 1.2  1994/06/17  18:03:57  houghton
+ * Cleanup for beta release.
+ *
+ * Revision 1.1  1994/01/31  14:06:13  houghton
+ * Add avl and some other minor functions
+ *
+ */
 
 /**
  *             This software is the sole property of
