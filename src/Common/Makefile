@@ -189,7 +189,6 @@ C_SOURCES	=			\
 
 USER_H_INCS	=			\
 	Common.h                        \
-	GnuRegex.h                      \
 	$(ARCH_USER_H_INCS)             \
 
 USER_INCLUDES	=		\
@@ -262,6 +261,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.16  1997/03/02 15:03:14  houghton
+# Removed GnuReges (now in libGnuRegex).
+#
 # Revision 2.15  1997/03/02 12:29:36  houghton
 # Updated with latest MakeConfigs fixes.
 #
