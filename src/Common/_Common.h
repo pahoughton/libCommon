@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.6  1997/04/26 12:45:03  houghton
+ * Changed ver tag.
+ *
  * Revision 2.5  1997/03/02 12:28:44  houghton
  * Changed version info.
  *
@@ -65,6 +68,7 @@
 const char COMMONVER_##name_[] =					      \
 "@(#) " COMMON_PRJ_NAME " - " COMMON_PRJ_VER "\n"			      \
 "    " #name_ " - " __FILE__ " - Compiled: " __DATE__ " "__TIME__ "\n"	      \
+"    CVS Tag: " COMMON_PRJ_VER_TAG "\n"					      \
 "    " verId_
 
 
