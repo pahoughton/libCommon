@@ -33,7 +33,7 @@ INSTALL_INCDIR	= $(beta_incdir)
 
 VER_MAJOR	= 2
 VER_MINOR	= 00
-VER_RELEASE	= 01.b.01
+VER_RELEASE	= 01.b.02
 VERSION		= $(VER_MAJOR).$(VER_MINOR).$(VER_RELEASE)
 
 LIBRARY_DEFAULT	= lib$(NAME).a
@@ -145,7 +145,6 @@ C_SOURCES	=			\
 	ErrorTypeString.c               \
 	FindPath.c                      \
 	GetErrorHandler.c               \
-	GnuRegex.c                      \
 	HHMMSStoTimeT.c                 \
 	IsLeapYear.c                    \
 	LogLevelFromString.c            \
@@ -263,6 +262,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.15  1997/03/02 12:29:36  houghton
+# Updated with latest MakeConfigs fixes.
+#
 # Revision 2.14  1996/11/06 18:23:16  houghton
 # Changed install dir for personal use.
 #
