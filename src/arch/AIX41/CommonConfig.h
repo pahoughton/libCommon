@@ -55,6 +55,11 @@ extern "C" {
 #define COMMON_PID_FORMAT	"%05d"
 #define COMMON_TEMP_DIR		_P_tmpdir
     
+#if !defined( TIMET_MAX )
+#define TIMET_MAX   LONG_MAX
+#define TIMET_MIN   LONG_MIN
+#endif
+  
 #if !defined( min ) && !defined( __cplusplus )
 #define min( _a_, _b_ ) ( ( (_a_) > (_b_) ) ? (_b_) : (_a_) )
 #endif 
@@ -70,7 +75,6 @@ extern "C" {
 #define COMMON_HAVE_BASENAME	1 /* */
 #define COMMON_HAVE_GROUPS	1 /* */
 #define COMMON_HAVE_MODE_T	1 /* */
-#define COMMON_HAVE_STRPTIME	1 /* */  
   
 #if !defined( CHAR_ALL_BITS )
 
@@ -112,6 +116,10 @@ extern "C" {
  * Revision Log:
  *
  * $Log$
+ * Revision 2.3  1997/09/21 12:17:25  houghton
+ * Cleanup comment header.
+ * Added portable types COMMON_*_T.
+ *
  * Revision 2.2  1997/09/16 11:33:12  houghton
  * Added define COMMON_NET_HOST_CONVERTION.
  *
