@@ -30,6 +30,16 @@
 extern "C" {
 #endif
 
+#define COMMON_LIB_VERSION	    0x02010100
+
+extern const long CommonLibVersion;
+
+extern const char CommonVersion[];
+
+const char * CommonGetVersion( void );
+
+/* Boolean type and values */
+
 #if !defined( BOOL )
 #define BOOL	int
 #endif
@@ -53,7 +63,6 @@ extern "C" {
 #endif
 
   
-#define COMMON_LIB_VERSION	    0x02010100
 
 /**************************************************************
  * E R R O R   P r o c e s s i n g 
@@ -477,7 +486,7 @@ strptime( char *buf, const char *format, struct tm *tm);
  * #define Bit( bitNumber )
  *
  * #define CHAR_BITS
- * #define SHORT_BIT
+ * #define SHORT_BITS
  * #define LONG_BITS
  * #define INT_BITS
  *
@@ -642,10 +651,6 @@ FileModeString( mode_t	mode, char * modeString );
 const char * basename( const char * path );
 #endif
 
-extern const char CommonVersion[];
-
-const char * CommonGetVersion( void );
-
 #define DWORD_ALIGN( _addr_ ) \
   ( ((_addr_ % 4) == 0) ? _addr_ :  ( _addr_  + ( 4 - ( _addr_ % 4 ) ) ) )
 
@@ -659,6 +664,9 @@ const char * CommonGetVersion( void );
  * Modification History
  *     			
  * $Log$
+ * Revision 2.12  1997/04/26 13:32:06  houghton
+ * Changed LOG_WCF* to LOG_LIB* and added defines for LOG_WCR*.
+ *
  * Revision 2.11  1997/04/26 12:44:16  houghton
  * Added COMMON_LIB_VERSION define.
  *
