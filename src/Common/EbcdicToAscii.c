@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/10/29 18:16:00  houghton
+ * Fixes for Borland 4.0 Port
+ *
  * Revision 2.1  1995/10/28  19:11:44  houghton
  * Change Version Id String
  *
@@ -34,7 +37,7 @@ COMMON_VERSION(
   "$Id$");
 
 
-const char EtoA[] =
+const unsigned char EtoA[] =
 {
   020, 01, 02, 03, 0234, 011, 0206, 0177,
   0227, 0215, 0216, 013, 014, 015, 016, 017,

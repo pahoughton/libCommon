@@ -367,7 +367,7 @@ extern int _CLogOutputLevel;
 strncpy( _dest_, _src_, _size_); _dest_[_size_ - 1] = 0;
     
 
-extern const char EtoA[];
+extern const unsigned char EtoA[];
 
 #define E2A( _c_ ) (EtoA[((unsigned char)(_c_))])
 
@@ -666,6 +666,10 @@ FileModeString( mode_t	mode, char * modeString );
  * Modification History
  *     			
  * $Log$
+ * Revision 2.14  1997/05/07 11:36:33  houghton
+ * Cleanup
+ * Added FindPath declaration.
+ *
  * Revision 2.13  1997/04/29 12:27:16  houghton
  * Cleanup
  * Added CommonLibVersion.
