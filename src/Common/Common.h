@@ -215,16 +215,21 @@ typedef enum
   LOG_APP4  = 0x0020,
   LOG_APP5  = 0x0040,
   LOG_APP6  = 0x0080,
-  LOG_WCF1  = 0x0100, /* WARNING: used by Wcf */
-  LOG_WCF2  = 0x0200, /* WARNING: used by Wcf */
-  LOG_WCF3  = 0x0400, /* WARNING: used by Wcf */
-  LOG_WCF4  = 0x0800, /* WARNING: used by Wcf */
+  LOG_LIB1  = 0x0100, /* WARNING: used by Wcf */
+  LOG_LIB2  = 0x0200, /* WARNING: used by Wcf */
+  LOG_LIB3  = 0x0400, /* WARNING: used by Wcf */
+  LOG_LIB4  = 0x0800, /* WARNING: used by Wcf */
   LOG_INFO  = 0x1000,
   LOG_TEST  = 0x2000,
   LOG_DEBUG = 0x4000,
   LOG_FUNCT = 0x8000,
   LOG_ALL   = 0xffff
 } LogLevelBit;
+
+#define LOG_WCF1    LOG_LIB1
+#define LOG_WCF2    LOG_LIB2
+#define LOG_WCF3    LOG_LIB3
+#define LOG_WCF4    LOG_LIB4
 
 typedef enum
 {
@@ -654,6 +659,9 @@ const char * CommonGetVersion( void );
  * Modification History
  *     			
  * $Log$
+ * Revision 2.11  1997/04/26 12:44:16  houghton
+ * Added COMMON_LIB_VERSION define.
+ *
  * Revision 2.10  1997/04/26 12:08:45  houghton
  * Bug-Fix: changed value of LOG_ALL to 0xffff.
  *
