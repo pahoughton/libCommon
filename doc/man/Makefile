@@ -19,7 +19,7 @@
 #   $Id$
 # 
 
-make_cfg_ver	= 5.02
+make_cfg_ver	= 5.05
 
 include Make/make.cfg.$(make_cfg_ver)
 
@@ -130,12 +130,17 @@ MAN_PAGES	=		\
 	DWORD_ALIGN.3		\
 	CommonGetVersion.3	\
 
-install.man: $(MAN_DIR) $(MAN_PAGES)
+install		\
+install_all	\
+install_man: $(MAN_DIR) $(MAN_PAGES)
 	$(install_cmd) -m 664 $(MAN_PAGES) $(MAN_DIR)
 
 
 #
 # $Log$
+# Revision 2.3  1997/09/02 21:32:50  houghton
+# Changed to use MakeConfigs 5.02.
+#
 # Revision 2.2  1997/05/07 12:23:36  houghton
 # Cleanup.
 #
