@@ -1,0 +1,58 @@
+.\"
+.\" File:      A2E.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for A2E
+.\"
+.\" Author:      Paul Houghton 719-527-7834 - (paul.houghton@wcom.com)
+.\" Created:     03/03/00 06:55
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH A2E 3  "03/03/00 06:55 (Common)"
+.SH NAME
+A2E \- convert an ASCII character to its EBCDIC equivalent.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+char E2A(
+.PD 0
+.RS
+.TP 10
+char
+a )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+a
+the character to convert.
+.SH DESCRIPTION
+Convert the EBCDIC character passed to its ASCII equivalent.
+.SH RETURNS
+.TP
+char
+the ASCII equivalent of 'e'.
+.SH FILES
+.PD 0
+%INSTALL_INC_DIR%/Common.h
+.LP
+%INSTALL_LIB_DIR%/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), E2A(3), AsciiToEbcdic(3), EbcdicToAscii(3)
+.SH AUTHORS
+Paul Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"
