@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1995/10/29  13:30:49  houghton
+ * Linux Config File
+ *
  * Revision 2.1  1995/10/28  19:19:12  houghton
  * New for Version 2.0
  *
