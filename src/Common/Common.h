@@ -59,11 +59,11 @@ extern "C" {
 typedef enum
 {
   RET_SUCCEED,
-  RET_DATA,
   RET_DONE,
+  RET_DATA,
   RET_ERROR,
   RET_FATAL
-}   Ret_Status;
+} Ret_Status;
 
 
 /*
@@ -71,51 +71,103 @@ typedef enum
  */
 typedef enum
 {
-  C_ENONE,
-  C_ERANGE,		/* Argument out of legal value range */
-  C_EBADPARAM,		/* Bad argument */
-  C_ECOMMFABRIC,    	/* CF Errro */
-  C_ESYBERR,		/* Sybase Error */
-  C_ESYBMSG,		/* Sybase Message */
-  C_ESYBOC,		/* SybocErrno */
-  C_EOSERROR,		/* system call error */
-  C_EAPP,		/* Application Error */  
-  C_EUNDEFINED
+  ET_NONE,
+  ET_APP,	/* Application Error */  
+  ET_OSERROR,	/* system call error */
+  ET_COMMON,	/* libCommon Error */
+  ET_WCF,	/* CF Errro */
+  ET_SYBERR,	/* Sybase Error */
+  ET_SYBMSG,	/* Sybase Message */
+  ET_SYBOC,	/* Syboc Error */
+  ET_UNDEFINED
 } CommonErrorType;
 
-extern char *	    	CommonErrFile;
-extern int  	    	CommonErrLine;
-extern int  	    	CommonOsErr;
-extern CommonErrorType 	CommonErrno;
-extern int		CommonAppErrno;
+typedef enum
+{
+  EC_NONE,
+  EC_BADPARAM,
+  EC_RANGE,
+  EC_UNDEFINED
+} CommonError;
 
-#define SET_ERROR( _err_ )						\
-    CommonErrFile = __FILE__; CommonErrLine = __LINE__;			\
-    CommonErrno = _err_;						\
-    CommonOsErr = ((_err_ == C_EOSERROR ) ? errno : 0);
- 
-#define SET_APP_ERROR( _err_ )	\
-    SET_ERROR( C_EAPP );	\
-    CommonAppErrno = _err_;     \
+extern CommonError  CommonErrno;
+extern const char * CommonErrorDesc;
+extern const char * CommonErrorFile;
+extern long	    CommonErrorLine;
 
-#define LIB_ERROR( _close_, _str_ )    \
-    LibError( CommonErrno, CommonAppErrno, _close_, _str_ )
-
-
-void SetErrorHandler( void (*errorHandler_)( CommonErrorType error,
-					     int appErrno,
-					     void * closure,
-					     const char * mesg ),
-		      void * closure );
-
-void LibError( CommonErrorType error,
-	       int appErrno,
-	       void * closure,
-	       const char * message, ... );
-
-const char * ErrorString( CommonErrorType error );
+typedef int (* CommonErrorHandler)( void *		closure,
+				    const char *	srcFileName,
+				    long		srcLineNumber,
+				    CommonErrorType	errorType,
+				    int			errorValue,
+				    const char *	errorDesc,
+				    const char *	mesgFormat,
+				    va_list		args );
 
 
+void
+SetErrorHandler( CommonErrorHandler handler, void * closure );
+
+void
+GetErrorHandler( CommonErrorHandler * handler, void ** closure );
+
+int
+Error( const char *	srcFileName,
+       long		srcLineNumber,
+       CommonErrorType	errorType,
+       int		errorValue,
+       void *		closure,
+       const char *	errorDesc,
+       const char *	mesgFormat,
+       ... );
+
+int
+ErrorArgs( const char *	    srcFileName,
+	   long		    srcLineNumber,
+	   CommonErrorType  errorType,
+	   int		    errorValue,
+	   void *	    closure,
+	   const char *	    errorDesc,
+	   const char *	    mesgFormat,
+	   va_list	    args );
+
+void
+SetError( const char *	    srcFileName,
+	  long		    srcLineNumber,
+	  CommonErrorType   errorType,
+	  int		    errorValue,
+	  const char *	    errorDesc,
+	  void *	    closure );
+       
+int
+ErrorMesg( char * mesgFormat, ... );
+
+const char *
+ErrorTypeString( CommonErrorType errType );
+
+const char *
+CommonErrorString( CommonError errValue );
+
+
+#define SET_ERROR_CLOSURE( type_, value_, closure_ ) \
+  SetError( __FILE__, __LINE__, type_, value_, 0, closure_ )
+
+#define SET_ERROR( type_, value_ ) \
+  SET_ERROR_CLOSURE( type_, value_, NULL )
+
+#define ERROR( type_, value_, args_ )					      \
+{									      \
+  SET_ERROR( type_, value_ );						      \
+  (void)ErrorMesg args_;						      \
+}
+
+#define ERROR_APP( value_, args_ )					      \
+{									      \
+  SET_ERROR( ET_APP, value_ );						      \
+  (void)ErrorMesg args_;						      \
+}
+
+	       
 /**************************************************************
  * A R G / E N V   P r o c e s s i n g 
  **************************************************************/
@@ -151,17 +203,25 @@ Ret_Status ArgEnvDouble( int * argc, char * argv[],
 
 typedef enum
 {
-  LOG_NONE  = 0,
-  LOG_ERROR = 0x01,
-  LOG_WARN  = 0x02,
-  LOG_USR1  = 0x04,
-  LOG_USR2  = 0x08,
-  LOG_INFO  = 0x10,
-  LOG_TEST  = 0x20,
-  LOG_DEBUG = 0x40,
-  LOG_FUNCT = 0x80,
-  LOG_ALL   = 0xff
-} LogBit;
+  LOG_NONE  = 0x0000,
+  LOG_ERROR = 0x0001,
+  LOG_WARN  = 0x0002,
+  LOG_APP1  = 0x0004,
+  LOG_APP2  = 0x0008,
+  LOG_APP3  = 0x0010,
+  LOG_APP4  = 0x0020,
+  LOG_APP5  = 0x0040,
+  LOG_APP6  = 0x0080,
+  LOG_WCF1  = 0x0100, /* WARNING: used by Wcf */
+  LOG_WCF2  = 0x0200, /* WARNING: used by Wcf */
+  LOG_WCF3  = 0x0400, /* WARNING: used by Wcf */
+  LOG_WCF4  = 0x0800, /* WARNING: used by Wcf */
+  LOG_INFO  = 0x1000,
+  LOG_TEST  = 0x2000,
+  LOG_DEBUG = 0x4000,
+  LOG_FUNCT = 0x8000,
+  LOG_ALL   = 0x8fff
+} LogLevelBit;
 
 typedef enum
 {
@@ -172,52 +232,109 @@ typedef enum
   
 typedef enum
 {
+  LOG_STDOUT,
   LOG_BY_DATE,
   LOG_REOPEN,
   LOG_KEEP_OPEN
-} LogOutFileType;
+} LogOutFileType; 
+
+typedef void (* LoggerFunct)( void *	    closure,
+			      const char *  srcFileName,
+			      long	    srcLineNumber,
+			      LogLevelBit   level,
+			      const char *  mesgFmt,
+			      va_list	    mesgArgs );
+
+/* WARNING: the 'name' is not copied. the pointer is used */
+
+const char *	LogLevelSetString( LogLevelBit level, const char * name );
+int		LogLevelFromString( const char * levelString );
+const char *	LogLevelString( LogLevelBit level );
+
+Ret_Status
+LoggerInit( const char *	logPath,
+	    const char *	logFileName,
+	    LogOutFileType	outputFileType,
+	    long	    	maxByteCount,
+	    long	    	trimIncrement,
+	    LogSetLevelType	setType,
+	    int			outputLevels,
+	    BOOL		outputDate,
+	    BOOL		outputSourceLoc,
+	    BOOL		teeOutput,
+	    LoggerFunct		funct,
+	    void *		closure
+	    );
+
+Ret_Status
+LoggerSetLogFile( const char *	    path,
+		  const char *	    fileName,
+		  LogOutFileType    outFileType,
+		  long		    maxByteCount,
+		  long		    trimIncrement );
 
 
+int
+LoggerSetOutputLevel( LogSetLevelType setType, int outputLevels );
 
-void LoggerInit( const char *	logPath,
-		 const char *	logFileName,
-		 LogOutFileType outputFileType,
-		 long	    	maxByteCount,
-		 long	    	trimIncrement,
-		 LogSetLevelType setType,
-		 int		 outputLevels,
-		 BOOL		 outputDate,
-		 BOOL		 outputSourceLoc
-		 );
+BOOL
+LoggerSetDate( BOOL outputDate );
 
-BOOL LoggerTee( BOOL state );
+BOOL
+LoggerSetLoc( BOOL outputLoc );
 
-void Logger( const char * msgFmt, ... );
+BOOL
+LoggerSetTee( BOOL  teeOutput );
 
-BOOL LoggerLoc( BOOL state );
-void LoggerTrim( void );
-int  LogLevelFromString( const char * levelString );
-const char * LogLevelString( LogBit lvl );
+void
+LoggerSetFunct( LoggerFunct funct, void * closure );
+
+void
+LoggerGetFunct( LoggerFunct * funct, void ** closure );
+
+LogLevelBit
+LoggerLevel( LogLevelBit level );
+
+void
+LoggerLoc( const char * fileName, long lineNumber );
+
+void
+Logger( const char * msgFmt, ... );
+
+void
+LoggerArgs( const char *    srcFileName,
+	    long	    srcLineNumber,
+	    LogLevelBit     level,
+	    void *	    closure,
+	    const char *    mesgFmt,
+	    va_list	    mesgArgs );
+
+Ret_Status
+LoggerTrim( void );
 
 
-extern int	  _CLogOutputLevel;
-extern LogBit     _CLogCurMesgLevel;
-extern const char * _CLogLocFile;
-extern int  	    _CLogLocLine;
+extern int _CLogOutputLevel;
 
-#define LOGIT( _lvl_, _logf_ )						     \
-{									     \
-  if( _lvl_ & _CLogOutputLevel )					     \
-    {									     \
-      _CLogCurMesgLevel = _lvl_;					     \
-      _CLogLocFile = __FILE__;						     \
-      _CLogLocLine = __LINE__;						     \
-      _logf_;								     \
-      _CLogCurMesgLevel = LOG_NONE;					     \
-    }									     \
-}									     \
+#define LOGITLOC( file_, line_, level_, logArgs_ )			      \
+{									      \
+  if( level_ & _CLogOutputLevel )					      \
+    {									      \
+      (void)LoggerLevel( level_ );					      \
+      (void)LoggerLoc( file_, line_ );					      \
+      Logger logArgs_ ;							      \
+      (void)LoggerLevel( LOG_NONE );					      \
+    }									      \
+}
+
+#define LOGIT( level_, logArgs_ )  \
+  LOGITLOC( __FILE__, __LINE__, level_, logArgs_ )
   
-		 
+#define LOGFUNCT( name_ ) \
+    LOGIT( LOG_FUNCT, ( #name_ "\n" ) )
+
+#define LOGERROR( args_ ) \
+  LOGIT( LOG_ERROR, args_ )
+
 /**************************************************************
  * S T R I N G   P r o c e s s i n g 
  **************************************************************/
@@ -478,6 +595,9 @@ int    AvlGetNumberOfUsers( AvlTree tree );
  * M I S C   
  **************************************************************/
 
+const char *
+TempFileName( const char * dir, const char * prefix );
+
 Ret_Status
 ForeachFile( const char *   name,
 	     Ret_Status     (*fileProc)( const char * name,
@@ -520,6 +640,11 @@ const char * CommonGetVersion( void );
  * Modification History
  *     			
  * $Log$
+ * Revision 2.5  1995/10/31  12:38:29  houghton
+ * Move version info from CommonVersion.h to _Common.h
+ * Use MakeConfigs 3.3
+ * Update ErrorStrings for all CommonErrorType values
+ *
  * Revision 2.4  1995/10/30  14:55:13  houghton
  * Move contents of Bit.h & DateTime.h to Common.h
  * Add Net2Host
