@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/29  12:01:21  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:29  houghton
  * Move to Version 2.0
  *
@@ -44,28 +47,16 @@ COMMON_VERSION(
   "$Id$");
 
 
-/* both these are defined in LibError.c */
-
-extern void (*CommonErrorHandler_)( CommonErrorType error,
-				    int 	    appErrno,
-				    void *          closure,
-				    const char *    mesg );
-
-extern void * CommonErrorClosure_;
+CommonErrorHandler  _CommonHandleError = _CommonDefaultErrorHandler;
+void *		    _CommonClosureError = NULL;
 
 void
-SetErrorHandler(
-    void (*errorHandler)( CommonErrorType error,
-			  int             appErrno,
-			  void *          closure,
-			  const char *	  mesg),
-    void * closure
-    )
+SetErrorHander( CommonErrorHandler handler, void * closure )
 {
-  CommonErrorHandler_ = errorHandler;
-  CommonErrorClosure_ = closure;
-  return;
+  _CommonHandleError  = handler;
+  _CommonClosureError = closure;
 }
+
 
 
 /**
