@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1994/06/20  15:28:40  dpotluri
+ * LibCommon Port to OPENVMS
+ *
  * Revision 1.1  1994/06/17  18:07:29  houghton
  * Cool new Logger function
  *
@@ -46,6 +49,7 @@ extern long _CLogTrim;        /* = 0 */
 extern int _CLogOutputLevel;  /* = LOG_WARN | LOG_ERROR */
 extern Bool _CLogDate;        /* = TRUE */
 extern Bool _CLogLoc ;        /* = TRUE */
+extern Bool _CLogTee;	      /* = TRUE */
 
 
 extern FILE * _CLogFP;
@@ -56,9 +60,9 @@ Logger(
     ...
     )
 {
-
+  
   va_list   args;
-
+  
   va_start( args, mesgFmt );
   
   if( _CLogMaxSize != 0 )
@@ -83,7 +87,7 @@ Logger(
 	  struct stat statBuf;
 	  
 	  _LoggerFileName( logFn, sizeof( logFn ) );
-
+	  
 	  if( stat( logFn, &statBuf ) == 0 )
 	    {
 	      if( statBuf.st_size > _CLogMaxSize )
@@ -93,27 +97,27 @@ Logger(
 	    }
 	}
     }
-
-
+  
+  
   if( _CLogFP == NULL )
     {
       char logFn[ 1024 ];
-
+      
       _LoggerFileName( logFn, sizeof( logFn ) );
       _CLogFP = fopen( logFn, "a" );
       
     }
-
+  
   if( _CLogFP == NULL )
     {
       _CLogFP = stderr;
     }
-
+  
   if( _CLogDate == TRUE )
     {
       time_t  nowSec = time(0);
       struct tm * now = localtime( &nowSec );
-	   
+      
       fprintf( _CLogFP,"%02d/%02d/%02d %02d:%02d:%02d ",
 	       now->tm_mon,
 	       now->tm_mday,
@@ -121,28 +125,58 @@ Logger(
 	       now->tm_hour,
 	       now->tm_min,
 	       now->tm_sec );
+      
+      if( _CLogTee == TRUE )
+	{
+	  
+	  fprintf( stderr,"%02d/%02d/%02d %02d:%02d:%02d ",
+		   now->tm_mon,
+		   now->tm_mday,
+		   now->tm_year,
+		   now->tm_hour,
+		   now->tm_min,
+		   now->tm_sec );
+	}
     }
-
+  
   if( _CLogLoc == TRUE )
     {
       fprintf( _CLogFP,"%s (%d): ",
 	       _CLogLocFile,
 	       _CLogLocLine );
+      if( _CLogTee == TRUE )
+	{
+	  fprintf( stderr,"%s (%d): ",
+		   _CLogLocFile,
+		   _CLogLocLine );
+	}
     }
-
+  
   fprintf( _CLogFP, "%s: ", LogLevelString( _CLogCurMesgLevel ) );
-
+  
   vfprintf( _CLogFP, mesgFmt, args );
   fputc( '\n', _CLogFP );
-
+  
+  if( _CLogTee == TRUE )
+    {
+      fprintf( stderr, "%s: ", LogLevelString( _CLogCurMesgLevel ) );
+      
+      vfprintf( stderr, mesgFmt, args );
+      fputc( '\n', stderr );
+      
+    }      
   va_end( args );
-
+  
   if( _CLogFileType == LOG_REOPEN )
     {
       close( _CLogFP );
       _CLogFP = NULL;
-
     }
+  else
+    {
+      fflush( _CLogFP );
+    }
+  
 }
 	       
   

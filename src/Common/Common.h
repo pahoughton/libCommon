@@ -18,6 +18,9 @@
  *
  *     			
  * $Log$
+ * Revision 1.9  1994/07/05  21:39:13  houghton
+ * Minor fixes and cleanup header info.
+ *
  * Revision 1.8  1994/06/20  15:28:38  dpotluri
  * LibCommon Port to OPENVMS
  *
@@ -204,6 +207,8 @@ void LoggerInit( const char *	logPath,
 		 Bool		 outputDate,
 		 Bool		 outputSourceLoc
 		 );
+
+Bool LoggerTee( Bool state );
 
 void Logger( const char * msgFmt, ... );
 

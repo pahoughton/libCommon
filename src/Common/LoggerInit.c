@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1994/07/05  21:39:14  houghton
+ * Minor fixes and cleanup header info.
+ *
  * Revision 1.1  1994/06/17  18:07:29  houghton
  * Cool new Logger function
  *
@@ -37,9 +40,10 @@ int _CLogFileType    = LOG_REOPEN;
 long _CLogMaxSize    = 0;
 long _CLogTrim       = 0;
 
-int _CLogOutputLevel = LOG_WARN | LOG_ERROR;
-Bool _CLogDate	    = TRUE;
-Bool _CLogLoc        = TRUE;
+int _CLogOutputLevel    = LOG_WARN | LOG_ERROR;
+Bool _CLogDate	        = TRUE;
+Bool _CLogLoc           = TRUE;
+Bool _CLogTee		= TRUE;
 
 FILE * _CLogFP = NULL;
 

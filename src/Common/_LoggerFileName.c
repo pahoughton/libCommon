@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1994/06/17  18:07:30  houghton
+ * Cool new Logger function
+ *
  *
  *********************************************************************/
 static const char RcsId[] =
@@ -25,9 +28,9 @@ static const char RcsId[] =
 
 #include "_Common.h"
 
-extern char * _CLogFilePath;
+extern char   _CLogFilePath[];
 extern int    _CLogFileType;
-extern char * _CLogFileName;
+extern char   _CLogFileName[];
 
 void
 _LoggerFileName(
@@ -49,7 +52,7 @@ _LoggerFileName(
 	   
       sprintf( timeStr, "%02d%02d%02d.",
 	       now->tm_year,
-	       now->tm_mon,
+	       now->tm_mon + 1,
 	       now->tm_mday );
 
       strncat( logFn, timeStr, bufSize - 2 );

@@ -48,6 +48,7 @@ LIB_C_SOURCES   =   	\
 	HHMMSStoTimeT.c \
 	DateTimeData.c  \
     	LoggerInit.c    \
+	LoggerTee.c	\
 	Logger.c	\
 	LogLevelFromString.c \
 	LogLevelString.c \
@@ -80,8 +81,8 @@ INCDIRS		= $(SRCINCDIR)	\
 # **** C O M P I L E / C P P ****
 
 CPPOTHER 	=
-CCDEBUG		= -pg
-#CCDEBUG		= -Q -O3
+#CCDEBUG		= -g
+CCDEBUG		= -Q -O2
 CCOTHER		=
 
 # ***** L I B R A R I E S *****
