@@ -27,6 +27,8 @@ PROJECT		= libCommon-3
 make_cfg_ver	= 5.06
 make_cfg_file	= $(TOOL_DIR)/include/Make/make.cfg.$(make_cfg_ver)
 
+dejagnu		= $(TOOL_DIR)/share/dejagnu/lib/libSupport.exp
+
 tools_archive_dir	= $(TOOL_DIR)/src/Tools
 tools_build_dir		= $(TOOL_DIR)/src/Build/Tools
 libs_build_dir		= $(TOOL_DIR)/src/Build/Libs
@@ -35,23 +37,27 @@ tools_host		= sideswipe.wcom.com
 tools_cvs		= cvs-1.10.tar.gz
 tools_gzip		= gzip-1.2.4.tar
 
-default:
+no_default:
 
-$(TOOL_DIR)/Build $(tools_build_dir):
+$(TOOL_DIR)/src								      \
+$(TOOL_DIR)/src/Build							      \
+$(tools_archive_dir)							      \
+$(tools_build_dir):
 	mkdir $@
 
-$(tools_archive_dir)/$(tools_gzip):
+$(tools_build_dir): $(TOOL_DIR)/src/Build
+
+$(tools_archive_dir)/$(tools_gzip): $(tools_archive_dir)
 	cd $(libs_build_dir)						      \
 	&& $(PROJECT)/support/AnonFtp.ksh				      \
 	      $(tools_host)						      \
 	      pub/tools/$(tools_gzip)					      \
 	      $(tools_archive_dir)
 
-$(TOOL_DIR)/bin/gzip: $(tools_archive_dir)/$(tools_gzip)
+$(TOOL_DIR)/bin/gzip: $(tools_build_dir) $(tools_archive_dir)/$(tools_gzip)
 	cd $(tools_build_dir)						      \
 	&& tar xf $(tools_archive_dir)/$(tools_gzip)
-	basedir=`pwd`							      \
-	&& cd $(tools_build_dir)/gzip*					      \
+	cd $(tools_build_dir)/gzip*					      \
 	&& ./configure --prefix=$(TOOL_DIR)				      \
 	&& make								      \
 	&& make install
@@ -65,7 +71,7 @@ $(tools_archive_dir)/$(tools_cvs):
 	      pub/tools/$(tools_cvs)					      \
 	      $(tools_archive_dir)
 
-$(TOOL_DIR)/bin/cvs: $(tools_archive_dir)/$(tools_cvs)			      \
+$(TOOL_DIR)/bin/cvs: $(tools_build_dir) $(tools_archive_dir)/$(tools_cvs)     \
 		$(TOOL_DIR)/bin/gzip
 	cd $(tools_build_dir)						      \
 	&& zcat $(tools_archive_dir)/$(tools_cvs) | tar xf -
@@ -85,8 +91,7 @@ check_cvs:
 	  exit 1;							      \
 	fi
 
-$(tools_build_dir)/MakeConfigs-$(make_cfg_ver): $(TOOL_DIR)/Build	      \
-		$(tools_build_dir)
+$(tools_build_dir)/MakeConfigs-$(make_cfg_ver): 
 	cd $(tools_build_dir)						      \
 	&& cvs $(tools_cvsroot) co MakeConfigs-$(make_cfg_ver)
 
@@ -97,13 +102,25 @@ $(make_cfg_file): $(tools_build_dir)/MakeConfigs-$(make_cfg_ver)
 		-C $(tools_build_dir)/MakeConfigs-$(make_cfg_ver)	      \
 		install
 
-MakeConfigs: check_cvs $(make_cfg_file)
+$(tools_build_dir)/DejagnuSupport-1: 
+	cd $(tools_build_dir)						      \
+	&& cvs $(tools_cvsroot) co DejagnuSupport-1
 
-setup: MakeConfigs
+$(dejagnu): $(tools_build_dir)/DejagnuSupport-1
+	cd $(tools_build_dir)						      \
+	&& $(MAKE) -f DejagnuSupport-1/Makefile setup
+	$(TOOL_DIR)/bin/make						      \
+		-C $(tools_build_dir)/DejagnuSupport-1			      \
+		install
+
+setup: check_cvs $(tools_build_dir) $(make_cfg_file) $(dejagnu)
 
 
 #
 # $Log$
+# Revision 1.4  1999/10/29 23:20:16  houghton
+# Bug-Fix: all referances to MakeConfigs dir not fixed.
+#
 # Revision 1.3  1999/10/29 23:17:26  houghton
 # Bug-Fix: need to be able to create tools_build_dir.
 #

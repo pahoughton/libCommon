@@ -32,6 +32,8 @@ INSTALL_MAN_DIR = $(TOOL_DIR)/man
 make_cfg_ver	= 5.06
 make_cfg_file	= $(TOOL_DIR)/include/Make/make.cfg.$(make_cfg_ver)
 
+dejagnu		= $(TOOL_DIR)/share/dejagnu/lib/libSupport.exp
+
 exports	    = 					\
 	INSTALL_BIN_DIR=$(INSTALL_BIN_DIR)	\
 	INSTALL_INC_DIR=$(INSTALL_INC_DIR)	\
@@ -53,11 +55,33 @@ verify_setup:
 	  exit 1;							      \
 	fi
 	@ if [ ! -f "$(make_cfg_file)" ] ; then				      \
-	  echo "MakeConfigs $(make_cfg_ver) not properly installed";	      \
-	  echo "  run make -f $(PROJECT)/Makefile setup from the";	      \
-	  echo "  \$TOOL_DIR/src/Build/Libs directory.";		      \
-	  echo "  Please see $(PROJECT)/docs/devel/Dependencies.txt";	      \
-	  echo "  for details.";					      \
+	  echo " ";							      \
+	  echo "+ MakeConfigs $(make_cfg_ver) NOT FOUND!";		      \
+	  echo " ";							      \
+	  echo "    To install all the dependencies, please perform";	      \
+	  echo "    the following:";					      \
+	  echo " ";							      \
+	  echo "      cd \$$TOOL_DIR/src/Build/Tools";			      \
+	  echo "      make -f $(PROJECT)/Makefile setup";		      \
+	  echo " ";							      \
+	  echo "    Please see $(PROJECT)/docs/devel/Dependencies.txt";	      \
+	  echo "    for details.";					      \
+	  echo " ";							      \
+	  exit 1;							      \
+	fi
+	@ if [ ! -f "$(dejagnu)" ] ; then				      \
+	  echo " ";							      \
+	  echo "+ $(dejagnu) NOT FOUND!";				      \
+	  echo " ";							      \
+	  echo "    To install all the dependencies, please perform";	      \
+	  echo "    the following:";					      \
+	  echo " ";							      \
+	  echo "      cd \$$TOOL_DIR/src/Build/Tools";			      \
+	  echo "      make -f $(PROJECT)/Makefile setup";		      \
+	  echo " ";							      \
+	  echo "    Please see $(PROJECT)/docs/devel/Dependencies.txt";	      \
+	  echo "    for details.";					      \
+	  echo " ";							      \
 	  exit 1;							      \
 	fi
 
@@ -125,6 +149,9 @@ help_config:
 
 #
 # $Log$
+# Revision 3.2  1999/10/29 21:41:27  houghton
+# Complete rewite to support 'setup' target.
+#
 # Revision 3.1  1999/10/29 16:55:54  houghton
 # Changed Version to 3
 #
