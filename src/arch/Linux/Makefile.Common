@@ -1,4 +1,4 @@
-# -*- makefile -*-
+# -*- Makefile -*-
 #
 # Makefile for libCommon src/arch/Linux
 #
@@ -35,6 +35,9 @@ ARCH_C_HEADERS		= 		\
 
 #
 # $Log$
+# Revision 2.2  1996/04/27 12:27:22  houghton
+# Changed to use MakeConfigs 5
+#
 # Revision 2.1  1995/12/02 02:12:12  houghton
 # Initial Version.
 #
