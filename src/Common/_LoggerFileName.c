@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/11/10  01:03:51  houghton
+ * Moved Global variables
+ *
  * Revision 2.1  1995/10/29  12:01:28  houghton
  * Change Version Id String
  *
@@ -48,8 +51,8 @@ extern LogOutFileType	_CLogFileType;	/* _LoggerDefault.c */
 
 void
 _LoggerFileName(
-    char * logFn,
-    int    bufSize
+    char *  logFn,
+    size_t  bufSize
     )
 {
   strncpy( logFn, _CLogFilePath, bufSize - 2 );
