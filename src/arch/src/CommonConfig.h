@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1995/10/29  18:16:24  houghton
+ * Fixes for Borland 4.0 Port
+ *
  * Revision 2.2  1995/10/29  13:33:55  houghton
  * Initial Linux Build of Version 2
  *
@@ -34,6 +37,7 @@
 #include <string.h>
 #include <time.h>
 #include <errno.h>
+#include <limits.h>
 
 #include <grp.h>
 
@@ -66,6 +70,33 @@ extern "C" {
 #define COMMON_HAVE_MODE_T	1 /* */
 #define COMMON_HAVE_STRPTIME	1 /* */  
 
+/**************************************************************
+ * Bit manipulations
+ **************************************************************/
+
+#if !defined( CHAR_ALL_BITS )
+
+#define Bit( _b_ ) ( 1 << _b_ )
+
+#define CHAR_BITS   CHAR_BIT
+#define SHORT_BITS  ( sizeof(short) * CHAR_BITS )
+#define LONG_BITS   ( sizeof(long) * CHAR_BITS )
+#define INT_BITS    ( sizeof(int) * CHAR_BITS )
+
+#define CHAR_ALL_BITS	((unsigned char)(~0))  /* 0xff */
+#define SHORT_ALL_BITS	((unsigned short)(~0)) /* 0xffff */
+#define LONG_ALL_BITS	((unsigned long)(~0L)) /* 0xffffffff */
+#define INT_ALL_BITS	((unsigned int)(~0))   /* 0xffff | 0xffffffff */
+
+#endif
+  
+  /* LITTLE_ENDIAN (1234) */
+#define COMMON_n2hs( s ) ( (s << 8) | (s >> 8) )
+
+#define COMMON_n2hl( l ) \
+  ( ( l << 24 ) | ( (l & 0xff00) << 8 ) |  \
+    (( l & 0xff0000L) >> 8 ) | ( l >> 24 ) )
+    
 #ifdef __cplusplus
 };
 #endif
