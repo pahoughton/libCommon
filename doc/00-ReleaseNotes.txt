@@ -1,0 +1,10 @@
+Version 2.00.00.b.04 - 10/31/95
+
+Changed Bool to BOOL for compatibility with libClue & libData
+
+Added Net2Host & Host2Net for short, long, unsigned short, unsigned long.
+This should improve the protability of these functions (actually Macros).
+
+
+
+

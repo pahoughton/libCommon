@@ -1,5 +1,5 @@
 #
-# This is the Comfabric Bugs file it is used to track all
+# This is the Comfabric libCommon file it is used to track all
 # bug reports and enhancement request. It is formated so
 # a perl script can be used to generate reports.
 #
@@ -10,7 +10,7 @@
 # Any line begining with a '#' is ignored by the parser
 #
 # Each entry starts with the line:
-# bug | enh[hancement] | adm[in]  who mm/dd/yy hh:mm[:ss] who mm/dd/yy hh:mm[:ss]
+# bug | enh[hancement] | adm who mm/dd/yy hh:mm[:ss] who mm/dd/yy hh:mm[:ss]
 #    bug - means this is a bug report
 #    enh - means this is an enhancment request
 #    adm - means this is a general admin/cleanup requirement
@@ -37,26 +37,32 @@
 #    hh:mm[:ss] - hour ( 24 hr format), min and optional seconds of 
 #                 of completion
 
-ENH Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
-Need to verify ErrorString has strings for all errors
+ADM Paul Houghton 10/31/95 05:25
+Update man pages for BOOL
 
 ENH Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
 Need test programs.
-
-BUG Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
-Change basename macro to a function that handles no path
 
 ENH Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
 man pages for: ArgEnvLong, CanExecute, FindPath, MemberOfGroup
 YYMMDDtoJD.pl, ArgEnvFlag,
 
 ENH Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
-Update CommonGetVersion string
-
-ENH Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
 Add file locking to Logger.
 
 === COMPLETED ===
+
+ENH Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
+Need to verify ErrorString has strings for all errors
+comp Paul Houghton 10/31/95
+
+ENH Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
+Update CommonGetVersion string
+comp Paul Houghton 10/30/95
+
+BUG Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
+Change basename macro to a function that handles no path
+comp Paul Houghton 2/13/95
 
 ENH Paul Houghton 6/14/94 08:00 Paul Houghton 6/14/94 08:00
 Add logging functions
@@ -78,3 +84,6 @@ ENH Paul Houghton 7/13/94 08:00 Paul Houghton 7/13/94 08:00
 Add Logger Tee function to tee output to stderr.
 comp Paul Houghton 7/13/94 08:00
 
+#
+# $Log$
+#
