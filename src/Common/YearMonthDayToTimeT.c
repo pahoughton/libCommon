@@ -20,6 +20,7 @@
  *********************************************************************/
 
 #include "_Common.h"
+#include <stdlib.h>
 
 COMMON_VERSION(
   YearMonthDayToTimeT,
@@ -104,6 +105,13 @@ YearMonthDayToTimeT(
  * Revision Log:
  *
  * $Log$
+ * Revision 2.3  1997/08/24 21:48:56  houghton
+ * Bug-Fix: the old algorithm didn't handle pre 1970 dates nore out of
+ *     range values correctly. complete rework (actually copy of the
+ *     implementation from libClue DateTime class. Now if an out of range
+ *     year is passed, the MIN_TIMET or MAX_TIMET will be returned
+ *     accordingly.
+ *
  * Revision 2.2  1997/08/20 10:39:05  houghton
  * Bug-Fix: if year was 1900 it was being treated as a two digit year.
  *
