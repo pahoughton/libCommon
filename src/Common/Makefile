@@ -171,6 +171,7 @@ C_SOURCES	=			\
 	ArgEnvInt.c                     \
 	ArgEnvLong.c                    \
 	ArgEnvString.c                  \
+	AsciiToEbcdic.c			\
 	Avl.c                           \
 	CenterLine.c                    \
 	CommonErrorString.c             \
@@ -305,6 +306,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 3.1  1999/10/29 16:56:19  houghton
+# Changed Version to 3
+#
 # Revision 2.35  1998/10/23 11:41:25  houghton
 # Changed to use MakeConfigs 5.06.
 #
