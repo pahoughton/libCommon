@@ -146,6 +146,9 @@ extern "C" {
  * Revision Log:
  *
  * $Log$
+ * Revision 1.3  1997/09/21 12:18:03  houghton
+ * Added portable types COMMON_*_T.
+ *
  * Revision 1.2  1997/09/16 11:33:26  houghton
  * Added define COMMON_NET_HOST_CONVERTION.
  *
