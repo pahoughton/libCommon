@@ -50,7 +50,8 @@ UTILITY_LIST  = 	ArgEnvInt.obj, -
 			LoggerTrim.obj, -
 			LoggerLoc.obj, -
 			_LoggerFileName.obj, -
-			strdup.obj
+			strdup.obj, -
+			TestOutput.obj, - 
 
 
 ArgEnvInt.obj		: 	ArgEnvInt.c
@@ -106,6 +107,8 @@ LoggerLoc.obj		:	LoggerLoc.c
 _LoggerFileName.obj	:	_LoggerFileName.c
 
 strdup.obj		:	strdup.c
+
+TestOutput.obj		:	TestOutput.c
 
 
 UTILITIES	:	COMMON($(UTILITY_LIST))
