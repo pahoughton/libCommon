@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.5  1997/03/02 12:28:44  houghton
+ * Changed version info.
+ *
  * Revision 2.4  1996/04/27 12:27:05  houghton
  * Changed to use new CPROTO macro for proto generation.
  *
@@ -55,8 +58,8 @@
 #include <stdio.h>
 
 #define COMMON_PRJ_NAME	    "Common"
+#define COMMON_PRJ_VER_TAG  "PROD_2_01"
 #define COMMON_PRJ_VER	    VERSION
-#define COMMON_PRJ_VER_TAG  "BETA_2_0_1"
 
 #define COMMON_VERSION( name_, verId_ )					      \
 const char COMMONVER_##name_[] =					      \
