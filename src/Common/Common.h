@@ -18,6 +18,9 @@
  *
  *     			
  * $Log$
+ * Revision 2.3  1995/10/29  18:15:57  houghton
+ * Fixes for Borland 4.0 Port
+ *
  * Revision 2.2  1995/10/29  13:33:41  houghton
  * Initial Linux Build of Version 2
  *
@@ -320,14 +323,127 @@ char * strdup( const char *);
  * D A T E / T I M E   P r o c e s s i n g 
  **************************************************************/
       
-#include <DateTime.h>
+#define SEC_PER_MIN   60
+#define SEC_PER_HOUR  (60 * SEC_PER_MIN)
+#define SEC_PER_DAY   (24 * SEC_PER_HOUR)
+#define SEC_PER_YEAR  (365 * SEC_PER_DAY)
+#define MIN_PER_HOUR  60
+
+#if !defined( DAYOFWEEK_ENUM )
+#define DAYOFWEEK_ENUM 1
+
+typedef enum {
+  Sunday = 0,
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday
+} DayOfWeek;
+
+#endif
+
+/*
+ * These constants are defined in DateTimeData.c if your linker
+ * has problems finding them (MS-Win) call the LinkDateData function
+ * from main.
+ */
+
+/* function in DataTimeData.c needed for some linkers */
+void LinkDateData( void );  
+ 
+extern const int    DaysInMonth[];
+extern const int    MonthDayOfYear[];
+extern const char * Months[];
+extern const char * AbbrMonths[];
+extern const char * WeekDays[];
+extern const char * AbbrWeekDays[];
+
+BOOL
+IsLeapYear( short year );
+
+time_t
+Difftm( struct tm * t1, struct tm * t2 );
+
+time_t
+YYYYMMDDtoTimeT( const char * yymmdd );
+
+time_t
+YYMMDDtoTimeT( const char * yymmdd );
+
+time_t
+HHMMSStoTimeT( const char * hhmmss );
+
+time_t
+DateStringToTimeT( const char * dateString, const char * fmt );
+
+const char *
+DateStringFromTimeT( char * buf, const char * fmt, time_t sec );
+
+const char *
+DateStringFromTm( char * buf, const char * fmt, const struct tm * tmTime );
+
+time_t
+YearMonthDayToTimeT( int year, int month, int day );
+
+#define HourMinSecToTimeT( hour, min, sec ) \
+  ( (hour * 60 * 60 ) + (min * 60) + sec )
+
+    
+#if !defined( COMMON_HAVE_STRPTIME )
+char *
+strptime( char *buf, const char *format, struct tm *tm);
+#endif
+
 
 /**************************************************************
- * Bit manipulation
+ * Bit manipulation - (see CommonConfig.h for values)
+ *
+ * #define Bit( bitNumber )
+ *
+ * #define CHAR_BITS
+ * #define SHORT_BIT
+ * #define LONG_BITS
+ * #define INT_BITS
+ *
+ * #define CHAR_ALL_BITS
+ * #define SHORT_ALL_BITS
+ * #define LONG_ALL_BITS
+ * #define INT_ALL_BITS
+ *
  **************************************************************/
 
-#include <Bit.h>
+/**************************************************************
+ * Net2Host - Network converters (declared in CommonConfig.h)
+ *
+ * short	  Net2HostShort( short from );
+ * long		  Net2HostLong( long from );
+ * unsigned short Net2HostUShort( unsigned short from );
+ * unsigned long  Net2HostLong( unsigned long from );
+ *
+ * short	  Host2NetShort( short from );
+ * long		  Host2NetLong( long from );
+ * unsigned short Host2NetUShort( unsigned short from );
+ * unsigned long  Host2NetLong( unsigned long from );
+ *
+ **************************************************************/
 
+#if !defined( Net2Host )
+
+#define Net2HostShort( s )  COMMON_n2hs( s )
+#define Host2NetShort( s )  COMMON_n2hs( s )
+
+#define Net2HostUShort( us ) COMMON_n2hs( us )
+#define Host2NetUShort( us ) COMMON_n2hs( us )
+
+#define Net2HostLong( l )  COMMON_n2hl( l )
+#define Host2NetLong( l )  COMMON_n2hl( l )
+
+#define Net2HostULong( ul ) COMMON_n2hl( ul )
+#define Host2NetULong( ul ) COMMON_n2hl( ul )
+  
+#endif
 /**************************************************************
  * A V L - Balanced Binary Tree
  **************************************************************/

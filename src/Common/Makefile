@@ -79,18 +79,14 @@ C_SOURCES	=			\
 	$(ARCH_C_SOURCES)		\
 
 USER_INCS	=			\
-	Bit.h                           \
 	Common.h                        \
 	CommonVersion.h                 \
-	DateTime.h                      \
 	../arch/$(arch)/CommonConfig.h	\
 
 
 C_HEADERS	=			\
-	Bit.h                           \
 	Common.h                        \
 	CommonVersion.h                 \
-	DateTime.h                      \
 	_AvlTypes.h                     \
 	_Common.h                       \
 
@@ -183,6 +179,9 @@ include .depend
 
 # 
 # $Log$
+# Revision 2.1  1995/10/29  13:33:44  houghton
+# Initial Linux Build of Version 2
+#
 # Revision 1.2  1995/02/13  17:35:10  houghton
 # Major enhancements much cleaner
 #
