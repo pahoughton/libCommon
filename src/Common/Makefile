@@ -265,11 +265,13 @@ beta_move_installed:
 beta_install_new: 
 	@echo + Installing $(VERSION)
 	@rm -f .installed.ver .installed.inc .installed.lib
+	$(MKDIRHIER) $(BETA_INC_DIR)
 	$(INSTALL) $(INSTALL_INC_FLAGS) \
 	  $(USER_INCS) \
 	  $(BETA_INC_DIR)
 	@for fn in $(USER_INCS); do \
 	  basename $$fn >>.installed.inc; done
+	$(MKDIRHIER) $(BETA_LIB_DIR)
 	$(INSTALL) $(INSTALL_LIB_FLAGS) \
 	  $(LIBRARY) \
 	  $(BETA_LIB_DIR)/$(LIBRARY).$(VERSION)
@@ -322,6 +324,9 @@ include .depend
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.5  1995/11/10  01:02:09  houghton
+# Now using MakeConfigs 3.4 with improved install targets.
+#
 # Revision 2.4  1995/10/31  13:07:00  houghton
 # Added arch components
 #
