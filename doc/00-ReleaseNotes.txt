@@ -20,6 +20,20 @@
 #   $Id$
 # 
 
+Version 2.02.01 -
+
+    Added strptime
+
+	  There is quite a bit of inconsistancy in the versions of
+	  strptime provided by the different operating systems. So, I
+	  decided the best solution is to include a version (based on
+	  GNU) that would provide the same functionallity across all
+	  OS's.
+
+    Changed Logger LOG_BY_DATE to create filenames with 4 digit years.
+    
+    Changed Logger to output time stamps with 4 digit years.
+    	  
 Version 2.01.02 - 5/7/97
 
     Source and header cleanup.
@@ -61,6 +75,9 @@ Version 2.00.00.b.04 - 10/31/95
 
 #
 # $Log$
+# Revision 2.2  1997/05/07 11:33:50  houghton
+# Updated for release 2.01.02
+#
 #
 
 # Local Variables:
