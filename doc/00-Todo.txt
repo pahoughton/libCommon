@@ -37,9 +37,44 @@
 #    hh:mm[:ss] - hour ( 24 hr format), min and optional seconds of 
 #                 of completion
 
+ENH Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
+Need to verify ErrorString has strings for all errors
+
+ENH Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
+Need test programs.
+
+BUG Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
+Change basename macro to a function that handles no path
+
+ENH Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
+man pages for: ArgEnvLong, CanExecute, FindPath, MemberOfGroup
+YYMMDDtoJD.pl, ArgEnvFlag,
+
+ENH Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
+Update CommonGetVersion string
+
+ENH Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
+Add file locking to Logger.
+
 === COMPLETED ===
 
 ENH Paul Houghton 6/14/94 08:00 Paul Houghton 6/14/94 08:00
 Add logging functions
 comp Paul Houghton 6/15/94 08:00
+
+ENH Paul Houghton 8/15/94 08:00 Paul Houghton 8/14/94 08:00
+Add ArgEnvLong, ArgEnvFlag
+comp Paul Houghton 8/15/94 08:00
+
+ENH Paul Houghton 8/15/94 08:00 Paul Houghton 8/14/94 08:00
+Add CanExecute, FindPath, MemberOfGroup
+comp Paul Houghton 8/15/94 08:00
+
+BUG Paul Houghton 7/26/94 08:00 Paul Houghton 7/26/94 08:00
+Incorrect month in logging string
+comp Paul Houghton 7/26/94 08:00
+
+ENH Paul Houghton 7/13/94 08:00 Paul Houghton 7/13/94 08:00
+Add Logger Tee function to tee output to stderr.
+comp Paul Houghton 7/13/94 08:00
 
