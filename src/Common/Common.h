@@ -220,7 +220,7 @@ typedef enum
   LOG_TEST  = 0x2000,
   LOG_DEBUG = 0x4000,
   LOG_FUNCT = 0x8000,
-  LOG_ALL   = 0x8fff
+  LOG_ALL   = 0xffff
 } LogLevelBit;
 
 typedef enum
@@ -651,6 +651,9 @@ const char * CommonGetVersion( void );
  * Modification History
  *     			
  * $Log$
+ * Revision 2.9  1997/03/03 14:12:28  houghton
+ * Bug-Fix: changed ErrorMesg arg type to const char *.
+ *
  * Revision 2.8  1996/02/29 16:20:44  houghton
  * Add Net to Host Conversion for Int and UInt
  *
