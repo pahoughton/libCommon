@@ -22,6 +22,9 @@
  * 6/7/94 - use StringToInt for conversion, allows using different bases.
  *
  * $Log$
+ * Revision 1.4  1994/06/20  15:28:37  dpotluri
+ * LibCommon Port to OPENVMS
+ *
  * Revision 1.3  1994/06/17  18:03:55  houghton
  * Cleanup for beta release.
  *
@@ -45,8 +48,8 @@ ArgEnvInt(
     char *  	  argv[],
     const char *  argId,
     const char *  envVar,
-    int           minimum,
-    int           max,
+    int           minimumVal,
+    int           maxVal,
     int *         paramVar
     )
 {
@@ -67,7 +70,7 @@ ArgEnvInt(
 	{
 	  paramValue = StringToInt( argString, 0, 0 );
 	  
-	  if( paramValue < minimum || paramValue > max )
+	  if( paramValue < minimumVal || paramValue > maxVal )
 	    {
 	      SET_ERROR( C_ERANGE );
 	      return( RET_ERROR );
@@ -88,7 +91,7 @@ ArgEnvInt(
 	{
 	  paramValue = StringToInt( envStringVal, 0, 0 );
 	  
-	  if( paramValue < minimum || paramValue > max )
+	  if( paramValue < minimumVal || paramValue > maxVal )
 	    {
 	      SET_ERROR( C_ERANGE );
 	      return( RET_ERROR );

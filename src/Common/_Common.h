@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.4  1994/06/22  16:34:55  dpotluri
+ * Port to MSWindows and OPENVMS
+ *
  * Revision 1.3  1994/06/06  13:23:38  houghton
  * Avl and DateTime functions added for Rating
  *
@@ -27,13 +30,15 @@
 
 #include <Common.h>
 
+#ifndef PROTO_GEN
+
 #ifdef MSWIN
 #include "_Cproto.h"
 #else
 #include "_CommonProto.h"
 #endif
 
-
+#endif
 
 
 

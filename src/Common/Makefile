@@ -71,8 +71,8 @@ DEFINES		= -D_POSIX_SOURCE
 
 TOPDIR		= .
 
-SRCINCDIR	= -I.
-PRJINCDIR	= -I$(TOPDIR)
+SRCINCDIR	= -I. -I$(TOPDIR)
+PRJINCDIR	= 
 
 INCDIRS		= $(SRCINCDIR)	\
 		  $(PRJINCDIR)
@@ -81,8 +81,7 @@ INCDIRS		= $(SRCINCDIR)	\
 # **** C O M P I L E / C P P ****
 
 CPPOTHER 	=
-#CCDEBUG		= -g
-CCDEBUG		= -Q -O2
+CCDEBUG		= -g
 CCOTHER		=
 
 # ***** L I B R A R I E S *****
@@ -105,14 +104,14 @@ $(LIBRARY): $(LIB_OBJECTS)
 
 .depend:
 	touch .depend
-	cproto -p $(LIB_C_SOURCES) >$(PROTO_H)
+	$(MKPROTO) $(CPPFLAGS) $(LIB_C_SOURCES) >$(PROTO_H)
 	$(DEPEND) -f.depend -- $(CPPFLAGS) -- $(LIB_C_SOURCES)
 	sed  's/^\([^ 	].*o:.*\)$(PROTO_H)\(.*\)/\1\2/' .depend >dep.out
 	mv dep.out .depend
 
 depend:
 	touch .depend
-	cproto -p $(LIB_C_SOURCES) >$(PROTO_H)
+	$(MKPROTO) $(CPPFLAGS) $(LIB_C_SOURCES) >$(PROTO_H)
 	$(DEPEND) -f.depend -- $(CPPFLAGS) -- $(LIB_C_SOURCES)
 	sed  's/^\([^ 	].*o:.*\)$(PROTO_H)\(.*\)/\1\2/' .depend >dep.out
 	mv dep.out .depend
@@ -145,8 +144,10 @@ install_production:
 	(cd $(PROD_INC_DEST); chgrp tools $(USER_INCS) )
 	echo 'Production Install Complete!'
 
+proto: $(PROTO_H)
+
 $(PROTO_H): $(LIB_C_SOURCES)
-	cproto $(CPPFLAGS) $(LIB_C_SOURCES) >$@
+	$(MKPROTO) $(CPPFLAGS) $(LIB_C_SOURCES) >$(PROTO_H)
 	
 
 tags: 
@@ -159,5 +160,5 @@ include .depend
 
 
 #
-# $log:$
+# $Log$
 #
