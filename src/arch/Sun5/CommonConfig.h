@@ -98,6 +98,14 @@ extern "C" {
 #define INT_ALL_BITS	((unsigned int)(~0))   /* 0xffff | 0xffffffff */
 
 #endif
+
+#define COMMON_CHAR_8_T		char
+#define COMMON_CHAR_S8_T	signed char
+#define COMMON_CHAR_U8_T	unsigned char
+#define COMMON_SHORT_S16_T	short
+#define COMMON_SHORT_U16_T	unsigned short
+#define COMMON_LONG_S32_T	long
+#define COMMON_LONG_U32_T	unsigned long
   
 #if defined(_BIG_ENDIAN)
   
@@ -138,6 +146,9 @@ extern "C" {
  * Revision Log:
  *
  * $Log$
+ * Revision 1.2  1997/09/16 11:33:26  houghton
+ * Added define COMMON_NET_HOST_CONVERTION.
+ *
  * Revision 1.1  1997/07/18 18:47:37  houghton
  * Initial Version.
  *
