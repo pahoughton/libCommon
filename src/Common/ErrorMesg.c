@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/11/10 00:48:34  houghton
+ * Initial Version
+ *
  *
  *********************************************************************/
 
@@ -31,7 +34,7 @@ extern int		_CommonErrorSetValue;	/* SetError.c */
 extern void *		_CommonErrorSetClosure; /* SetError.c */
 
 int
-ErrorMesg( char * mesgFormat, ... )
+ErrorMesg( const char * mesgFormat, ... )
 {
   int	    ret;
   va_list   args;

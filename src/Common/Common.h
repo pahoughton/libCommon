@@ -140,7 +140,7 @@ SetError( const char *	    srcFileName,
 	  void *	    closure );
        
 int
-ErrorMesg( char * mesgFormat, ... );
+ErrorMesg( const char * mesgFormat, ... );
 
 const char *
 ErrorTypeString( CommonErrorType errType );
@@ -651,6 +651,9 @@ const char * CommonGetVersion( void );
  * Modification History
  *     			
  * $Log$
+ * Revision 2.8  1996/02/29 16:20:44  houghton
+ * Add Net to Host Conversion for Int and UInt
+ *
  * Revision 2.7  1995/12/02 02:03:53  houghton
  * Add test and define for using libCommon with libClue.
  *
