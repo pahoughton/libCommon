@@ -150,7 +150,7 @@ install_man3: $(MAN_3_PAGES)
 
 install		\
 install_all	\
-install_doc	\
+install_docs	\
 install_man: install_man3
 
 clean:
@@ -161,6 +161,9 @@ realclean:
 
 #
 # $Log$
+# Revision 3.1  1999/10/29 16:56:11  houghton
+# Changed Version to 3
+#
 # Revision 2.8  1999/05/14 10:20:41  houghton
 # Bug-Fix: was not exiting with error code.
 #
