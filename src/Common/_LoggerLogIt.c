@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/11/10  00:56:08  houghton
+ * Initial Version
+ *
  *
  *********************************************************************/
 
@@ -58,7 +61,7 @@ _LoggerLogIt(
   
   if( _CLogLoc == TRUE && srcFileName != NULL )
     {
-      fprintf( log,"%s (%ld): ", srcFileName, srcLineNumber );
+      fprintf( log,"%s:%ld: ", srcFileName, srcLineNumber );
     }
   
   vfprintf( log, mesgFmt, mesgArgs );

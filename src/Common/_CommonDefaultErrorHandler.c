@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/11/10  00:56:07  houghton
+ * Initial Version
+ *
  *
  *********************************************************************/
 
@@ -58,7 +61,7 @@ _CommonDefaultErrorHandler(
       break;
 
     default:
-      sprintf( ErrorMesg, "%s: (%d) ",
+      sprintf( ErrorMesg, "%s(%d): ",
 	       ErrorTypeString( errorType ),
 	       errorValue );
       break;
