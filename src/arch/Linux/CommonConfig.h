@@ -2,51 +2,24 @@
 #define _CommonConfig_h_
 /*********************************************************************
  *
- * Title:            CommonConfig.h
+ * Title:       CommonConfig.h
+ * Project:	Common
+ * Desc:
  *
- * Description:
- *
- *
+ *  libCommon configuration header for Linux
  *
  * Notes:
  *
- * Programmer:	    Paul Houghton - (paul_houghton@wiltel.com)
+ * Author:	Paul Houghton - (paul.houghton@wcom.com)
+ * Created:	10/28/95 12:14
  *
- * Start Date:	    10/28/95 12:14
+ * Revision History: (See end of file for Revision Log)
  *
- * Modification History:
+ *  Last Mod By:    $Author$
+ *  Last Mod:	    $Date$
+ *  Version:	    $Revision$
  *
- * $Log$
- * Revision 2.8  1997/03/02 12:13:47  houghton
- * Added support for turning threads on or off.
- *
- * Revision 2.7  1996/03/08 16:28:17  houghton
- * Bug Fix: n2hs parens missing
- *
- * Revision 2.6  1996/02/29 16:22:04  houghton
- * Fixed net to host converters
- *
- * Revision 2.5  1995/12/02 02:11:04  houghton
- * *** empty log message ***
- *
- * Revision 2.4  1995/11/10  01:04:30  houghton
- * Added configuration defines for File names a sizes
- *
- * Revision 2.3  1995/10/30  14:55:22  houghton
- * Add Net2Host
- *
- * Revision 2.2  1995/10/29  18:16:15  houghton
- * Fixes for Borland 4.0 Port
- *
- * Revision 2.1  1995/10/29  13:31:20  houghton
- * Change version to 2.0
- *
- * Revision 1.1  1995/10/29  13:30:49  houghton
- * Linux Config File
- *
- * Revision 2.1  1995/10/28  19:19:12  houghton
- * New for Version 2.0
- *
+ * $Id$
  *
  *********************************************************************/
 
@@ -124,6 +97,14 @@ extern "C" {
 
 #define COMMON_NET_HOST_CONVERTION  1
   
+#define COMMON_CHAR_8_T		char
+#define COMMON_CHAR_S8_T	signed char
+#define COMMON_CHAR_U8_T	unsigned char
+#define COMMON_SHORT_S16_T	short
+#define COMMON_SHORT_U16_T	unsigned short
+#define COMMON_LONG_S32_T	long
+#define COMMON_LONG_U32_T	unsigned long
+
   /* LITTLE_ENDIAN (1234) */
 #define COMMON_n2hs( s ) \
     ((unsigned short)( ( (((unsigned short)(s)) & 0x00ff) << 8 ) | \
@@ -141,6 +122,44 @@ extern "C" {
 };
 #endif
 
+/*
+ *
+ * Revision Log:
+ *
+ * $Log$
+ * Revision 2.9  1997/09/16 11:33:18  houghton
+ * Added define COMMON_NET_HOST_CONVERTION.
+ *
+ * Revision 2.8  1997/03/02 12:13:47  houghton
+ * Added support for turning threads on or off.
+ *
+ * Revision 2.7  1996/03/08 16:28:17  houghton
+ * Bug Fix: n2hs parens missing
+ *
+ * Revision 2.6  1996/02/29 16:22:04  houghton
+ * Fixed net to host converters
+ *
+ * Revision 2.5  1995/12/02 02:11:04  houghton
+ * *** empty log message ***
+ *
+ * Revision 2.4  1995/11/10  01:04:30  houghton
+ * Added configuration defines for File names a sizes
+ *
+ * Revision 2.3  1995/10/30  14:55:22  houghton
+ * Add Net2Host
+ *
+ * Revision 2.2  1995/10/29  18:16:15  houghton
+ * Fixes for Borland 4.0 Port
+ *
+ * Revision 2.1  1995/10/29  13:31:20  houghton
+ * Change version to 2.0
+ *
+ * Revision 1.1  1995/10/29  13:30:49  houghton
+ * Linux Config File
+ *
+ * Revision 2.1  1995/10/28  19:19:12  houghton
+ * New for Version 2.0
+ *
+ */
+
 #endif /* ! def _CommonConfig_h_ */
-
-

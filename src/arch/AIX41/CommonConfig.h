@@ -2,60 +2,24 @@
 #define _CommonConfig_h_
 /*********************************************************************
  *
- * Title:            CommonConfig.h
+ * Title:       CommonConfig.h
+ * Project:	Common
+ * Desc:
  *
- * Description:
- *
- *
+ *  libCommon configuration header for IBM Aix 4.1
  *
  * Notes:
  *
- * Programmer:	    Paul Houghton - (paul_houghton@wiltel.com)
+ * Author:	Paul Houghton - (paul.houghton@wcom.com)
+ * Created:	10/28/95 12:14
  *
- * Start Date:	    10/28/95 12:14
+ * Revision History: (See end of file for Revision Log)
  *
- * Modification History:
+ *  Last Mod By:    $Author$
+ *  Last Mod:	    $Date$
+ *  Version:	    $Revision$
  *
- * $Log$
- * Revision 2.1  1997/04/26 12:28:58  houghton
- * Changed to Version 2
- *
- * Revision 1.3  1997/03/02 12:13:27  houghton
- * Added support for turning threads on or off.
- *
- * Revision 1.2  1996/04/09 12:12:43  houghton
- * Add Support for Net to Host 'int'
- *
- * Revision 1.1  1996/02/29 16:21:38  houghton
- * Initial Version
- *
- * Revision 2.2  1995/12/31 11:27:43  houghton
- * AIX Port - comment out sys/types.h include line.
- *
- * Revision 2.1  1995/11/10 12:32:53  houghton
- * Change to Version 2
- *
- * Revision 1.1  1995/11/10  12:08:57  houghton
- * Initial Version.
- *
- * Revision 2.4  1995/11/10  01:04:30  houghton
- * Added configuration defines for File names a sizes
- *
- * Revision 2.3  1995/10/30  14:55:22  houghton
- * Add Net2Host
- *
- * Revision 2.2  1995/10/29  18:16:15  houghton
- * Fixes for Borland 4.0 Port
- *
- * Revision 2.1  1995/10/29  13:31:20  houghton
- * Change version to 2.0
- *
- * Revision 1.1  1995/10/29  13:30:49  houghton
- * Linux Config File
- *
- * Revision 2.1  1995/10/28  19:19:12  houghton
- * New for Version 2.0
- *
+ * $Id$
  *
  *********************************************************************/
 
@@ -74,9 +38,7 @@
 #include <stdarg.h>
 #include <limits.h>
 
-/* #include <sys/types.h> */
-
-#ifdef __cplusplus
+#if defined( __cplusplus )
 extern "C" {
 #endif
 
@@ -127,14 +89,71 @@ extern "C" {
 #endif
   
 #define COMMON_NET_HOST_CONVERTION  0
-  
+
+#define COMMON_CHAR_8_T		char
+#define COMMON_CHAR_S8_T	signed char
+#define COMMON_CHAR_U8_T	unsigned char
+#define COMMON_SHORT_S16_T	short
+#define COMMON_SHORT_U16_T	unsigned short
+#define COMMON_LONG_S32_T	long
+#define COMMON_LONG_U32_T	unsigned long
+
   /* BIG_ENDIAN (4321) */
 #define COMMON_n2hs( s ) ( s ) 
 #define COMMON_n2hi( i ) ( i )
 #define COMMON_n2hl( l ) ( l )
 
-#ifdef __cplusplus
+#if defined( __cplusplus )
 };
 #endif
+
+/*
+ *
+ * Revision Log:
+ *
+ * $Log$
+ * Revision 2.2  1997/09/16 11:33:12  houghton
+ * Added define COMMON_NET_HOST_CONVERTION.
+ *
+ * Revision 2.1  1997/04/26 12:28:58  houghton
+ * Changed to Version 2
+ *
+ * Revision 1.3  1997/03/02 12:13:27  houghton
+ * Added support for turning threads on or off.
+ *
+ * Revision 1.2  1996/04/09 12:12:43  houghton
+ * Add Support for Net to Host 'int'
+ *
+ * Revision 1.1  1996/02/29 16:21:38  houghton
+ * Initial Version
+ *
+ * Revision 2.2  1995/12/31 11:27:43  houghton
+ * AIX Port - comment out sys/types.h include line.
+ *
+ * Revision 2.1  1995/11/10 12:32:53  houghton
+ * Change to Version 2
+ *
+ * Revision 1.1  1995/11/10  12:08:57  houghton
+ * Initial Version.
+ *
+ * Revision 2.4  1995/11/10  01:04:30  houghton
+ * Added configuration defines for File names a sizes
+ *
+ * Revision 2.3  1995/10/30  14:55:22  houghton
+ * Add Net2Host
+ *
+ * Revision 2.2  1995/10/29  18:16:15  houghton
+ * Fixes for Borland 4.0 Port
+ *
+ * Revision 2.1  1995/10/29  13:31:20  houghton
+ * Change version to 2.0
+ *
+ * Revision 1.1  1995/10/29  13:30:49  houghton
+ * Linux Config File
+ *
+ * Revision 2.1  1995/10/28  19:19:12  houghton
+ * New for Version 2.0
+ *
+ */
 
 #endif /* ! def _CommonConfig_h_ */
