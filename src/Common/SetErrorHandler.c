@@ -1,25 +1,50 @@
 /*********************************************************************
  *
- * Title:            SetErrorHandler.c
- *
- * Description:
+ * File:        SetErrorHandler.c
+ * Project:	Common
+ * Desc:
  *
  *	Sepecify the function to call when an error occures.
- *	The error function is call from LibError.
- *
- * Error Handling:
- *
- *	
+ *	The error function is call from ErrorArgs.
  *
  * Notes:
  *
- * Programmer:	    Paul Houghton (pah)
+ * Author:	Paul A. Houghton - (paul.houghton@wcom.com)
+ * Created:	01/29/94 20:26
  *
- * Start Date:	    01/29/94 20:26
+ * Revision History: (See end of file for Revision Log)
  *
- * Modification History:
+ *  Last Mod By:    $Author$
+ *  Last Mod:	    $Date$
+ *  Version:	    $Revision$
+ *
+ *********************************************************************/
+
+#include "_Common.h"
+
+COMMON_VERSION(
+  SetErrorHandler,
+  "$Id$");
+
+
+extern CommonErrorHandler  _CommonHandleError;	    /* ErrorArgs.c */
+extern void *		    _CommonClosureError;    /* ErrorArgs.c */
+
+void
+SetErrorHandler( CommonErrorHandler handler, void * closure )
+{
+  _CommonHandleError  = handler;
+  _CommonClosureError = closure;
+}
+
+/*
+ *
+ * Revision Log:
  *
  * $Log$
+ * Revision 2.4  1997/03/02 12:11:56  houghton
+ * Bug-Fix: function name was missing a 'l'.
+ *
  * Revision 2.3  1995/12/02 02:07:20  houghton
  * Bug fix - duplicate symbols.
  *
@@ -44,25 +69,7 @@
  * Revision 1.1  1994/01/31  14:06:15  houghton
  * Add avl and some other minor functions
  *
- *
- *********************************************************************/
-#include "_Common.h"
-
-COMMON_VERSION(
-  SetErrorHandler,
-  "$Id$");
-
-
-extern CommonErrorHandler  _CommonHandleError;	    /* ErrorArgs.c */
-extern void *		    _CommonClosureError;    /* ErrorArgs.c */
-
-void
-SetErrorHandler( CommonErrorHandler handler, void * closure )
-{
-  _CommonHandleError  = handler;
-  _CommonClosureError = closure;
-}
-
+ */
 
 
 /**

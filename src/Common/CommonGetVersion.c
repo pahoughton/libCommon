@@ -26,6 +26,8 @@ COMMON_VERSION(
   "$Id$" );
 
 
+const long CommonLibVersion = COMMON_LIB_VERSION;
+
 const char CommonVersion[] =
 #if !defined( OPENVMS )
 
@@ -40,7 +42,6 @@ const char CommonVersion[] =
 
 #endif
 
-
 const char *
 CommonGetVersion( void )
 {
@@ -52,6 +53,9 @@ CommonGetVersion( void )
  * Revision Log:
  *
  * $Log$
+ * Revision 2.5  1997/04/26 12:44:46  houghton
+ * Cleanup.
+ *
  * Revision 2.4  1997/03/02 12:28:56  houghton
  * Changed version info.
  *

@@ -4,9 +4,13 @@
  *
  * Description:
  *
- *	
+ *	Provides a way to specify the string that will be output to
+ *	represent a specific LogLevelBit. 
  *
  * Notes:
+ *
+ *	The string is not copied. It is directly accessed by the
+ *	logger functions.
  *
  * Programmer:	    Paul Houghton - (paul_houghton@wiltel.com)
  *
@@ -15,6 +19,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/11/10 00:56:01  houghton
+ * Initial Version
+ *
  *
  *********************************************************************/
 

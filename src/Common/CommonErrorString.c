@@ -4,7 +4,7 @@
  *
  * Description:
  *
- *	
+ *	Translate a CommonError value into a string
  *
  * Notes:
  *
@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/11/10 00:45:47  houghton
+ * Initial Version
+ *
  *
  *********************************************************************/
 

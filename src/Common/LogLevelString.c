@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/11/10 00:57:21  houghton
+ * Restructured to improve readability and move Global Values
+ *
  * Revision 2.1  1995/10/29  12:01:17  houghton
  * Change Version Id String
  *
@@ -48,10 +51,10 @@ const char * _CLogLevelNames[] =
   "APP_4",
   "APP_5",
   "APP_6",
-  "WCF_1",
-  "WCF_2",
-  "WCF_3",
-  "WCF_4",
+  "LIB_1",
+  "LIB_2",
+  "LIB_3",
+  "LIB_4",
   "INFO",
   "TEST",
   "DEBUG",

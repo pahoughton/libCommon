@@ -4,7 +4,10 @@
  *
  * Description:
  *
- *	
+ *	This function initializes the file that log entries are
+ *	written to, if the default logging funtion is used. Log files
+ *	are opened with the append flag, so if the file exist, it will
+ *	be appended.
  *
  * Notes:
  *
@@ -15,6 +18,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/11/10 00:56:05  houghton
+ * Initial Version
+ *
  *
  *********************************************************************/
 
@@ -89,3 +95,4 @@ LoggerSetLogFile(
 
   return( RET_SUCCEED );
 }
+

@@ -4,7 +4,8 @@
  *
  * Description:
  *
- *	
+ *	Call the error handler using the values establised by
+ *	SetError.
  *
  * Notes:
  *
@@ -15,6 +16,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1997/03/03 14:12:38  houghton
+ * Bug-Fix: changed ErrorMesg arg type to const char *.
+ *
  * Revision 2.1  1995/11/10 00:48:34  houghton
  * Initial Version
  *

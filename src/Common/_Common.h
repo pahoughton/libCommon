@@ -1,64 +1,34 @@
+#ifndef __Common_h_
+#define __Common_h_
 /*********************************************************************
  *
- * Title:            _Common.h
+ * Title:       _Common.h
+ * Project:	Common
+ * Desc:
  *
- * Description:
- *
- *	
+ *  
  *
  * Notes:
  *
- * Programmer:	    Paul Houghton (pah)
+ * Author:	Paul A. Houghton - (paul.houghton@wcom.com)
+ * Created:	01/29/94 21:06
  *
- * Start Date:	    01/29/94 21:06
+ * Revision History: (See end of file for Revision Log)
  *
- * Modification History:
+ *  Last Mod By:    $Author$
+ *  Last Mod:	    $Date$
+ *  Version:	    $Revision$
  *
- * $Log$
- * Revision 2.6  1997/04/26 12:45:03  houghton
- * Changed ver tag.
- *
- * Revision 2.5  1997/03/02 12:28:44  houghton
- * Changed version info.
- *
- * Revision 2.4  1996/04/27 12:27:05  houghton
- * Changed to use new CPROTO macro for proto generation.
- *
- * Revision 2.3  1995/11/10 01:03:31  houghton
- * Change to use new Error processing functions.
- *
- * Revision 2.2  1995/10/31  12:38:31  houghton
- * Move version info from CommonVersion.h to _Common.h
- * Use MakeConfigs 3.3
- * Update ErrorStrings for all CommonErrorType values
- *
- * Revision 2.1  1995/10/29  12:01:28  houghton
- * Change Version Id String
- *
- * Revision 2.0  1995/10/28  17:35:37  houghton
- * Move to Version 2.0
- *
- * Revision 1.6  1995/02/13  15:34:23  houghton
- * New functions and many enhancements to existing functions.
- *
- * Revision 1.5  1994/07/13  14:54:06  houghton
- * Sequent port
- *
- * Revision 1.4  1994/06/22  16:34:55  dpotluri
- * Port to MSWindows and OPENVMS
- *
- * Revision 1.3  1994/06/06  13:23:38  houghton
- * Avl and DateTime functions added for Rating
- *
- * Revision 1.2  1994/01/31  14:06:16  houghton
- * Add avl and some other minor functions
- *
+ * $Id$
  *
  *********************************************************************/
 
-
 #include "Common.h"
 #include <stdio.h>
+
+#if defined( __cplusplus )
+extern "C" {
+#endif
 
 #define COMMON_PRJ_NAME	    "Common"
 #define COMMON_PRJ_VER_TAG  "PROD_2_01"
@@ -100,10 +70,57 @@ const char COMMONVER_##name_[] =					      \
 #include "Cmmnprot.h"
 #endif
 
+#if defined( __cplusplus )
+};
 #endif
 
-
-
+/*
+ *
+ * Revision Log:
+ *
+ * $Log$
+ * Revision 2.7  1997/04/26 16:25:21  houghton
+ * Added COMMON_PRJ_VER_TAG to COMMON_VERSION macro.
+ *
+ * Revision 2.6  1997/04/26 12:45:03  houghton
+ * Changed ver tag.
+ *
+ * Revision 2.5  1997/03/02 12:28:44  houghton
+ * Changed version info.
+ *
+ * Revision 2.4  1996/04/27 12:27:05  houghton
+ * Changed to use new CPROTO macro for proto generation.
+ *
+ * Revision 2.3  1995/11/10 01:03:31  houghton
+ * Change to use new Error processing functions.
+ *
+ * Revision 2.2  1995/10/31  12:38:31  houghton
+ * Move version info from CommonVersion.h to _Common.h
+ * Use MakeConfigs 3.3
+ * Update ErrorStrings for all CommonErrorType values
+ *
+ * Revision 2.1  1995/10/29  12:01:28  houghton
+ * Change Version Id String
+ *
+ * Revision 2.0  1995/10/28  17:35:37  houghton
+ * Move to Version 2.0
+ *
+ * Revision 1.6  1995/02/13  15:34:23  houghton
+ * New functions and many enhancements to existing functions.
+ *
+ * Revision 1.5  1994/07/13  14:54:06  houghton
+ * Sequent port
+ *
+ * Revision 1.4  1994/06/22  16:34:55  dpotluri
+ * Port to MSWindows and OPENVMS
+ *
+ * Revision 1.3  1994/06/06  13:23:38  houghton
+ * Avl and DateTime functions added for Rating
+ *
+ * Revision 1.2  1994/01/31  14:06:16  houghton
+ * Add avl and some other minor functions
+ *
+ */
 
 /**
  *             This software is the sole property of
@@ -118,4 +135,4 @@ const char COMMONVER_##name_[] =					      \
  *                      All Rights Reserved.  
  *
  **/
-    
+#endif /* ! def __Common_h_ */

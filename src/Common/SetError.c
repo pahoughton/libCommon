@@ -4,7 +4,7 @@
  *
  * Description:
  *
- *	
+ *	Set the information for an error that has occured.
  *
  * Notes:
  *
@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/11/10 00:56:06  houghton
+ * Initial Version
+ *
  *
  *********************************************************************/
 
