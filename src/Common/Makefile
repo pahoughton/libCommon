@@ -34,8 +34,8 @@ INSTALL_LIBDIR	= $(beta_libdir)
 INSTALL_INCDIR	= $(beta_incdir)
 
 VER_MAJOR	= 2
-VER_MINOR	= 01
-VER_RELEASE	= 03
+VER_MINOR	= 02
+VER_RELEASE	= 00.a.01
 VERSION		= $(VER_MAJOR).$(VER_MINOR).$(VER_RELEASE)
 
 LIBRARY_DEFAULT	= lib$(NAME).a
@@ -200,7 +200,6 @@ USER_INCLUDES	=		\
 
 C_HEADERS	=			\
 	Common.h                        \
-	GnuRegex.h                      \
 	_AvlTypes.h                     \
 	_Common.h                       \
 	$(ARCH_C_HEADERS)               \
@@ -263,6 +262,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.25  1997/09/02 21:33:09  houghton
+# Changed to use MakeConfigs 5.02.
+#
 # Revision 2.24  1997/08/24 21:50:04  houghton
 # Changed version number.
 #
