@@ -16,6 +16,10 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/10/30 14:55:14  houghton
+ * Move contents of Bit.h & DateTime.h to Common.h
+ * Add Net2Host
+ *
  * Revision 2.1  1995/10/28  19:11:43  houghton
  * Change Version Id String
  *
@@ -49,8 +53,14 @@ COMMON_VERSION(
 const int DaysInMonth[] =
 { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, 0};
 
+const int DaysInMonthLeap[] =
+{ 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, 0};
+
 const int MonthDayOfYear[] =
 { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365, 0};
+
+const int MonthDayOfYearLeap[] =
+{ 0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366, 0};
 
 const char * Months[] =
 {

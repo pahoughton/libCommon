@@ -444,7 +444,9 @@ typedef enum {
 void LinkDateData( void );  
  
 extern const int    DaysInMonth[];
+extern const int    DaysInMonthLeap[];
 extern const int    MonthDayOfYear[];
+extern const int    MonthDayOfYearLeap[];
 extern const char * Months[];
 extern const char * AbbrMonths[];
 extern const char * WeekDays[];
@@ -674,6 +676,9 @@ FileModeString( mode_t	mode, char * modeString );
  * Modification History
  *     			
  * $Log$
+ * Revision 2.20  1998/09/24 14:32:00  houghton
+ * Changed strptime 'buf' arg to const char * (was char *).
+ *
  * Revision 2.19  1998/03/21 17:17:43  houghton
  * Removed ';' to eliminate compiler warning.
  *
