@@ -10,6 +10,9 @@
  * Revision History:
  *
  * $Log$
+ * Revision 2.2  1995/10/29  12:01:16  houghton
+ * Change Version Id String
+ *
  * Revision 2.1  1995/10/28  19:18:18  houghton
  * New for version 2.0
  *
@@ -22,7 +25,7 @@ COMMON_VERSION(
   "$Id$" );
 
 BOOL
-IsLeapYear( short year )
+IsLeapYear( int year )
 {
   return( !(year % 4) && ( (year % 100) || !(year % 400) ) );
 }
