@@ -1,12 +1,24 @@
-# -*- Makefile -*-
 #
-# Makefile for libCommon src/arch/Linux
+# Title:        Makefile.Common
+# Project:	Common
+# Desc:
+# 
+#   Makefile for libCommon src/arch/AIX41
+# 
+# Notes:
+# 
+# Author:	Paul A. Houghton - (paul.houghton@wcom.com)
+# Created:	11/20/95
 #
-# Created 11/20/95
+# Revision History: (See end of file for Revision Log)
 #
-# $Id$
+#   Last Mod By:    $Author$
+#   Last Mod:	    $Date$
+#   Version:	    $Revision$
 #
-#
+#   $Id$
+# 
+
 
 ARCH_SRC_DIR	= ../arch/src
 ARCH_DIR	= ../arch/$(arch)
@@ -30,12 +42,15 @@ ARCH_USER_H_INCS	= 		\
 	$(ARCH_DIR)/CommonConfig.h	\
 
 ARCH_C_HEADERS		= 		\
-	$(ARCH_DIR)CommonConfig.h	\
-	$(ARCH_DIR)_GnuRegexCfg.h	\
+	$(ARCH_DIR)/CommonConfig.h	\
+
 
 
 #
 # $Log$
+# Revision 2.1  1997/04/26 12:29:12  houghton
+# Changed to Version 2.
+#
 # Revision 1.2  1996/05/03 16:10:34  houghton
 # Rework for MakeConfigs 5.
 #
@@ -49,3 +64,9 @@ ARCH_C_HEADERS		= 		\
 # Initial Version.
 #
 #
+
+# Local Variables:
+# mode:makefile
+# End:
+
+
