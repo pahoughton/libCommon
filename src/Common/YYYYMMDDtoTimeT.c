@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/10/29 18:16:01  houghton
+ * Fixes for Borland 4.0 Port
+ *
  * Revision 2.1  1995/10/29  12:01:26  houghton
  * Change Version Id String
  *
@@ -35,19 +38,14 @@ COMMON_VERSION(
 time_t 
 YYYYMMDDtoTimeT( const char * yyyymmdd )
 {
-  int   year = 0;
-  int	month = ( ( (yyyymmdd[4] - '0') * 10) + (yyyymmdd[5] - '0') );
-  int	day = ( ( (yyyymmdd[6] - '0') * 10) + (yyyymmdd[7] - '0') );
-
-  if( yyyymmdd[0] != '0' )
-    {
-      year = ( ((yyyymmdd[0] - '0') * 1000 ) + ((yyyymmdd[1] - '0') * 100) +
-	       ((yyyymmdd[2] - '0') * 10) + ((yyyymmdd[3] - '0' )) );
-    }
-  else
-    {
-      year = ((yyyymmdd[2] - '0') * 10) + ((yyyymmdd[3] - '0' ));
-    }
+  int   year = ( ((yyyymmdd[0] - '0') * 1000 )
+		 + ((yyyymmdd[1] - '0') * 100)
+		 + ((yyyymmdd[2] - '0') * 10)
+		 + ((yyyymmdd[3] - '0' )) );
+  int	month = ( ( (yyyymmdd[4] - '0') * 10)
+		  + (yyyymmdd[5] - '0') );
+  int	day = ( ( (yyyymmdd[6] - '0') * 10)
+		+ (yyyymmdd[7] - '0') );
 
   return( YearMonthDayToTimeT( year, month, day ) );
 }
