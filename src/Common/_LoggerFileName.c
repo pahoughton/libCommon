@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/29  12:01:28  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:38  houghton
  * Move to Version 2.0
  *
@@ -38,9 +41,10 @@ COMMON_VERSION(
   _LoggerFileName,
   "$Id$");
 
-extern char   _CLogFilePath[];
-extern int    _CLogFileType;
-extern char   _CLogFileName[];
+char	_CLogFilePath[ COMMON_PATH_MAX + 5 ]     = ".";
+char	_CLogFileName[ FILENAME_MAX + 5 ] = "00-APP.LOG";
+
+extern LogOutFileType	_CLogFileType;	/* _LoggerDefault.c */
 
 void
 _LoggerFileName(
