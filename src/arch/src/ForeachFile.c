@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/29  13:33:56  houghton
+ * Initial Linux Build of Version 2
+ *
  * Revision 2.0  1995/10/28  17:35:22  houghton
  * Move to Version 2.0
  *
@@ -75,7 +78,7 @@ ForeachFile(
   
   if( stat( dirName, &fileStat ) != 0 )
     {
-      SET_ERROR( C_EOSERROR );
+      SET_ERROR( ET_OSERROR, errno );
       return( RET_ERROR );
     }
   
@@ -87,7 +90,8 @@ ForeachFile(
       
       if( (dir = opendir( dirName ) ) == NULL )
 	{
-	  SET_ERROR( C_EOSERROR );
+	  SET_ERROR( ET_OSERROR, errno );
+	  _CommonErrorDesc( "Can't open: '%s'", dirName );	  
 	  return( RET_ERROR );
 	}
       
@@ -105,7 +109,7 @@ ForeachFile(
 	  
 	  if( pathName == NULL )
 	    {
-	      SET_ERROR( C_EOSERROR );
+	      SET_ERROR( ET_OSERROR, errno );
 	      return( RET_ERROR );
 	    }
 	  
