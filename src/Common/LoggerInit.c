@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/10/29  13:33:43  houghton
+ * Initial Linux Build of Version 2
+ *
  * Revision 2.1  1995/10/29  12:01:18  houghton
  * Change Version Id String
  *
@@ -50,89 +53,40 @@ COMMON_VERSION(
   "$Id$" );
 
 
-char _CLogFilePath[256] = ".";
-char _CLogFileName[256] = "program.log";
 
-int _CLogFileType    = LOG_REOPEN;
-long _CLogMaxSize    = 0;
-long _CLogTrim       = 0;
-
-int _CLogOutputLevel    = LOG_WARN | LOG_ERROR;
-BOOL _CLogDate	        = TRUE;
-BOOL _CLogLoc           = TRUE;
-BOOL _CLogTee		= TRUE;
-
-FILE * _CLogFP = NULL;
-
-LogBit _CLogCurMesgLevel = LOG_NONE;
-const char * _CLogLocFile = "unknown";
-int 	     _CLogLocLine = -1;
-
-
-void
+Ret_Status
 LoggerInit(
-    const char *      logPath,
-    const char *      logFileName,
-    LogOutFileType    outputFileType,
-    long	      maxByteCount,
-    long	      trimIncrement,
-    LogSetLevelType   setType,
-    int		      outputLevels,
-    BOOL	      outputDate,
-    BOOL	      outputSourceLoc
-    )
+  const char *      logPath,
+  const char *      logFileName,
+  LogOutFileType    outputFileType,
+  long		    maxByteCount,
+  long		    trimIncrement,
+  LogSetLevelType   setType,
+  int		    outputLevels,
+  BOOL		    outputDate,
+  BOOL		    outputSourceLoc,
+  BOOL		    teeOutput,
+  LoggerFunct	    funct,
+  void *	    closure
+  )
 {
-
-  if( logPath != NULL )
+  if( LoggerSetLogFile( logPath,
+			logFileName,
+			outputFileType,
+			maxByteCount,
+			trimIncrement ) != RET_SUCCEED )
     {
-      strncpy( _CLogFilePath, logPath, sizeof( _CLogFilePath ) - 2 );
-      _CLogFilePath[sizeof( _CLogFilePath ) - 2] = 0;
+      return( RET_ERROR );
     }
-
-  if( logFileName != NULL )
-    {
-      strncpy( _CLogFileName, logFileName, sizeof( _CLogFileName ) - 2 );
-      _CLogFileName[ sizeof( _CLogFileName ) - 2] = 0;
-    }
-
-  _CLogFileType = outputFileType;
-  _CLogMaxSize  = maxByteCount;
-  _CLogTrim     = trimIncrement;
-
-  switch( setType )
-    {
-    case LOG_SET:
-      _CLogOutputLevel = outputLevels;
-      break;
-
-    case LOG_ON:
-      _CLogOutputLevel |= outputLevels;
-      break;
-
-    case LOG_OFF:
-      _CLogOutputLevel ^= outputLevels;
-      break;
-
-    default:
-      _CLogOutputLevel = outputLevels;
-      break;
-
-    }
-
   
-  _CLogDate = outputDate;
-  _CLogLoc  = outputSourceLoc;
+  LoggerSetOutputLevel(  setType, outputLevels );
 
-  if( _CLogFileType != LOG_REOPEN )
-    {
-      char logFn[1024];
-
-      _LoggerFileName( logFn, sizeof( logFn ) );
-      
-      _CLogFP = fopen( logFn, "a" );
-    }
-      
-  return;
+  LoggerSetDate( outputDate );
+  LoggerSetLoc( outputSourceLoc );
+  LoggerSetTee( teeOutput );
+  LoggerSetFunct( funct, closure );
+  
+  return( RET_SUCCEED );
 }
 
 
