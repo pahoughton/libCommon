@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.6  1994/06/17  21:48:14  dpotluri
+ * Minor mods to the function Logger
+ *
  * Revision 1.5  1994/06/17  18:03:56  houghton
  * Cleanup for beta release.
  *
@@ -322,7 +325,9 @@ Ret_Status ForeachFile(
 
 const char * CommonGetVersion( void );
 
-
+#ifndef min
+#define min( _a_, _b_ ) ( ( (_a_) > (_b_) ) ? (_b_) : (_a_) )
+#endif 
 
 #ifdef __cplusplus
 };

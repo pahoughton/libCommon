@@ -52,6 +52,7 @@ LIB_C_SOURCES   =   	\
 	LogLevelFromString.c \
 	LogLevelString.c \
 	LoggerTrim.c    \
+    	LoggerLoc.c     \
     	_LoggerFileName.c \
 	$(ARCH_C_SOURCES)
 

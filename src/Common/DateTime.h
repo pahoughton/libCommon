@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1994/06/17  18:03:57  houghton
+ * Cleanup for beta release.
+ *
  * Revision 1.1  1994/06/06  13:23:34  houghton
  * Avl and DateTime functions added for Rating
  *
@@ -31,7 +34,7 @@ extern "C" {
 #define SEC_PER_HOUR  (60 * SEC_PER_MIN)
 #define SEC_PER_DAY   (24 * SEC_PER_HOUR)
 #define SEC_PER_YEAR  (365 * SEC_PER_DAY)
-
+#define MIN_PER_HOUR  60
 #include <time.h>
 
 typedef enum {

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1994/06/17  18:07:30  houghton
+ * Cool new Logger function
+ *
  *
  *********************************************************************/
 static const char RcsId[] =
@@ -23,8 +26,8 @@ static const char RcsId[] =
 
 #include "_Common.h"
 
-int
-StringToInt(
+long
+StringToLong(
     const char * string,
     int		 baseToUse,
     int          len
