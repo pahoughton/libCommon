@@ -11,7 +11,7 @@
 
 
   /* definition of a NULL action and a NULL tree */
-#define NULL_ACTION    ( ( void(*)() ) NULL )
+#define NULL_ACTION    ( ( void (*)( void *, AvlVisit, void *) ) 0 )
 #define NULL_TREE      ( (AVLtree)     NULL )
   
   
@@ -22,9 +22,9 @@
   
        /* Directional Definitions */
 typedef  short  DIRECTION;
-#define  LEFT             0
-#define  RIGHT            1
-#define  OPPOSITE(x)     ( 1 - (x) )
+#define  LEFT           ((DIRECTION) 0)
+#define  RIGHT          ((DIRECTION) 1)
+#define  OPPOSITE(x)	((DIRECTION) ( 1 - (x) ))
   
 
        /* return codes used by avl_insert(), avl_delete(), and balance() */
