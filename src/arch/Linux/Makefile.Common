@@ -31,10 +31,12 @@ ARCH_USER_H_INCS	= 		\
 
 ARCH_C_HEADERS		= 		\
 	$(ARCH_DIR)/CommonConfig.h	\
-	$(ARCH_DIR)/_GnuRegexCfg.h	\
 
 #
 # $Log$
+# Revision 2.3  1996/05/03 16:10:42  houghton
+# Cleanup.
+#
 # Revision 2.2  1996/04/27 12:27:22  houghton
 # Changed to use MakeConfigs 5
 #
