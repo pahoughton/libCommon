@@ -102,10 +102,14 @@ typedef enum
   EC_UNDEFINED
 } CommonError;
 
-extern CommonError  CommonErrno;
-extern const char * CommonErrorDesc;
-extern const char * CommonErrorFile;
-extern long	    CommonErrorLine;
+/* SetError (below) assigns values to these */
+
+extern CommonErrorType	CommonErrType;
+extern CommonError	CommonErrValue;
+extern const char *	CommonErrDesc;
+extern const char *	CommonErrFile;
+extern long		CommonErrLine;
+extern void *		CommonErrClosure;
 
 typedef int (* CommonErrorHandler)( void *		closure,
 				    const char *	srcFileName,
@@ -446,7 +450,7 @@ extern const char * AbbrMonths[];
 extern const char * WeekDays[];
 extern const char * AbbrWeekDays[];
 
-#if !defined( CLUE_IsLeapYear )
+#if !defined( STLUTILS_IsLeapYear )
 #define COMMON_IsLeapYear 1
 
 BOOL
@@ -670,6 +674,9 @@ FileModeString( mode_t	mode, char * modeString );
  * Modification History
  *     			
  * $Log$
+ * Revision 2.16  1997/08/24 21:46:35  houghton
+ * Added MIN_TIMET, MAX_TIMET, MIN_YEAR & MAX_YEAR.
+ *
  * Revision 2.15  1997/07/18 18:44:24  houghton
  * Port(Sun5): Changed EtoA to unsigned char.
  *
