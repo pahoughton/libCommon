@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.5  1994/06/17  18:03:56  houghton
+ * Cleanup for beta release.
+ *
  * Revision 1.4  1994/06/06  13:23:34  houghton
  * Avl and DateTime functions added for Rating
  *
@@ -182,7 +185,7 @@ void LoggerInit( const char *	logPath,
 		 Bool		 outputSourceLoc
 		 );
 
-void Logger( char * msgFmt, ... );
+void Logger( const char * msgFmt, ... );
 
 Bool LoggerLoc( Bool state );
 void LoggerTrim( void );

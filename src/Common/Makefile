@@ -20,7 +20,7 @@ PROD_INC_DEST	= /usr/local/include
 
 LIBRARY = libCommon.a
 
-USER_INCS	= Common.h avl.h
+USER_INCS	= Common.h avl.h DateTime.h
 
 PROTO_H = _CommonProto.h
 
@@ -103,14 +103,14 @@ $(LIBRARY): $(LIB_OBJECTS)
 
 .depend:
 	touch .depend
-	$(MKPROTO) -p $(LIB_C_SOURCES) >$(PROTO_H)
+	cproto -p $(LIB_C_SOURCES) >$(PROTO_H)
 	$(DEPEND) -f.depend -- $(CPPFLAGS) -- $(LIB_C_SOURCES)
 	sed  's/^\([^ 	].*o:.*\)$(PROTO_H)\(.*\)/\1\2/' .depend >dep.out
 	mv dep.out .depend
 
 depend:
 	touch .depend
-	$(MKPROTO) -p $(LIB_C_SOURCES) >$(PROTO_H)
+	cproto -p $(LIB_C_SOURCES) >$(PROTO_H)
 	$(DEPEND) -f.depend -- $(CPPFLAGS) -- $(LIB_C_SOURCES)
 	sed  's/^\([^ 	].*o:.*\)$(PROTO_H)\(.*\)/\1\2/' .depend >dep.out
 	mv dep.out .depend
