@@ -1,87 +1,240 @@
 #
-# Makefile for WCF Sample Client
-#
-#  This make file uses configuration system that detects the
-#  platform (AIX, SEQ, NeXT ...) and uses the appropriate 
-#  compiler and libs	
+# Makefile for t
 #
 #
-# Created: 3/29/93
+# Created: 10/9/95
 #
-# SCCS Info: %W% %G% %U%
+# $Id$
 #
+# (see end of file for Log info)
+
+#
+# Include standard MakeConfig configuration for GNU make required
 #
 
-include make.cfg
+makefile_type = program
 
-PROGRAM		= AvlTest
+include Make/make.cfg.3.4
 
-# **** S O U R C E   F I L E S ****
-
-C_SOURCES   =   			\
-	main.c		\
-	DeleteError.c	\
-	AvlTestSmallValues.c 	\
-	CompareNodes.c		\
-	AvlTestLargeValues.c	\
-	DateTimeTest.c		\
-	StringTest.c		\
-	TestOutput.c	
+BETA_DIR	= 
+PROD_DIR	= 
+MAN_DIR		=
 
 
+MAJOR_VER	= 1
+MINOR_VER	= 00.00
+VERSION		= $(MAJOR_VER).$(MINOR_VER)
 
+PROGRAM = t
+
+PROTO_H	= _t_Proto.h
+
+# 
+# =USE_CURRENT_MAKEFILE=
+# When you re-gen a make file, every thing between 
+# these tags will be kept int the new makefile
+# if you want it re-gen'd, just delete the tags
+#
 
 # *****  D E F I N E S  *****
+#
+# Config defines avalable
+#
+# $(X11_DEF)	    defines for X11
+# $(SYB_DEF)	    defines for SYB
+# $(MMALLOC_DEF)    defines for libmmalloc
+# $(DATA_DEF)	    defines for libData (C++)
+# $(CLUE_DEF)	    defines for libClue (C++)
+# $(COMMON_DEF)	    defines for libCommon
+# $(WT_DEF)	    defines for libWt
+# $(WCF_DEF)	    defines for libWcf (CommFabric)
+#
 
-DEFINES		= 
+SRCDEFINES	= 
+PRJDEFINES	= -DVERSION=\"$(VERSION)\"
+
+DEFINES		= $(PRJDEFINES) $(SRCDEFINES) 
 
 # *****  I N C L U D E S *****
+#
+# Config includes available
+#
+# $(X11_INC)
+# $(SYB_INC)
+# $(MMALLOC_BETA_INC)
+# $(MMALLOC_INC)
+# $(DATA_ALPHA_INC)
+# $(DATA_BETA_INC)
+# $(DATA_INC)
+# $(CLUE_ALPHA_INC)
+# $(CLUE_BETA_INC)
+# $(CLUE_INC)
+# $(COMMON_ALPHA_INC)
+# $(COMMON_BETA_INC)
+# $(COMMON_INC)
+# $(WT_ALPHA_INC)
+# $(WT_BETA_INC)
+# $(WT_INC)
+# $(WCF_ALPHA_INC)
+# $(WCF_BETA_INC)
+# $(WCF_INC)
+#
+# $(LOCAL_ALPHA_INC)
+# $(LOCAL_BETA_INC)
+# $(LOCAL_INC)
+#
 
+# TOPDIR	=
 
-SRCINCDIR	= -I. -I../
-PRJINCDIR	= -I
+SRCINCDIR	= -I. -I../src/Common -I../src/arch/$(arch)
+PRJINCDIR	= 
 
 INCDIRS		= $(SRCINCDIR)	\
 		  $(PRJINCDIR)
 
-
 # **** C O M P I L E / C P P ****
+#
+# Config flags available
+#
+# $(CC_OPTIMIZE)
+# $(CC_DEBUG)
+# $(CC_PROFILE)
+#
 
-CPPOTHER 	=
+CPPOTHER 	= 
 CCDEBUG		= -g
 CCOTHER		=
 
+INSTALL_BIN_FLAGS   = -m 775
 
 # ***** L I B R A R I E S *****
+#
+# Config libraryies available
+#
+# $(X11_LIBS)
+# $(XAW_LIBS)
+# $(XM_LIBS)
+# $(SYB_LIBS)
+# $(MMALLOC_BETA_LIBS)
+# $(MMALLOC_LIBS)
+# $(DATA_ALPHA_LIBS)
+# $(DATA_BETA_LIBS)
+# $(DATA_LIBS)
+# $(CLUE_ALPHA_LIBS)
+# $(CLUE_BETA_LIBS)
+# $(CLUE_LIBS)
+# $(COMMON_ALPHA_LIBS)
+# $(COMMON_BETA_LIBS)
+# $(COMMON_LIBS)
+# $(WT_ALPHA_LIBS)
+# $(WT_BETA_LIBS)
+# $(WT_LIBS)
+# $(WCF_ALPHA_LIBS)
+# $(WCF_BETA_LIBS)
+# $(WCF_LIBS)
+#
+# $(LOCAL_ALPHA_LDIR)
+# $(LOCAL_BETA_LDIR)
+# $(LOCAL_LDIR)
+# $(X11_LDIR)
+#
 
-LDLIBDIRS	= -L../
-LDLIBS		= -lCommon
+LDLIBS		= -L../src/Common -lCommon
+
+#
+# =USE_CURRENT_MAKEFILE=
+#
+
+# **** S O U R C E   F I L E S ****
+
+C_SOURCES	=			\
+	main.c                          \
+	tTempFileName.c                 \
 
 
-# ***** D E P E N D A N C I E S *****
-
-
-
-all:	Prototypes $(PROGRAM)
-
-$(PROGRAM):	$(OBJECTS)
-	$(LD) -o $@ $(OBJECTS) $(LDFLAGS) 
-
-depend:
-	$(DEPEND) -s "# DO NOT DELETE" -- $(CPPFLAGS) -- $(SRCS)
-
-test:
-
-
-Prototypes:	$(PROTO_H)
-
-$(PROTO_H): $(C_SOURCES)
-	/usr/local/bin/mkproto -p $(C_SOURCES) >$@
+USER_INCS	=	\
+	$(USER_H_INCS)     \
+	$(USER_HH_INCS)    \
+	$(USER_II_INCS)    \
 
 
 
+# ***** T A R G E T S *****
+#
+#
+# Targets defined in make.cfg.*
+#
+# default: 	all
+# depend:	create .depend
+# proto:	create $(PROTO_H)
+# clean:  	rm -f LIB_OBJECTS LIBRARY
+# realclean:	rm -f LIB_OBJECTS LIBRARY .depend.lib PROTO_H TAGS
+# tags:		create TAGS using etags
+#
+
+include Make/make.cfg.targets.3.4
+
+
+all: $(PROGRAM)
+
+$(PROGRAM): $(OBJECTS)
+	$(LD) -o $@ $(OBJECTS) $(LDFLAGS) $(LIBXXARCH)
+
+install: default
+	$(MKDIRHIER) $(BETA_DIR)/old
+	if [ -e $(BETA_DIR)/$(PROGRAM).$(VERSION) ] ; then \
+	echo $(BETA_DIR)/$(PROGRAM).$(VERSION) already installed!; \
+	echo Change version number in makefile and try again.; \
+	exit 1; \
+	fi
+	if [ -e .installed.ver ] ; then \
+	ver=`cat .installed.ver`; \
+	for fn in `cat .installed.prog`; do \
+	mv $(BETA_DIR)/$$fn $(BETA_DIR)/old; \
+	done; \
+	echo $(VERSION) >.installed.ver
+	echo $(PROGRAM).$(VERSION) >.installed.prog
+	$(INSTALL) $(INSTALL_BIN_FLAGS) \
+		$(PROGRAM) $(BETA_DIR)/$(PROGAM).$(VERSION)
+	(cd $(BETA_DIR); rm $(PROGRAM); \
+	  ln -s $(PROGRAM).$(VERSION) $(PROGRAM) )
+	echo 'Beta Install Complete!'
+
+install_production: default
+	$(MKDIRHIER) $(PROD_DIR)/old
+	if [ -e $(PROD_DIR)/$(PROGRAM).$(VERSION) ] ; then \
+	echo $(PROD_DIR)/$(PROGRAM).$(VERSION) already installed!; \
+	echo Change version number in makefile and try again.; \
+	exit 1; \
+	fi
+	if [ -e .installed.ver ] ; then \
+	ver=`cat .installed.ver`; \
+	for fn in `cat .installed.prog`; do \
+	mv $(PROD_DIR)/$$fn $(PROD_DIR)/old; \
+	done; \
+	echo $(VERSION) >.installed.ver
+	echo $(PROGRAM).$(VERSION) >.installed.prog
+	$(INSTALL) $(INSTALL_BIN_FLAGS) \
+		$(PROGRAM) $(PROD_DIR)/$(PROGAM).$(VERSION)
+	(cd $(PROD_DIR); rm $(PROGRAM); \
+	  ln -s $(PROGRAM).$(VERSION) $(PROGRAM) )
+	echo 'Production Install Complete!'
+
+
+test:	all
+
+#
+# include dependancies generated by 'make depend'
+#
+include .depend
+
+#
+# =MAKEFILE_LOG=
+#
+# $Log$
+#
+# =MAKEFILE_LOG=
+#
 
 
 
-
-# DO NOT DELETE
