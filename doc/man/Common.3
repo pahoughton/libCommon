@@ -69,6 +69,15 @@ CommonErrorType value of the last error.
 CommonAppErrno
 int to be used by applications for application errors.
 .TP
+LogBit
+enum of log message types.
+.TP
+LogSetLevelType
+enum used to specify how to set the output log levels.
+.TP
+LogOutFileType
+enum to specify the type of log file to create.
+.TP
 AvlTree
 typedef used to declare AVL tree identifiers.
 .TP
@@ -125,7 +134,33 @@ ArgEnvDouble(3)
 translate command line argument or environment variable to a double.
 .TP
 ArgEnvString(3)
-translate command line argument or environment variable to a char string.
+translate command line argument or environment variable to a char
+string.
+.SH LOGGIN FUNCTIONS
+.TP
+LoggerInit(3)
+Initialize the logger.
+.TP
+LoggerTee(3)
+turn on/off tee'ing log output to stderr.
+.TP
+Logger(3)
+log a specific message to the log file
+.TP
+LoggerLoc(3)
+turn on/off prefixing log message with source file and line number.
+.TP
+LoggerTrim(3)
+trim the log file.
+.TP
+LogLevelFromString(3)
+translate a string to a output log level.
+.TP
+LogLevelString(3)
+translate a current log level to a string.
+.TP
+LOGIT(3)
+log a specific type of message.
 .SH STRING FUNCTIONS
 .TP
 CharToInt(3)

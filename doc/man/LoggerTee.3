@@ -1,0 +1,39 @@
+.\"
+.\" Man page for LoggerTee
+.\"
+.\" $Id$
+.\"
+.\" $Log$
+.\"
+.TH LoggerTee 3  "13 Jul 94"
+.SH NAME
+LoggerTee \- tee log output to stderr
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+Bool LoggerTee(
+.PD 0
+.RS
+.TP 10
+Bool
+onOff )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+onOff
+turn ON or OFF tee'ing log output to stderr
+.SH DESCRIPTION
+Turns ON or OFF ouputing log messages to stderr in addition to the log file.
+.SH RETURNS
+the original state.
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.SH "SEE ALSO"
+LoggerInit(3), LOGIT(3), Logger(3), LogLevelFromString(3), LoggerLoc(3),
+LoggerTrim(3), Common(3)
+.SH AUTHORS
+Paul Houghton x2309 - (houghton@shoe.wiltel.com) 
+
