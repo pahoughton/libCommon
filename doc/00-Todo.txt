@@ -1,34 +1,52 @@
 #
-# TODO
 #
-# $Id$
+# Title:        00-Todo.txt
+# Project:	Common
+# Desc:
+# 
+#   This is the libCommon TODO file it is used to track all
+#   bug reports and enhancement request. It is formated so
+#   a perl script can be used to generate reports.
 #
-# This is the libCommon TODO file it is used to track all
-# bug reports and enhancement request. It is formated so
-# a perl script can be used to generate reports.
+# 
+# Notes:
+# 
+#   The order of entries implies priority
 #
-# The order of entries implies priority
+#   See End of file for format specs
+#   
+# Author:	Paul A. Houghton - (paul.houghton@wcom.com)
+# Created:	05/07/97 05:48
 #
-# See End of file for format specs
+# Revision History: (See end of file for Revision Log)
 #
-
-ENH Paul Houghton 11/09/95 07:15
-Move YYMMDDtoJD.pl to libPerl
+#   Last Mod By:    $Author$
+#   Last Mod:	    $Date$
+#   Version:	    $Revision$
+#
+#   $Id$
+# 
 
 ENH Paul Houghton 8/19/94 08:00
 Need test programs.
-
-ADM Paul Houghton 10/31/95 05:25
-Update man pages
-
-ENH Paul Houghton 8/19/94 08:00
-man pages for: ArgEnvLong, CanExecute, FindPath, MemberOfGroup
-YYMMDDtoJD.pl, ArgEnvFlag,
 
 ENH Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
 Add file locking to Logger.
 
 === COMPLETED ===
+
+ADM Paul Houghton 10/31/95 05:25
+Update man pages
+comp Paul A. Houghton 05/07/97 05:52
+
+ENH Paul Houghton 8/19/94 08:00
+man pages for: ArgEnvLong, CanExecute, FindPath, MemberOfGroup
+YYMMDDtoJD.pl, ArgEnvFlag,
+comp Paul A. Houghton 05/07/97 05:52
+
+ENH Paul Houghton 11/09/95 07:15
+Move YYMMDDtoJD.pl to libPerl
+comp Paul A. Houghton 05/07/97 05:52
 
 ENH Paul Houghton 8/19/94 08:00 Paul Houghton 8/19/94 08:00
 Need to verify ErrorString has strings for all errors
@@ -94,8 +112,10 @@ comp Paul Houghton 7/13/94 08:00
 #    hh:mm[:ss] - hour ( 24 hr format), min and optional seconds of 
 #                 of completion
 
-#
 # $Log$
+# Revision 2.4  1995/11/10 00:40:46  houghton
+# Updated
+#
 # Revision 2.3  1995/10/31  13:15:50  houghton
 # Added Version id tag
 #
@@ -105,4 +125,9 @@ comp Paul Houghton 7/13/94 08:00
 # Revision 2.1  1995/10/31  12:36:55  houghton
 # Update for version 2.00.00.b.04
 #
+
+#
+# Local Variables:
+# mode:TODO
+# End:
 #
