@@ -1,20 +1,135 @@
 /*********************************************************************
  *
- * Title:            DateStringToTimeT.c
+ * File:        DateStringToTimeT.c
+ * Project:	Common
+ * Desc:
  *
- * Description:
- *
- *	
+ *  
  *
  * Notes:
  *
- * Programmer:	    Paul Houghton x2309 - (houghton@shoe.wiltel.com)
+ * Author:	Paul A. Houghton - (paul.houghton@wcom.com)
+ * Created:	11/02/94 16:00
  *
- * Start Date:	    11/02/94 16:00
+ * Revision History: (See end of file for Revision Log)
  *
- * Modification History:
+ *  Last Mod By:    $Author$
+ *  Last Mod:	    $Date$
+ *  Version:	    $Revision$
+ *
+ *********************************************************************/
+
+#include "_Common.h"
+
+#include <time.h>
+#include <string.h>
+#include <ctype.h>
+
+COMMON_VERSION(
+  DateStringToTimeT,
+  "$Id$");
+
+time_t
+DateStringToTimeT( const char * dateString, const char * fmt )
+{
+  const char * start = dateString;
+  const char * end = 0;
+
+  int year;
+  int month;
+  int day;
+
+  time_t seconds = 0;
+
+
+  if( dateString == NULL )
+    return( TIMET_MIN );
+
+  if( fmt )
+    {
+      struct tm     tm;
+
+      memset( &tm, 0, sizeof( tm ) );
+      
+      if( ! strptime( (char *)dateString, fmt, &tm ) )
+	return( TIMET_MIN );
+
+      seconds = YearMonthDayToTimeT( tm.tm_year + 1900,
+				     tm.tm_mon + 1,
+				     tm.tm_mday );
+
+      seconds += HourMinSecToTimeT( tm.tm_hour,
+				    tm.tm_min,
+				    tm.tm_sec );
+      return( seconds );
+    }
+
+  if( (end = strchr( start, '/' ) ) == 0 )
+    return( TIMET_MIN );
+    
+  month = StringToInt( start, 10, (end - start) );
+
+  if( month < 1 || month > 12 )
+    return( TIMET_MIN );
+    
+  start = end + 1;
+
+  if( (end = strchr( start, '/') ) == 0 )
+    return( TIMET_MIN );
+    
+  day = StringToInt( start, 10, (end - start)  );
+
+  if( day < 1 || day > 31 )
+    return( TIMET_MIN );
+    
+  start = end + 1;
+
+  for( end = start; isdigit( *end ); end++ );
+
+  year = StringToInt( start, 10, (end - start) );
+
+  seconds = YearMonthDayToTimeT( year, month, day );
+        
+  for( start = end; ! isdigit( *start ) && *start != 0; start++ );
+
+  if( *start == 0 )
+    return( seconds );
+    
+  if( (end = strchr( start, ':' ) ) == 0 )
+    return( TIMET_MIN );
+    
+  seconds += StringToInt( start, 10, (end - start) ) * SEC_PER_HOUR;
+
+  start = end + 1;
+
+  for( end++ ; isdigit( *end ); end++ );
+
+  if( end == start )
+    return( TIMET_MIN );
+    
+  seconds += StringToInt( start, 10, (end - start) ) * SEC_PER_MIN;
+
+  if( *end != ':' )
+    return( seconds );
+    
+  start = end + 1;
+
+  for( end++; isdigit( *end ); end++ );
+
+  seconds += StringToInt( start, 10, (end - start) );
+
+  return( seconds );
+}
+
+/*
+ *
+ * Revision Log:
  *
  * $Log$
+ * Revision 2.5  1998/03/02 22:32:49  houghton
+ * Bug-Fix: when passing tm.tm_year to YearMonthDayToTimeT need to add
+ *     1900 to the value.
+ *
  * Revision 2.4  1997/09/02 21:34:07  houghton
  * Port(Sun5): Added define _EXTENTIONS_
  *
@@ -34,139 +149,7 @@
  * New functions and many enhancements to existing functions.
  *
  *
- *********************************************************************/
-
-#if defined( Sun5 )
-#define __EXTENSIONS__
-#endif
-
-#include "_Common.h"
-
-#include <time.h>
-#include <string.h>
-#include <ctype.h>
-
-COMMON_VERSION(
-  DateStringToTimeT,
-  "$Id$");
-
-
-time_t
-DateStringToTimeT( const char * dateString, const char * fmt )
-{
-  const char * start = dateString;
-  const char * end = 0;
-
-  int year;
-  int month;
-  int day;
-
-  time_t seconds = 0;
-
-
-  if( dateString == NULL )
-    {
-      return( 0 );
-    }
-
-  if( fmt )
-    {
-      struct tm     tm;
-      strptime( (char *)dateString, fmt, &tm );
-
-      seconds = YearMonthDayToTimeT( tm.tm_year + 1900,
-				     tm.tm_mon + 1,
-				     tm.tm_mday );
-
-      seconds += HourMinSecToTimeT( tm.tm_hour,
-				    tm.tm_min,
-				    tm.tm_sec );
-      return( seconds );
-    }
-
-  if( (end = strchr( start, '/' ) ) == 0 )
-    {
-      return( 0 );
-    }
-
-  month = StringToInt( start, 10, (end - start) );
-
-  if( month < 1 || month > 12 )
-    {
-      return( 0 );
-    }
-
-  start = end + 1;
-
-  if( (end = strchr( start, '/') ) == 0 )
-    {
-      return( 0 );
-    }
-
-  day = StringToInt( start, 10, (end - start)  );
-
-  if( day < 1 || day > 31 )
-    {
-      return( 0 );
-    }
-
-  start = end + 1;
-
-  for( end = start; isdigit( *end ); end++ );
-
-  year = StringToInt( start, 10, (end - start) );
-
-  seconds = YearMonthDayToTimeT( year, month, day );
-        
-  for( start = end; ! isdigit( *start ) && *start != 0; start++ );
-
-  if( *start == 0 )
-    {
-      return( seconds );
-    }
-
-  if( (end = strchr( start, ':' ) ) == 0 )
-    {
-      return( 0 );
-    }
-
-  seconds += StringToInt( start, 10, (end - start) ) * SEC_PER_HOUR;
-
-  start = end + 1;
-
-  for( end++ ; isdigit( *end ); end++ );
-
-  if( end == start )
-    {
-      return( 0 );
-    }
-
-  seconds += StringToInt( start, 10, (end - start) ) * SEC_PER_MIN;
-
-  if( *end != ':' )
-    {
-      return( seconds );
-    }
-
-  start = end + 1;
-
-  for( end++; isdigit( *end ); end++ );
-
-  seconds += StringToInt( start, 10, (end - start) );
-
-  return( seconds );
-}
-
-
-  
-  
-  
-
-
-
-
-
-
+ */
 
 /**
  *             This software is the sole property of
