@@ -416,8 +416,8 @@ const char * basename( const char * path );
 #define MIN_PER_HOUR  60
 #define MIN_TIMET     LONG_MIN
 #define MAX_TIMET     LONG_MAX
-#define MIN_YEAR      (MIN_TIMET / SEC_PER_YEAR)
-#define MAX_YEAR      (MAX_TIMET / SEC_PER_YEAR)
+#define MIN_YEAR      (1970 + (MIN_TIMET / SEC_PER_YEAR))
+#define MAX_YEAR      (1970 + (MAX_TIMET / SEC_PER_YEAR))
 
 #if !defined( DAYOFWEEK_ENUM )
 #define DAYOFWEEK_ENUM 1
@@ -674,6 +674,10 @@ FileModeString( mode_t	mode, char * modeString );
  * Modification History
  *     			
  * $Log$
+ * Revision 2.17  1997/09/19 09:00:20  houghton
+ * Changed: renamed CommonError* variables to CommonErr becuase of conflict with
+ *     enum names.
+ *
  * Revision 2.16  1997/08/24 21:46:35  houghton
  * Added MIN_TIMET, MAX_TIMET, MIN_YEAR & MAX_YEAR.
  *
