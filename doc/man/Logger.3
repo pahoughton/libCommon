@@ -1,16 +1,24 @@
 .\"
-.\" Man page for Logger
+.\" File:      Logger.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for Logger
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     6/20/94
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
 .\"
 .\" $Id$
 .\"
-.\" $Log$
-.\" Revision 1.1  1994/07/05  21:38:09  houghton
-.\" Updated man pages for all libCommon functions.
-.\"
-.\"
-.TH Logger 3  "20 Jun 94 (Common)"
+.TH Logger 3  "05/05/97 04:32 (Common)"
 .SH NAME
-Logger \- Log a message to the log file.
+Logger \- create a log entry.
 .SH SYNOPSIS
 #include <Common.h>
 .LP
@@ -36,10 +44,8 @@ format string arguments (like printf).
 Logger should only be called from within the LOGIT(3) macro. It uses
 LOGIT to determine the messages log level and source file location.
 .LP
-Creates a formated entry in the log file using the same formating
-mechanism as printf. Each log entry is terminated with a end of
-line. Do not include the '\\n' char in your mesgFmt string unless you
-want a blank line between log entries.
+Creates a formated log entry using the same formating
+mechanism as printf
 .SH RETURNS
 None
 .SH EXAMPLE
@@ -47,18 +53,33 @@ None
 
     ...
 
-    LOGIT( LOG_ERROR, Logger( "Invalid value: %6.2f",aDoubleVar ) );
+    LOGIT( LOG_ERROR, ( "Invalid value: %6.2f", aDoubleVar ) );
 
     ...
 .fn    
 .SH FILES
-.nf
+.PD 0
 /usr/local/include/Common.h
+.LP
 /usr/local/lib/libCommon.a
-.fn
+.PD
 .SH "SEE ALSO"
-LoggerInit(3), LOGIT(3), LogLevelFromString(3), LoggerLoc(3),
-LoggerTrim(3), Common(3)
+Common(3), LogLevelSetString(3), LogLevelFromString(3), LogLevelString(3),
+LoggerInit(3), LoggerSetLogFile(3), LoggerSetOutputLevel(3),
+LoggerSetDate(3), LoggerSetLoc(3), LoggerSetTee(3),
+LoggerSetFunct(3), LoggerGetFunct(3), LoggerLevel(3), LoggerLoc(3),
+LoggerArgs(3), LoggerTrim(3),
+LOGITLOC(3), LOGIT(3), LOGFUNCT(3), LOGERROR(3) 
 .SH AUTHORS
-Paul Houghton - (houghton@cworld.wiltel.com) 
+Paul A. Houghton - (paul.houghton@wcom.com)
 
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\" Revision 2.0  1995/10/28 17:34:47  houghton
+.\" Move to Version 2.0
+.\"
+.\" Revision 1.1  1994/07/05  21:38:09  houghton
+.\" Updated man pages for all libCommon functions.
+.\"

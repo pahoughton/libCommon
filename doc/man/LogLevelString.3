@@ -1,16 +1,24 @@
 .\"
-.\" Man page for LogLevelString
+.\" File:      LogLevelString.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for LogLevelString() Ver: 2.2
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     04/29/97 08:51
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
 .\"
 .\" $Id$
 .\"
-.\" $Log$
-.\" Revision 1.1  1994/07/05  21:38:09  houghton
-.\" Updated man pages for all libCommon functions.
-.\"
-.\"
-.TH LogLevelString 3  "21 Jun 94 (Common)"
+.TH LogLevelString 3  "04/29/97 08:51 (Common)"
 .SH NAME
-LogLevelString \- Convert a log level into a string
+LogLevelString \- convert a log level into a string.
 .SH SYNOPSIS
 #include <Common.h>
 .LP
@@ -18,27 +26,43 @@ const char * LogLevelString(
 .PD 0
 .RS
 .TP 10
-LogBit
+LogLevelBit
 logLevel )
 .PD
 .RE
 .SH ARGUMENTS
+.TP
 logLevel
 the log level to be translated into a string.
 .SH DESCRIPTION
 Converts a log level into a string. It does not handle OR'd (|) log
 levels. It is intended to output the current message log level set by
-LOGIT(3).
+LoggerLevel(3), LoggerArgs(3), LOGITLOC(3), or LOGIT(3).
 .SH RETURNS
-the converted string or 'UNKNOWN'.
+const char * representation of the LogLevelBit.
 .SH FILES
-.nf
+.PD 0
 /usr/local/include/Common.h
+.LP
 /usr/local/lib/libCommon.a
-.fn
+.PD
 .SH "SEE ALSO"
-LoggerInit(3), LOGIT(3), Logger(3), LoggerLoc(3), LogLevelFromString(3),
-LoggerTrim(3), Common(3)
+Common(3), LogLevelSetString(3), LogLevelFromString(3), LoggerInit(3),
+LoggerSetLogFile(3), LoggerSetOutputLevel(3), LoggerSetDate(3),
+LoggerSetLoc(3), LoggerSetTee(3), LoggerSetFunct(3),
+LoggerGetFunct(3), LoggerLevel(3), LoggerLoc(3), Logger(3),
+LoggerArgs(3), LoggerTrim(3),
+LOGITLOC(3), LOGIT(3), LOGFUNCT(3), LOGERROR(3) 
 .SH AUTHORS
-Paul Houghton - (houghton@cworld.wiltel.com) 
+Paul A. Houghton - (paul.houghton@wcom.com)
 
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\" Revision 2.0  1995/10/28 17:34:46  houghton
+.\" Move to Version 2.0
+.\"
+.\" Revision 1.1  1994/07/05  21:38:09  houghton
+.\" Updated man pages for all libCommon functions.
+.\"

@@ -1,12 +1,42 @@
+.\"
+.\" File:     Common.3
+.\" Project:	Common
+.\" Desc:        
+.\"
+.\"     Man page for Common (Common.h Ver: 2.13)
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     06/06/94
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:	    $Date$
+.\"  Version:	    $Revision$
+.\"
 .\" $Id$
-.TH Common 3 Common
+.\"
+.TH Common 3  "04/29/97 06:26 (Common)"
 .SH NAME
 Common - Common C Function Library
 .SH DESCRIPTION
 libCommon is a collection of C generic functions that should be useful
 for most projects. It is available for Aix, Sun, HP, Sequent,
 Vax & MS-Win.
-.SH DATA TYPES, CONSTANTS & GLOBALS
+.SH MISC DATA TYPES, CONSTANTS & GLOBALS
+.TP
+COMMON_LIB_VERSION
+macro with the hex encoded library version number.
+.TP
+CommonLibVersion
+const long of the hex encoded library version number that was
+compiled.
+.TP
+CommonVersion
+a string containing the library version info.
+.TP
+BOOL
+macro defined as int.
 .TP
 TRUE
 macro defined as 1.
@@ -25,61 +55,76 @@ macro defined as 1.
 .TP
 OFF
 macro defined as 0.
+.SH ERROR DATA TYPES, CONSTTANTS & GLOBALS
 .TP
 Ret_Status
-enum used for return status. Values are RET_SUCCEED, RET_DATA,
-RET_DONE, RET_ERROR, RET_FATAL
+enum used for return status. Values are RET_SUCCEED, RET_DONE,
+RET_DATA, RET_ERROR, RET_FATAL
 .TP
 CommonErrorType
-enum used for library error codes. Values are:
+enum used to define the type of an error. Values are:
 .RS
 .TP
-C_ENONE
-No Error.
+ET_NONE
+not set.
 .TP
-C_EOSERROR
-Operating system error; errno has been set by system library.
-.TP
-C_ERANGE
-Value out of range.
-.TP
-C_EBADPARAM
-invalid parameter passed
-.TP
-C_ESYBERR
-Sybase error should be set in Sybase Error handler
-.TP
-C_ESYBMSG
-Sybase message should be set in Sybase Message Handler
-.TP
-C_ESYBOC
-Syboc library error
-.TP
-C_EAPP
+ET_APP
 application error.
 .TP
-C_EUNDEFINED
-last valid error value.
+ET_OSERROR
+operating system error.
+.TP
+ET_COMMON
+libCommon error value (see CommonError).
+.TP
+ET_WCF
+libWcf error value. See Wcf(3).
+.TP
+ET_SYBERR
+Sybase error.
+.TP
+ET_SYBMSG
+Sybase message.
+.TP
+ET_SYBOC
+libSyboc error. See Syboc(3).
 .RE
 .TP
-CommonErrFile
+CommonError
+enum used for libCommon error codes. Values are:
+.RS
+.TP
+EC_NONE
+No Error.
+.TP
+EC_BADPARAM
+invalid parameter passed
+.TP
+EC_RANGE
+Value out of range.
+.RE
+.LP
+.TP
+CommonErrno
+CommonError value of the last libCommon error.
+.TP
+CommonErrorDesc
+a string description of the last libCommon error.
+.TP
+CommonErrorFile
 char string containing the name of the source file where the last
 error occurred.
 .TP
-CommonErrLine
+CommonErrorLine
 int line number of source file where the last error occurred.
 .TP
-CommonOsErr
-the errno value if CommonErrno is set to C_EOSERROR.
+CommonErrorHandler
+type for the error handler used by SetErrorHandler(3) and
+GetErrorHandler(3). 
+.SH LOGGER DATA TYPES, CONSTTANTS & GLOBALS
 .TP
-CommonErrno
-CommonErrorType value of the last error.
-.TP
-CommonAppErrno
-int to be used by applications for application errors.
-.TP
-LogBit
-enum of log message types.
+LogLogBit
+enum of log entry types.
 .TP
 LogSetLevelType
 enum used to specify how to set the output log levels.
@@ -87,17 +132,10 @@ enum used to specify how to set the output log levels.
 LogOutFileType
 enum to specify the type of log file to create.
 .TP
-AvlTree
-typedef used to declare AVL tree identifiers.
-.TP
-AvlVisit
-typedef definition of traversal type.
-.TP
-AvlSiblingOrder
-typedef definition of sibling order type.
-.TP
-AvlNodeType
-typedef definition of node type.
+LoggerFunct
+type for the logger function used by LoggerInit(3), LoggerSetFunct(3)
+and LoggerGetFunct(3).
+.SH TIME DATA TYPES, CONSTANTS & GLOBALS
 .TP
 SEC_PER_MIN
 macro defined as the number of seconds in a minute.
@@ -111,12 +149,18 @@ macro defined as the number of seconds in a day.
 SEC_PER_YEAR
 macro defined as the number of seconds in a (non-leap) year.
 .TP
+MIN_PER_HOUR
+macro defined as the number of minues in an hour.
+.TP
 DayOfWeek
-enum of the days of the week; SUNDAY=0, MONDAY, TUESDAY, WEDNESDAY,
-THURSDAY, FRIDAY, SATURDAY.
+enum of the days of the week; Sunday=0, Monday, Tuesday, Wednesday,
+Thursday, Friday, Saturday.
 .TP
 DaysInMonth
 int array with number of days in each month (Jan=0).
+.TP
+MonthDayOfYear
+int array  with the day of year for the first of every month.
 .TP
 Months
 string array with names of the month (Jan=0).
@@ -129,6 +173,87 @@ string array with names of the days of the week (Sun=0).
 .TP
 AbbrWeekDays
 string array with day of week abbreviations (Sun=0).
+.SH BIT MANIPULATION DATA TYPES, CONSTANTS & GLOBALS
+.TP
+CHAR_BITS
+the number of bits in a char.
+.TP
+SHORT_BITS
+the number of bits in a short.
+.TP
+LONG_BITS
+then number of bits in a long.
+.TP
+INT_BITS
+the number of bits in an int.
+.TP
+CHAR_ALL_BITS
+a char with all its bits turned on.
+.TP
+SHORT_ALL_BITS
+a short with all its bits turned on.
+.TP
+LONG_ALL_BITS
+a long with all its bits turned on.
+.TP
+INT_ALL_BITS
+an it with all its bits turned on.
+.SH AVL TREE DATA TYPES, CONSTANTS & GLOBALS
+.TP
+AvlTree
+typedef used to declare AVL tree identifiers.
+.TP
+AvlVisit
+typedef definition of traversal type.
+.TP
+AvlSiblingOrder
+typedef definition of sibling order type.
+.TP
+AvlNodeType
+typedef definition of node type.
+.SH ERROR FUNCTIONS
+.TP
+SetErrorHandler(3)
+specify the function to call when an error occurs and/or when
+Error(3) is called.
+.TP
+GetErrorHandler(3)
+get the current error handler and closure.
+.TP
+Error(3)
+call the error handler using a printf like format string. (the default
+error handler outputs a log entry).
+.TP
+ErrorArgs(3)
+call the error handler with stdarg like args. (the default
+error handler outputs a log entry).
+.TP
+SetError(3)
+function to specify an error has occured.
+.TP
+ErrorMesg(3)
+call the error handler with the values established using SetError(3).
+.TP
+ErrorTypeString(3)
+translate a CommonErrorType value to a string.
+.TP
+CommonErrorString(3)
+translate a CommonError value to a string.
+.TP
+SET_ERROR_CLOSURE(3)
+macro to specifiy a library error has occured.
+.TP
+SET_ERROR(3)
+macro to specify a library error has occurred.
+.TP
+SET_APP_ERROR(3)
+macro to specify an application error has occurred.
+.TP
+ERROR(3)
+macro to call SetError and ErrorMesg with default parameters.
+.TP
+ERROR_APP(3)
+macro to call SetError and ErrorMesg with default parameters.
 .SH ARG / ENV FUNCTIONS
 .TP
 ArgEnvBool(3)
@@ -152,41 +277,110 @@ translate command line argument or environment variable to a long.
 ArgEnvString(3)
 translate command line argument or environment variable to a char
 string.
-.SH LOGGIN FUNCTIONS
+.SH LOGGING FUNCTIONS
+.TP
+LogLevelSetString(3)
+the string for a specific LogLevelBit.
+.TP
+LogLevelFromString(3)
+converts a string to a LogLevelBit.
+.TP
+LogLevelString(3)
+convert a log level into a string.
 .TP
 LoggerInit(3)
-Initialize the logger.
+initialize the logger.
 .TP
-LoggerTee(3)
-turn on/off tee'ing log output to stderr.
+LoggerSetLogFile(3)
+set the file that log entries will be written to.
 .TP
-Logger(3)
-log a specific message to the log file
+LoggerSetOutputLevel(3)
+set the type of log entries that should be output.
+.TP
+LoggerSetDate(3)
+turn on/off prefixing the date and time of log entries.
+.TP
+LoggerSetLoc(3)
+turn on/off including the source file and line in log entries.
+.TP
+LoggerSetTee(3)
+turn on/off tee'ing log entries to stderr.
+.TP
+LoggerSetFunct(3)
+specify the function to use to process log entries.
+.TP
+LoggerGetFunct(3)
+retrieve the function used to process log entries.
+.TP
+LoggerLevel(3)
+set the level for the next log entry.
 .TP
 LoggerLoc(3)
-turn on/off prefixing log message with source file and line number.
+set the source file and line number for the next log entry.
+.TP
+Logger(3)
+create a log entry.
+.TP
+LoggerArgs(3)
+creates a log entry using the args passed.
 .TP
 LoggerTrim(3)
 trim the log file.
 .TP
-LogLevelFromString(3)
-translate a string to a output log level.
-.TP
-LogLevelString(3)
-translate a current log level to a string.
+LOGITLOC(3)
+create a log entry using file, line, level and logArgs.
 .TP
 LOGIT(3)
-log a specific type of message.
+create a log entry.
+.TP
+LOGFUNCT(3)
+create a LOG_FUNCT entry.
+.TP
+LOGERROR(3)
+create a LOG_ERROR level log entry.
 .SH STRING FUNCTIONS
 .TP
-CharToInt(3)
+CHAR_TO_INT(3)
 translate a single char to an integer value.
 .TP
-IsBaseDigit(3)
+IS_BASE_DIGIT(3)
 true or false, is a char value a valid digit of the specified base.
 .TP
-basename(3)
-return a pointer to the filename portion of a pathname.
+SAFE_STRCPY(3)
+copy a string into dest for 'size' bytes and null terminate it.
+.TP
+E2A(3)
+convert an EBCDIC character to its ASCII equivalent.
+.TP
+StringToInt(3)
+convert a string to an integer.
+.TP
+StringToUInt(3)
+convert a string to an unsigned integer.
+.TP
+StringToShort(3)
+convert a string to a short.
+.TP
+StringToUShort(3)
+convert a string to an unsigned short.
+.TP
+StringToLong(3)
+convert a string to a long.
+.TP
+StringToULong(3)
+convert a string to an unsigned long.
+.TP
+StringToDouble(3)
+convert a string to a double.
+.TP
+CenterLine(3)
+prefix a string buffer with spaces to center it on a line.
+.TP
+StrinpSpaces(3)
+remove leading and trailing spaces from a string.
+.TP
+EbcdicToAscii(3)
+convert all characters in an EBCDIC char buffer to ASCII.
 .TP
 strlwr(3)
 convert a string to lower case.
@@ -197,24 +391,18 @@ convert a string to upper case.
 strdup(3)
 duplicate a string into a malloc'ed space.
 .TP
-StringToDouble(3)
-convert a string to a double.
-.TP
-StringToInt(3)
-convert a string to an integer.
-.TP
-StringToLong(3)
-convert a string to a long.
-.TP
-CenterLine(3)
-prefix a string buffer with spaces to center it on a line.
-.TP
-StrinpSpaces(3)
-remove leading and trailing spaces from a string.
+basename(3)
+return a pointer to the filename portion of a pathname.
 .SH DATE/TIME FUNCTIONS
 .TP
 IsLeapYear(3)
 true or false, is the specified year a leap year.
+.TP
+Difftm(3)
+return the difference of two tm structs in seconds
+.TP
+YYYYMMDDtoTimeT(3)
+convert a YYMMDD string to time_t.
 .TP
 YYMMDDtoTimeT(3)
 convert a YYMMDD string to time_t.
@@ -222,9 +410,64 @@ convert a YYMMDD string to time_t.
 HHMMSStoTimeT(3)
 convert a HHMMSS string to time_t.
 .TP
-TimeStringToTimeT(3)
+DateStringToTimeT(3)
 convert date/time string to time_t.
-.SH AVL FUNCTIONS
+.TP
+DateStringFromTimeT(3)
+convert a time_t value to a string.
+.TP
+DateStringFromTm(3)
+convert a tm struct to a string.
+.TP
+YearMonthDayToTimeT(3)
+convert a year, month and day to a time_t value.
+.TP
+HourMinSecToTimeT(3)
+convert an hour, minute and second to a time_t value.
+.TP
+strptime(3)
+convert a date time string to a tm struct.
+.SH BIT MANIPULATION FUNCTIONS
+.TP
+Bit(3)
+return an int with a specific bit set.
+.TP
+Host2NetShort(3)
+return a short converted to network byte order.
+.TP
+Net2HostShort(3)
+return a short converted from network to host byte order.
+.TP
+Host2NetUShort(3)
+return a unsigned short converted to network byte order.
+.TP
+Net2HostUShort(3)
+return a unsigned short converted from network to host byte order.
+.TP
+Host2NetInt(3)
+return a int converted to network byte order.
+.TP
+Net2HostInt(3)
+return a int converted from network to host byte order.
+.TP
+Host2NetUInt(3)
+return a unsigned int converted to network byte order.
+.TP
+Net2HostUInt(3)
+return a unsigned int converted from network to host byte order.
+.TP
+Host2NetLong(3)
+return a long converted to network byte order.
+.TP
+Net2HostLong(3)
+return a long converted from network to host byte order.
+.TP
+Host2NetULong(3)
+return a unsigned long converted to network byte order.
+.TP
+Net2HostULong(3)
+return a unsgined long converted from network to host byte order.
+.SH AVL BINARY TREE FUNCTIONS
 .TP
 AvlInit(3)
 initialize an AVL (balanced binary) tree.
@@ -264,53 +507,46 @@ delete the last record of an AVL tree.
 .TP
 AvlFindMax(3)
 find the last record of an AVL tree.
-.SH ERROR FUNCTIONS
-.TP
-SET_ERROR(3)
-macro to specify a library error has occurred.
-.TP
-SET_APP_ERROR(3)
-macro to specify an application error has occurred.
-.TP
-LIB_ERROR(3)
-macro to call LibError with default parameters.
-.TP
-SetErrorHandler(3)
-specify the function to call when an error occurs and/or when
-LibError is called.
-.TP
-LibError(3)
-call the error handler or output an error message to stderr.
-.TP
-ErrorString(3)
-translate a CommonErrorType value to a string.
 .SH MISC FUNCTIONS
 .TP
-CanExecute(3)
-can a specific file be executed.
-.TP
-CommonGetVersion(3)
-return the version string to identify the version of the library.
-.TP
-FindPath(3)
-search for a file in using a path and return the full file name.
+TempFileName(3)
+create a unique file name.
 .TP
 ForeachFile(3)
 execute a function for each file in a directory.
 .TP
+CanExecute(3)
+can a specific file be executed.
+.TP
+FindPath(3)
+search for a file in using a path and return the full file name.
+.TP
 MemberOfGroup(3)
 is the current user a member of the specified group.
+.TP
+FileModeString(3)
+return a string representation of the mode passed.
+.TP
+DWORD_ALIGN(3)
+return a value aligned to a dword (4 byte) value. 
+.TP
+CommonGetVersion(3)
+return the version string to identify the version of the library.
 .SH FILES
 .nf
 /usr/local/lib/libCommon.a
 /usr/local/include/Common.h
-/usr/local/include/DateTime.h
+/usr/local/include/CommonConfig.h
 .fn
 .SH SEE ALSO
 Clue(3)
 .SH AUTHORS
-Paul Houghton \- 6/6/94
+Paul A. Houghton - (paul.houghton@wcom.com)
 .nf
 Avl - Brad Appleton	<brad@ssd.csd.Harris.COM>
 Harris Computer Systems, Fort Lauderdale, FL USA
 .fi
+
+.\"
+.\" $Log$
+.\"

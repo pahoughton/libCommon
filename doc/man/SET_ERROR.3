@@ -1,9 +1,67 @@
 .\"
-.\" Man page for SET_ERROR
+.\" File:      SET_ERROR.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for SET_ERROR() Ver: (Common.h 2.13)
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     04/29/97 07:16
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
 .\"
 .\" $Id$
 .\"
+.TH SET_ERROR 3  "04/29/97 07:16 (Common)"
+.SH NAME
+SET_ERROR \- calls SetError(3) with default args.
+#include <Common.h>
+.LP
+void SET_ERROR(
+.PD 0
+.RS
+.TP 18
+CommonErrorType
+errorType,
+.TP 18
+int
+errorValue )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+errorType
+the type of value in errorValue.
+.TP
+errorValue
+error value representing the error.
+.SH DESCRIPTION
+This macro calls SetError(3) with __FILE__, __LINE__, closure = 0 and
+errorDesc = 0.
+.SH RETURNS
+None.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.PD
+.SH "SEE ALSO"
+Common(3), SetErrorHandler(3), GetErrorHandler(3),
+Error(3), ErrorArgs(3), SetError(3), ErrorMesg(3), ErrorTypeString(3),
+CommonErrorString(3),
+SET_ERROR_CLOSURE(3), ERROR(3), ERROR_APP(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+.\"
+.\" Revision Log:
+.\"
 .\" $Log$
+.\" Revision 2.0  1995/10/28 17:34:51  houghton
+.\" Move to Version 2.0
+.\"
 .\" Revision 1.3  1994/07/05  21:50:35  houghton
 .\" fixup man page comment header
 .\"
@@ -14,54 +72,3 @@
 .\" New man pages ... what a concept!
 .\"
 .\"
-.TH SET_ERROR 3  "18 Jul 94 (Common)"
-.SH NAME
-SET_ERROR \- macro to specify a library error has occurred
-.SH SYNOPSIS
-#include <Common.h>
-.LP
-void SET_ERROR(
-.PD 0
-.RS
-.TP 20
-CommonErrorType
-errNumber)
-.RE
-.PD
-.SH ARGUMENTS
-.TP
-errNumber
-the type of error that has occurred.
-.SH DESCRIPTION
-This macro should only be used by library functions or after a system
-call (i.e. open) has failed. It set the global
-CommonErrno variable to errNumber and sets the current source filename
-and line number. 
-.SH RETURNS
-None.
-.SH EXAMPLE
-.nf
-    ...
-    if( i < MAX_I || i > MIN_I )
-      {
-        SET_ERROR( C_EBADRANGE );
-        return( RET_ERROR );
-      }
-
-    if( (fp = fopen( "a.file","r") ) == NULL )
-      {
-        SET_ERROR( C_EOSERROR );
-        return( RET_ERROR );
-      }
-    ...
-.fn
-.SH FILES
-.nf
-/usr/local/include/Common.h
-.fn
-.SH "SEE ALSO"
-Common(3), SET_APP_ERROR(3), LibError(3), LIB_ERROR(3),
-SetErrorHandler(3)
-.SH AUTHORS
-Paul Houghton \- 6/8/94
-

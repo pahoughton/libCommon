@@ -1,16 +1,24 @@
 .\"
-.\" Man page for LogLevelFromString
+.\" File:      LogLevelFromString.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for LogLevelFromString() Ver: 2.3
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     06/21/94
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
 .\"
 .\" $Id$
 .\"
-.\" $Log$
-.\" Revision 1.1  1994/07/05  21:38:08  houghton
-.\" Updated man pages for all libCommon functions.
-.\"
-.\"
-.TH LogLevelFromString 3  "21 Jun 94"
+.TH LogLevelFromString 3  "04/29/97 08:41 (Common)"
 .SH NAME
-LogLevelFromString \- convert a string into a log level
+LogLevelFromString \- convert a string into a collection of LogLevelBits.
 .SH SYNOPSIS
 #include <Common.h>
 .LP
@@ -25,15 +33,18 @@ levelString )
 .SH ARGUMENTS
 .TP
 levelString
-the string to convert to a log level. It can contain multiple log
-levels which will be OR'd for the return value. Valid strings are
-NONE, ERROR, WARN, USER_1, USER_2, INFO, TEST, DEBUG, FUNCT and ALL.
+the string to convert to a collection of LogLevelBits. The string can
+contain multiple log levels which will be OR'd for the return value.
+The default strings are: NONE, ERROR, WARN, APP_1, APP_2, APP_3,
+APP_4, APP_5, APP_6, LIB_1, LIB_2, LIB_3, LIB_4,
+INFO, TEST, DEBUG, FUNCT and ALL.
 .SH DESCRIPTION
 Converts a string containing log levels into a value that can be used
-as the outputLevel parameter to LoggerInit(3). This function was
-developed to make it easy to convert command line arguments.
+as the outputLevel parameter to LoggerInit(3) or
+LoggerSetOutputLevel(3). This function was developed to make it easy
+to convert command line arguments.
 .SH RETURNS
-the converted log levels.
+an int with the correct LogLevelBits set.
 .SH EXAMPLE
 .nf
 
@@ -48,13 +59,29 @@ the converted log levels.
     ...
 .fn    	
 .SH FILES
-.nf
+.PD 0
 /usr/local/include/Common.h
+.LP
 /usr/local/lib/libCommon.a
-.fn
+.PD
 .SH "SEE ALSO"
-LoggerInit(3), LOGIT(3), Logger(3), LoggerLoc(3), LogLevelString(3),
-LoggerTrim(3), Common(3)
+Common(3), LogLevelSetString(3), LogLevelString(3), LoggerInit(3),
+LoggerSetLogFile(3), LoggerSetOutputLevel(3), LoggerSetDate(3),
+LoggerSetLoc(3), LoggerSetTee(3), LoggerSetFunct(3),
+LoggerGetFunct(3), LoggerLevel(3), LoggerLoc(3), Logger(3),
+LoggerArgs(3), LoggerTrim(3),
+LOGITLOC(3), LOGIT(3), LOGFUNCT(3), LOGERROR(3) 
 .SH AUTHORS
-Paul Houghton - (houghton@cworld.wiltel.com) 
+Paul A. Houghton - (paul.houghton@wcom.com)
 
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\" Revision 2.0  1995/10/28 17:34:46  houghton
+.\" Move to Version 2.0
+.\"
+.\" Revision 1.1  1994/07/05  21:38:08  houghton
+.\" Updated man pages for all libCommon functions.
+.\"
+.\"

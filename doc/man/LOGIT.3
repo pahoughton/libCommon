@@ -1,16 +1,25 @@
 .\"
-.\" Man page for LOGIT
+.\" File:      LOGIT.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for LOGIT
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     6/20/94
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
 .\"
 .\" $Id$
 .\"
-.\" $Log$
-.\" Revision 1.1  1994/07/05  21:38:07  houghton
-.\" Updated man pages for all libCommon functions.
-.\"
-.\"
-.TH LOGIT 3  "20 Jun 94 (Common)"
+
+.TH LOGIT 3  "05/05/97 04:59 (Common)"
 .SH NAME
-LOGIT \- Log a message
+LOGIT \- create a log entry.
 .SH SYNOPSIS
 #include <Common.h>
 .LP
@@ -21,25 +30,22 @@ void LOGIT(
 LogBit
 mesgLevel,
 .TP
-void
-(*Logger)() )
+loggerArgs )
 .PD
 .RE
 .SH ARGUMENTS
 .TP
 mesgLevel
-message log level. Must be one of LOG_ERROR, LOG_WARN, LOG_USR1,
-LOG_USR2, LOG_INFO, LOG_TEST, LOG_DEBUG, LOG_FUNCT
+message log level. Must be one of: LOG_ERROR,
+LOG_WARN, LOG_APP1, LOG_APP2, LOG_APP3, LOG_APP4, LOG_APP4, LOG_APP5,
+LOG_APP6, LOG_LIB1, LOG_LIB2, LOG_LIB3, LOG_LIB4,
+LOG_INFO, LOG_TEST, LOG_DEBUG, or LOG_FUNCT.
 .TP
-Logger
-a call to the Logger(3) function.
+loggerArgs
+a paren enclosed set of printf like format string and args.
 .SH DESCRIPTION
-LOGIT establishes the log Level, source file and source line number
-for a log message. It is defined as a macro so the current file and
-line can be determined.
-.LP
-Any function can be used as the Logger function, but of course Logger
-itself is recommended.
+The LOGIT macro establishes the log level, source file, source line number
+and log message for a log entry.. 
 .SH RETURNS
 None
 .SH EXAMPLE
@@ -47,7 +53,7 @@ None
 
     ...
 
-    LOGIT( LOG_ERROR, Logger( "Invalid value: %6.2f",aDoubleVar ) );
+    LOGIT( LOG_ERROR, ( "Invalid value: %6.2f",aDoubleVar ) );
 
     ...
 .fn    
@@ -57,8 +63,23 @@ None
 /usr/local/lib/libCommon.a
 .fn
 .SH "SEE ALSO"
-LoggerInit(3), Logger(3), LogLevelFromString(3), LoggerLoc(3),
-LoggerTrim(3)
+Common(3), LogLevelSetString(3), LogLevelFromString(3), LogLevelString(3),
+LoggerInit(3), LoggerSetLogFile(3), LoggerSetOutputLevel(3),
+LoggerSetDate(3), LoggerSetLoc(3), LoggerSetTee(3),
+LoggerSetFunct(3), LoggerGetFunct(3), LoggerLevel(3), LoggerLoc(3),
+Logger(3), LoggerArgs(3), LoggerTrim(3).
+LOGITLOC(3), LOGFUNCT(3), LOGERROR(3) 
 .SH AUTHORS
-Paul Houghton - (houghton@cworld.wiltel.com) 
+Paul A. Houghton - (paul.houghton@wcom.com)
 
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\" Revision 2.0  1995/10/28 17:34:45  houghton
+.\" Move to Version 2.0
+.\"
+.\" Revision 1.1  1994/07/05  21:38:07  houghton
+.\" Updated man pages for all libCommon functions.
+.\"
+.\"

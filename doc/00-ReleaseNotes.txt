@@ -1,10 +1,68 @@
+#
+#
+# Title:        00-RELEASE.NOTES
+# Project:	Common
+# Desc:
+# 
+#   Release notes for libCommon
+# 
+# Notes:
+# 
+# Author:	Paul A. Houghton - (paul.houghton@wcom.com)
+# Created:	05/07/97 05:33
+#
+# Revision History: (See end of file for Revision Log)
+#
+#   Last Mod By:    $Author$
+#   Last Mod:	    $Date$
+#   Version:	    $Revision$
+#
+#   $Id$
+# 
+
+Version 2.01.02 - 5/7/97
+
+    Source and header cleanup.
+
+    Updated man pages.
+    
+Version 2.01.01 - 4/29/97
+
+    Changed CommonErrorType values from C_* to ET_*
+
+    Complete rework of error handling/processing routines.
+
+	Remove LibError().
+
+	Added GetErrorHandler().
+	Added Error().
+	Added ErrorArgs().
+	Added SetError().
+	Added ErrorMesg().
+	Added ErrorTypeString().
+	Added SET_ERROR_CLOSURE macro.
+	Added ERROR macro.
+
+    Added more LogBits.
+    
+    Added LogLevelSetString, LoggerSetLogFile, LoggerSetOutputLevel,
+    LoggerSetDate, LoggerSetLoc, LoggerSetTee, LoggerSetFunct,
+    LoggerLevel, LoggerLoc, LoggerTrim.
+
+    Added TempFileName.
+
 Version 2.00.00.b.04 - 10/31/95
 
-Changed Bool to BOOL for compatibility with libClue & libData
+    Changed Bool to BOOL for compatibility with libClue & libData
 
-Added Net2Host & Host2Net for short, long, unsigned short, unsigned long.
-This should improve the protability of these functions (actually Macros).
+    Added Net2Host & Host2Net for short, long, unsigned short,
+    unsigned long.  This should improve the protability of these
+    functions (actually Macros).
 
+#
+# $Log$
+#
 
-
-
+# Local Variables:
+# mode:indented-text
+# End:

@@ -1,59 +1,74 @@
 .\"
-.\" Man page for LoggerLoc
+.\" File:      LoggerLoc.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for LoggerLoc
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     06/21/94
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
 .\"
 .\" $Id$
 .\"
+.TH LoggerLoc 3  "05/05/97 04:22 (Common)"
+.SH NAME
+LoggerLoc \- set the source file and line number for the next log entry.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+void LoggerLoc(
+.PD 0
+.RS
+.TP 18
+const char *
+srcFileName,
+.TP 18
+long
+lineNumber )
+.RE
+.PD
+.SH ARGUMENTS
+.TP
+srcFileName
+the source file name that will be output with the next log entry
+(should normally be __FILE__).
+.TP
+lineNumber
+the source file line number that will be output with the next log
+entry (should normally be __LINE__ ).
+.SH DESCRIPTION
+This specifys the source file name and line number that should be
+output with the next log entry.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), LogLevelSetString(3), LogLevelFromString(3), LogLevelString(3),
+LoggerInit(3), LoggerSetLogFile(3), LoggerSetOutputLevel(3),
+LoggerSetDate(3), LoggerSetLoc(3), LoggerSetTee(3),
+LoggerSetFunct(3), LoggerGetFunct(3), LoggerLevel(3), Logger(3),
+LoggerArgs(3), LoggerTrim(3),
+LOGITLOC(3), LOGIT(3), LOGFUNCT(3), LOGERROR(3) 
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
 .\" $Log$
+.\" Revision 2.0  1995/10/28 17:34:48  houghton
+.\" Move to Version 2.0
+.\"
 .\" Revision 1.1  1994/07/05  21:38:10  houghton
 .\" Updated man pages for all libCommon functions.
 .\"
 .\"
-.TH LoggerLoc 3  "21 Jun 94 (Common)"
-.SH NAME
-LoggerLoc \- should Logger output source file & line
-.SH SYNOPSIS
-#include <Common.h>
-.LP
-Bool LoggerLoc(
-.PD 0
-.RS
-.TP 10
-Bool
-onOff )
-.PD
-.RE
-.SH ARGUMENTS
-.TP
-onOff
-should the source file and line be include in the log message.
-.SH DESCRIPTION
-Turn ON or OFF the logging of the source file and line number
-where LOGIT(3) was called.
-.SH RETURNS
-previous state of the flag
-.SH EXAMPLE
-.nf
-
-    ...
-
-    Bool   oldState;
-
-    oldState = LoggerLoc( OFF );
-
-    LOGIT( LOG_ERROR, Logger( "Don't want source in this message" ) );
-
-    LoggerLoc( oldState );
-
-    ...
-.fn
-.SH FILES
-.nf
-/usr/local/include/Common.h
-/usr/local/lib/libCommon.a
-.fn
-.SH "SEE ALSO"
-LoggerInit(3), LOGIT(3), LogLevelFromString(3), Logger(3),
-LoggerTrim(3), Common(3)
-.SH AUTHORS
-Paul Houghton - (houghton@cworld.wiltel.com) 
-

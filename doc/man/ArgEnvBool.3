@@ -73,7 +73,7 @@ int main( int argc, char * argv[] )
 {
   if( ArgEnvBool( &argc, argv, "log", "LOGGING", &Logging ) != RET_SUCCEED )
     {
-      LIB_ERROR( NULL, "testarg: bad argument" );
+      ERROR( ET_COMMON, CommonErrno, ("testarg: bad argument") );
       exit(1);
     }
 
@@ -106,7 +106,7 @@ Logging is: OFF
 /usr/local/include/Common.h
 .fn
 .SH SEE ALSO
-ArgEnvDouble(3), ArgEnvInt(3), ArgEnvString(3)
-SetErrorHandler(3), LibError(3), LIB_ERROR(3)
+ArgEnvDouble(3), ArgEnvFlag(3), ArgEnvInt(3), ArgEnvLong(3), ArgEnvString(3)
+SetErrorHandler(3), Error(3), ERROR(3), SET_ERROR(3)
 .SH AUTHOR
 Paul Houghton \- 6/7/94

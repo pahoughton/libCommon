@@ -4,6 +4,9 @@
 .\" $Id$
 .\"
 .\" $Log$
+.\" Revision 2.0  1995/10/28 17:34:28  houghton
+.\" Move to Version 2.0
+.\"
 .\" Revision 1.1  1995/02/13  15:33:27  houghton
 .\" New man pages for new functions.
 .\"
@@ -98,7 +101,7 @@ int main( int argc, char * argv[] )
   if( ArgEnvLong( &argc, argv, "num", "NUMBER", 0, 1000, &JustANumber )
       != RET_SUCCEED )
     {
-      LIB_ERROR( NULL, "testarg: bad argument" );
+      ERROR( ET_COMMON, CommonErrno, ("testarg: bad argument") );
       exit(1);
     }
 
@@ -129,9 +132,8 @@ Number is: 9
 /usr/local/include/Common.h
 .fn
 .SH SEE ALSO
-ArgEnvBool(3), ArgEnvInt(3),
-ArgEnvDouble(3), ArgEnvString(3), ArgEnvFlag(3)
-SetErrorHandler(3), LibError(3), LIB_ERROR(3)
+ArgEnvBool(3), ArgEnvDouble(3), ArgEnvFlag(3), ArgEnvInt(3), ArgEnvString(3)
+SetErrorHandler(3), Error(3), SET_ERROR(3)
 .SH AUTHOR
 Paul Houghton \- 8/19/94
 

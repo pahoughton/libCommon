@@ -1,14 +1,22 @@
 .\"
-.\" Man page for StringToInt
+.\" File:      StringToInt.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for StringToInt
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     6/22/94
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
 .\"
 .\" $Id$
 .\"
-.\" $Log$
-.\" Revision 1.1  1994/07/05  21:38:13  houghton
-.\" Updated man pages for all libCommon functions.
-.\"
-.\"
-.TH StringToInt 3  "22 Jun 94 (Common)"
+.TH StringToInt 3  "05/05/97 06:46 (Common)"
 .SH NAME
 StringToInt \- Convert a string to an integer
 .SH SYNOPSIS
@@ -46,12 +54,27 @@ Converts a character string to an integer.
 .SH RETURNS
 the integer value.
 .SH FILES
-.nf
+.PD 0
 /usr/local/include/Common.h
+.LP
 /usr/local/lib/libCommon.a
-.fn
+.PD
 .SH "SEE ALSO"
-Common(3), StringToLong(3), atoi(3)
+Common(3), CHAR_TO_INT(3), StringToUInt(3), StringToShort(3),
+StringToUShort(3), StringToLong(3), StringToULong(3),
+StringToDouble(3), atoi(3)
 .SH AUTHORS
-Paul Houghton - (houghton@cworld.wiltel.com) 
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\" Revision 2.0  1995/10/28 17:34:53  houghton
+.\" Move to Version 2.0
+.\"
+.\" Revision 1.1  1994/07/05  21:38:13  houghton
+.\" Updated man pages for all libCommon functions.
+.\"
+.\"
 
