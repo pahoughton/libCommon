@@ -19,6 +19,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/28  19:11:40  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:16  houghton
  * Move to Version 2.0
  *
@@ -52,7 +55,7 @@ const char CommonVersion[] =
 
   "@(#) " COMMON_PRJ_NAME " - " COMMON_PRJ_VER "\n"			      
   "    Compiled: " __DATE__ " "__TIME__ "\n"
-  "    CVS Tag: BETA_2_0\n"
+  "    CVS Tag: ALPHA_2_0\n"
   "    $Id$ "; 
 
 #else
