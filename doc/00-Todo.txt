@@ -8,6 +8,8 @@
 #   bug reports and enhancement request. It is formated so
 #   a perl script can be used to generate reports.
 # 
+#   I'm just testing cvs
+#
 # Notes:
 # 
 #   The order of entries implies priority
@@ -124,6 +126,9 @@ comp Paul Houghton 7/13/94 08:00
 #                 of completion
 
 # $Log$
+# Revision 3.3  1999/10/29 22:39:56  houghton
+# Updated
+#
 # Revision 3.2  1999/10/29 22:39:21  houghton
 # Updated
 #
