@@ -1,24 +1,26 @@
+# -*- makefile -*- for t
 #
-# -*- Makefile -*- for t
-#
-# Created: 2/26/96 using MakeConfigs 4.01.00.a.02
+# Created: 4/29/97 using MakeConfigs 5.01.00.a.08
 #
 # $Id$
 #
 # (see end of file for Log info)
 
 #
-# Include standard MakeConfig configuration for GNU make required
-#
-
-#
 # Do not modifiy 'makefile_type'
-makefile_type = program
+makefile_type = prog
+# This is the make.cfg version that will be used
+make_cfg_ver	= 5.01
+# Default target type
+make_target	= default
 # Uncomment 'show_commands' to output compile command.
+# Comment out proto_dep (or set to any value but true) to prevent
+#     regen of proto header
 show_commands = # true
+proto_dep       = true
 
 # Include standard MakeConfig configuration for GNU make required
-include Make/make.cfg.4.01
+include Make/make.cfg.$(make_cfg_ver)
 
 # 
 # =USE_CURRENT_MAKEFILE=
@@ -37,68 +39,73 @@ VER_RELEASE	= 00.a.01
 VERSION		= $(VER_MAJOR).$(VER_MINOR).$(VER_RELEASE)
 
 PROGRAM_DEFAULT	= $(NAME)
-PROGRAM_DEBUG	= $(NAME)g
-PROGRAM_PROFILE	= $(NAME)pg
+PROGRAM_DEBUG	= $(NAME)_g
+PROGRAM_PROFILE	= $(NAME)_pg
+PROGRAM_STATIC	= $(NAME)_static
 
 PROTO_H		= _$(NAME)_Proto.h
+PRJ_TOPDIR	= ..
+
+# include any arch specific makefile component
+-include $(PRJ_TOPDIR)/src/arch/$(arch)/Makefile.$(NAME)
+
+VPATH		= $(ARCH_VPATH):.
 
 ###### D E F I N E S  #####
 # 
 # Config defines avalable
 #
-# $(X11_DEF)	    defines for X11
-# $(SYB_DEF)	    defines for SYB
 #
 
 
-SRCDEFINES	= 
-PRJDEFINES	= -DVERSION=\"$(VERSION)\"
+SRC_DEFINES	= 
+PRJ_DEFINES	= -DVERSION=\"$(VERSION)\" $(ARCH_DEFINES)
 
-DEFINES		= $(PRJDEFINES) $(SRCDEFINES) 
+DEFAULT_DEFINES = -DT_DEFAULT=1
+DEBUG_DEFINES	= -DT_DEBUG=1
+PROFILE_DEFINES	= -DT_PROFILE=1
+STATIC_DEFINES	= -DT_STATIC=1
 
 ######  I N C L U D E S #####
 #
-# Config includes available
+# Config includes available (need to use -I)
 #
-# $(X11_INC)
-# $(SYB_INC)
-# $(MALLOC_ALPHA_INC)	$(MMALLOC_BETA_INC)	$(MMALLOC_INC)
-# $(DATA_ALPHA_INC) 	$(DATA_BETA_INC) 	$(DATA_INC)
-# $(CLUE_ALPHA_INC)	$(CLUE_BETA_INC) 	$(CLUE_INC)
-# $(COMMON_ALPHA_INC)	$(COMMON_BETA_INC) 	$(COMMON_INC)
-# $(WT_ALPHA_INC) 	$(WT_BETA_INC) 		$(WT_INC)
-# $(WCF_ALPHA_INC) 	$(WCF_BETA_INC) 	$(WCF_INC)
-#
-# $(LOCAL_ALPHA_INC) 	$(LOCAL_BETA_INC) 	$(LOCAL_INC)
+# $(alpha_incdir) 	$(beta_incdir) 	$(local_incdir)
 #
 
 
-TOPDIR		= ../src/Common
+SRC_INC		= $(ARCH_INC) -I. -I../src/arch/$(arch) \
+		  -I$(PRJ_TOPDIR)/src/Common 
+PRJ_INC		= 
 
-SRCINCDIR	= -I. -I$(TOPDIR) -I../src/arch/$(arch)
-PRJINCDIR	= 
+# Any other cpp flags to use on for all targets
 
-INCDIRS		= $(SRCINCDIR)	\
-		  $(PRJINCDIR)
+CPP_FLAGS		= $(ARCH_CPP_FLAGS)
 
 ###### C O M P I L E / C P P #####
 #
 # Config flags available
 #
-# $(CC_OPTIMIZE) $(CXX_OPTIMIZE)
-# $(CC_DEBUG)	 $(CXX_DEBUG)
-# $(CC_PROFILE)	 $(CXX_PROFILE)
-# $(CC_WARN)	 $(CXX_WARN)
+# $(cc_optimize) $(cxx_optimize)
+# $(cc_debug)	 $(cxx_debug)
+# $(cc_profile)	 $(cxx_profile)
+# $(cc_warn)	 $(cxx_warn)
 #
 
 
-CPPOTHER 	=
+CC_FLAGS		= $(cc_warn_all) $(ARCH_CC_FLAGS)
 
-CCDEBUG		= $(CC_OPTIMIZE)
-CCOTHER		= $(CC_WARN)
+DEFAULT_CC_FLAGS	= $(cc_optimize)
+DEBUG_CC_FLAGS		= $(cc_debug)
+PROFILE_CC_FLAGS	= $(cc_profile)
+STATIC_CC_FLAGS		= $(cc_optimize)
 
-CXXDEBUG	= $(CXX_OPTIMIZE)
-CXXOTHER	= $(CXX_WARN)
+CXX_FLAGS		= $(arch_cxx_flags) $(cxx_warn_all)
+
+DEFAULT_CXX_FLAGS	= $(cxx_optimize)
+DEBUG_CXX_FLAGS		= $(cxx_debug)
+PROFILE_CXX_FLAGS	= $(cxx_profile)
+STATIC_CXX_FLAGS	= $(cxx_optimize)
 
 # ##### I N S T A L L #####
 
@@ -108,37 +115,40 @@ INSTALL_BIN_FLAGS	=
 #
 # Config flags available
 #
-# $(LD_OPTIMIZE)
-# $(LD_DEBUG)
-# $(LD_PROFILE)
+# $(ld_optimize)
+# $(ld_debug)
+# $(ld_profile)
+# $(ld_static)
 #
-# Config libraryies available
+# Config library directories available (need to use -L)
 #
-# $(X11_LIBS)
-# $(XAW_LIBS)
-# $(XM_LIBS)
-# $(SYB_LIBS)
-# $(MALLOC_ALPHA_LIBS)	$(MMALLOC_BETA_LIBS)	$(MMALLOC_LIBS)
-# $(DATA_ALPHA_LIBS)	$(DATA_BETA_LIBS)	$(DATA_LIBS)
-# $(CLUE_ALPHA_LIBS)	$(CLUE_BETA_LIBS)	$(CLUE_LIBS)
-# $(COMMON_ALPHA_LIBS)	$(COMMON_BETA_LIBS)	$(COMMON_LIBS)
-# $(WT_ALPHA_LIBS)	$(WT_BETA_LIBS)		$(WT_LIBS)
-# $(WCF_ALPHA_LIBS)	$(WCF_BETA_LIBS)	$(WCF_LIBS)
-#
-# $(LOCAL_ALPHA_LDIR)	$(LOCAL_BETA_LDIR)	$(LOCAL_LDIR)
-#
-# $(X11_LDIR)
+# $(alpha_libdir)	$(beta_libdir)	$(local_libdir)
 #
 
 
-# remove comment on next line to use libraries with debuging info
-DEBUG_LIBS	= # g
+LD_FLAGS		= $(ARCH_LD_FLAGS)
 
-LDDEBUG		= 
-LDOTHER		=
+DEFAULT_LD_FLAGS	= $(ld_optimize)
+DEBUG_LD_FLAGS		= $(ld_debug)
+PROFILE_LD_FLAGS	= $(ld_profile)
+STATIC_LD_FLAGS		= $(ld_static) $(ld_optimize)
 
-LDLIBDIRS	= -L$(TOPDIR) -lCommons 
-LDLIBS		= 
+DEFAULT_LD_LIBDIRS	= 
+DEBUG_LD_LIBDIRS	= -L$(PRJ_TOPDIR)/src/Common
+PRIFLE_LD_LIBDIRS	= $(DEFAULT_LD_LIBDIRS)
+STATIC_LD_LIBDIRS	= $(DEFAULT_LD_LIBDIRS)
+
+DEFAULT_LD_LIBS		= -lCommon
+DEBUG_LD_LIBS		= -lCommon_g
+PROFILE_LD_LIBS		= $(DEFAULT_LD_LIBS)
+STATIC_LD_LIBS		= $(DEFAULT_LD_LIBS)
+
+# DEP_LIBS - rebuild target if DEP_LIBS newer than target
+
+DEFAULT_DEP_LIBS	=
+DEBUG_DEP_LIBS		=
+PROFILE_DEP_LIBS	=
+STATIC_DEP_LIBS		=
 
 #
 # =USE_CURRENT_MAKEFILE=
@@ -148,20 +158,10 @@ LDLIBS		=
 
 C_SOURCES	=			\
 	main.c                          \
+	tCommonError.c                  \
 	tLOGIT.c                        \
 	tTempFileName.c                 \
 	$(ARCH_C_SOURCES)               \
-
-hold = \
-	AvlTestLargeValues.c            \
-	AvlTestSmallValues.c            \
-	CompareNodes.c                  \
-	DateTimeTest.c                  \
-	DeleteError.c                   \
-	StringTest.c                    \
-	TestOutput.c                    \
-	avl_test.c                      \
-	key_gen.c                       \
 
 
 USER_INCLUDES	=		\
@@ -176,7 +176,7 @@ USER_INCLUDES	=		\
 # Targets defined in make.cfg.targets.
 #
 # default: 	all
-# depend:	create .depend
+# depend:	create .depend_default
 # profile:	MAKE CCDEBUG=CC_PROFILE all
 # proto:	create $(PROTO_H)
 # clean:  	rm -f LIB_OBJECTS LIBRARY
@@ -185,36 +185,16 @@ USER_INCLUDES	=		\
 #
 
 
-include Make/make.cfg.targets.4.01
+include Make/make.cfg.targets.$(makefile_type).$(make_cfg_ver)
 
 default debug profile:: proto
 
-default:: objects/default $(PROGRAM_DEFAULT)
+default:: $(PROGRAM_DEFAULT)
+
+debug prifle static::
+	$(hide) $(MAKE) make_target=$@ $(PROGRAM_$($@))
 
 all::	default debug profile
-
-debug:: objects/debug
-	$(HIDE) $(MAKE) CCDEBUG='$(CC_DEBUG)' \
-			CXXDEBUG='$(CXX_DEBUG)' \
-			LDDEBUG='$(LD_DEBUG)' \
-			DEBUG_LIBS='g' \
-			$(PROGRAM_DEBUG)
-
-profile:: objects/profile
-	$(HIDE) $(MAKE) CCDEBUG='$(CC_PROFILE)' \
-			CXXDEBUG='$(CXX_PROFILE)' \
-			LDDEBUG='$(LD_PROFILE)' \
-			DEBUG_LIBS='pg' \
-			$(PROGRAM_PROFILE)
-
-$(PROGRAM_DEFAULT):: $(OBJECTS:%=objects/default/%)
-	$(LD) $(LD_FLAGS) $^ $(LD_LIBS) -o $@
-
-$(PROGRAM_DEBUG):: $(OBJECTS:%=objects/debug/%)
-	$(LD) $(LD_FLAGS) $^ $(LD_LIBS) -o $@
-
-$(PROGRAM_PROFILE):: $(OBJECTS:%=objects/profile/%)
-	$(LD) $(LD_FLAGS) $^ $(LD_LIBS) -o $@
 
 install:: default $(INSTALL_DIR)/$(PROGRAM_DEFAULT)
 
@@ -224,7 +204,7 @@ test:	default
 #
 # include dependancies generated by 'make depend'
 #
--include .depend
+-include .depend_$(make_target)
 
 #
 # =MAKEFILE_LOG=
