@@ -1125,11 +1125,12 @@ group_in_compile_stack( const compile_stack_type * compile_stack,
    examined nor set.  */
 
 static GnuReg_errcode_t
-regex_compile (pattern, size, syntax, bufp)
-     const char *pattern;
-     int size;
-     GnuReg_syntax_t syntax;
-     struct GnuRe_pattern_buffer *bufp;
+regex_compile (
+  const char * pattern,
+  int size,
+  GnuReg_syntax_t syntax,
+  struct GnuRe_pattern_buffer *bufp
+  )
 {
   /* We fetch characters from PATTERN here.  Even though PATTERN is
      `char *' (i.e., signed), we declare these variables as unsigned, so
@@ -3136,10 +3137,6 @@ GnuRe_search_2 (bufp, string1, size1, string2, size2, startpos, range, regs, sto
 
 /* Declarations and macros for re_match_2.  */
 
-static boolean alt_match_null_string_p (),
-               common_op_match_null_string_p (),
-               group_match_null_string_p ();
-
 /* Structure for per-register (a.k.a. per-group) information.
    This must not be longer than one word, because we push this value
    onto the failure stack.  Other register information, such as the
@@ -3170,6 +3167,16 @@ typedef union
 #define IS_ACTIVE(R)  ((R).bits.is_active)
 #define MATCHED_SOMETHING(R)  ((R).bits.matched_something)
 #define EVER_MATCHED_SOMETHING(R)  ((R).bits.ever_matched_something)
+
+static boolean alt_match_null_string_p ( unsigned char * p,
+					 unsigned char * end,
+					 register_info_type * reg_info );
+static boolean common_op_match_null_string_p ( unsigned char ** p,
+					       unsigned char * end,
+					       register_info_type * reg_info );
+static boolean group_match_null_string_p ( unsigned char ** p,
+					   unsigned char * end,
+					   register_info_type * reg_info );
 
 
 /* Call this when have matched a real character; it sets `matched' flags
@@ -3369,14 +3376,16 @@ GnuRe_match_2 (bufp, string1, size1, string2, size2, pos, regs, stop)
      matching and the regnum-th regend points to right after where we
      stopped matching the regnum-th subexpression.  (The zeroth register
      keeps track of what the whole pattern matches.)  */
-  const char **regstart, **regend;
+  const char **regstart = NULL;
+  const char  **regend  = NULL;
 
   /* If a group that's operated upon by a repetition operator fails to
      match anything, then the register for its start will need to be
      restored because it will have been set to wherever in the string we
      are when we last see its open-group operator.  Similarly for a
      register's end.  */
-  const char **old_regstart, **old_regend;
+  const char **old_regstart = NULL;
+  const char **old_regend = NULL;
 
   /* The is_active field of reg_info helps us keep track of which (possibly
      nested) subexpressions we are currently in. The matched_something
@@ -3384,14 +3393,15 @@ GnuRe_match_2 (bufp, string1, size1, string2, size2, pos, regs, stop)
      matched any of the pattern so far this time through the reg_num-th
      subexpression.  These two fields get reset each time through any
      loop their register is in.  */
-  register_info_type *reg_info; 
+  register_info_type *reg_info = NULL; 
 
   /* The following record the register info as found in the above
      variables when we find a match better than any we've seen before. 
      This happens as we backtrack through the failure points, which in
      turn happens only if we have not yet matched the entire string. */
   unsigned best_regs_set = false;
-  const char **best_regstart, **best_regend;
+  const char **best_regstart = NULL;
+  const char **best_regend = NULL;
   
   /* Logically, this is `best_regend[0]'.  But we don't want to have to
      allocate space for that if we're not allocating space for anything
@@ -3404,8 +3414,8 @@ GnuRe_match_2 (bufp, string1, size1, string2, size2, pos, regs, stop)
   const char *match_end = NULL;
 
   /* Used when we pop values we don't care about.  */
-  const char **reg_dummy;
-  register_info_type *reg_info_dummy;
+  const char **reg_dummy = NULL;
+  register_info_type *reg_info_dummy = NULL;
 
 #ifdef DEBUG
   /* Counts the total number of registers pushed.  */
@@ -4517,9 +4527,11 @@ common_op_match_null_string_p ( unsigned char ** p,
    We don't handle duplicates properly (yet).  */
 
 static boolean
-group_match_null_string_p (p, end, reg_info)
-    unsigned char **p, *end;
-    register_info_type *reg_info;
+group_match_null_string_p (
+  unsigned char ** p,
+  unsigned char * end,
+  register_info_type * reg_info
+  )
 {
   int mcnt;
   /* Point to after the args to the start_memory.  */
@@ -4626,9 +4638,11 @@ group_match_null_string_p (p, end, reg_info)
    byte past the last. The alternative can contain groups.  */
    
 static boolean
-alt_match_null_string_p (p, end, reg_info)
-    unsigned char *p, *end;
-    register_info_type *reg_info;
+alt_match_null_string_p (
+  unsigned char * p,
+  unsigned char * end,
+  register_info_type * reg_info
+  )
 {
   int mcnt;
   unsigned char *p1 = p;
@@ -4663,9 +4677,11 @@ alt_match_null_string_p (p, end, reg_info)
    Sets P to one after the op and its arguments, if any.  */
 
 static boolean
-common_op_match_null_string_p (p, end, reg_info)
-    unsigned char **p, *end;
-    register_info_type *reg_info;
+common_op_match_null_string_p (
+  unsigned char ** p,
+  unsigned char * end,
+  register_info_type * reg_info
+  )
 {
   int mcnt;
   boolean ret;
