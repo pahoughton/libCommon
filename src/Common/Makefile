@@ -42,7 +42,7 @@ INSTALL_INCDIR	= $(beta_incdir)
 
 VER_MAJOR	= 2
 VER_MINOR	= 02
-VER_RELEASE	= 00.a.01
+VER_RELEASE	= 00.b.01
 VERSION		= $(VER_MAJOR).$(VER_MINOR).$(VER_RELEASE)
 
 LIBRARY_DEFAULT	= lib$(NAME).a
@@ -120,8 +120,8 @@ SHDEP_LIBS		= -lc -lm
 
 # **** I N S T A L L ****
 
-INSTALL_LIB_FLAGS	= -m 664
-INSTALL_INC_FLAGS	= -m 664
+INSTALL_LIB_FLAGS	= -m 444
+INSTALL_INC_FLAGS	= -m 444
 
 objects/$(make_target)/CommonGetVersion.o: FORCE
 
@@ -269,6 +269,9 @@ FORCE:
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.27  1997/09/19 09:53:19  houghton
+# Cleanup.
+#
 # Revision 2.26  1997/09/19 09:09:10  houghton
 # Changed minor version num and release.
 # Removed referances to GnuRegex.h (no longer part of libCommon).
