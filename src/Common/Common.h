@@ -372,8 +372,10 @@ strncpy( _dest_, _src_, _size_); _dest_[_size_ - 1] = 0;
     
 
 extern const unsigned char EtoA[];
+extern const unsigned char AtoE[];
 
 #define E2A( _c_ ) (EtoA[((unsigned char)(_c_))])
+#define A2E( _c_ ) (AtoE[((unsigned char)(_c_))])
 
 int   	    	StringToInt( const char * str, int base, int len );
 unsigned int   	StringToUInt( const char * str, int base, int len );
@@ -387,6 +389,7 @@ char * CenterLine( char * dest, const char * src, int width );
 void StripSpaces( char * buffer );
 
 void EbcdicToAscii( unsigned char * buf, int len );
+void AsciiToEbcdic( unsigned char * buf, int len );
 
 #if !defined( COMMON_HAVE_STRLWR )
 char * strlwr( char * str );
@@ -676,6 +679,9 @@ FileModeString( mode_t	mode, char * modeString );
  * Modification History
  *     			
  * $Log$
+ * Revision 3.1  1999/10/29 16:56:16  houghton
+ * Changed Version to 3
+ *
  * Revision 2.21  1999/03/02 12:42:42  houghton
  * Added DaysInMonthLeap
  * Added MonthDayOfYearLeap
