@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/12/02 02:13:36  houghton
+ * Cleanup outputs.
+ *
  * Revision 2.1  1995/11/10  01:05:48  houghton
  * *** empty log message ***
  *
@@ -43,13 +46,14 @@ struct TestEnt
 
 struct TestEnt Tests[] =
 {
+  { "Error",		tCommonError },
   { "LOGIT",		tLOGIT },
   { "TempFileName",	tTempFileName },
   { NULL, NULL }
 };
 
   
-int
+int 
 main( int argc, char * argv[] )
 {
   size_t test;
