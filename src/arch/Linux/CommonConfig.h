@@ -60,7 +60,7 @@ extern "C" {
 
 #define COMMON_TEMPNAME_SIZE	8
 #define COMMON_PID_FORMAT	"%05d"
-#define COMMON_TEMP_DIR		P_tmpdir
+#define COMMON_TEMP_DIR		_PATH_TMP
     
 #if !defined( min ) && !defined( __cplusplus )
 #define min( _a_, _b_ ) ( ( (_a_) > (_b_) ) ? (_b_) : (_a_) )
@@ -127,6 +127,10 @@ extern "C" {
  * Revision Log:
  *
  * $Log$
+ * Revision 2.10  1997/09/21 12:17:44  houghton
+ * Cleanup comment header.
+ * Added portable types COMMON_*_T.
+ *
  * Revision 2.9  1997/09/16 11:33:18  houghton
  * Added define COMMON_NET_HOST_CONVERTION.
  *
