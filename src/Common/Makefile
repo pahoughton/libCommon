@@ -29,8 +29,13 @@ LIB_C_SOURCES   =   	\
 	StrError.c	\
 	strlwr.c	\
 	Error.c		\
-	_ArgString.c
+	_ArgString.c	\
+	$(ARCH_C_SOURCES)
 
+
+ifeq ($(arch),NeXT)
+  ARCH_C_SOURCES  = strdup.c
+endif
 
 
 # *****  D E F I N E S  *****
@@ -93,23 +98,23 @@ clean:
 	rm -f $(LIBRARY) $(LIB_OBJECTS) $(PROTO_H)
 	
 install:
-	( cd $(BETA_LIB_DEST); cp -f $(LIBRARY) old )
-	( cd $(BETA_INC_DEST); cp -f $(USER_INCS) old )
-	cp -f $(LIBRARY) $(BETA_LIB_DEST)
+	( cd $(BETA_LIB_DEST); cp $(LIBRARY) old )
+	( cd $(BETA_INC_DEST); cp $(USER_INCS) old )
+	cp $(LIBRARY) $(BETA_LIB_DEST)
 	chmod 664 $(BETA_LIB_DEST)/$(LIBRARY)
 	chgrp tools $(BETA_LIB_DEST)/$(LIBRARY)
-	cp -f $(USER_INCS) $(BETA_INC_DEST)
+	cp $(USER_INCS) $(BETA_INC_DEST)
 	(cd $(BETA_INC_DEST); chmod 664 $(USER_INCS) )
 	(cd $(BETA_INC_DEST); chgrp tools $(USER_INCS) )
 	echo 'Beta Install Complete!'
 	
 install_production:
-	( cd $(PROD_LIB_DEST); cp -f $(LIBRARY) old )
-	( cd $(PROD_INC_DEST); cp -f $(USER_INCS) old )
-	cp -f $(LIBRARY) $(PROD_LIB_DEST)
+	( cd $(PROD_LIB_DEST); cp $(LIBRARY) old )
+	( cd $(PROD_INC_DEST); cp $(USER_INCS) old )
+	cp $(LIBRARY) $(PROD_LIB_DEST)
 	chmod 664 $(PROD_LIB_DEST)/$(LIBRARY)
 	chgrp tools $(PROD_LIB_DEST)/$(LIBRARY)
-	cp -f $(USER_INCS) $(PROD_INC_DEST)
+	cp $(USER_INCS) $(PROD_INC_DEST)
 	(cd $(PROD_INC_DEST); chmod 664 $(USER_INCS) )
 	(cd $(PROD_INC_DEST); chgrp tools $(USER_INCS) )
 	echo 'Production Install Complete!'
