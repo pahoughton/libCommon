@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/11/10  01:05:48  houghton
+ * *** empty log message ***
+ *
  * Revision 2.0  1995/10/28  17:35:59  houghton
  * Move to Version 2.0
  *
@@ -40,6 +43,7 @@ struct TestEnt
 
 struct TestEnt Tests[] =
 {
+  { "LOGIT",		tLOGIT },
   { "TempFileName",	tTempFileName },
   { NULL, NULL }
 };
@@ -64,6 +68,8 @@ main( int argc, char * argv[] )
 	  fprintf( stderr, "passed\n" );
 	}
     }
+
+  fprintf( stderr, "%s\n\nTested\n",CommonGetVersion() );
   
   return( 0 );
 }
