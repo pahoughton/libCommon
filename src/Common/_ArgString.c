@@ -21,6 +21,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/11/10  01:03:19  houghton
+ * Change to use new Error processing functions.
+ *
  * Revision 2.1  1995/10/29  12:01:27  houghton
  * Change Version Id String
  *
@@ -35,8 +38,8 @@
 
 #include "_Common.h"
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 
 COMMON_VERSION(
@@ -81,12 +84,12 @@ _ArgString(
 		    }
 		}
 	    }
-	}
-      
-      for( ; arg + 1  < *argc; arg++ )
-	{
-	  argv[arg] = argv[arg + 1];
-	}
+	  
+	  for( ; arg + 1  < *argc; arg++ )
+	    {
+	      argv[arg] = argv[arg + 1];
+	    }
+	}      
     }
   
   return( RET_SUCCEED );
