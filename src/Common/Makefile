@@ -81,7 +81,7 @@ INCDIRS		= $(SRCINCDIR)	\
 # **** C O M P I L E / C P P ****
 
 CPPOTHER 	=
-CCDEBUG		= -g
+CCDEBUG		= $(CC_OPTIMIZE)
 CCOTHER		=
 
 # ***** L I B R A R I E S *****
@@ -161,4 +161,7 @@ include .depend
 
 #
 # $Log$
+# Revision 1.10  1994/07/13  14:54:01  houghton
+# Sequent port
+#
 #

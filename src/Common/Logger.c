@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.3  1994/07/13  13:43:00  houghton
+ * Added LoggerTee function and fixed some bugs with logging
+ *
  * Revision 1.2  1994/06/20  15:28:40  dpotluri
  * LibCommon Port to OPENVMS
  *
@@ -119,7 +122,7 @@ Logger(
       struct tm * now = localtime( &nowSec );
       
       fprintf( _CLogFP,"%02d/%02d/%02d %02d:%02d:%02d ",
-	       now->tm_mon,
+	       now->tm_mon + 1,
 	       now->tm_mday,
 	       now->tm_year,
 	       now->tm_hour,
@@ -130,7 +133,7 @@ Logger(
 	{
 	  
 	  fprintf( stderr,"%02d/%02d/%02d %02d:%02d:%02d ",
-		   now->tm_mon,
+		   now->tm_mon + 1,
 		   now->tm_mday,
 		   now->tm_year,
 		   now->tm_hour,

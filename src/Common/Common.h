@@ -18,6 +18,9 @@
  *
  *     			
  * $Log$
+ * Revision 1.10  1994/07/13  13:43:00  houghton
+ * Added LoggerTee function and fixed some bugs with logging
+ *
  * Revision 1.9  1994/07/05  21:39:13  houghton
  * Minor fixes and cleanup header info.
  *
@@ -249,7 +252,8 @@ extern int  	    _CLogLocLine;
 #define SafeStrcpy( _dest_, _src_, _size_ );    \
 strncpy( _dest_, _src_, _size_); _dest_[_size_ - 1] = 0;
     
-#define basename(_path_) (strrchr( _path_, '/' ) + 1)
+#define basename(_path_)  \
+  ( ( strrchr( _path_, '/' ) == 0) ? _path_ : (strrchr( _path_, '/' ) + 1) )
 
 char * strlwr( char * str );
 char * strupr( char * str );
