@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/12/31 11:27:43  houghton
+ * AIX Port - comment out sys/types.h include line.
+ *
  * Revision 2.1  1995/11/10 12:32:53  houghton
  * Change to Version 2
  *
@@ -109,7 +112,7 @@ extern "C" {
   
   /* BIG_ENDIAN (4321) */
 #define COMMON_n2hs( s ) ( s ) 
-
+#define COMMON_n2hi( i ) ( i )
 #define COMMON_n2hl( l ) ( l )
 
 #ifdef __cplusplus
