@@ -190,10 +190,21 @@ strptime(
 	  /* Match day of week.  */
 	  for (cnt = 0; cnt < 7; ++cnt)
 	    {
-	      if (match_string (DayOfWeekNames[ cnt ], rp))
-		break;
-	      if (match_string (DayOfWeekAbbr[cnt], rp))
-		break;
+	      size_t len;
+
+	      len = strlen( DayOfWeekNames[ cnt ] );
+	      if( strncasecmp( DayOfWeekNames[ cnt ], rp, len ) == 0 )
+		{
+		  rp += len;
+		  break;
+		}
+	      
+	      len = strlen( DayOfWeekAbbr[ cnt ] );
+	      if( strncasecmp( DayOfWeekAbbr[ cnt ], rp, len ) == 0 )
+		{
+		  rp += len;
+		  break;
+		}
 	    }
 	  if (cnt == 7)
 	    /* Does not match a weekday name.  */
@@ -206,10 +217,22 @@ strptime(
 	  /* Match month name.  */
 	  for (cnt = 0; cnt < 12; ++cnt)
 	    {
-	      if (match_string (MonthNames[cnt], rp))
-		break;
-	      if (match_string (MonthAbbr[cnt], rp))
-		break;
+	      size_t len;
+
+	      len = strlen( MonthNames[ cnt ] );
+	      if( strncasecmp( MonthNames[ cnt ], rp, len ) == 0 )
+		{
+		  rp += len;
+		  break;
+		}
+	      
+	      len = strlen( MonthAbbr[ cnt ] );
+	      if( strncasecmp( MonthAbbr[ cnt ], rp, len ) == 0 )
+		{
+		  rp += len;
+		  break;
+		}
+	      
 	    }
 	  if (cnt == 12)
 	    /* Does not match a month name.  */
@@ -270,13 +293,24 @@ strptime(
 	  break;
 	case 'p':
 	  /* Match locale's equivalent of AM/PM.  */
-	  if (match_string ( AM_STR, rp))
-	    break;
-	  if (match_string (PM_STR, rp))
-	    {
-	      is_pm = 1;
-	      break;
-	    }
+	  {
+	    size_t len;
+	    
+	    len = strlen( AM_STR );
+	    if( strncasecmp(  AM_STR, rp, len ) == 0 )
+	      {
+		rp += len;
+		break;
+	      }
+	      
+	    len = strlen( PM_STR );
+	    if( strncasecmp(  PM_STR, rp, len ) == 0 )
+	      {
+		rp += len;
+		is_pm = 1;
+		break;
+	      }
+	  }
 	  return NULL;
 	case 'r':
 	  recursive ("%I:%M:%S %p");
@@ -370,6 +404,9 @@ Boston, MA 02111-1307, USA.  */
  * Revision Log:
  *
  * $Log$
+ * Revision 1.2  1998/09/24 14:34:40  houghton
+ * Bug-Fix: was processing to many digits with the width is specified.
+ *
  * Revision 1.1  1998/09/22 14:36:46  houghton
  * initial version.
  *
