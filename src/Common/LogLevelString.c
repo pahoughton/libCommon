@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/29  12:01:17  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:25  houghton
  * Move to Version 2.0
  *
@@ -26,6 +29,7 @@
  *
  *
  *********************************************************************/
+
 #include "_Common.h"
 
 COMMON_VERSION(
@@ -33,46 +37,61 @@ COMMON_VERSION(
   "$Id$");
 
 
-extern char * LogLevelNames[];
+const char * _CLogLevelNames[] =
+{
+  "NONE",
+  "ERROR",
+  "WARN",
+  "APP_1",
+  "APP_2",
+  "APP_3",
+  "APP_4",
+  "APP_5",
+  "APP_6",
+  "WCF_1",
+  "WCF_2",
+  "WCF_3",
+  "WCF_4",
+  "INFO",
+  "TEST",
+  "DEBUG",
+  "FUNCT",
+  "ALL",
+  NULL
+};
 
 const char *
-LogLevelString(
-    LogBit lvl
-    )
+LogLevelString( LogLevelBit level )
 {
 
-  if( lvl == LOG_NONE )  return( LogLevelNames[0] );
-  if( lvl == LOG_ERROR ) return( LogLevelNames[1] );
-  if( lvl == LOG_WARN )  return( LogLevelNames[2] );
-  if( lvl == LOG_USR1 )  return( LogLevelNames[3] );
-  if( lvl == LOG_USR2 )  return( LogLevelNames[4] );
-  if( lvl == LOG_INFO )  return( LogLevelNames[5] );
-  if( lvl == LOG_TEST )  return( LogLevelNames[6] );
-  if( lvl == LOG_DEBUG ) return( LogLevelNames[7] );
-  if( lvl == LOG_FUNCT ) return( LogLevelNames[8] );
-  if( lvl == LOG_ALL )   return( LogLevelNames[9] );
+  size_t	index;
+  
+  switch( level )
+    {
+    case LOG_NONE:      index =  0;  break;
+    case LOG_ERROR:     index =  1;  break;
+    case LOG_WARN:      index =  2;  break;
+    case LOG_APP1:      index =  3;  break;
+    case LOG_APP2:      index =  4;  break;
+    case LOG_APP3:      index =  5;  break;
+    case LOG_APP4:      index =  6;  break;
+    case LOG_APP5:      index =  7;  break;
+    case LOG_APP6:      index =  8;  break;
+    case LOG_WCF1:      index =  9;  break;
+    case LOG_WCF2:      index = 10;  break;
+    case LOG_WCF3:      index = 11;  break;
+    case LOG_WCF4:      index = 12;  break;
+    case LOG_INFO:      index = 13;  break;
+    case LOG_TEST:      index = 14;  break;
+    case LOG_DEBUG:     index = 15;  break;
+    case LOG_FUNCT:     index = 16;  break;
+    case LOG_ALL:	index = 17;  break;
 
-  return( "UNKNOWN" );
+    default:
+      return( "UNKNOWN" );
+      
+    }
 
+  return( _CLogLevelNames[ index ] );
 }
 
-
-
-
-
-
-
-
-/**
- *             This software is the sole property of
- *
- *                 The Williams Companies, Inc.
- *                       1 Williams Center
- *                         P.O. Box 2400
- *                      Tulsa, Oklahoma 74102
- *
- *        Copyright (c) 1993 by The Williams Companies, Inc.
- *
- *                      All Rights Reserved.  
- *
- **/
