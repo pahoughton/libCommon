@@ -19,6 +19,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1996/05/03 16:09:27  houghton
+ * Cleanup for AIX port.
+ *
  * Revision 2.2  1995/11/10 00:46:11  houghton
  * Fixed CVS Tag value
  *
@@ -58,7 +61,7 @@ const char CommonVersion[] =
 
   "@(#) " COMMON_PRJ_NAME " - " COMMON_PRJ_VER "\n"			      
   "    Compiled: " __DATE__ " "__TIME__ "\n"
-  "    CVS Tag: ALPHA_2_0\n"
+  "    CVS Tag: " COMMON_PRJ_VER_TAG "\n"
   "    $Id$ "; 
 
 #else

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.4  1996/04/27 12:27:05  houghton
+ * Changed to use new CPROTO macro for proto generation.
+ *
  * Revision 2.3  1995/11/10 01:03:31  houghton
  * Change to use new Error processing functions.
  *
@@ -53,7 +56,7 @@
 
 #define COMMON_PRJ_NAME	    "Common"
 #define COMMON_PRJ_VER	    VERSION
-#define COMMON_PRJ_VER_TAG  "BETA_2_0_0_2"
+#define COMMON_PRJ_VER_TAG  "BETA_2_0_1"
 
 #define COMMON_VERSION( name_, verId_ )					      \
 const char COMMONVER_##name_[] =					      \
