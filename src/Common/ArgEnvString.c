@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/11/10 00:43:58  houghton
+ * Modified to use new Error processing routines
+ *
  * Revision 2.1  1995/10/28  19:11:37  houghton
  * Change Version Id String
  *
@@ -34,10 +37,11 @@
  *
  * 
  *********************************************************************/
-#include <stdio.h>
-#include <stdlib.h>
 
 #include "_Common.h"
+
+#include <stdio.h>
+#include <stdlib.h>
 
 COMMON_VERSION(
   ArgEnvString,

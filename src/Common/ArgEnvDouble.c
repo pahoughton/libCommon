@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/28 19:11:34  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:09  houghton
  * Move to Version 2.0
  *
@@ -24,10 +27,10 @@
  *
  *********************************************************************/
 
+#include "_Common.h"
+
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "_Common.h"
 
 COMMON_VERSION(
   ArgEnvDouble,

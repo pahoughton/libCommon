@@ -22,6 +22,9 @@
  * 6/7/94 - use StringToInt for conversion, allows using different bases.
  *
  * $Log$
+ * Revision 2.2  1995/11/10 00:42:28  houghton
+ * Modified to use new Error processing routines
+ *
  * Revision 2.1  1995/10/28  19:11:36  houghton
  * Change Version Id String
  *
@@ -42,10 +45,12 @@
  *
  *
  *********************************************************************/
+
+#include "_Common.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "_Common.h"
 
 COMMON_VERSION(
   ArgEnvInt,

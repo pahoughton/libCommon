@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1995/10/29 18:15:52  houghton
+ * Fixes for Borland 4.0 Port
+ *
  * Revision 2.2  1995/10/29  13:33:39  houghton
  * Initial Linux Build of Version 2
  *
@@ -37,10 +40,10 @@
  *
  *********************************************************************/
 
+#include "_Common.h"
+
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "_Common.h"
 
 COMMON_VERSION(
   ArgEnvFlag,
