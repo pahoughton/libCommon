@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1995/11/10 01:03:31  houghton
+ * Change to use new Error processing functions.
+ *
  * Revision 2.2  1995/10/31  12:38:31  houghton
  * Move version info from CommonVersion.h to _Common.h
  * Use MakeConfigs 3.3
@@ -80,7 +83,7 @@ const char COMMONVER_##name_[] =					      \
   COMMON_RETURN_TYPE_ERROR( ET_COMMON, err_, args_ )
 
 
-#if !defined( PROTO_GEN )
+#if !defined( CPROTO )
 #if !defined( COMMON_SHORT_FN )
 #include "_Common_Proto.h"
 #else
