@@ -1,8 +1,12 @@
 /*********************************************************************
  *
- * Title:            _Common.h
+ * Title:            SetErrorHandler.c
  *
  * Description:
+ *
+ *	
+ *
+ * Error Handling:
  *
  *	
  *
@@ -10,7 +14,7 @@
  *
  * Programmer:	    Paul Houghton (pah)
  *
- * Start Date:	    01/29/94 21:06
+ * Start Date:	    01/29/94 20:26
  *
  * Modification History:
  *
@@ -20,20 +24,17 @@
 static const char RcsId[] =
 "$Id$";
 
+#include <_Common.h>
 #include <Common.h>
-#define PRIVATE static
-#define PUBLIC
-#include <avl.h>
-#include "avl_typs.h"
 
-#include "_CommonProto.h"
-
-
-
-
-
-
-
+void
+SetErrorHandler(
+    void (*errorHandler)( CommonErrorType error, const char * mesg )
+    )
+{
+  CommonErrorHandler_ = errorHandler;
+  return;
+}
 
 
 /**
@@ -49,4 +50,3 @@ static const char RcsId[] =
  *                      All Rights Reserved.  
  *
  **/
-    

@@ -19,8 +19,12 @@
  *
  * Modification History:
  *
+ * $Log$
  *
  *********************************************************************/
+static const char * RcsID =
+"$Id$";
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -29,12 +33,13 @@
 #include <Common.h>
 
 
-int ArgEnvBool(
-    int *   argc,
-    char *  argv[],
-    char *  argId,
-    char *  envVar,
-    int *   paramVar
+Ret_Status
+ArgEnvBool(
+    int *   	  argc,		/* argc from main */
+    char *  	  argv[],	/* argv from main */
+    const char *  argId,	/* arg identifier string */
+    const char *  envVar,	/* env var identfier string */
+    int *   	  paramVar	/* assigned to value on return */
     )
 {
   
@@ -47,7 +52,7 @@ int ArgEnvBool(
       
       if( _ArgString( argc, argv, argId, &argString ) )
 	{
-	  return( ERROR );
+	  return( RET_ERROR );
 	}
       
       if( argString != NULL )
@@ -70,12 +75,12 @@ int ArgEnvBool(
 		}
 	      else
 		{
-		  SET_ERROR( E_RANGE );
-		  return( ERROR );
+		  SET_ERROR( C_ERANGE );
+		  return( RET_ERROR );
 		}
 	    }
 	  *paramVar = paramValue;
-	  return( SUCCEED );
+	  return( RET_SUCCEED );
 	}
     }
   
@@ -103,16 +108,16 @@ int ArgEnvBool(
 		}
 	      else
 		{
-		  SET_ERROR( E_RANGE );
-		  return( ERROR );
+		  SET_ERROR( C_ERANGE );
+		  return( RET_ERROR );
 		}
 	    }
 	  *paramVar = paramValue;
-	  return( SUCCEED );
+	  return( RET_SUCCEED );
 	}
     }
   
-  return( SUCCEED );
+  return( RET_SUCCEED );
 }
 
 

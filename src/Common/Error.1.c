@@ -23,22 +23,58 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
 
 #include <_Common.h>
 #include <Common.h>
 
+#define MAX_ERR_MESG	2048
 
-int
-Error( const char * message )
+extern void (*CommonErrorHandler_)( CommonErrorType error,
+				    const char * mesg );
+/*
+ * Other available error info:
+ *  CommonErrFile, CommonErrLine, CommonOsErr
+ */
+
+static char  ErrorMesgBuffer[ MAX_ERR_MESG ];
+
+
+void
+Error(
+    CommonErrorType error,
+    const char * message,
+    ...
+    )
 {
-  fprintf( stderr, "Common Lib Error: %d - %s\n",
-	   Errno, message );
+  va_list      args;
+
+  va_start(args, message );
+  
+  if( CommonErrorHandler_ == NULL )
+    {
+      if( CommonErrFile != NULL )
+	{
+	  fprintf( stderr, "%s(%d): %s ",
+		   CommonErrFile,
+		   CommonErrLine,
+		   (error == C_EOSERROR) ?
+		       strerror( CommonOsErr ) :  ErrorString( error ) );
+	}
+      
+      vfprintf( stderr, message, args );
+    }
+  else
+    {
+      vsprintf( ErrorMesgBuffer, message, args );
+      CommonErrorHandler_( error, ErrorMesgBuffer );
+    }
+
+  va_end( args );
+  return;
+  
 }
 	   
-
-
-
-
 
 
 

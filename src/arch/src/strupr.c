@@ -1,8 +1,12 @@
 /*********************************************************************
  *
- * Title:            _Common.h
+ * Title:            strupr.c
  *
  * Description:
+ *
+ *	
+ *
+ * Error Handling:
  *
  *	
  *
@@ -10,7 +14,7 @@
  *
  * Programmer:	    Paul Houghton (pah)
  *
- * Start Date:	    01/29/94 21:06
+ * Start Date:	    01/29/94 21:02
  *
  * Modification History:
  *
@@ -20,13 +24,28 @@
 static const char RcsId[] =
 "$Id$";
 
-#include <Common.h>
-#define PRIVATE static
-#define PUBLIC
-#include <avl.h>
-#include "avl_typs.h"
+#include <ctype.h>
 
-#include "_CommonProto.h"
+char	*
+strupr(
+    char	*str
+    )
+{
+  
+  char	*string = str;
+  
+  
+  while( *string != 0 )
+    {
+      if( islower(*string) )
+	{
+	  *string = toupper(*string);
+	}
+      string++;
+    }
+  return(str);
+  
+}
 
 
 
@@ -49,4 +68,4 @@ static const char RcsId[] =
  *                      All Rights Reserved.  
  *
  **/
-    
+

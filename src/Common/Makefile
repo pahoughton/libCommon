@@ -16,7 +16,7 @@ PROD_INC_DEST	= /usr/local/include
 
 LIBRARY = libCommon.a
 
-USER_INCS	= Common.h
+USER_INCS	= Common.h avl.h
 
 PROTO_H = _CommonProto.h
 
@@ -26,10 +26,16 @@ LIB_C_SOURCES   =   	\
 	ArgEnvInt.c	\
 	ArgEnvBool.c	\
 	ArgEnvString.c	\
-	StrError.c	\
+	ErrorString.c	\
 	strlwr.c	\
+	strupr.c	\
 	Error.c		\
 	_ArgString.c	\
+	CommonGetVersion.c \
+	CenterLine.c	\
+	Difftm.c	\
+	ForeachFile.c	\
+	avl.c           \
 	$(ARCH_C_SOURCES)
 
 

@@ -1,8 +1,12 @@
 /*********************************************************************
  *
- * Title:            _Common.h
+ * Title:            ErrorString.c
  *
  * Description:
+ *
+ *	
+ *
+ * Error Handling:
  *
  *	
  *
@@ -10,7 +14,7 @@
  *
  * Programmer:	    Paul Houghton (pah)
  *
- * Start Date:	    01/29/94 21:06
+ * Start Date:	    01/29/94 20:28
  *
  * Modification History:
  *
@@ -21,14 +25,32 @@ static const char RcsId[] =
 "$Id$";
 
 #include <Common.h>
-#define PRIVATE static
-#define PUBLIC
-#include <avl.h>
-#include "avl_typs.h"
 
-#include "_CommonProto.h"
+static char * ErrorDescription[] =
+{
+/* C_ENONE */	     "No error",
+/* C_EOSERROR */     "OS error",
+/* C_ERANGE */       "Value out of range",
+/* C_EBADPARAM */    "Bad parameter",
+/* C_EAPP */	     "Application error"
+};
 
+static char UnknownString[100];
 
+const char *
+ErrorString( CommonErrorType error )
+{
+ 
+  if( error < 0 || error > C_EUNDEFINED )
+    {
+      sprintf( UnknownString, "Unknown Error: %d", error );
+      return( UnknownString );
+    }
+  else
+    {
+      return( ErrorDescription[ error ] );
+    }
+}
 
 
 
@@ -49,4 +71,3 @@ static const char RcsId[] =
  *                      All Rights Reserved.  
  *
  **/
-    

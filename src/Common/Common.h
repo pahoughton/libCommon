@@ -1,10 +1,12 @@
+#ifndef _COMMON_H_
+#define _COMMON_H_
 /*********************************************************************
  *
  * Title:            Common.h
  *
  * Description:
  *
- *	
+ *	Common / Generic C Functions
  *
  * Error Handling:
  *
@@ -18,57 +20,115 @@
  *
  * Modification History:
  *
- *
+ * $Log$
  *********************************************************************/
+
+#include <errno.h>
+#include <time.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 
 #ifndef TRUE
 #define TRUE 1
-#endif
-
-#ifndef FALSE
 #define FALSE 0
 #endif
 
 #ifndef ON
 #define ON 1
-#endif
-
-#ifndef OFF
 #define OFF 0
 #endif
 
+#ifndef NO
+#define NO  	0
+#define YES 	1
+#endif
+
+#ifndef Bool
+#define Bool int   /* wanted to do an enum, but to common */
+#endif
 
 typedef enum
 {
-  E_NONE,
-  E_OSERROR,
-  E_RANGE,
-  E_BADARG,
-  E_BADPARAM,
-  E_UNDEFINED
+  RET_SUCCEED,
+  RET_DATA,
+  RET_DONE,
+  RET_ERROR,
+  RET_FATAL
+}   Ret_Status;
+
+
+/*
+ *Remember to add the descriptions for new errors in
+ * ErrorString.c
+ */
+typedef enum
+{
+  C_ENONE,
+  C_EOSERROR,
+  C_ERANGE,
+  C_EBADPARAM,
+  C_EAPP,		/* Application Error */  
+  C_EUNDEFINED
 } CommonErrorType;
 
-extern char *	    	ErrFile;
-extern int  	    	ErrLine;
-extern int  	    	OsErr;
-extern CommonErrorType 	Errno;
+extern char *	    	CommonErrFile;
+extern int  	    	CommonErrLine;
+extern int  	    	CommonOsErr;
+extern CommonErrorType 	CommonErrno;
 
+#define SET_ERROR( _err_ )						\
+    CommonErrFile = __FILE__; CommonErrLine = __LINE__;			\
+    CommonErrno = _err_;						\
+    CommonOsErr = ((_err_ == C_EOSERROR ) ? errno : 0);
+ 
+    
 
-int ArgEnvInt( int * argc, char *argv[], char * argid, char * envVar,
+Ret_Status ArgEnvInt( int * argc, char *argv[],
+	       const char * argid, const char * envVar,
 	       int min, int max, int * paramVar );
 
-int ArgEnvBool( int * argc, char *argv[], char * argid, char * envVar,
+Ret_Status ArgEnvBool( int * argc, char *argv[],
+		const char * argid, const char * envVar,
 	        int * paramVar );
 
-int ArgEnvString( int * argc, char *argv[], char * argid, char * envVar,
+Ret_Status ArgEnvString( int * argc, char *argv[],
+		  const char * argid, const char * envVar,
 	          char ** paramVar );
 
+time_t	Difftm( struct tm * t1, struct tm * t2 );
+char * strlwr( char * str );
+void CenterLine( char * dest, const char * src, int width );
+
+Ret_Status ForeachFile(
+    const char *    name,
+    Ret_Status      (*fileProc)( const char * name, void * closure ),
+    Bool    	    recurs,
+    void *  	    closure 
+    );
+
+void SetErrorHandler( void (*errorHandler_)( CommonErrorType error,
+					     const char * mesg ) );
+
+void Error( CommonErrorType error, const char * message, ... );
+
+const char * ErrorString( CommonErrorType error );
+
+const char * CommonGetVersion( void );
 
 
-extern char * strdup( const char *);
+#if defined( NeXT )
+char * strdup( const char *);
+#endif
+
+#ifdef __cplusplus
+};
+#endif
 
 
+#endif
 
 /**
  *             This software is the sole property of

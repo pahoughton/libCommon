@@ -1,8 +1,12 @@
 /*********************************************************************
  *
- * Title:            _Common.h
+ * Title:            CommonGetVersion.c
  *
  * Description:
+ *
+ *	
+ *
+ * Error Handling:
  *
  *	
  *
@@ -10,7 +14,7 @@
  *
  * Programmer:	    Paul Houghton (pah)
  *
- * Start Date:	    01/29/94 21:06
+ * Start Date:	    01/25/94 12:48
  *
  * Modification History:
  *
@@ -20,14 +24,19 @@
 static const char RcsId[] =
 "$Id$";
 
-#include <Common.h>
-#define PRIVATE static
-#define PUBLIC
-#include <avl.h>
-#include "avl_typs.h"
+const char _CommonVersionString[] = 
+{
+      "libCommon Version: BETA 0.3\n"
+      "Compiled: " __DATE__ " " __TIME__ "\n"
+      "CVS Tag: NONE  $Id$ \n"
+};
 
-#include "_CommonProto.h"
 
+const char *
+CommonGetVersion( void )
+{
+  return( _CommonVersionString );
+}
 
 
 
@@ -49,4 +58,3 @@ static const char RcsId[] =
  *                      All Rights Reserved.  
  *
  **/
-    

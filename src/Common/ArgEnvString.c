@@ -19,7 +19,8 @@
  *
  * Modification History:
  *
- *
+ * $Log$
+ * 
  *********************************************************************/
 
 #include <stdio.h>
@@ -28,13 +29,13 @@
 #include <_Common.h>
 #include <Common.h>
 
-
-int ArgEnvString(
-    int *   argc,
-    char *  argv[],
-    char *  argId,
-    char *  envVar,
-    char ** paramVar
+Ret_Status
+ArgEnvString(
+    int *   	  argc,
+    char *  	  argv[],
+    const char *  argId,
+    const char *  envVar,
+    char ** 	  paramVar
     )
 {
 
@@ -42,7 +43,8 @@ int ArgEnvString(
 
   if( paramVar == NULL )
     {
-      return( E_BADPARAM );
+      SET_ERROR( C_EBADPARAM );
+      return( RET_ERROR );
     }
   
   if( argId != NULL )
@@ -51,19 +53,19 @@ int ArgEnvString(
       
       if( _ArgString( argc, argv, argId, &argString ) )
 	{
-	  return( ERROR );
+	  return( RET_ERROR );
 	}
       
       if( argString != NULL )
 	{
 	  if( (paramValue = malloc( strlen( argString ) + 1 )) == NULL )
 	    {
-	      SET_ERROR( E_OSERROR );
-	      return( ERROR );
+	      SET_ERROR(C_EOSERROR );
+	      return( RET_ERROR );
 	    }
 	  strcpy( paramValue, argString );
 	  *paramVar = paramValue;
-	  return( SUCCEED );
+	  return( RET_SUCCEED );
 	}
     }
   
@@ -75,16 +77,16 @@ int ArgEnvString(
 	{
 	  if( (paramValue = malloc( strlen( envStringVal ) + 1 )) == NULL )
 	    {
-	      SET_ERROR( E_OSERROR );
-	      return( ERROR );
+	      SET_ERROR( C_EOSERROR );
+	      return( RET_ERROR );
 	    }
 	  strcpy( paramValue, envStringVal );
 	  *paramVar = paramValue;
-	  return( SUCCEED );
+	  return( RET_SUCCEED );
 	}
     }
   
-  return( SUCCEED );
+  return( RET_SUCCEED );
 }
 
 

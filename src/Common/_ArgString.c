@@ -59,8 +59,8 @@ _ArgString(
 		    }
 		  else
 		    {
-		      SET_ERROR( E_BADARG );
-		      return( ERROR );
+		      SET_ERROR( C_EBADPARAM );
+		      return( RET_ERROR );
 		    }
 		}
 	    }
@@ -72,7 +72,7 @@ _ArgString(
 	}
     }
   
-  return( SUCCEED );
+  return( RET_SUCCEED );
   
 }
 

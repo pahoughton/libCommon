@@ -19,8 +19,11 @@
  *
  * Modification History:
  *
+ * $Log$
  *
  *********************************************************************/
+static const char * RcsID =
+"$Id$";
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -29,14 +32,15 @@
 #include <Common.h>
 
 
-int ArgEnvInt(
-    int *   argc,
-    char *  argv[],
-    char *  argId,
-    char *  envVar,
-    int     min,
-    int     max,
-    int *   paramVar
+Ret_Status
+ArgEnvInt(
+    int *         argc,
+    char *  	  argv[],
+    const char *  argId,
+    const char *  envVar,
+    int           min,
+    int           max,
+    int *         paramVar
     )
 {
   
@@ -49,7 +53,7 @@ int ArgEnvInt(
       
       if( _ArgString( argc, argv, argId, &argString ) )
 	{
-	  return( ERROR );
+	  return( RET_ERROR );
 	}
       
       if( argString != NULL )
@@ -58,13 +62,13 @@ int ArgEnvInt(
 	  
 	  if( paramValue < min || paramValue > max )
 	    {
-	      SET_ERROR( E_RANGE );
-	      return( ERROR );
+	      SET_ERROR( C_ERANGE );
+	      return( RET_ERROR );
 	    }
 	  else
 	    {
 	      *paramVar = paramValue;
-	      return( SUCCEED );
+	      return( RET_SUCCEED );
 	    }
 	}
     }
@@ -79,18 +83,18 @@ int ArgEnvInt(
 	  
 	  if( paramValue < min || paramValue > max )
 	    {
-	      SET_ERROR( E_RANGE );
-	      return( ERROR );
+	      SET_ERROR( C_ERANGE );
+	      return( RET_ERROR );
 	    }
 	  else
 	    {
 	      *paramVar = paramValue;
-	      return( SUCCEED );
+	      return( RET_SUCCEED );
 	    }
 	}
     }
   
-  return( SUCCEED );
+  return( RET_SUCCEED );
 }
 
 
