@@ -44,6 +44,7 @@
 #include <limits.h>
 
 #include <sys/types.h>
+#include <paths.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -132,6 +133,9 @@ extern "C" {
  * Revision Log:
  *
  * $Log$
+ * Revision 2.12  1998/09/24 14:35:10  houghton
+ * Added TIMET_MIN & TIMET_MAX values (defines).
+ *
  * Revision 2.11  1998/09/22 14:37:29  houghton
  * Changed COMMON_TEMP_DIR to use _PATH_TMP.
  *
