@@ -15,9 +15,13 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1994/08/15  19:42:18  houghton
+ * Add ArgEnvFlage, ArgEnvLong, CanExecute, FindPath and MemberOfGroup
+ * functions
+ *
  *
  *********************************************************************/
-static const char RcsId[] =
+static const char * RcsId =
 "$Id$";
 
 #include <stdio.h>

@@ -15,9 +15,12 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1994/06/20  10:27:19  houghton
+ * Porting and add LoggerLoc function
+ *
  *
  *********************************************************************/
-static const char RcsId[] =
+static const char * RcsId =
 "$Id$";
 
 #include "_Common.h"

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.3  1994/06/22  16:34:55  dpotluri
+ * Port to MSWindows and OPENVMS
+ *
  * Revision 1.2  1994/06/20  10:27:20  houghton
  * Porting and add LoggerLoc function
  *
@@ -23,7 +26,7 @@
  *
  *
  *********************************************************************/
-static const char RcsId[] =
+static const char * RcsId =
 "$Id$";
 
 

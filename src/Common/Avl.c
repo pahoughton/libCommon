@@ -11,13 +11,16 @@
 * Fri Jul 14 13:53:42 1989, Rev 1.0, brad(0165)
 *
 * $Log$
+ * Revision 1.4  1994/07/05  21:39:15  houghton
+ * Minor fixes and cleanup header info.
+ *
  * Revision 1.3  1994/06/17  18:04:03  houghton
  * Cleanup for beta release.
  *
 *
 **/
 
-static const char RcsId[] =
+static const char * RcsId =
 {"$Id$"};
 
 #include <stdio.h>

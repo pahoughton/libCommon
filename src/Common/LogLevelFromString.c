@@ -15,9 +15,12 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1994/06/17  18:07:28  houghton
+ * Cool new Logger function
+ *
  *
  *********************************************************************/
-static const char RcsId[] =
+static const char * RcsId =
 "$Id$";
 
 #include <stdio.h>

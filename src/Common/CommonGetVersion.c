@@ -19,6 +19,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.4  1994/08/15  19:40:17  houghton
+ * Cleanup; Rating QA1 Checkin
+ *
  * Revision 1.3  1994/06/20  15:28:38  dpotluri
  * LibCommon Port to OPENVMS
  *
@@ -30,7 +33,7 @@
  *
  *
  *********************************************************************/
-static const char RcsId[] =
+static const char * RcsId =
 "$Id$";
 
 

@@ -15,9 +15,12 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1994/07/13  13:43:01  houghton
+ * Added LoggerTee function and fixed some bugs with logging
+ *
  *
  *********************************************************************/
-static const char RcsId[] =
+static const char * RcsId =
 "$Id$";
 
 #include <Common.h>

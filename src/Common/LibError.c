@@ -17,12 +17,15 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.4  1994/07/13  19:04:32  dpotluri
+ * Port to sun4, and defined strerror()
+ *
  * Revision 1.3  1994/06/17  18:03:59  houghton
  * Cleanup for beta release.
  *
  *
  *********************************************************************/
-static const char RcsId[] =
+static const char * RcsId =
 "$Id$";
 
 #include <stdio.h>

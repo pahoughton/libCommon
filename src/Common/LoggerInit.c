@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.4  1994/08/15  19:40:18  houghton
+ * Cleanup; Rating QA1 Checkin
+ *
  * Revision 1.3  1994/07/13  13:43:00  houghton
  * Added LoggerTee function and fixed some bugs with logging
  *
@@ -26,7 +29,7 @@
  *
  *
  *********************************************************************/
-static const char RcsId[] =
+static const char * RcsId =
 "$Id$";
 
 #include "_Common.h"

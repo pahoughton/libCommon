@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.5  1994/08/15  19:40:18  houghton
+ * Cleanup; Rating QA1 Checkin
+ *
  * Revision 1.4  1994/07/26  14:37:21  houghton
  * Fix basename in Common.h
  * Fix month in Logger
@@ -30,7 +33,7 @@
  *
  *
  *********************************************************************/
-static const char RcsId[] =
+static const char * RcsId =
 "$Id$";
 
 #include "_Common.h"

@@ -25,6 +25,9 @@
 *	Modification History:
 *
 *	$Log$
+ * Revision 1.3  1994/08/15  19:40:17  houghton
+ * Cleanup; Rating QA1 Checkin
+ *
  * Revision 1.2  1994/06/17  18:03:56  houghton
  * Cleanup for beta release.
  *
@@ -39,7 +42,7 @@
  *
 *
 *********************************************************************/
-static char RcsId[] = 
+static const char * RcsId = 
 {"$Id$"};
 
 #include "_Common.h"

@@ -22,6 +22,9 @@
 *	Modification History:
 *
 *	$Log$
+ * Revision 1.3  1994/07/05  21:39:14  houghton
+ * Minor fixes and cleanup header info.
+ *
  * Revision 1.2  1994/06/17  18:03:58  houghton
  * Cleanup for beta release.
  *
@@ -36,8 +39,8 @@
  *
 *
 *********************************************************************/
-static char RcsId[] = 
-	{"$Id$"};
+static const char * RcsId = 
+"$Id$";
 
 #include <time.h>
 

@@ -20,12 +20,15 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.3  1994/06/17  18:04:05  houghton
+ * Cleanup for beta release.
+ *
  * Revision 1.2  1994/01/31  14:06:19  houghton
  * Add avl and some other minor functions
  *
  *
  *********************************************************************/
-static const char RcsId[] =
+static const char * RcsId =
 "$Id$";
 
 #include <ctype.h>
