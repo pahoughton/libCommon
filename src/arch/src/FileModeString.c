@@ -15,21 +15,21 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:47  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.1  1995/02/13  15:34:17  houghton
  * New functions and many enhancements to existing functions.
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
-#if defined( AIX )
-#define _ALL_SOURCE
-#include <sys/mode.h>
-#endif
-
-
-#include <Common.h>
+#include "_Common.h"
 #include <sys/stat.h>
+
+COMMON_VERSION(
+  FileModeString,
+  "$Id$");
+
 
 static char ModeString[15];
 

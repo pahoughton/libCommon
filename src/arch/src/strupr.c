@@ -19,6 +19,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:50  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.3  1994/08/15  19:57:12  houghton
  * Fix RcsId so ident will work
  *
@@ -30,53 +33,26 @@
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
-
-#include <ctype.h>
 
 #include "_Common.h"
+#include <ctype.h>
 
-char	*
-strupr(
-    char	*str
-    )
+COMMON_VERSION(
+  strupr,
+  "$Id$");
+
+char *
+strupr(char * str )
 {
   
-  char	*string = str;
-  
-  
-  while( *string != 0 )
+  char * string;
+
+  for( string = str; *string != 0; string++ )
     {
       if( islower(*string) )
-	{
-	  *string = toupper(*string);
-	}
-      string++;
+	*string = toupper(*string);
     }
+  
   return(str);
   
 }
-
-
-
-
-
-
-
-
-
-/**
- *             This software is the sole property of
- *
- *                 The Williams Companies, Inc.
- *                       1 Williams Center
- *                         P.O. Box 2400
- *                      Tulsa, Oklahoma 74102
- *
- *        Copyright (c) 1993 by The Williams Companies, Inc.
- *
- *                      All Rights Reserved.  
- *
- **/
-

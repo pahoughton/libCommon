@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:48  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.2  1995/07/31  17:56:28  dpotluri
  * Igor's fix to basename
  *
@@ -28,25 +31,22 @@
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
+#include "_Common.h"
 
+COMMON_VERSION(
+  basename,
+  "$Id$");
 
-#include <_Common.h>
 
 const char *
 basename( const char * name )
 {
   const char * base;
 
-  if( ( base = strrchr( name, '/' ) ) )
-    {
-      return( base + 1 ); /* ichudov - was return( base );  and no + 1 :-( */
-    }
+  if( ( base = strrchr( name, COMMON_DIR_SEP_CHAR ) ) )
+    return( base + 1 )
   else
-    {
-      return( name );
-    }
+    return( name );
 }
 
 

@@ -11,6 +11,9 @@
  * Fri Jul 14 13:53:42 1989, Rev 1.0, brad(0165)
  *
  * $Log$
+ * Revision 2.1  1995/10/28  19:11:37  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:12  houghton
  * Move to Version 2.0
  *
@@ -233,7 +236,7 @@ rotate_twice(
   )
 {
   DIRECTION   other_dir		     = OPPOSITE( dir );
-  AVLtree     old_root		     = *rootp
+  AVLtree     old_root		     = *rootp;
   AVLtree     old_other_dir_subtree  = (*rootp) -> subtree[ other_dir ];
   
   /* assign new root */
@@ -308,9 +311,11 @@ balance( AVLtree    *rootp )
 */
 static void *
 avl_find( 
-  void      *data,
-  AVLtree   tree,
-  int       (*compar)( void * data1, void * data2, AvlNodeType nd )
+  const void *	data,
+  AVLtree	tree,
+  int		(*compar)( const void * data1,
+			   const void * data2,
+			   AvlNodeType nd )
   )
 {
   AvlNodeType       nd_typ = node_type( tree );
@@ -466,23 +471,27 @@ avl_delete(
       {
 	*data = (*rootp) -> data;  /* set return value in data */
 	
-	switch ( nd_typ )  {  /* what kind of node are we removing? */
-	case  AVL_IS_LEAF :
-	  free_node( avlDesc, rootp );  /* free the leaf, its height     */
-	  return  HEIGHT_CHANGED;       /* changes from 1 to 0, return 1 */
+	switch ( nd_typ )  /* what kind of node are we removing? */
+	  {
+	  case  AVL_IS_LEAF:
+	    free_node( avlDesc, rootp );  /* free the leaf, its height     */
+	    return  HEIGHT_CHANGED;       /* changes from 1 to 0, return 1 */
 	  
-	case  AVL_IS_RBRANCH :       /* only child becomes new root */
-	case  AVL_IS_LBRANCH :
-	  *rootp = (*rootp) -> subtree[ dir ];
-	  free_node( avlDesc, &old_root );      /* free the deleted node */
-	  return  HEIGHT_CHANGED;    /* we just shortened the "dir" subtree */
+	  case  AVL_IS_RBRANCH:       /* only child becomes new root */
+	  case  AVL_IS_LBRANCH:
+	    *rootp = (*rootp) -> subtree[ dir ];
+	    free_node( avlDesc, &old_root );      /* free the deleted node */
+	    return  HEIGHT_CHANGED;  /* we just shortened the "dir" subtree */
 	  
-	case  AVL_IS_TREE  :
-	  decrease = avl_delete( avlDesc,
-				 &( (*rootp) -> data ),
-				 &( (*rootp) -> subtree[ RIGHT ] ),
-				 avl_min				);
-	} /* switch */
+	  case  AVL_IS_TREE:
+	    decrease = avl_delete( avlDesc,
+				   &( (*rootp) -> data ),
+				   &( (*rootp) -> subtree[ RIGHT ] ),
+				   avl_min				);
+	    break;
+	  case AVL_IS_NULL:
+	    break;
+	  } /* switch */
       } /* else */
   
   (*rootp) -> bal -= decrease;       /* update balance factor */
@@ -600,7 +609,6 @@ avl_free(
 {
   DIRECTION  dir1 = (sibling_order == AVL_LEFT_TO_RIGHT) ? LEFT : RIGHT,
     dir2 = OPPOSITE( dir1 );
-  AvlNodeType       node = node_type( *rootp );
   
   if ( *rootp != NULL_TREE )  {
     

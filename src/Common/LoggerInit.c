@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/29  12:01:18  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:26  houghton
  * Move to Version 2.0
  *
@@ -55,9 +58,9 @@ long _CLogMaxSize    = 0;
 long _CLogTrim       = 0;
 
 int _CLogOutputLevel    = LOG_WARN | LOG_ERROR;
-Bool _CLogDate	        = TRUE;
-Bool _CLogLoc           = TRUE;
-Bool _CLogTee		= TRUE;
+BOOL _CLogDate	        = TRUE;
+BOOL _CLogLoc           = TRUE;
+BOOL _CLogTee		= TRUE;
 
 FILE * _CLogFP = NULL;
 
@@ -75,8 +78,8 @@ LoggerInit(
     long	      trimIncrement,
     LogSetLevelType   setType,
     int		      outputLevels,
-    Bool	      outputDate,
-    Bool	      outputSourceLoc
+    BOOL	      outputDate,
+    BOOL	      outputSourceLoc
     )
 {
 

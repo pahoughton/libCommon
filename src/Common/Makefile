@@ -2,7 +2,7 @@
 # Makefile for Common
 #
 #
-# Created: 0/22/95
+# Created: 9/29/95
 #
 # $Id$
 #
@@ -12,48 +12,48 @@
 # Include standard MakeConfig configuration for GNU make required
 #
 
-include Make/make.cfg.2.1
+makefile_type   = library
 
-BETA_LIB_DIR	= 
-BETA_INC_DIR	= 
+include Make/make.cfg.3.0
+
+BETA_DIR	= /usr/local/beta
+BETA_LIB_DIR	= $(BETA_DIR)/lib
+BETA_INC_DIR	= $(BETA_DIR)/include
 
 PROD_LIB_DIR	= 
 PROD_INC_DIR	= 
 
-LIBRARY		= libCommon.a
+MAJOR_VER	= 2
+MINOR_VER	= 00.00.b.02
 
-USER_INCS	=			\
-	Common.h                        \
-	DateTime.h                      \
-	Bit.h				\
-	avl.h                           \
-	avl_typs.h                      \
+LIBRARY		= libCommon.a
 
 PROTO_H		= _Common_Proto.h
 
 # **** S O U R C E   F I L E S ****
 
-LIB_C_SOURCES	=			\
+include ../arch/$(arch)/Makefile.common
+
+C_SOURCES	=			\
 	ArgEnvBool.c                    \
 	ArgEnvDouble.c                  \
 	ArgEnvFlag.c                    \
 	ArgEnvInt.c                     \
 	ArgEnvLong.c                    \
 	ArgEnvString.c                  \
-	CanExecute.c                    \
+	Avl.c                           \
 	CenterLine.c                    \
 	CommonGetVersion.c              \
+	DateStringFromTimeT.c           \
+	DateStringFromTm.c              \
 	DateStringToTimeT.c             \
-	DateStringFromTimeT.c		\
-	DateStringFromTm.c		\
 	DateTimeData.c                  \
 	Difftm.c                        \
 	EbcdicToAscii.c                 \
 	ErrorString.c                   \
-	FileModeString.c                \
 	FindPath.c                      \
-	ForeachFile.c                   \
 	HHMMSStoTimeT.c                 \
+	IsLeapYear.c                    \
 	LibError.c                      \
 	LogLevelFromString.c            \
 	LogLevelString.c                \
@@ -62,30 +62,39 @@ LIB_C_SOURCES	=			\
 	LoggerLoc.c                     \
 	LoggerTee.c                     \
 	LoggerTrim.c                    \
-	MemberOfGroup.c                 \
 	SetErrorHandler.c               \
 	StringToDouble.c                \
 	StringToInt.c                   \
-	StringToUInt.c                  \
-	StringToShort.c                 \
-	StringToUShort.c                \
 	StringToLong.c                  \
+	StringToShort.c                 \
+	StringToUInt.c                  \
 	StringToULong.c                 \
+	StringToUShort.c                \
 	StripSpaces.c                   \
 	YYMMDDtoTimeT.c                 \
 	YYYYMMDDtoTimeT.c               \
 	YearMonthDayToTimeT.c           \
 	_ArgString.c                    \
 	_LoggerFileName.c               \
-	avl.c                           \
-	key_gen.c                       \
-	basename.c			\
-	strdup.c                        \
-	strlwr.c                        \
-	strupr.c                        \
+	$(ARCH_C_SOURCES)		\
 
-LIB_CXX_SOURCES	=			\
+USER_INCS	=			\
+	Bit.h                           \
+	Common.h                        \
+	CommonVersion.h                 \
+	DateTime.h                      \
+	../arch/$(arch)/CommonConfig.h	\
 
+
+C_HEADERS	=			\
+	Bit.h                           \
+	Common.h                        \
+	CommonVersion.h                 \
+	DateTime.h                      \
+	_AvlTypes.h                     \
+	_Common.h                       \
+
+CXX_HEADERS	=			\
 
 # 
 # =USE_CURRENT_MAKEFILE=
@@ -98,7 +107,7 @@ LIB_CXX_SOURCES	=			\
 # see MakeConfig(1) for portable library defines
 #
 
-DEFINES		= -D_POSIX_SOURCE 
+DEFINES		= -DVERSION=\"$(MAJOR_VER).$(MINOR_VER)\" $(ARCH_DEFINES)
 
 # *****  I N C L U D E S *****
 #
@@ -106,8 +115,8 @@ DEFINES		= -D_POSIX_SOURCE
 #
 
 
-SRCINCDIR	= -I.
-PRJINCDIR	= -I.
+SRCINCDIR	= -I. -I../arch/$(arch)
+PRJINCDIR	= 
 
 INCDIRS		= $(SRCINCDIR)	\
 		  $(PRJINCDIR)
@@ -116,7 +125,7 @@ INCDIRS		= $(SRCINCDIR)	\
 # **** C O M P I L E / C P P ****
 
 CPPOTHER 	=
-CCDEBUG		= -g
+CCDEBUG		= $(CC_DEBUG)
 CCOTHER		=
 
 INSTALL_LIB_FLAGS	= -m 664
@@ -127,18 +136,26 @@ INSTALL_MAN_FLAGS	= -m 664
 
 # =USE_CURRENT_MAKEFILE=
 
+#
+# Targets defined in make.cfg.targets.
+#
+# default: 	all
+# depend:	create .depend
+# profile:	MAKE CCDEBUG=CC_PROFILE all
+# proto:	create $(PROTO_H)
+# clean:  	rm -f LIB_OBJECTS LIBRARY
+# realclean:	rm -f LIB_OBJECTS LIBRARY .depend.lib PROTO_H TAGS
+# tags:		create TAGS using etags
+#
+#
+
+include Make/make.cfg.targets.3.0
+
+
 all: $(PROTO_H) $(LIBRARY)
 
-
-
-$(LIBRARY): $(LIB_OBJECTS) 
+$(LIBRARY): $(OBJECTS) 
 	$(UPDATELIB) $@ $?
-
-clean:
-	rm -f $(LIBRARY) $(LIB_OBJECTS) 
-
-realclean:
-	rm -f $(LIBRARY) $(LIB_OBJECTS) $(PROTO_H) .depend.lib TAGS 
 
 install:
 	mkdirhier $(BETA_LIB_DIR)/old
@@ -157,46 +174,22 @@ install_production:
 	-( cd $(PROD_INC_DIR)/old; rm -f $(USER_INCS); cd ..; mv $(USER_INCS) old )
 	$(INSTALL) $(INSTALL_LIB_FLAGS) $(LIBRARY) $(PROD_LIB_DIR)
 	$(INSTALL) $(INSTALL_INC_FLAGS) $(USER_INCS) $(PROD_INC_DIR)
-	echo 'Beta Install Complete!'
+	echo 'Production Install Complete!'
 
-proto: 
-	$(MKPROTO) $(CPPFLAGS) $(LIB_C_SOURCES) >$(PROTO_H)
-
-   
-$(PROTO_H): $(LIB_C_SOURCES)
-	$(MKPROTO) $(CPPFLAGS) $(LIB_C_SOURCES) >$@
-
-
-tags: 
-	etags -t *.h *.c *.C *.hh
-
-depend: depend.lib
-
-FORCE:
 #
 # include dependancies generated by 'make depend'
 #
-include .depend.lib
+include .depend
 
 # 
 # $Log$
-# Revision 1.14  1995/02/13  15:34:19  houghton
-# New functions and many enhancements to existing functions.
-#
-# Revision 1.13  1994/12/02  17:25:42  dpotluri
-# Added locking to Avl Trees
-#
-# Revision 1.12  1994/08/15  19:40:19  houghton
-# Cleanup; Rating QA1 Checkin
-#
-# Revision 1.11  1994/07/26  14:37:22  houghton
-# Fix basename in Common.h
-# Fix month in Logger
-#
-# Revision 1.10  1994/07/13  14:54:01  houghton
-# Sequent port
+# Revision 1.2  1995/02/13  17:35:10  houghton
+# Major enhancements much cleaner
 #
 # Revision 1.1  1994/01/23  18:16:55  houghton
 # Production release 1.0 of MakeConfig system
 #
 #
+
+
+

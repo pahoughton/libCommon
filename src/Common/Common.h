@@ -18,6 +18,9 @@
  *
  *     			
  * $Log$
+ * Revision 2.1  1995/10/28  19:11:39  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:15  houghton
  * Move to Version 2.0
  *
@@ -297,6 +300,19 @@ void StripSpaces( char * buffer );
 
 void EbcdicToAscii( unsigned char * buf, int len );
 
+#if !defined( COMMON_HAVE_STRLWR )
+char * strlwr( char * str );
+#endif
+
+#if !defined( COMMON_HAVE_STRUPR )
+char * strupr( char * str );
+#endif
+
+#if !defined( COMMON_HAVE_STRDUP )
+char * strdup( const char *);
+#endif
+
+
 /**************************************************************
  * D A T E / T I M E   P r o c e s s i n g 
  **************************************************************/
@@ -378,20 +394,51 @@ void * AvlFindMin( AvlTree  tree );
 void * AvlDelMax( AvlTree  tree );
 void * AvlFindMax ( AvlTree  tree );
 
-void * AvlSetTreeData( AvlTree * tree, void * data );
-void * AvlGetTreeData( AvlTree * tree );
+void * AvlSetTreeData( AvlTree tree, void * data );
+void * AvlGetTreeData( AvlTree tree );
+
+#if defined( COMMON_HAVE_LOCKING )
+/************************************************************/
+/* AvlTree Locking Mechanisms */
+/************************************************************/
+  
+int    InitLocking( const char *    fileName ,
+		    int 	    accessFlag,
+		    const char	    keyID );
+int    AvlLockTree( AvlTree tree, int semId );
+int    AvlUnlockTree( AvlTree tree, int semId  );
+int    AvlWaitForUnlock( AvlTree tree, int semId  );
+int    AvlGetNumberOfUsers( AvlTree tree );
+#endif
 
 /**************************************************************
  * M I S C   
  **************************************************************/
-      
 
-Ret_Status ForeachFile( const char *	name,
-			Ret_Status      (*fileProc)( const char * name,
-						     void * closure ),
-			BOOL    	recurs,
-			void *  	closure );
+Ret_Status
+ForeachFile( const char *   name,
+	     Ret_Status     (*fileProc)( const char * name,
+					 void * closure ),
+	     BOOL	    recurs,
+	     void *	    closure );
 
+BOOL
+CanExecute( const char * fileName );
+
+
+#if defined( COMMON_HAVE_GROUPS )
+BOOL
+MemberOfGroup( gid_t grp );
+#endif
+
+#if defined( COMMON_HAVE_UMODE )
+const char * 
+FileModeString( umode_t	mode, char * modeString );
+#endif
+
+#if !defined( COMMON_HAVE_BASENAME )
+const char * basename( const char * path );
+#endif
 
 extern const char CommonVersion[];
 

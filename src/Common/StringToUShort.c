@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/29  12:01:25  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:33  houghton
  * Move to Version 2.0
  *
@@ -74,12 +77,13 @@ StringToUShort(
       base = baseToUse;
     }
 
-  for( ; (len != 0 && index < len ) || (len == 0 && string[index] != 0); index++ )
+  for( ; (len != 0 && index < len ) || (len == 0 && string[index] != 0);
+       index++ )
     {
-      if( IsBaseDigit( string[index], base ) )
+      if( IS_BASE_DIGIT( string[index], base ) )
 	{
 	  value *= base;
-	  value += CharToInt( string[index] );
+	  value += CHAR_TO_INT( string[index] );
 	}
     }
 

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:46  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.3  1995/02/13  15:34:13  houghton
  * New functions and many enhancements to existing functions.
  *
@@ -27,16 +30,16 @@
  *
  *
  *********************************************************************/
-static const char * RcsId =
-"$Id$";
-
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-
 #include "_Common.h"
 
-Bool
+#include <unistd.h>
+#include <sys/stat.h>
+
+COMMON_VERSION(
+  CanExecute,
+  "$Id$");
+
+BOOL
 CanExecute( const char * fileName )
 {
 

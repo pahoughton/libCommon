@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/29  12:01:16  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:24  houghton
  * Move to Version 2.0
  *
@@ -60,7 +63,7 @@ void * CommonErrorClosure_ = NULL;
  *  CommonErrFile, CommonErrLine, CommonOsErr
  */
 
-static char  ErrorMesgBuffer[ MAX_ERR_MESG ];
+static char  ErrorMesgBuffer[ COMMON_MAX_ERR_MESG ];
 
 
 void

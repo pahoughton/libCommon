@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/28  19:18:18  houghton
+ * New for version 2.0
+ *
  * Revision 2.1  1995/10/28  17:26:21  houghton
  * Change to Version 2.1
  *
@@ -38,7 +41,7 @@ extern "C" {
 #endif
 
 #define COMMON_PRJ_NAME	    "Common"
-#define COMMON_PRJ_VER	    #VERSION
+#define COMMON_PRJ_VER	    VERSION
 #define COMMON_PRJ_VER_TAG  "BETA_2_0_0_2"
 
 #define COMMON_VERSION( name_, verId_ )					      \

@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/28  19:11:35  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:09  houghton
  * Move to Version 2.0
  *
@@ -47,7 +50,7 @@ ArgEnvFlag(
     char *  	  argv[],	/* argv from main */
     const char *  argId,	/* arg identifier string */
     const char *  envVar,	/* env var identfier string */
-    Bool *     	  paramVar	/* assigned to value on return */
+    BOOL *     	  paramVar	/* assigned to value on return */
     )
 {
     

@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:22  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.7  1995/02/13  15:34:18  houghton
  * New functions and many enhancements to existing functions.
  *
@@ -44,24 +47,24 @@
  *
  *
  *********************************************************************/
-static const char * RcsId =
-{"$Id$"};
+#include "_Common.h"
 
-
-#define _ALL_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <dirent.h>
 #include <sys/stat.h>
 
-#include "_Common.h"
+COMMON_VERSION(
+  ForeachFile,
+  "$Id$");
+
 
 Ret_Status
 ForeachFile(
     const char *    dirName,
     Ret_Status      (*fileProc)( const char * name, void * closure ),
-    Bool    	    recurs,
+    BOOL    	    recurs,
     void *  	    closure 
     )
 {

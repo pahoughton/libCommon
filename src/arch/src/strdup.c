@@ -19,18 +19,23 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.0  1995/10/28  17:35:49  houghton
+ * Move to Version 2.0
+ *
  * Revision 1.2  1994/06/17  18:04:04  houghton
  * Cleanup for beta release.
  *
  *
  *********************************************************************/
-static const char * RcsID =
-"$Id$";
+#include "_Common.h"
 
 #include <string.h>
 #include <stdlib.h>
 
-#include "_Common.h"
+COMMON_VERSION(
+  strdup,
+  "$Id$");
+
 char *
 strdup( const char * input )
 {
