@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.1  1995/02/13  15:34:24  houghton
+ * New functions and many enhancements to existing functions.
+ *
  *
  *********************************************************************/
 static const char * RcsId =
@@ -35,7 +38,7 @@ basename( const char * name )
 
   if( ( base = strrchr( name, '/' ) ) )
     {
-      return( base );
+      return( base + 1 ); /* ichudov - was return( base );  and no + 1 :-( */
     }
   else
     {
