@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/11/10  01:02:52  houghton
+ * Change error handler arguments.
+ *
  * Revision 2.1  1995/10/29  12:01:21  houghton
  * Change Version Id String
  *
@@ -47,8 +50,8 @@ COMMON_VERSION(
   "$Id$");
 
 
-CommonErrorHandler  _CommonHandleError = _CommonDefaultErrorHandler;
-void *		    _CommonClosureError = NULL;
+extern CommonErrorHandler  _CommonHandleError;	    /* ErrorArgs.c */
+extern void *		    _CommonClosureError;    /* ErrorArgs.c */
 
 void
 SetErrorHander( CommonErrorHandler handler, void * closure )
