@@ -37,6 +37,9 @@ tools_gzip		= gzip-1.2.4.tar
 
 default:
 
+$(TOOL_DIR)/Build $(tools_build_dir):
+	mkdir $@
+
 $(tools_archive_dir)/$(tools_gzip):
 	cd $(libs_build_dir)						      \
 	&& $(PROJECT)/support/AnonFtp.ksh				      \
@@ -82,7 +85,8 @@ check_cvs:
 	  exit 1;							      \
 	fi
 
-$(tools_build_dir)/MakeConfigs-$(make_cfg_ver): 
+$(tools_build_dir)/MakeConfigs-$(make_cfg_ver): $(TOOL_DIR)/Build	      \
+		$(tools_build_dir)
 	cd $(tools_build_dir)						      \
 	&& cvs $(tools_cvsroot) co MakeConfigs-$(make_cfg_ver)
 
@@ -98,6 +102,9 @@ setup: MakeConfigs
 
 #
 # $Log$
+# Revision 1.2  1999/10/29 23:09:50  houghton
+# Changed to use MakeConfigs-(ver) vs MakeConfigs.
+#
 # Revision 1.1  1999/10/29 21:43:59  houghton
 # Initial Version.
 #
