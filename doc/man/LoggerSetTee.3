@@ -1,0 +1,64 @@
+.\"
+.\" File:      LoggerSetTee.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for LoggerSetTee
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/05/97 04:04
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH LoggerSetTee 3  "05/05/97 04:04 (Common)"
+.SH NAME
+LoggerSetTee \- turn on/off tee'ing log entries to stderr.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+BOOL LoggerSetTee(
+.PD 0
+.RS
+.TP 18
+BOOL
+teeOutput )
+.RE
+.PD
+.SH ARGUMENTS
+.TP
+teeOutput
+use TRUE to start outputing log entries to stderr and FALSE to stop. 
+.SH DESCRIPTION
+This function will turn on/off tee'ing log entries to stderr in
+addition to the current log destination.
+.SH RETURNS
+.TP
+BOOL
+the previous setting.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), LogLevelSetString(3), LogLevelFromString(3), LogLevelString(3),
+LoggerInit(3), LoggerSetLogFile(3), LoggerSetOutputLevel(3),
+LoggerSetDate(3), LoggerSetLoc(3), LoggerSetFunct(3),
+LoggerGetFunct(3), LoggerLevel(3), LoggerLoc(3), Logger(3),
+LoggerArgs(3), LoggerTrim(3),
+LOGITLOC(3), LOGIT(3), LOGFUNCT(3), LOGERROR(3) 
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

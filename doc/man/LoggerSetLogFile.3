@@ -1,0 +1,101 @@
+.\"
+.\" File:      LoggerSetLogFile.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for LoggerSetLogFile
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/05/97 03:33
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH LoggerSetLogFile 3  "05/05/97 03:33 (Common)"
+.SH NAME
+LoggerSetLogFile \- set the file that log entries will be written to.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+Ret_Status LoggerInit(
+.PD 0
+.RS
+.TP 18
+const char *
+logPath,
+.TP 18
+const char *
+logFileName,
+.TP 18
+LogOutFileType
+outputFileType,
+.TP 18
+long
+maxByteCount,
+.TP 18
+long
+trimIncrement )
+.RE
+.PD
+.SH ARGUMENTS
+.TP
+logPath
+directory to create log file in. Default is '.'
+.TP
+logFileName
+name of log file. Default is 'program.log'. If the output file type is
+LOG_BY_DATE, the 'logFileName' is prefixed with the date and a '.'.
+.TP
+outputFileType
+the type of log file to create. This can be one of LOG_BY_DATE (a new
+log file is created every day), LOG_REOPEN (the log file can be
+deleted while the program is running), LOG_KEEP_OPEN (the log file is
+kept open by the program). Default value is 'LOG_REOPEN'.
+.TP
+maxByteCount
+maximum size of the log file. When the log file gets to this size,
+at least, 'trimIncrement' bytes will be removed. A value of 0 means no
+maximum. Default is 0.
+.TP
+trimIncrement
+the minimum number of bytes to remove from the beginning of the log
+file when it hits 'maxByteCount'. The log is trimmed up to the next
+end of line character. A value of 0 means the lesser of 2048 or
+maxByteCount / 4. Default is 0.
+.SH DESCRIPTION
+This function initializes the file that log entries are written to, if
+the default logging funtion is used. Log files are opened with the
+append flag, so if the file  exist, it will be appended.
+.SH RETURNS
+.TP
+RET_SUCCEED
+log file successfully initialized.
+.TP
+RET_ERROR
+an error occured initiaizing the file.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), LogLevelSetString(3), LogLevelFromString(3), LogLevelString(3),
+LoggerInit(3), LoggerSetOutputLevel(3), LoggerSetDate(3),
+LoggerSetLoc(3), LoggerSetTee(3), LoggerSetFunct(3),
+LoggerGetFunct(3), LoggerLevel(3), LoggerLoc(3), Logger(3),
+LoggerArgs(3), LoggerTrim(3),
+LOGITLOC(3), LOGIT(3), LOGFUNCT(3), LOGERROR(3) 
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

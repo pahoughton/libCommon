@@ -1,0 +1,58 @@
+.\"
+.\" File:      CommonErrorString.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for CommonErrorString() Ver: 2.1
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     04/29/97 07:08
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH CommonErrorString 3  "04/29/97 07:08 (Common)"
+.SH NAME
+CommonErrorString \- translate a CommonError value into a string.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+const char * CommonErrorString(
+.PD 0
+.RS
+.TP 18
+CommonError
+err )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+err
+the CommonError value to tranlate
+.SH DESCRIPTION
+Returns a string description for a CommonError value.
+.SH RETURNS
+const char * description of the CommonError value.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), SetErrorHandler(3), GetErrorHandler(3),
+Error(3), ErrorArgs(3), SetError(3), ErrorMesg(3), ErrorTypeString(3),
+SET_ERROR_CLOSURE(3), SET_ERROR(3), ERROR(3), ERROR_APP(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

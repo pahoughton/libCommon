@@ -1,0 +1,86 @@
+.\"
+.\" File:      LoggerGetFunct.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for LoggerGetFunct
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/05/97 04:15
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH LoggerGetFunct 3  "05/05/97 04:15 (Common)"
+.SH NAME
+LoggerGetFunct \- retrieve the function currently used for logging.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+typedef void (* LoggerFunct)(
+.PD 0
+.RS
+.TP 18
+void *
+closure,
+.TP 18
+cosnt char *
+srcFile,
+.TP 18
+long
+srcLine,
+.TP 18
+const char *
+mesgFmt,
+.TP 18
+va_list
+mesgArgs )
+.RE
+.PD
+.LP
+void LoggerGetFunct(
+.PD 0
+.RS
+.TP 18
+LoggerFunct *
+funct,
+.TP
+void **
+closure )
+.RE
+.PD 0
+.SH ARGUMENTS
+.TP
+funct
+is set to the current logging function on return.
+.TP
+closure
+is set to the current closure on return.
+.SH DESCRIPTION
+This function retrieves the current logging function and closure.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), LogLevelSetString(3), LogLevelFromString(3), LogLevelString(3),
+LoggerInit(3), LoggerSetLogFile(3), LoggerSetOutputLevel(3),
+LoggerSetDate(3), LoggerSetLoc(3), LoggerSetTee(3),
+LoggerSetFunct(3), LoggerLevel(3), LoggerLoc(3), Logger(3),
+LoggerArgs(3), LoggerTrim(3),
+LOGITLOC(3), LOGIT(3), LOGFUNCT(3), LOGERROR(3) 
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

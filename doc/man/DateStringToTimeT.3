@@ -1,0 +1,66 @@
+.\"
+.\" File:      DateStringToTimeT.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for DateStringToTimeT
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/05/97 07:04
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH DateStringToTimeT 3  "05/05/97 07:04 (Common)"
+.SH NAME
+DateStringToTimeT \- convert a date and time string to a time_t value.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+time_t DateStringToTimeT(
+.PD 0
+.RE
+.TP 18
+const char *
+dateString,
+.TP 18
+const char *
+fmt )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+dateString
+the string to convert.
+.TP
+fmt
+the strptime(3) format of the dateString. If this is NULL, the default
+format expected is '5/5/97 14:44:33'.
+.SH DESCRIPTION
+Converts a string representation of a date and time to a time_t value.
+.SH RETURNS
+The converted value or '0' if the conversion failed.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), YYYYMMDDtoTimeT(3), YYMMDDtoTimeT(3),
+HHMMSStoTimeT(3), DateStringFromTimeT(3), DateStringFromTm(3),
+YearMonthDayToTimeT(3), HourMinSecToTimeT(3),
+strptime(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

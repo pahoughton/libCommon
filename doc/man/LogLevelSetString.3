@@ -1,0 +1,69 @@
+.\"
+.\" File:      LogLevelSetString.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for LogLevelSetString() Ver: 2.2
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     04/29/97 08:29
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH LogLevelSetString 3  "04/29/97 08:29 (Common)"
+.SH NAME
+LogLevelSetString \- set the string for a specific LogLevelBit.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+const char * LogLevelSetString(
+.PD 0
+.RS
+.TP 18
+LogLevelBit
+level,
+.TP 18
+const char *
+string )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+level
+the is the log level bit to set the string for.
+.TP
+string
+this is the string to output for the level.
+.SH DESCRIPTION
+Provides a way to specify the string that will be output to represent
+a specific LogLevelBit. Note, the string is not copied. It is directly
+accessed by the logger functions.
+.SH RETURNS
+const char * the previous string for the bit.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), LogLevelFromString(3), LogLevelString(3), LoggerInit(3),
+LoggerSetLogFile(3), LoggerSetOutputLevel(3), LoggerSetDate(3),
+LoggerSetLoc(3), LoggerSetTee(3), LoggerSetFunct(3),
+LoggerGetFunct(3), LoggerLevel(3), LoggerLoc(3), Logger(3),
+LoggerArgs(3), LoggerTrim(3),
+LOGITLOC(3), LOGIT(3), LOGFUNCT(3), LOGERROR(3) 
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

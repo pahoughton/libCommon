@@ -1,0 +1,73 @@
+.\"
+.\" File:      TempFileName.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for TempFileName
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/07/97 04:54
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH TempFileName 3  "05/07/97 04:54 (Common)"
+.SH NAME
+TempFileName \- create a unique filename.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+const char * TempFileName(
+.PD 0
+.RS
+.TP 18
+const char *
+dir,
+.TP 18
+const char *
+prefix )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+dir
+the directory portion of the file name. If NULL, the environment will
+be searched for TMPDIR, TMP and TEMP and the first value found will be
+used.
+.TP
+prefix
+a string to prefix to the filename.
+.SH DESCRIPTION
+This function will create up to 238,328 unique file names. It uses the
+'dir', 'prifix', process id and 3 characters to create the file
+name. The stat function is used internally to verify the name is
+unique, so if this function is called twice without creating the file
+for the first call, the same value may be returned (very rare).
+.SH RETURNS
+.TP
+const char *
+an interal static string containing the unique file name.
+.TP
+NULL
+an error occured.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

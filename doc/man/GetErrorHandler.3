@@ -1,0 +1,92 @@
+.\"
+.\" File:	GetErrorHandler.3
+.\" Project:	Common
+.\" Desc:        
+.\"
+.\"     Man page for GetErrorHandler() Ver: 2.1
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     04/29/97 05:18
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:	    $Date$
+.\"  Version:	    $Revision$
+.\"
+.\" $Id$
+.\"
+.TH GetErrorHandler 3  "04/29/97 05:18 (Common)"
+.SH NAME
+GetErrorHandler \- Get the function being called when an error occures.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+typedef int
+(* CommonErrorHandler)(
+.PD 0
+.RS
+.TP 18
+void *
+closure,
+.TP 18
+const char *
+srcFile,
+.TP 18
+long
+srcLine,
+.TP 18
+CommonErrorType
+errorType
+.TP 18
+int
+errorValue,
+.TP 18
+const char *
+errDesc,
+.TP 18
+const char *
+mesgFormat,
+.TP 18
+va_list
+args ),
+.RE
+.PD
+.LP
+void GetErrorHandler(
+.PD 0
+.RS
+.TP 22
+CommonErrorHandler *
+errorHandler,
+.TP 22
+void **
+closure )
+.RE
+.PD
+.SH ARGUMENTS
+.TP
+errorHandler
+set to the current error handler function.
+.TP
+closure
+set to the current error handler closure value.
+.SH DESCRIPTION
+This function provides access to the current error handling function.
+.SH RETURNS
+None.
+.SH FILES
+.nf
+/usr/local/lib/libCommon.a
+/usr/local/include/Common.h
+.fn
+.SH "SEE ALSO"
+Common(3), GetErrorHandler(3), Error(3), ErrorArgs(3), SetError(3),
+ErrorMesg(3), ErrorTypeString(3), CommonErrorString(3),
+SET_ERROR_CLOSURE(3), SET_ERROR(3), ERROR(3), ERROR_APP(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" $Log$
+.\"

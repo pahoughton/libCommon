@@ -1,0 +1,72 @@
+.\"
+.\" File:      HourMinSecToTimeT.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for HourMinSecToTimeT
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/07/97 03:56
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH HourMinSecToTimeT 3  "05/07/97 03:56 (Dist)"
+.SH NAME
+HourMinSecToTimeT \- convert an hour, minute and second to a time_t value.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+time_t HourMinSecToTimeT(
+.PD 0
+.RS
+.TP 10
+int
+hour,
+.TP 10
+int
+min,
+.TP 10
+int
+sec )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+hour
+the hour of the day (0 -> 23).
+.TP
+min
+the minute of the hour (0 -> 60).
+.TP
+sec
+the second of the minute (0 -> 60).
+.SH DESCRIPTION
+Convert the 'hour', 'min', and 'sec' values passed to a time_t
+value. The date portion of the time_t value created will be 0.
+.SH RETURNS
+the converted time_t value.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), YYYYMMDDtoTimeT(3), YYMMDDtoTimeT(3),
+HHMMSStoTimeT(3), DateStringToTimeT(3), DateStringFromTimeT(3),
+DateStringFromTm(3), YearMonthDayToTimeT(3),
+strftime(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

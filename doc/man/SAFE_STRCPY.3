@@ -1,0 +1,65 @@
+.\"
+.\" File:      SAFE_STRCPY.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for SAFE_STRCPY
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/05/97 06:34
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH SAFE_STRCPY 3  "05/05/97 06:34 (Common)"
+.SH NAME
+SAFE_STRCPY \- copy a string into dest for 'size' bytes and null terminate it.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+void SAFE_STRCPY(
+.PD 0
+.RS
+.TP 18
+char *
+dest,
+.TP 18
+const char *
+src,
+.TP 18
+size_t
+size )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+dest
+the destination string pointer.
+.TP
+src
+the source string.
+.TP
+size
+the size of the destination buffer.
+.SH DESCRIPTION
+This is a simple macro wrapper for strncpy(3) adds a null terminator
+to the dest at size - 1.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.PD
+.SH "SEE ALSO"
+Common(3), strncpy(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

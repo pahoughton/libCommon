@@ -1,0 +1,78 @@
+.\"
+.\" File:      ERROR_APP.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for ERROR_APP() Ver: (Common.h 2.13)
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     04/29/97 07:27
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH ERROR_APP 3  "04/29/97 07:27 (Common)"
+.SH NAME
+ERROR_APP \- macro to call SetError and ErrorMesg with default parameters.
+.SH SYNOPSIS
+void ERROR_APP(
+.PD 0
+.RS
+.TP 18
+int
+errorValue,
+.TP
+mesg_args
+args )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+errorValue
+error value representing the error.
+.TP
+args
+this should be a paren enclosed '()' set of arguments for ErrorMesg
+that describes the error that has occured.
+.SH DESCRIPTION
+This macro first calls SetError with an errorType of ET_APP then
+calls ErrorMesg which calls the current error handler function.
+.SH RETURNS
+None.
+.SH EXAMPLE
+.nf
+
+  {
+    const char * arg = "With Me";
+
+    if( ! DoSomething( "With Me" ) )
+      {
+        ERROR_APP( APP_ERROR_VALUE,
+                   ("DoSomething failed using: %s", arg ) );
+      }
+  }
+.fn
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), SetErrorHandler(3), GetErrorHandler(3),
+Error(3), ErrorArgs(3), SetError(3), ErrorMesg(3), ErrorTypeString(3),
+CommonErrorString(3),
+SET_ERROR_CLOSURE(3), SET_ERROR(3), ERROR(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

@@ -1,0 +1,73 @@
+.\"
+.\" File:      DateStringFromTimeT.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for DateStringFromTimeT
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/05/97 07:13
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH DateStringFromTimeT 3  "05/05/97 07:13 (Common)"
+.SH NAME
+DateStringFromTimeT \- create a string representation of a time_t value.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+const char * DateStringFromTimeT(
+.PD 0
+.RS
+.TP 18
+char *
+buffer,
+.TP 18
+const char *
+fmt,
+.TP 18
+time_t
+seconds )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+buffer
+the buffer to put the date string in. If this is NULL an interal
+static value will be used.
+.TP
+fmt
+a strftime(0) format string or NULL for the default format of MM/DD/YY
+HH:MM:SS.
+.TP
+seconds
+the time value to use.
+.SH DESCRIPTION
+This function creates a string representation of the 'seconds' value passed.
+.SH RETURNS
+a string representation of the 'seconds' passed.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), YYYYMMDDtoTimeT(3), YYMMDDtoTimeT(3),
+HHMMSStoTimeT(3), DateStringToTimeT(3), DateStringFromTm(3),
+YearMonthDayToTimeT(3), HourMinSecToTimeT(3),
+strftime(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

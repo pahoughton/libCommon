@@ -1,0 +1,64 @@
+.\"
+.\" File:      FileModeString.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for FileModeString
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/07/97 05:10
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH FileModeString 3  "05/07/97 05:10 (Common)"
+.SH NAME
+FileModeString \- return a string representation of the mode passed.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+const char * FileModeString(
+.PD 0
+.RS
+.TP 18
+mode_t
+mode,
+char *
+modeStringBuf )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+mode
+the mode to use.
+.TP
+modeStringBuf
+the buffer to place the string in. If it is NULL an internal static
+buffer will be returned.
+.SH DESCRIPTION
+This function uses a file's 'mode' passed to create a string. The
+format of the string is similar to the output of 'ls -l'. For example,
+if mode is octal 0775 then the string would be "-rwxrwxr-x".
+.SH RETURNS
+the formated mode string.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

@@ -1,0 +1,92 @@
+.\"
+.\" File:      SetError.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for SetError() Ver: 2.2
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     04/29/97 06:40
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH SetError 3  "04/29/97 06:40 (Common)"
+.SH NAME
+SetError \- Set the information for an error that has occured.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+void SetError(
+.PD 0
+.RS
+.TP 18
+const char *
+srcFile,
+.TP 18
+long
+srcLine,
+.TP 18
+CommonErrorType
+errorType,
+.TP 18
+int
+errorValue,
+.TP 18
+const char *
+errorDesc,
+.TP 18
+void *
+closure )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+srcFile
+the source file name where the error occured (i.e. __FILE__).
+.TP
+srcLine
+the source line number where the error occured (i.e. __LINE__).
+.TP
+errorType
+the type of value in errorValue.
+.TP
+errorValue
+error value representing the error.
+.TP
+errorDesc
+addition descriptive info for the error.
+.TP
+closure
+the closure value to pass to the error handler.
+.SH DESCRIPTION
+This function sets internal variables to the arguments passed. It
+allows you the set the fact that an error has occured without actually
+calling the error handler. Use ErrorMesg(3) to call the error handler
+after using SetError.
+.SH RETURNS
+None.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), SetErrorHandler(3), GetErrorHandler(3),
+Error(3), ErrorArgs(3), ErrorMesg(3), ErrorTypeString(3),
+CommonErrorString(3),
+SET_ERROR_CLOSURE(3), SET_ERROR(3), ERROR(3), ERROR_APP(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

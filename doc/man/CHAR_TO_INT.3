@@ -1,0 +1,55 @@
+.\"
+.\" File:      CHAR_TO_INT.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for CHAR_TO_INT
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/05/97 06:25
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH CHAR_TO_INT 3  "05/05/97 06:25 (Common)"
+.SH NAME
+CHAR_TO_INT \- Convert a character to it's integer equivalent
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+int CHAR_TO_INT(
+.PD 0
+.RS
+.TP
+char
+c )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+c
+The ASCII character to convert to an integer.
+.SH DESCRIPTION
+Converts a single ASCII character to an integer value. If the
+character is an alpha ('a'->'f') it will be interpreted as a hex
+value (i.e. 'a' = 10, 'b' = 11 ... ).
+.SH RETURNS
+the converted integer value.
+.SH FILES
+/usr/local/include/Common.h
+.SH "SEE ALSO"
+Common(3), IS_BASE_DIGIT(3),
+StringToInt(3), StringToUInt(3), StringToShort(3),
+StringToUShort(3), StringToLong(3), StringToULong(3), StringToDouble(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

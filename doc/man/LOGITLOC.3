@@ -1,0 +1,90 @@
+.\"
+.\" File:      LOGITLOC.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for LOGITLOC
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/05/97 04:49
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH LOGITLOC 3  "05/05/97 04:49 (Common)"
+.SH NAME
+LOGITLOC \- create a log entry using file, line, level and logArgs.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+void LOGITLOC(
+.PD 0
+.RS
+.TP 18
+const char *
+srcFile,
+.TP 18
+long
+srcLine,
+.TP 18
+LogLevelBit
+level,
+.TP 18
+args )
+.RE
+.PD
+.SH ARGUMENTS
+.TP
+srcFile
+the source file name to be output with the log entry (normally
+__FILE__).
+.TP
+srcLine
+the source file line number to be outpuut with the log entry (normally
+__LINE__).
+.TP
+level
+the log level for the log entry.
+.TP
+args
+a paren enclosed set of printf like format string and args.
+.SH DESCRIPTION
+The LOGITLOG macro uses its args to creat a log entry. It should only
+be used if you have to specify the srcFile and srcLine, otherwise, use
+LOGIT.
+.SH EXAMPLE
+.nf
+
+    ...
+
+    LOGITLOC( srcFile, srcLine, LOG_ERROR,
+              ("Invalid value: %6.2f", aDoubleVar ) );
+
+    ...
+.fn    
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), LogLevelSetString(3), LogLevelFromString(3), LogLevelString(3),
+LoggerInit(3), LoggerSetLogFile(3), LoggerSetOutputLevel(3),
+LoggerSetDate(3), LoggerSetLoc(3), LoggerSetTee(3),
+LoggerSetFunct(3), LoggerGetFunct(3), LoggerLevel(3), LoggerLoc(3),
+Logger(3), LoggerArgs(3), LoggerTrim(3).
+LOGIT(3), LOGFUNCT(3), LOGERROR(3) 
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

@@ -1,0 +1,73 @@
+.\"
+.\" File:      DateStringFromTm.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for DateStringFromTm
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/07/97 03:46
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH DateStringFromTm 3  "05/07/97 03:46 (Dist)"
+.SH NAME
+DateStringFromTm \- convert a tm struct to a string.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+const char * DateStringFromTm(
+.PD 0
+.RS
+.TP 18
+const char *
+buffer,
+.TP 18
+const char *
+fmt,
+.TP 18
+const struct tm *
+tmTime )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+buffer
+the buffer to put the date string in. If this is NULL an interal
+static value will be used.
+.TP
+fmt
+a strftime(0) format string or NULL for the default format of MM/DD/YY
+HH:MM:SS.
+.TP
+tmTime
+the time value to use.
+.SH DESCRIPTION
+Use tmTime to create a string representation of a date and time.
+.SH RETURNS
+a string representation of the 'tmTime passed.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), YYYYMMDDtoTimeT(3), YYMMDDtoTimeT(3),
+HHMMSStoTimeT(3), DateStringToTimeT(3), DateStringFromTimeT(3),
+YearMonthDayToTimeT(3), HourMinSecToTimeT(3),
+strftime(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

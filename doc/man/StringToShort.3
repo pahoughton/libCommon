@@ -1,0 +1,73 @@
+.\"
+.\" File:      StringToShort.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for StringToShort
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/05/97 06:49
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH StringToShort 3  "05/05/97 06:49 (Common)"
+.SH NAME
+StringToShort \- Convert a string to a short.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+short StringToShort(
+.PD 0
+.RS
+.TP 15
+const char *
+string,
+.TP 15
+int
+base,
+.TP 15
+int
+length )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+string
+the string to be converted.
+.TP
+base
+the base of the string. A value of 0 cause the base to be determined
+by the first two characters of the string. a leading '0' means octal
+(base 8) and a leading '0x' or '0X' means hex (base 16).
+.TP
+length
+the number of character to use for the conversion. A value of 0
+means the string is NULL terminated.
+.SH DESCRIPTION
+Converts a character string to a short.
+.SH RETURNS
+the short value.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), CHAR_TO_INT(3), StringToInt(3), StringToUInt(3),
+StringToUShort(3), StringToLong(3), StringToULong(3),
+StringToDouble(3), atoi(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

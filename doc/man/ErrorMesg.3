@@ -1,0 +1,70 @@
+.\"
+.\" File:      ErrorMesg.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for ErrorMesg() Ver: 2.3
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     04/29/97 06:58
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH ErrorMesg 3  "04/29/97 06:58 (Common)"
+.SH NAME
+ErrorMesg \- call the error handler using the values establised by
+SetError(3).
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+int ErrorMesg(
+.PD 0
+.RS
+.TP 18
+const char *
+errMesgFormat,
+.TP 18
+ ... )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+errMesgFormat
+format string like printf.
+.TP
+ ...
+args for the format string.
+.SH DESCRIPTION
+This will call the currently installed error handler passing it the
+values specifed by SetError(3).
+.LP
+If no error handler was installed, the default one will be used. It
+creates a log entry with LoggerArgs using LOG_ERROR for the type.
+.SH RETURNS
+The value returned by the error handler. The default error handler
+returnes INT_MAX.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), SetErrorHandler(3), GetErrorHandler(3),
+Error(3), ErrorArgs(3), SetError(3), ErrorTypeString(3),
+CommonErrorString(3),
+SET_ERROR_CLOSURE(3), SET_ERROR(3), ERROR(3), ERROR_APP(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

@@ -1,0 +1,89 @@
+.\"
+.\" File:      LoggerSetFunct.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for LoggerSetFunct
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/05/97 04:08
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH LoggerSetFunct 3  "05/05/97 04:08 (Common)"
+.SH NAME
+LoggerSetFunct \- specify the function to use to process log entries.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+typedef void (* LoggerFunct)(
+.PD 0
+.RS
+.TP 18
+void *
+closure,
+.TP 18
+cosnt char *
+srcFile,
+.TP 18
+long
+srcLine,
+.TP 18
+const char *
+mesgFmt,
+.TP 18
+va_list
+mesgArgs )
+.RE
+.PD
+.LP
+void LoggerSetFunct(
+.PD 0
+.RS
+.TP 18
+LoggerFunct
+funct,
+.TP
+void *
+closure )
+.RE
+.PD 0
+.SH ARGUMENTS
+.TP
+funct
+the function to call to process a log entry.
+.TP
+closure
+the value passed as the closure argument to 'funct'.
+.SH DESCRIPTION
+By using LoggerSetFunct to change the fucntion used to processing log
+entries, you get total control over how log entries are
+processed. The funct is called for each log entry that should
+currently be processed.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), LogLevelSetString(3), LogLevelFromString(3), LogLevelString(3),
+LoggerInit(3), LoggerSetLogFile(3), LoggerSetOutputLevel(3),
+LoggerSetDate(3), LoggerSetLoc(3), LoggerSetTee(3),
+LoggerGetFunct(3), LoggerLevel(3), LoggerLoc(3), Logger(3),
+LoggerArgs(3), LoggerTrim(3),
+LOGITLOC(3), LOGIT(3), LOGFUNCT(3), LOGERROR(3) 
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

@@ -1,0 +1,57 @@
+.\"
+.\" File:      Host2NetULong.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for Host2NetULong
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/07/97 04:44
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH Host2NetULong 3  "05/07/97 04:44 (Common)"
+.SH NAME
+Host2NetULong \- return an unsigned long converted to network byte order.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+unsigned long Host2NetULong( unsigned long value )
+.SH ARGUMENTS
+.TP
+value
+the value to convert.
+.SH DESCRIPTION
+This function converts the value passed from host byte order which is
+architecture dependent to network byte order (most significant byte
+first: 4321).
+.SH RETURNS
+the converted value.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3),
+Host2NetShort(3), Net2HostShort(3),
+Host2NetUShort(3), Net2HostUShort(3),
+Host2NetInt(3), Net2HostInt(3),
+Host2NetUInt(3), Net2HostUInt(3),
+Host2NetLong(3), Net2HostLong(3),
+Net2HostULong(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

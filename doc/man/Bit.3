@@ -1,0 +1,50 @@
+.\"
+.\" File:      Bit.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for Bit
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/07/97 04:08
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH Bit 3  "05/07/97 04:08 (Common)"
+.SH NAME
+Bit \- return an int with a specific bit set.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+int Bit( int bitNum )
+.SH ARGUMENTS
+.TP
+bitNum
+this is the bit to set where 0 is the right most bit.
+.SH DESCRIPTION
+This is a macro that returns an int with only the 'bitNum' bit
+set. For example, Bit(3) would return a 8 (binary 00001000).
+.SH RETURNS
+the int with the specificed bit set.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

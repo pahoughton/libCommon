@@ -1,0 +1,70 @@
+.\"
+.\" File:      LOGFUNCT.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for LOGFUNCT
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/05/97 05:04
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH LOGFUNCT 3  "05/05/97 05:04 (Common)"
+.SH NAME
+LOGFUNCT \- create a LOG_FUNCT entry.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+void LOGFUNCT(
+.PD 0
+.RS
+functName )
+.RE
+.PD
+.SH ARGUMENTS
+.TP
+functName
+is the name of the function (do NOT enclose in quotes).
+.SH DESCRIPTION
+This is a helper macro to create LOG_FUNCT log entries that show
+entry into a function durring execution.
+.SH EXAMPLE
+.nf
+
+    void MyFunct( void )
+    {
+       int x;
+
+       LOGFUNCT( MyFunct );
+
+       ...
+
+    }
+.fn
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+Common(3), LogLevelSetString(3), LogLevelFromString(3), LogLevelString(3),
+LoggerInit(3), LoggerSetLogFile(3), LoggerSetOutputLevel(3),
+LoggerSetDate(3), LoggerSetLoc(3), LoggerSetTee(3),
+LoggerSetFunct(3), LoggerGetFunct(3), LoggerLevel(3), LoggerLoc(3),
+Logger(3), LoggerArgs(3), LoggerTrim(3).
+LOGITLOC(3), LOGIT(3), LOGERROR(3) 
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

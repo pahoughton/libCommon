@@ -1,0 +1,104 @@
+.\"
+.\" File:       Error.3
+.\" Project:	Common
+.\" Desc:        
+.\"
+.\"     Man page for Error() Ver: 2.1
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     04/29/97 05:55
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:   $Author$
+.\"  Last Mod:	    $Date$
+.\"  Version:	    $Revision$
+.\"
+.\" $Id$
+.\"
+.TH Error 3  "04/29/97 05:55 (Common)"
+.SH NAME
+Error \- call the error handler function.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+int Error(
+.PD 0
+.RS
+.TP 18
+const char *
+srcFile,
+.TP 18
+long
+srcLine,
+.TP 18
+CommonErrorType
+errorType,
+.TP 18
+int
+errorValue,
+.TP 18
+void *
+closure,
+.TP 18
+const char *
+errorDesc,
+.TP 18
+const char *
+errMesgFormat,
+.TP 18
+ ... )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+srcFile
+the source file name where the error occured (i.e. __FILE__).
+.TP
+srcLine
+the source line number where the error occured (i.e. __LINE__).
+.TP
+errorType
+the type of value in errorValue.
+.TP
+errorValue
+error value representing the error.
+.TP
+closure
+the closure value to pass to the error handler.
+.TP
+errorDesc
+addition descriptive info for the error.
+.TP
+errMesgFormat
+format string like printf.
+.TP
+ ...
+args for the format string.
+.SH DESCRIPTION
+This will call the currently installed error handler passing it the
+values specifed. If closure is NULL the closure passed to
+SetErrorHandler(3) will be used.
+.LP
+If no error handler was installed, the default one will be used. It
+creates a log entry with LoggerArgs using LOG_ERROR for the type.
+.SH RETURNS
+The value returned by the error handler. The default error handler
+returnes INT_MAX.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), SetErrorHandler(3), GetErrorHandler(3),
+ErrorArgs(3), SetError(3), ErrorMesg(3), ErrorTypeString(3),
+CommonErrorString(3),
+SET_ERROR_CLOSURE(3), SET_ERROR(3), ERROR(3), ERROR_APP(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" $Log$
+.\"

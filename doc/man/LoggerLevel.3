@@ -1,0 +1,65 @@
+.\"
+.\" File:      LoggerLevel.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for LoggerLevel
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/05/97 04:18
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH LoggerLevel 3  "05/05/97 04:18 (Common)"
+.SH NAME
+LoggerLevel \- set the level for the next log entry.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+LogLevelBit LoggerLevel(
+.PD 0
+.RS
+.TP 18
+LogLevelBit
+level )
+.PD
+.RE
+.SH ARGUMENTS
+level
+the level to use for the next log entry created. it can be one of:
+LOG_ERROR,LOG_WARN, LOG_APP1, LOG_APP2, LOG_APP3, LOG_APP4, LOG_APP4, LOG_APP5,
+LOG_APP6, LOG_LIB1, LOG_LIB2, LOG_LIB3, LOG_LIB4,
+LOG_INFO, LOG_TEST, LOG_DEBUG, and LOG_FUNCT.
+.SH DESCRIPTION
+This function establishes the level for the next log entry created.
+.SH RETURNS
+.TP
+LogLevelBit
+the previous setting.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), LogLevelSetString(3), LogLevelFromString(3), LogLevelString(3),
+LoggerInit(3), LoggerSetLogFile(3), LoggerSetOutputLevel(3),
+LoggerSetDate(3), LoggerSetLoc(3), LoggerSetTee(3),
+LoggerSetFunct(3), LoggerGetFunct(3), LoggerLoc(3), Logger(3),
+LoggerArgs(3), LoggerTrim(3),
+LOGITLOC(3), LOGIT(3), LOGFUNCT(3), LOGERROR(3) 
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

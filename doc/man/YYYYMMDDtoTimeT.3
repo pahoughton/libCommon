@@ -1,0 +1,55 @@
+.\"
+.\" File:      YYYYMMDDtoTimeT.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for YYYYMMDDtoTimeT
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/05/97 07:02
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH YYYYMMDDtoTimeT 3  "05/05/97 07:02 (Common)"
+.SH NAME
+YYYYMMDDtoTimeT \- convert a 'YYYYMMDD' string to a time_t value
+#include <Common.h> or <DateTime.h>
+.LP
+time_t YYYYMMDDtoTimeT(
+.PD 0
+.RS
+.TP 15
+const char *
+yyyymmdd )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+yymmdd
+the date string to convert. Does not have to be NULL terminated.
+.SH DESCRIPTION
+Convert a 'YYYYMMDD' string (i.e. 19940515) to a time_t value. No
+validation is performed on the string.
+.SH RETURNS
+the translated time_t value.
+.SH FILES
+.nf
+/usr/local/include/DateTime.h
+/usr/local/lib/libCommon.h
+.fn
+.SH "SEE ALSO"
+YYMMDDtoTimeT(3), HHMMSStoTimeT(3), Common(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

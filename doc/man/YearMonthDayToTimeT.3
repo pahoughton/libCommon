@@ -1,0 +1,73 @@
+.\"
+.\" File:      YearMonthDayToTimeT.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for YearMonthDayToTimeT
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/07/97 03:50
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH YearMonthDayToTimeT 3  "05/07/97 03:50 (Dist)"
+.SH NAME
+YearMonthDayToTimeT \- convert a year, month and day to a time_t value.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+time_t YearMonthDayToTimeT(
+.PD 0
+.RS
+.TP 10
+int
+year,
+.TP 10
+int
+month,
+.TP 10
+int
+day )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+year
+the year to use for the conversion. If this value is < 50, it is
+treated as 20**.
+.TP
+month
+the month to use for the conversion where Jan == 1.
+.TP
+day
+the day of the month to use for the conversion.
+.SH DESCRIPTION
+This function takes a 'year', 'month' and 'day' and returns the time_t
+representatio of the date.
+.SH RETURNS
+the converted time_t value.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), YYYYMMDDtoTimeT(3), YYMMDDtoTimeT(3),
+HHMMSStoTimeT(3), DateStringToTimeT(3), DateStringFromTimeT(3),
+DateStringFromTm(3), HourMinSecToTimeT(3),
+strftime(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

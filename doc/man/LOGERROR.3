@@ -1,0 +1,56 @@
+.\"
+.\" File:      LOGERROR.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for LOGERROR
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     05/05/97 05:08
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH LOGERROR 3  "05/05/97 05:08 (Common)"
+.SH NAME
+LOGERROR \- create a LOG_ERROR level log entry.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+void LOGERROR(
+.PD 0
+.RS
+loggerArgs )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+loggerArgs
+a paren enclosed set of printf like format string and args.
+.SH DESCRIPTION
+This is just a helper macro that calls LOGIT with a level of LOG_ERROR.
+.SH FILES
+.nf
+/usr/local/include/Common.h
+/usr/local/lib/libCommon.a
+.fn
+.SH "SEE ALSO"
+Common(3), LogLevelSetString(3), LogLevelFromString(3), LogLevelString(3),
+LoggerInit(3), LoggerSetLogFile(3), LoggerSetOutputLevel(3),
+LoggerSetDate(3), LoggerSetLoc(3), LoggerSetTee(3),
+LoggerSetFunct(3), LoggerGetFunct(3), LoggerLevel(3), LoggerLoc(3),
+Logger(3), LoggerArgs(3), LoggerTrim(3).
+LOGITLOC(3), LOGIT(3), LOGFUNCT(3) 
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"

@@ -1,0 +1,59 @@
+.\"
+.\" File:      ErrorTypeString.3
+.\" Project:   Common
+.\" Desc:        
+.\"
+.\"     Man page for ErrorTypeString() Ver: 2.2
+.\"
+.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
+.\" Created:     04/29/97 07:04
+.\"
+.\" Revision History: (See end of file for Revision Log)
+.\"
+.\"  Last Mod By:    $Author$
+.\"  Last Mod:       $Date$
+.\"  Version:        $Revision$
+.\"
+.\" $Id$
+.\"
+.TH ErrorTypeString 3  "04/29/97 07:04 (Common)"
+.SH NAME
+ErrorTypeString \- return a string description of a CommonErrorType value.
+.SH SYNOPSIS
+#include <Common.h>
+.LP
+const char * ErrorTypeString(
+.PD 0
+.RS
+.TP 18
+CommonErrorType
+type )
+.PD
+.RE
+.SH ARGUMENTS
+.TP
+type
+the CommonErrorType to return a string description for.
+.SH DESCRIPTION
+Translate a CommonErrorType to a printable string.
+.SH RETURNS
+const char * description of the type passed.
+.SH FILES
+.PD 0
+/usr/local/include/Common.h
+.LP
+/usr/local/lib/libCommon.a
+.PD
+.SH "SEE ALSO"
+Common(3), SetErrorHandler(3), GetErrorHandler(3),
+Error(3), ErrorArgs(3), SetError(3), ErrorMesg(3),
+CommonErrorString(3),
+SET_ERROR_CLOSURE(3), SET_ERROR(3), ERROR(3), ERROR_APP(3)
+.SH AUTHORS
+Paul A. Houghton - (paul.houghton@wcom.com)
+
+.\"
+.\" Revision Log:
+.\"
+.\" $Log$
+.\"
