@@ -1,0 +1,44 @@
+
+The Following Regression Test tests the following functions
+LoggerFunctions are *NOT* tested.
+
+Avl Trees
+---------
+	All the following are checked both with Small and large 
+values.
+
+1. AvlInit
+2. AvlAdd
+3. AvlFind
+4. AvlDel 
+5. AvlCount
+6. AvlFindMax
+7. AvlFindMin
+8. AvlDelMax
+9. AvlDelMin
+
+
+Note: AvlFindMax and AvlFindMin are returning erroneous values 
+      and are commented out.
+
+
+DateTime
+-------
+1. IsLeapYear
+2. YYMMDDtoTimeT
+3. HHMMSStoTimeT   
+
+
+String Functions
+---------------
+1. strlwr
+2. strupr
+3. CenterLine
+4. StripSpaces
+5. strdup
+
+Misc
+------
+1. ArgEnvInt
+2. ArgEnvString
+
