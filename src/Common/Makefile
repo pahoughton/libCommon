@@ -1,7 +1,7 @@
 #
 # Makefile for Common
 #
-# Created: 9/31/95
+# Created: 10/9/95
 #
 # $Id$
 #
@@ -13,7 +13,7 @@
 
 makefile_type   = library
 
-include Make/make.cfg.3.3
+include Make/make.cfg.3.4
 
 # 
 # =USE_CURRENT_MAKEFILE=
@@ -22,16 +22,16 @@ include Make/make.cfg.3.3
 # if you want it re-gen'd, just delete the tags
 #
 
-BETA_DIR	= /usr/local/beta
-BETA_LIB_DIR	= $(BETA_DIR)/lib
-BETA_INC_DIR	= $(BETA_DIR)/include
+BETA_DIR	= 
+BETA_LIB_DIR	= $(LOCAL_ALPHA_LIB_DIR)
+BETA_INC_DIR	= $(LOCAL_ALPHA_INC_DIR)
 
 PROD_DIR	= /usr/local/
 PROD_LIB_DIR	= $(PROD_DIR)/lib 
 PROD_INC_DIR	= $(PROD_DIR)/include
 
 MAJOR_VER	= 2
-MINOR_VER	= 00.00.b.05
+MINOR_VER	= 00.00.a.21
 VERSION		= $(MAJOR_VER).$(MINOR_VER)
 
 LIBRARY		= libCommon.a
@@ -121,6 +121,7 @@ C_SOURCES	=			\
 	ArgEnvString.c                  \
 	Avl.c                           \
 	CenterLine.c                    \
+	CommonErrorString.c             \
 	CommonGetVersion.c              \
 	DateStringFromTimeT.c           \
 	DateStringFromTm.c              \
@@ -128,18 +129,32 @@ C_SOURCES	=			\
 	DateTimeData.c                  \
 	Difftm.c                        \
 	EbcdicToAscii.c                 \
-	ErrorString.c                   \
+	Error.c                         \
+	ErrorArgs.c                     \
+	ErrorMesg.c                     \
+	ErrorTypeString.c               \
 	FindPath.c                      \
+	GetErrorHandler.c               \
 	HHMMSStoTimeT.c                 \
 	IsLeapYear.c                    \
-	LibError.c                      \
 	LogLevelFromString.c            \
+	LogLevelSetString.c             \
 	LogLevelString.c                \
 	Logger.c                        \
+	LoggerArgs.c                    \
+	LoggerGetFunct.c                \
 	LoggerInit.c                    \
+	LoggerLevel.c                   \
 	LoggerLoc.c                     \
-	LoggerTee.c                     \
+	LoggerSetDate.c                 \
+	LoggerSetFunct.c                \
+	LoggerSetLevel.c                \
+	LoggerSetLoc.c                  \
+	LoggerSetLogFile.c              \
+	LoggerSetOutputLevel.c          \
+	LoggerSetTee.c                  \
 	LoggerTrim.c                    \
+	SetError.c                      \
 	SetErrorHandler.c               \
 	StringToDouble.c                \
 	StringToInt.c                   \
@@ -149,22 +164,26 @@ C_SOURCES	=			\
 	StringToULong.c                 \
 	StringToUShort.c                \
 	StripSpaces.c                   \
+	TempFileName.c                  \
 	YYMMDDtoTimeT.c                 \
 	YYYYMMDDtoTimeT.c               \
 	YearMonthDayToTimeT.c           \
 	_ArgString.c                    \
+	_CommonDefaultErrorHandler.c    \
+	_CommonErrorDesc.c              \
+	_LoggerDefault.c                \
 	_LoggerFileName.c               \
-	$(ARCH_C_SOURCES)		\
-
+	_LoggerLogIt.c                  \
+	$(ARCH_C_SOURCES)               \
 
 USER_H_INCS	=			\
 	Common.h                        \
-	../arch/$(arch)/CommonConfig.h	\
+	 ../arch/$(arch)/CommonConfig.h \
 
-USER_INCS	=	\
-	$(USER_H_INCS)	\
-	$(USER_HH_INCS)	\
-	$(USER_II_INCS)	\
+USER_INCS	=	   \
+	$(USER_H_INCS)     \
+	$(USER_HH_INCS)    \
+	$(USER_II_INCS)    \
 
 C_HEADERS	=			\
 	Common.h                        \
@@ -188,43 +207,79 @@ C_HEADERS	=			\
 #
 #
 
-include Make/make.cfg.targets.3.3
+include Make/make.cfg.targets.3.4
 
-all: $(PROTO_H) $(LIBRARY)
+all: $(LIBRARY)
 
 $(LIBRARY): $(OBJECTS) 
 	$(UPDATELIB) $@ $?
 
-install: default
-	$(MKDIRHIER) $(BETA_LIB_DIR)/old
-	$(MKDIRHIER) $(BETA_INC_DIR)/old
-	if [ -e $(BETA_LIB_DIR)/$(LIBRARY).$(VERSION) ] ; then \
-	echo $(BETA_LIB_DIR)/$(LIBRARY).$(VERSION) already installed!; \
-	echo Change version number in makefile and try again.; \
-	exit 1; \
+install: beta_check_installed beta_install_lib
+	@echo $(BETA_LIB_DIR)/$(LIBRARY).$(VERSION) installed!
+
+beta_check_installed: 
+	@if [ -e $(BETA_LIB_DIR)/$(LIBRARY).$(VERSION) ] ; then \
+	  echo $(BETA_LIB_DIR)/$(LIBRARY).$(VERSION) already installed!; \
+	  echo Change version number in makefile and try again.; \
+	  exit 1; \
 	fi
-	if [ -e .installed.ver ] ; then \
-	ver=`cat .installed.ver`; \
-	for fn in `cat .installed.lib`; do \
-	mv $(BETA_LIB_DIR)/$$fn $(BETA_LIB_DIR)/old; \
-	done; \
-	for fn in `cat .installed.inc`; do \
-	mv $(BETA_INC_DIR)/$$fn $(BETA_INC_DIR)/old/$$fn.$$ver; \
-	done; \
+	@echo + Installing $(NAME) Version: $(VERSION)
+
+beta_install_lib: default beta_move_installed beta_install_new
+
+beta_move_installed: 
+	@if [ -e .installed.ver ] ; then \
+	  for line in `cat .installed.ver` ; do \
+	    case $$line in \
+	      installed_ver=*) \
+		installed_ver=$${line#installed_ver=};; \
+	      installed_inc_dir=*) \
+		installed_inc_dir=$${line#installed_inc_dir=};; \
+	      installed_lib_dir=*) \
+		installed_lib_dir=$${line#installed_lib_dir=};; \
+	    esac; \
+	  done; \
+	  echo + Moving Version $$installed_ver out of way; \
+	  if [ -d $$installed_inc_dir ] ; then \
+	    for fn in `cat .installed.inc` ; do \
+	      $(MKDIRHIER) $$installed_inc_dir/old/$(NAME).$$installed_ver; \
+	      echo  Moving $$installed_inc_dir/$$fn ; \
+	      echo -n "    to "; \
+	      echo $$installed_inc_dir/old/$(NAME).$$installed_ver/$$fn; \
+	      mv $$installed_inc_dir/$$fn \
+	         $$installed_inc_dir/old/$(NAME).$$installed_ver; \
+	    done; \
+	  fi; \
+	  if [ -d $$installed_lib_dir ] ; then \
+	    for fn in `cat .installed.lib` ; do \
+	      $(MKDIRHIER) $$installed_lib_dir/old/$(NAME).$$installed_ver; \
+	      echo  Moving $$installed_lib_dir/$$fn to; \
+	      echo -n "    to "; \
+	      echo $$installed_lib_dir/old/$(NAME).$$installed_ver/$(LIBRARY);\
+	      mv $$installed_lib_dir/$$fn \
+		 $$installed_lib_dir/old/$(NAME).$$installed_ver/$(LIBRARY); \
+	    done; \
+	  fi; \
 	fi
-	echo $(VERSION) >.installed.ver
-	echo $(LIBRARY).$(VERSION) >.installed.lib
-	rm -f .installed.inc
-	for fn in $(USER_INCS); do basename $$fn >>.installed.inc; done
+
+beta_install_new: 
+	@echo + Installing $(VERSION)
+	@rm -f .installed.ver .installed.inc .installed.lib
+	$(INSTALL) $(INSTALL_INC_FLAGS) \
+	  $(USER_INCS) \
+	  $(BETA_INC_DIR)
+	@for fn in $(USER_INCS); do \
+	  basename $$fn >>.installed.inc; done
 	$(INSTALL) $(INSTALL_LIB_FLAGS) \
-		$(LIBRARY) \
-	  	$(BETA_LIB_DIR)/$(LIBRARY).$(VERSION)
+	  $(LIBRARY) \
+	  $(BETA_LIB_DIR)/$(LIBRARY).$(VERSION)
 	(cd $(BETA_LIB_DIR); \
 	  rm $(LIBRARY); \
 	  ln -s $(LIBRARY).$(VERSION) $(LIBRARY) )
-	$(INSTALL) $(INSTALL_INC_FLAGS) $(USER_INCS) $(BETA_INC_DIR)
-	echo 'Beta Install Complete!'
-
+	@echo $(LIBRARY).$(VERSION) >.installed.lib
+	@echo installed_ver=$(VERSION) >.installed.ver
+	@echo installed_inc_dir=$(BETA_INC_DIR) >>.installed.ver
+	@echo installed_lib_dir=$(BETA_LIB_DIR) >>.installed.ver
 
 install_production: default
 	$(MKDIRHIER) $(PROD_LIB_DIR)/old
@@ -258,10 +313,6 @@ install_production: default
 
 test:	default
 
-CommonGetVersion.o: FORCE
-
-FORCE:
-
 #
 # include dependancies generated by 'make depend'
 #
@@ -271,6 +322,9 @@ include .depend
 # =MAKEFILE_LOG=
 #
 # $Log$
+# Revision 2.4  1995/10/31  13:07:00  houghton
+# Added arch components
+#
 # Revision 2.3  1995/10/31  12:38:30  houghton
 # Move version info from CommonVersion.h to _Common.h
 # Use MakeConfigs 3.3
