@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.3  1997/03/02 12:13:27  houghton
+ * Added support for turning threads on or off.
+ *
  * Revision 1.2  1996/04/09 12:12:43  houghton
  * Add Support for Net to Host 'int'
  *
