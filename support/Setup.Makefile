@@ -28,7 +28,11 @@ CFG_DIR		= $(PROJECT)/src/config
 make_cfg_ver	= 5.06
 make_cfg_file	= $(TOOL_DIR)/include/Make/make.cfg.$(make_cfg_ver)
 
-dejagnu		= $(TOOL_DIR)/share/dejagnu/lib/libSupport.exp
+dejagnu_lib	= $(TOOL_DIR)/share/dejagnu/lib/libSupport.exp
+
+MAKECONFIGS	= MakeConfigs-$(make_cfg_ver)
+DEJAGNU		= DejagnuSupport-1
+
 
 tools_archive_dir	= $(TOOL_DIR)/src/Tools
 tools_build_dir		= $(TOOL_DIR)/src/Build/Tools
@@ -92,26 +96,26 @@ check_cvs:
 	  exit 1;							      \
 	fi
 
-$(tools_build_dir)/MakeConfigs-$(make_cfg_ver): 
+$(tools_build_dir)/$(MAKECONFIGS): 
 	cd $(tools_build_dir)						      \
-	&& cvs $(tools_cvsroot) co MakeConfigs-$(make_cfg_ver)
+	&& cvs $(tools_cvsroot) co $(MAKECONFIGS)
 
-$(make_cfg_file): $(tools_build_dir)/MakeConfigs-$(make_cfg_ver)
+$(make_cfg_file): $(tools_build_dir)/$(MAKECONFIGS)
 	cd $(tools_build_dir)						      \
-	&& $(MAKE) -f MakeConfigs-$(make_cfg_ver)/Makefile setup
+	&& $(MAKE) -f $(MAKECONFIGS)/Makefile setup
 	$(TOOL_DIR)/bin/make						      \
 		-C $(tools_build_dir)/MakeConfigs-$(make_cfg_ver)	      \
 		install
 
-$(tools_build_dir)/DejagnuSupport-1: 
+$(tools_build_dir)/$(DEJAGNU): 
 	cd $(tools_build_dir)						      \
-	&& cvs $(tools_cvsroot) co DejagnuSupport-1
+	&& cvs $(tools_cvsroot) co $(DEJAGNU)
 
-$(dejagnu): $(tools_build_dir)/DejagnuSupport-1
+$(dejagnu): $(tools_build_dir)/$(DEJAGNU)
 	cd $(tools_build_dir)						      \
-	&& $(MAKE) -f DejagnuSupport-1/Makefile setup
+	&& $(MAKE) -f $(DEJAGNU)/Makefile setup
 	$(TOOL_DIR)/bin/make						      \
-		-C $(tools_build_dir)/DejagnuSupport-1			      \
+		-C $(tools_build_dir)/$(DEJAGNU)			      \
 		install
 
 gen_setup_cfg:
@@ -129,6 +133,9 @@ setup: check_cvs $(tools_build_dir) $(make_cfg_file) $(dejagnu) gen_setup_cfg
 
 #
 # $Log$
+# Revision 1.6  1999/11/08 15:13:58  houghton
+# Added get_setup_cfg target.
+#
 # Revision 1.5  1999/11/04 17:23:41  houghton
 # Added dejagnu support to setup.
 #
