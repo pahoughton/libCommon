@@ -135,6 +135,7 @@ help targets:
 	$(hide) echo "    clean"
 	$(hide) echo "    realclean"
 	$(hide) echo "    install_docs"
+	$(hide) echo "    install_lib_all"
 	$(hide) echo "    install_default"
 	$(hide) echo "    install_debug"
 	$(hide) echo "    install"
@@ -170,6 +171,9 @@ help_config:
 
 #
 # $Log$
+# Revision 3.5  1999/11/08 15:17:25  houghton
+# Changed to use $(hide) instead of @.
+#
 # Revision 3.4  1999/11/08 15:13:02  houghton
 # Change: reworked setup to create src/config/Setup.cfg.
 # Added install_lib_all target.
