@@ -69,7 +69,8 @@ const char COMMONVER_##name_[] =					      \
 #else
 #include "Cmmnprot.h"
 #endif
-
+#endif
+    
 #if defined( __cplusplus )
 };
 #endif
@@ -79,6 +80,9 @@ const char COMMONVER_##name_[] =					      \
  * Revision Log:
  *
  * $Log$
+ * Revision 2.8  1997/05/07 11:36:58  houghton
+ * Cleanup
+ *
  * Revision 2.7  1997/04/26 16:25:21  houghton
  * Added COMMON_PRJ_VER_TAG to COMMON_VERSION macro.
  *
