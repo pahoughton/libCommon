@@ -31,7 +31,7 @@ extern "C" {
 #endif
 
 #define COMMON_PRJ_NAME	    "Common"
-#define COMMON_PRJ_VER_TAG  "PROD_2_01"
+#define COMMON_PRJ_VER_TAG  "PROD_2_02"
 #define COMMON_PRJ_VER	    VERSION
 
 #define COMMON_VERSION( name_, verId_ )					      \
@@ -80,6 +80,9 @@ const char COMMONVER_##name_[] =					      \
  * Revision Log:
  *
  * $Log$
+ * Revision 2.9  1997/05/07 11:40:04  houghton
+ * Bug-Fix: Added missing endif.
+ *
  * Revision 2.8  1997/05/07 11:36:58  houghton
  * Cleanup
  *
