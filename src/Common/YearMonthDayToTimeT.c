@@ -36,54 +36,65 @@ YearMonthDayToTimeT(
   long  seconds = 0;
   int	leapCount = 0;
   
-  /* I really don't like putting this test in here, but
-   * it's is the only valid solution to being passed
-   * all 0 values. If I get all 0 the i should return
-   * 0.
-   */
+  if( year )
+    {
+      /* this is a best guess for 2 digit years */
+      if( year > 100 )
+	year = year;
+      else
+	year = 1900 + ( year < 50 ? year + 100 : year );
 
-  if( ! year && ! month && ! day ) /* everything is 0 */
-    {
-      return( 0 );
-    }
-  
-  if( year >= 1900 )
-    {
-      year = year - 1900;
-    }
-  else
-    {
-      /* FIXME_2100
-       * this is my year 2000 fix it assumes 2 digit years < 50 mean
-       * 20xx. There must be a better solution. I should probably get
-       * the current system time and use it for a hint at the value
-       * to use.
+      /*
+       * safty valve - if year is out of range, use min/max 
+       * posible time_t value
        */
-      if( year < 50 )
+      if( year > MAX_YEAR )
+	return( MAX_TIMET );
+      else
+	if( year < MIN_YEAR )
+	  return( MIN_TIMET );
+      
+		
+      /*
+       * 1972 was a leap year
+       * leap years are every 4 years except centuries unless the centruy
+       * is divisable by 400 (i.e. 1600 & 2000 are leap years and
+       * 1700, 1800, 1900 are not leap years).
+       */ 
+      leapCount = ( ((abs( year - 1970 ) + 2) / 4)
+		    - (abs( year - 1900 ) / 100)
+		    );
+
+      leapCount += ( ( year < 2000  ?
+			abs( year - 2000 ) / 400 :
+			abs( year - 1600 ) / 400 ));
+
+      if( IsLeapYear( year ) && year > 1970 )
+	-- leapCount;
+      
+      if( year < 1970 )
+	leapCount *= -1;
+      
+      seconds = ((year - 1970) * SEC_PER_YEAR) + (leapCount * SEC_PER_DAY);
+      
+    }
+
+  if( month )
+    {
+      seconds += SEC_PER_DAY * MonthDayOfYear[ month - 1 ];
+      
+      if( IsLeapYear( year ) && month > 2 )
 	{
-	  year = year + 100;
+	  seconds += SEC_PER_DAY;
 	}
     }
 
-  leapCount = ((year - 70) + 2) / 4;
-
-  if( IsLeapYear( year ) )
+  if( day )
     {
-      leapCount--;
+      day--;
+  
+      seconds += SEC_PER_DAY * day;
     }
-  
-  seconds = ((year - 70) * SEC_PER_YEAR) + (leapCount * SEC_PER_DAY );
-
-  seconds += SEC_PER_DAY * MonthDayOfYear[ month - 1 ];
-  
-  if( IsLeapYear( year ) && month > 2 )
-    {
-      seconds += SEC_PER_DAY;
-    }
-
-  day--;
-  
-  seconds += SEC_PER_DAY * day;
 
   return( seconds );
 }
@@ -93,6 +104,9 @@ YearMonthDayToTimeT(
  * Revision Log:
  *
  * $Log$
+ * Revision 2.2  1997/08/20 10:39:05  houghton
+ * Bug-Fix: if year was 1900 it was being treated as a two digit year.
+ *
  * Revision 2.1  1995/10/29 12:01:27  houghton
  * Change Version Id String
  *
