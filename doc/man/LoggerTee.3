@@ -4,6 +4,9 @@
 .\" $Id$
 .\"
 .\" $Log$
+.\" Revision 2.0  1995/10/28 17:34:49  houghton
+.\" Move to Version 2.0
+.\"
 .\" Revision 1.1  1994/07/13  13:42:33  houghton
 .\" Added Logger entries to Common.3
 .\" Added LoggerTee man page
@@ -33,8 +36,8 @@ Turns ON or OFF ouputing log messages to stderr in addition to the log file.
 the original state.
 .SH FILES
 .nf
-/usr/local/include/Common.h
-/usr/local/lib/libCommon.a
+%INSTALL_INC_DIR%/Common.h
+%INSTALL_LIB_DIR%/libCommon.a
 .SH "SEE ALSO"
 LoggerInit(3), LOGIT(3), Logger(3), LogLevelFromString(3), LoggerLoc(3),
 LoggerTrim(3), Common(3)

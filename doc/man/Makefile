@@ -23,9 +23,13 @@ make_cfg_ver	= 5.05
 
 include Make/make.cfg.$(make_cfg_ver)
 
-MAN_DIR = $(TOOL_DIR)/man/man3
+INSTALL_MAN_DIR = $(local_mandir)
+INSTALL_INC_DIR = $(local_incdir)
+INSTALL_LIB_DIR = $(local_libdir)
 
-MAN_PAGES	=		\
+MAN_PERM	= 444
+
+MAN_3_PAGES	=		\
 	Common.3		\
 	SetErrorHandler.3	\
 	GetErrorHandler.3	\
@@ -130,14 +134,37 @@ MAN_PAGES	=		\
 	DWORD_ALIGN.3		\
 	CommonGetVersion.3	\
 
+define REPLACE_VARS
+sed -e 's!%INSTALL_LIB_DIR%!$(INSTALL_LIB_DIR)!'	\
+	-e 's!%INSTALL_INC_DIR%!$(INSTALL_INC_DIR)!'
+endef
+
+install_man3: $(MAN_3_PAGES) 
+	$(hide) for src in $^ ; do 				\
+	  dest=$(INSTALL_MAN_DIR)/man3/$$src;			\
+	  rm -f $$dest;						\
+	  $(REPLACE_VARS) $$src > $$dest;			\
+	  chmod $(MAN_PERM) $$dest;				\
+	  echo "+ Installed $$dest";				\
+	done
+
 install		\
 install_all	\
-install_man: $(MAN_DIR) $(MAN_PAGES)
-	$(install_cmd) -m 664 $(MAN_PAGES) $(MAN_DIR)
+install_man: install_man3
+
+clean:
+
+realclean:
+	rm *~
 
 
 #
 # $Log$
+# Revision 2.4  1998/09/22 14:26:59  houghton
+# Changed to use MakeConfigs 5.05.
+# Added install & install_all targets.
+# Renamed install.man to install_man.
+#
 # Revision 2.3  1997/09/02 21:32:50  houghton
 # Changed to use MakeConfigs 5.02.
 #
