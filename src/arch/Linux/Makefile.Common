@@ -1,0 +1,59 @@
+#
+# -*- Makefile -*-
+#
+# Makefile for libCommon src/arch/Linux
+#
+# Created 11/20/95
+#
+# $Id$
+#
+#
+
+ARCHSRC_DIR	= ../arch/src
+ARCH_DIR	= ../arch/$(arch)
+
+ARCH_DEFINES	=
+ARCH_INCDIR	= -I$(ARCH_DIR)
+
+
+ARCHSRC_C_FILES	=		\
+	strlwr.c		\
+	strupr.c		\
+	strdup.c		\
+	CanExecute.c		\
+	FileModeString.c	\
+	ForeachFile.c		\
+	MemberOfGroup.c		\
+
+ARCH_USER_H_INCS	= 		\
+	$(ARCH_DIR)/CommonConfig.h	\
+
+ARCH_C_HEADERS		= 		\
+	$(ARCH_DIR)CommonConfig.h	\
+	$(ARCH_DIR)_GnuRegexCfg.h	\
+
+ARCH_PROTO_C_SOURCES = $(ARCHSRC_C_FILES:%=$(ARCHSRC_DIR)/%)
+ARCH_DEPEND_C_SOURCES = $(ARCHSRC_C_FILES:%=$(ARCHSRC_DIR)/%)
+
+ARCH_OBJECTS_DEFAULT	= $(ARCHSRC_C_FILES:%.c=objects/default/%.o)
+ARCH_OBJECTS_DEBUG	= $(ARCHSRC_C_FILES:%.c=objects/debug/%.o)
+ARCH_OBJECTS_PROFILE	= $(ARCHSRC_C_FILES:%.c=objects/profile/%.o)
+ARCH_OBJECTS_SHARED	= $(ARCHSRC_C_FILES:%.c=objects/shared/%.o)
+
+$(ARCHSRC_OBJECTS_DEFAULT): objects/default
+$(ARCHSRC_OBJECTS_DEBUG):   objects/debug
+$(ARCHSRC_OBJECTS_PROFILE): objects/profile
+$(ARCHSRC_OBJECTS_SHARED):  objects/shared
+
+
+objects/default/%.o 	\
+objects/debug/%.o 	\
+objects/profile/%.o 	\
+objects/shared/%.o : $(ARCHSRC_DIR)/%.c
+	$(C_COMPILE)
+
+
+
+#
+# $Log$
+#
