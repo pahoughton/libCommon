@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/11/10 12:32:53  houghton
+ * Change to Version 2
+ *
  * Revision 1.1  1995/11/10  12:08:57  houghton
  * Initial Version.
  *
@@ -52,7 +55,7 @@
 #include <stdarg.h>
 #include <limits.h>
 
-#include <sys/types.h>
+/* #include <sys/types.h> */
 
 #ifdef __cplusplus
 extern "C" {
