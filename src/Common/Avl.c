@@ -11,6 +11,9 @@
  * Fri Jul 14 13:53:42 1989, Rev 1.0, brad(0165)
  *
  * $Log$
+ * Revision 2.3  1995/10/29  18:15:54  houghton
+ * Fixes for Borland 4.0 Port
+ *
  * Revision 2.2  1995/10/29  13:33:40  houghton
  * Initial Linux Build of Version 2
  *
@@ -737,13 +740,15 @@ AvlAttach(
 
   if( avl_desc == NULL )
     {
-      SET_ERROR( C_EOSERROR );
+      SET_ERROR( ET_OSERROR, errno );
       return( NULL );
     }
   
   if( root->versionId != AVL_VERSION )
     {
-      SET_ERROR( C_EBADPARAM );
+      COMMON_SET_ERROR( EC_BADPARAM,
+			( "Avl version mismatch: is %lx should be %lx",
+			  root->versionId, AVL_VERSION ) );
       return( NULL );
     }
 

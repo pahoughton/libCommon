@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.3  1995/10/29  13:33:39  houghton
+ * Initial Linux Build of Version 2
+ *
  * Revision 2.2  1995/10/28  19:11:33  houghton
  * Change Version Id String
  *
@@ -86,8 +89,9 @@ ArgEnvBool(
 		}
 	      else
 		{
-		  SET_ERROR( C_ERANGE );
-		  return( RET_ERROR );
+		  COMMON_RETURN_ERROR( EC_RANGE,
+				       ( "'%s' is not a valid Bool value",
+					 argString ) );
 		}
 	    }
 	  *paramVar = paramValue;
@@ -119,8 +123,9 @@ ArgEnvBool(
 		}
 	      else
 		{
-		  SET_ERROR( C_ERANGE );
-		  return( RET_ERROR );
+		  COMMON_RETURN_ERROR( EC_RANGE,
+				       ("'%s' is not a valid Bool value",
+				       envStringVal ) );
 		}
 	    }
 	  *paramVar = paramValue;

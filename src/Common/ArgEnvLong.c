@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/28  19:11:36  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:11  houghton
  * Move to Version 2.0
  *
@@ -44,7 +47,7 @@ ArgEnvLong(
     char *  	  argv[],
     const char *  argId,
     const char *  envVar,
-    long           minimumVal,
+    long           minVal,
     long           maxVal,
     long *         paramVar
     )
@@ -65,10 +68,11 @@ ArgEnvLong(
 	{
 	  paramValue = StringToLong( argString, 0, 0 );
 	  
-	  if( paramValue < minimumVal || paramValue > maxVal )
+	  if( paramValue < minVal || paramValue > maxVal )
 	    {
-	      SET_ERROR( C_ERANGE );
-	      return( RET_ERROR );
+	      COMMON_RETURN_ERROR( EC_RANGE,
+				   ("Max: %ld Min: %ld Value: %ld",
+				    maxVal, minVal, paramValue ) );	      
 	    }
 	  else
 	    {
@@ -86,10 +90,11 @@ ArgEnvLong(
 	{
 	  paramValue = StringToLong( envStringVal, 0, 0 );
 	  
-	  if( paramValue < minimumVal || paramValue > maxVal )
+	  if( paramValue < minVal || paramValue > maxVal )
 	    {
-	      SET_ERROR( C_ERANGE );
-	      return( RET_ERROR );
+	      COMMON_RETURN_ERROR( EC_RANGE,
+				   ("Max: %ld Min: %ld Value: %ld",
+				    maxVal, minVal, paramValue ) );	      
 	    }
 	  else
 	    {

@@ -20,6 +20,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/28  19:11:37  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:11  houghton
  * Move to Version 2.0
  *
@@ -54,10 +57,8 @@ ArgEnvString(
   char *    paramValue;
 
   if( paramVar == NULL )
-    {
-      SET_ERROR( C_EBADPARAM );
-      return( RET_ERROR );
-    }
+    COMMON_RETURN_ERROR( EC_BADPARAM,
+			 ("null pointer") );
   
   if( argId != NULL )
     {
@@ -72,7 +73,7 @@ ArgEnvString(
 	{
 	  if( (paramValue = malloc( strlen( argString ) + 1 )) == NULL )
 	    {
-	      SET_ERROR(C_EOSERROR );
+	      SET_ERROR( ET_OSERROR, errno );
 	      return( RET_ERROR );
 	    }
 	  strcpy( paramValue, argString );
@@ -89,7 +90,7 @@ ArgEnvString(
 	{
 	  if( (paramValue = malloc( strlen( envStringVal ) + 1 )) == NULL )
 	    {
-	      SET_ERROR( C_EOSERROR );
+	      SET_ERROR( ET_OSERROR, errno );
 	      return( RET_ERROR );
 	    }
 	  strcpy( paramValue, envStringVal );
