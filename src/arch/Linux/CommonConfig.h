@@ -61,7 +61,12 @@ extern "C" {
 #define COMMON_TEMPNAME_SIZE	8
 #define COMMON_PID_FORMAT	"%05d"
 #define COMMON_TEMP_DIR		_PATH_TMP
-    
+
+#if !defined( TIMET_MAX )
+#define TIMET_MAX   LONG_MAX
+#define TIMET_MIN   LONG_MIN
+#endif
+  
 #if !defined( min ) && !defined( __cplusplus )
 #define min( _a_, _b_ ) ( ( (_a_) > (_b_) ) ? (_b_) : (_a_) )
 #endif 
@@ -77,7 +82,7 @@ extern "C" {
 #define COMMON_HAVE_BASENAME	1 /* */
 #define COMMON_HAVE_GROUPS	1 /* */
 #define COMMON_HAVE_MODE_T	1 /* */
-#define COMMON_HAVE_STRPTIME	1 /* */  
+  /* #define COMMON_HAVE_STRPTIME	1 */  
   
 #if !defined( CHAR_ALL_BITS )
 
@@ -127,6 +132,9 @@ extern "C" {
  * Revision Log:
  *
  * $Log$
+ * Revision 2.11  1998/09/22 14:37:29  houghton
+ * Changed COMMON_TEMP_DIR to use _PATH_TMP.
+ *
  * Revision 2.10  1997/09/21 12:17:44  houghton
  * Cleanup comment header.
  * Added portable types COMMON_*_T.
