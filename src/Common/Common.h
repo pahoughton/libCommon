@@ -51,7 +51,10 @@ extern "C" {
 #define NO  	FALSE
 #define YES 	TRUE
 #endif
+
   
+#define COMMON_LIB_VERSION	    0x02010100
+
 /**************************************************************
  * E R R O R   P r o c e s s i n g 
  **************************************************************/
@@ -651,6 +654,9 @@ const char * CommonGetVersion( void );
  * Modification History
  *     			
  * $Log$
+ * Revision 2.10  1997/04/26 12:08:45  houghton
+ * Bug-Fix: changed value of LOG_ALL to 0xffff.
+ *
  * Revision 2.9  1997/03/03 14:12:28  houghton
  * Bug-Fix: changed ErrorMesg arg type to const char *.
  *
