@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/10/29  12:01:19  houghton
+ * Change Version Id String
+ *
  * Revision 2.0  1995/10/28  17:35:27  houghton
  * Move to Version 2.0
  *
@@ -34,7 +37,7 @@ COMMON_VERSION(
   LoggerTee,
   "$Id$");
 
-extern BOOL _CLogTee;
+extern BOOL _CLogTee;	/* LoggerArgs.c */
 
 BOOL
 LoggerTee( BOOL state )
