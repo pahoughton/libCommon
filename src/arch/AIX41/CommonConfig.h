@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 1.2  1996/04/09 12:12:43  houghton
+ * Add Support for Net to Host 'int'
+ *
  * Revision 1.1  1996/02/29 16:21:38  houghton
  * Initial Version
  *
@@ -50,8 +53,12 @@
  *
  *********************************************************************/
 
-#if !defined( _POSIX_SOURCE )
-#define _POSIX_SOURCE 1
+#if !defined( COMMON_THREADS )
+#define COMMON_THREADS 1
+#endif
+
+#if defined( COMMON_THREADS )
+#include <pthread.h>
 #endif
 
 #include <stddef.h>

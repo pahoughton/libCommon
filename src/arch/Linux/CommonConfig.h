@@ -17,6 +17,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.7  1996/03/08 16:28:17  houghton
+ * Bug Fix: n2hs parens missing
+ *
  * Revision 2.6  1996/02/29 16:22:04  houghton
  * Fixed net to host converters
  *
@@ -44,8 +47,17 @@
  *
  *********************************************************************/
 
+#if !defined( COMMON_THREADS )
+#define COMMON_TREADS	1
+#endif
+
 #if !defined( _POSIX_SOURCE )
 #define _POSIX_SOURCE 1
+#endif
+
+#if defined( COMMON_THREADS )
+#define _MIT_POSIX_THREADS  1
+#include <pthread.h>
 #endif
 
 #include <stddef.h>
