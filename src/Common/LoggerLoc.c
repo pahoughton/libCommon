@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.2  1995/10/29  13:33:43  houghton
+ * Initial Linux Build of Version 2
+ *
  * Revision 2.1  1995/10/29  12:01:19  houghton
  * Change Version Id String
  *
@@ -35,23 +38,15 @@ COMMON_VERSION(
   LoggerLoc,
   "$Id$");
 
+extern const char *	_CLogLocFile;	/* Logger.c */
+extern long		_CLogLocLine;	/* Logger.c */
 
-extern BOOL  _CLogLoc;
-
-BOOL
-LoggerLoc(
-    BOOL  newState
-    )
+void
+LoggerLoc( const char * fileName, long lineNumber )
 {
-
-  BOOL oldState = _CLogLoc;
-
-  _CLogLoc = newState;
-
-  return( oldState );
+  _CLogLocFile = fileName;
+  _CLogLocLine = lineNumber;
 }
-
-
 
 
 
