@@ -133,6 +133,9 @@ MAN_3_PAGES	=		\
 	FileModeString.3	\
 	DWORD_ALIGN.3		\
 	CommonGetVersion.3	\
+	A2E.3			\
+	AsciiToEbcdic.3
+
 
 define REPLACE_VARS
 sed -e 's!%INSTALL_LIB_DIR%!$(INSTALL_LIB_DIR)!'	\
@@ -161,6 +164,9 @@ realclean:
 
 #
 # $Log$
+# Revision 3.2  1999/10/29 21:42:26  houghton
+# Chagned install_doc to install_docs.
+#
 # Revision 3.1  1999/10/29 16:56:11  houghton
 # Changed Version to 3
 #
