@@ -30,7 +30,7 @@
 extern "C" {
 #endif
 
-#define COMMON_LIB_VERSION	    0x02010100
+#define COMMON_LIB_VERSION	    0x02010200
 
 extern const long CommonLibVersion;
 
@@ -396,6 +396,10 @@ char * strupr( char * str );
 char * strdup( const char *);
 #endif
 
+#if !defined( COMMON_HAVE_BASENAME )
+const char * basename( const char * path );
+#endif
+
 
 /**************************************************************
  * D A T E / T I M E   P r o c e s s i n g 
@@ -514,23 +518,23 @@ strptime( char *buf, const char *format, struct tm *tm);
 
 #if !defined( Net2Host )
 
-#define Net2HostShort( s )  COMMON_n2hs( s )
 #define Host2NetShort( s )  COMMON_n2hs( s )
+#define Net2HostShort( s )  COMMON_n2hs( s )
 
-#define Net2HostUShort( us ) COMMON_n2hs( us )
 #define Host2NetUShort( us ) COMMON_n2hs( us )
+#define Net2HostUShort( us ) COMMON_n2hs( us )
 
-#define Net2HostInt( i )  COMMON_n2hi( i )
 #define Host2NetInt( i )  COMMON_n2hi( i )
+#define Net2HostInt( i )  COMMON_n2hi( i )
 
-#define Net2HostUInt( ui ) COMMON_n2hi( ui )
 #define Host2NetUInt( ui ) COMMON_n2hi( ui )
+#define Net2HostUInt( ui ) COMMON_n2hi( ui )
   
-#define Net2HostLong( l )  COMMON_n2hl( l )
 #define Host2NetLong( l )  COMMON_n2hl( l )
+#define Net2HostLong( l )  COMMON_n2hl( l )
 
-#define Net2HostULong( ul ) COMMON_n2hl( ul )
 #define Host2NetULong( ul ) COMMON_n2hl( ul )
+#define Net2HostULong( ul ) COMMON_n2hl( ul )
   
 #endif
 /**************************************************************
@@ -636,6 +640,8 @@ ForeachFile( const char *   name,
 BOOL
 CanExecute( const char * fileName );
 
+char *
+FindPath( const char * fileName, const char * path );
 
 #if defined( COMMON_HAVE_GROUPS )
 BOOL
@@ -645,10 +651,6 @@ MemberOfGroup( gid_t grp );
 #if defined( COMMON_HAVE_MODE_T )
 const char * 
 FileModeString( mode_t	mode, char * modeString );
-#endif
-
-#if !defined( COMMON_HAVE_BASENAME )
-const char * basename( const char * path );
 #endif
 
 #define DWORD_ALIGN( _addr_ ) \
@@ -664,6 +666,10 @@ const char * basename( const char * path );
  * Modification History
  *     			
  * $Log$
+ * Revision 2.13  1997/04/29 12:27:16  houghton
+ * Cleanup
+ * Added CommonLibVersion.
+ *
  * Revision 2.12  1997/04/26 13:32:06  houghton
  * Changed LOG_WCF* to LOG_LIB* and added defines for LOG_WCR*.
  *
