@@ -15,6 +15,9 @@
  * Modification History:
  *
  * $Log$
+ * Revision 2.1  1995/11/10 00:56:08  houghton
+ * Initial Version
+ *
  *
  *********************************************************************/
 
@@ -37,7 +40,7 @@ LogOutFileType	_CLogFileType	    = LOG_STDOUT;
 long		_CLogMaxSize	    = 0;
 long		_CLogTrim	    = 0;
 
-FILE *		_CLogFP		    = stdout;
+FILE *		_CLogFP		    = 0;
 
 LogLevelBit	_CLogCurMesgLevel   = LOG_NONE;
 const char *	_CLogLocFile	    = "unknown";
@@ -102,7 +105,7 @@ _LoggerDefault(
   
   if( _CLogFP == NULL )
     {
-      _CLogFP = stderr;
+      _CLogFP = stdout;
     }
 
   _LoggerLogIt( _CLogFP,
