@@ -1,30 +1,13 @@
-/*********************************************************************
- *
- * File:        tstrptime.c
- * Project:	Common
- * Desc:
- *
- *  
- *
- * Notes:
- *
- * Author:	Paul A. Houghton - (paul.houghton@wcom.com)
- * Created:	09/16/98 10:23
- *
- * Revision History: (See end of file for Revision Log)
- *
- *  Last Mod By:    $Author$
- *  Last Mod:	    $Date$
- *  Version:	    $Revision$
- *
- *********************************************************************/
+/* 1998-09-16 (cc) paul4hough@gmail.com
+ */
 
-#include "TestConfig.h"
-#include "TestFunctProto.h"
-#include "Common.h"
+#include "proto.h"
+#define _XOPEN_SOURCE       /* See feature_test_macros(7) */
 
 #include <time.h>
 #include <stdio.h>
+#include <memory.h>
+/* #define DEBUG 1 */
 
 #define TEST_DATE( fmt, str, year, mon, mday, hour, min, sec )		      \
 {									      \
@@ -93,7 +76,7 @@ test(
     struct tm	    checkTm;
 
     memset( &checkTm, 0, sizeof( checkTm ) );
-    
+
     if( ! strptime( testStr, fmt, &checkTm ) )
       {
 	printf( "strptime - conv failed for %s fmt: %s\n",
@@ -102,15 +85,20 @@ test(
 	return( 0 );
       }
 
-    if( memcmp( testTm, &checkTm, sizeof( checkTm ) ) )
-      return( fail( testStr, &checkTm, testTm, sourceLine ) );
-
 #if defined( DEBUG )
     strftime( checkStr, sizeof( checkStr ), "%m/%d/%Y %H:%M:%S", &checkTm );
     printf( "strptime - %s -> %s\n", testStr, checkStr );
 #endif
-    
-    return( 1 );
+
+    if( checkTm.tm_year != (*testTm).tm_year
+	|| checkTm.tm_mon != (*testTm).tm_mon
+	|| checkTm.tm_mday != (*testTm).tm_mday
+	|| checkTm.tm_hour != (*testTm).tm_hour
+	|| checkTm.tm_min != (*testTm).tm_min
+	|| checkTm.tm_sec != (*testTm).tm_sec )
+      return( fail( testStr, &checkTm, testTm, sourceLine ) );
+    else
+      return( 1 );
 }
 
 int
@@ -182,7 +170,16 @@ tstrptime( void )
 
   TEST_DATE( "%m/%d/%y %H:%M:%S",
 	     "04/28/50 13:04:40",
-	     1950,
+	     2050,
+	     4,
+	     28,
+	     13,
+	     04,
+	     40 );
+
+  TEST_DATE( "%m/%d/%y %H:%M:%S",
+	     "04/28/70 13:04:40",
+	     1970,
 	     4,
 	     28,
 	     13,
@@ -231,14 +228,14 @@ tstrptime( void )
 	     2,
 	     28,
 	     0, 0, 0 );
-  
+
   TEST_DATE( "%y%m%d",
 	     "000228",
 	     2000,
 	     2,
 	     28,
 	     0, 0, 0 );
-  
+
   TEST_DATE( "%y%m%d",
 	     "010228",
 	     2001,
@@ -252,7 +249,7 @@ tstrptime( void )
 	     1,
 	     1,
 	     0, 0, 0 );
-  
+
   TEST_DATE( "%m/%d/%y %I:%M:%S %p",
 	     "04/28/25 10:04:40 PM",
 	     2025,
@@ -261,7 +258,7 @@ tstrptime( void )
 	     22,
 	     4,
 	     40 );
-  
+
   TEST_DATE( "%m/%d/%y %I:%M:%S %p",
 	     "04/28/25 1:04:40 AM",
 	     2025,
@@ -270,7 +267,7 @@ tstrptime( void )
 	     1,
 	     4,
 	     40 );
-  
+
   TEST_DATE( "%m/%d/%y %I:%M:%S %p",
 	     "04/28/25 12:04:40 PM",
 	     2025,
@@ -279,7 +276,7 @@ tstrptime( void )
 	     12,
 	     4,
 	     40 );
-  
+
   TEST_DATE( "%m/%d/%y %I:%M:%S %p",
 	     "04/28/25 12:04:40 AM",
 	     2025,
@@ -288,7 +285,7 @@ tstrptime( void )
 	     0,
 	     4,
 	     40 );
-  
+
   return( 1 );
 }
 

@@ -1,29 +1,11 @@
-/*********************************************************************
- *
- * File:        main.c
- * Project:	Common
- * Desc:
- *
- *  
- *
- * Notes:
- *
- * Author:	Paul A. Houghton - (paul.houghton@wcom.com)
- * Created:	09/16/98 10:09
- *
- * Revision History: (See end of file for Revision Log)
- *
- *  Last Mod By:    $Author$
- *  Last Mod:	    $Date$
- *  Version:	    $Revision$
- *
- *********************************************************************/
+/* 1998-09-16 (cc) paul4hough@gmail.com
+ */
 
-#include <Common.h>
-
-#include "TestFunctProto.h"
+#include "proto.h"
 
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 struct TestFunct
 {
@@ -33,7 +15,9 @@ struct TestFunct
 
 struct TestFunct    Tests[] =
 {
+  { "missing",              tmissing },
   { "strptime",		    tstrptime },
+  /*
   { "IsLeapYear",	    tIsLeapYear },
   { "YearMonthDayToTimeT",  tYearMonthDayToTimeT },
   { "HourMinSecToTimeT",    tHourMinSecToTimeT },
@@ -43,6 +27,7 @@ struct TestFunct    Tests[] =
   { "DateStringToTimeT",    tDateStringToTimeT },
   { "DateStringFromTm",	    tDateStringFromTm },
   { "DateStringFromTimeT",  tDateStringFromTimeT },
+  */
   {0, 0},
 };
 
@@ -50,12 +35,12 @@ int
 main( int argc, char * argv[] )
 {
   int result = 0;
-  
+
   if( argc > 1 )
     {
       int t;
       int tested;
-      
+
       for( t = 1; t < argc; ++ t )
 	{
 	  int f;
@@ -101,7 +86,7 @@ main( int argc, char * argv[] )
 	    }
 	}
     }
-      
+
   return( result );
 }
 
