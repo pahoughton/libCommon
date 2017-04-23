@@ -4,3 +4,6 @@ language: c
 notifications:
   email:
     - paul4hough@gmail.com
+
+# :( unavoidable
+install: apt install automake
