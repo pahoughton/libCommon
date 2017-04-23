@@ -6,4 +6,4 @@ notifications:
     - paul4hough@gmail.com
 
 # :( unavoidable
-install: apt install automake
+install: apt-get install automake
