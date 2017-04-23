@@ -1,6 +1,4 @@
-# .travis.yml - 2017-04-23
-#
-# (cc) <paul4hough@gmail.com>
+# 2017-04-23 (cc) <paul4hough@gmail.com>
 
 language: c
 notifications:
