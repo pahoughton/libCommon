@@ -1,0 +1,8 @@
+# .travis.yml - 2017-04-23
+#
+# (cc) <paul4hough@gmail.com>
+
+language: c
+notifications:
+  email:
+    - paul4hough@gmail.com
