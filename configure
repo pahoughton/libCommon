@@ -12591,7 +12591,7 @@ fi
 
 
 
-ac_config_files="$ac_config_files src/missing/Makefile tests/unit/Makefile"
+ac_config_files="$ac_config_files Makefile src/missing/Makefile tests/unit/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -13623,6 +13623,7 @@ do
   case $ac_config_target in
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "libtool") CONFIG_COMMANDS="$CONFIG_COMMANDS libtool" ;;
+    "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "src/missing/Makefile") CONFIG_FILES="$CONFIG_FILES src/missing/Makefile" ;;
     "tests/unit/Makefile") CONFIG_FILES="$CONFIG_FILES tests/unit/Makefile" ;;
 

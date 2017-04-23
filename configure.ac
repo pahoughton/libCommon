@@ -11,5 +11,5 @@ LT_INIT
 AC_PROG_CC
 dnl AC_CONFIG_HEADERS([config.h])
 
-AC_CONFIG_FILES([src/missing/Makefile tests/unit/Makefile])
+AC_CONFIG_FILES([Makefile src/missing/Makefile tests/unit/Makefile])
 AC_OUTPUT

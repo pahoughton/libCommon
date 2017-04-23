@@ -14,6 +14,6 @@ validator_SOURCES =				\
 
 #	tIsLeapYear.c
 
-.PHONY: validate
-validate: validator
+.PHONY: test
+test: validator
 	$(hide) validator

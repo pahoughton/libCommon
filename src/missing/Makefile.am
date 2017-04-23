@@ -3,7 +3,7 @@
 
 lib_LTLIBRARIES = libmissing.la
 
-libmissing_la_SOURCES = StringToLong.c
+libmissing_la_SOURCES = Difftm.c
 
 include_HEADERS =				\
 	missing.h
