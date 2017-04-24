@@ -6,9 +6,8 @@ notifications:
     - paul4hough@gmail.com
 
 # :( unavoidable
-install: sudo apt-get install automake
+# install: sudo apt-get install automake
 
 script:
-  - autoreconf
   - ./configure
   - make test
