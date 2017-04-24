@@ -2,7 +2,7 @@ dnl configure.ac - 2017-04-19
 dnl
 dnl (cc) <paul4hough@gmail.com>
 
-AC_PREREQ(2.69)
+AC_PREREQ(2.68)
 AC_INIT( [missing],[1.0],[Paul Houghton <paul4hough@gmail.com>])
 AC_CONFIG_MACRO_DIRS([m4])
 AM_INIT_AUTOMAKE
