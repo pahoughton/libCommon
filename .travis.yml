@@ -9,6 +9,5 @@ notifications:
 install: sudo apt-get install automake
 
 script:
-  - autoreconf
-  - ./configure
-  - make test
+  - autoreconf --version
+  - false
