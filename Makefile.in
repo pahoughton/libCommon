@@ -14,6 +14,10 @@
 
 @SET_MAKE@
 
+# 2017-04-20 (cc) <paul4hough@gmail.com>
+#
+# ACLOCAL_AMFLAGS = '-Im4'
+
 VPATH = @srcdir@
 am__is_gnu_make = { \
   if test -z '$(MAKELEVEL)'; then \
@@ -349,10 +353,6 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-
-# 2017-04-20 (cc) <paul4hough@gmail.com>
-#
-ACLOCAL_AMFLAGS = '-Im4'
 SUBDIRS = src/missing tests/unit
 dist_doc_DATA = README.md
 all: all-recursive
