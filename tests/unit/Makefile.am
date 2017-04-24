@@ -16,4 +16,4 @@ validator_SOURCES =				\
 
 .PHONY: test
 test: validator
-	$(hide) validator
+	$(hide) ./validator
