@@ -216,8 +216,8 @@ tStringTo(void)
 #endif
 
 #define VSTRING_TO( _typ_ )					\
-  {								\
-    for( size_t t = 0; _typ_##TestValues[t].str; t++ )		\
+  { size_t t = 0;						\
+    for( ; _typ_##TestValues[t].str; t++ )			\
       {								\
         myDEBUG( _typ_ );					\
 	VVTRUE( StringTo##_typ_( _typ_##TestValues[t].str,	\
@@ -235,8 +235,8 @@ tStringTo(void)
   VSTRING_TO( UShort );
 
   /* Double */
-  {
-    for( size_t t = 0; DoubleTestValues[t].str; t++ )
+  { size_t t = 0;
+    for( ; DoubleTestValues[t].str; t++ )
       {
 
 #if defined(DEBUG)
