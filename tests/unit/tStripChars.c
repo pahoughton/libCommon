@@ -31,10 +31,9 @@ struct STestVals {
 int
 tStripChars( void )
 {
-  for( struct CTestVals * t = SpaceValues;
-       t->was;
-       t++ )
-    {
+  {
+    struct CTestVals * t = SpaceValues;
+    for( ; t->was; t++ ) {
       char was[ 128 ];
 
       strcpy( was, t->was );
@@ -43,11 +42,11 @@ tStripChars( void )
       /* printf("e:%s~\nv:%s~\n\n", t->exp, was ); */
       VVTRUE( strcmp( was, t->exp ) == 0 );
     }
+  }
+  {
+    struct STestVals * t = WhiteValues;
 
-  for( struct STestVals * t = WhiteValues;
-       t->was;
-       t++ )
-    {
+    for(; t->was; t++ ) {
       char was[ 128 ];
 
       strcpy( was, t->was );
@@ -57,5 +56,6 @@ tStripChars( void )
       VVTRUE( strcmp( was, t->exp ) == 0 );
     }
 
+  }
   return( TRUE );
 }
