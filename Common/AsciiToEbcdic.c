@@ -1,25 +1,5 @@
-/*********************************************************************
- *
- * File:        AsciiToEbcdic.c
- * Project:	Common
- * Desc:
- *
- *  Convert an ASCII string to EBCDIC.
- *
- * Notes:
- *
- *  The conversion table was stolen from GNU's dd program.
- *
- * Author:	Paul Houghton 719-527-7834 - (paul.houghton@wcom.com)
- * Created:	03/03/00 06:44
- *
- * Revision History: (See end of file for Revision Log)
- *
- *  Last Mod By:    $Author$
- *  Last Mod:	    $Date$
- *  Version:	    $Revision$
- *
- *********************************************************************/
+/* 1900-03-03 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 
 #include "_Common.h"
 
@@ -83,11 +63,3 @@ AsciiToEbcdic( unsigned char * buf, int len )
       *buf = AtoE[*buf];
     }
 }
-
-/*
- *
- * Revision Log:
- *
- * $Log$
- *
- */

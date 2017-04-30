@@ -1,25 +1,5 @@
-/*********************************************************************
- *
- * Title:            GetErrorHandler.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton - (paul_houghton@wiltel.com)
- *
- * Start Date:	    11/07/95 11:00
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.1  1995/11/10 00:48:35  houghton
- * Initial Version
- *
- *
- *********************************************************************/
+/* 1995-11-10 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 
 #include "_Common.h"
 

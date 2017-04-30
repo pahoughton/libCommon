@@ -1,30 +1,5 @@
-/*********************************************************************
- *
- * Title:            DateTimeTest.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Dora Potluri x561-6131 - (dpotluri@shoe.wiltel.com)
- *
- * Start Date:	    07/18/94 13:42
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.0  1995/10/28 17:35:54  houghton
- * Move to Version 2.0
- *
- * Revision 1.1  1994/08/25  15:58:48  houghton
- * Initial test program for libCommon
- *
- *
- *********************************************************************/
-static const char RcsId[] =
-"$Id$";
+/* 1994-07-18 (cc) Dora Potluri
+ */
 
 #include <stdio.h>
 #include <limits.h>
@@ -45,7 +20,7 @@ DateTimeTest(
   char 		*hourBuffer= NULL;
   time_t	testTime;
   time_t	presentTime;
- 
+
   if ( ArgEnvInt( &argc, argv, "dat", "DATETIME", 0, INT_MAX, &leapYear )
        != RET_SUCCEED )
     {
@@ -56,7 +31,7 @@ DateTimeTest(
   /*
     Check the leap year
     */
-  
+
   if ( IsLeapYear( leapYear ) == TRUE )
     {
       TestOutput("Year:%ld Is Leap Year \n", leapYear );
@@ -75,10 +50,10 @@ DateTimeTest(
       printf("Failed to get the year from Environment \n" );
       return( RET_ERROR );
     }
-   
-  
+
+
   testTime = YYMMDDtoTimeT( yearBuffer );
-  
+
   TestOutput("%s is Converted to %s \n",
 	     yearBuffer, asctime( gmtime( &testTime ) ) );
 
@@ -94,24 +69,6 @@ DateTimeTest(
   testTime = testTime + presentTime;
   TestOutput("%s:%s is Converted to %s \n",
 	 yearBuffer,hourBuffer, asctime( gmtime( &testTime ) ) );
-  
+
   return( RET_SUCCEED );
 }
-
-
-
-
-
-/**
- *             This software is the sole property of
- *
- *                 The Williams Companies, Inc.
- *                       1 Williams Center
- *                         P.O. Box 2400
- *                      Tulsa, Oklahoma 74102
- *
- *        Copyright (c) 1993 by The Williams Companies, Inc.
- *
- *                      All Rights Reserved.  
- *
- **/

@@ -1,35 +1,5 @@
-/*********************************************************************
- *
- * Title:            SetError.c
- *
- * Description:
- *
- *	Set the information for an error that has occured.
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton - (paul_houghton@wiltel.com)
- *
- * Start Date:	    11/07/95 10:35
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.3  1997/09/19 09:07:03  houghton
- * Changed: renamed CommonError* variables to CommonErr becuase of conflict with
- *     enum names.
- * Changed to use global public variables (CommonErr*) for error info
- *     instead of private (_CommonError*) variables.
- * Removed _CommonError* global variables.
- *
- * Revision 2.2  1997/05/07 11:36:57  houghton
- * Cleanup
- *
- * Revision 2.1  1995/11/10 00:56:06  houghton
- * Initial Version
- *
- *
- *********************************************************************/
+/* 1995-11-07 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 
 #include "_Common.h"
 
@@ -54,15 +24,14 @@ SetError(
   void *	    closure
   )
 {
- 
+
   CommonErrFile		= srcFileName;
   CommonErrLine		= srcLineNumber;
   CommonErrType		= errorType;
   CommonErrValue	= errorValue;
   CommonErrClosure	= closure;
-  
+
   if( errorDesc )
     CommonErrDesc = errorDesc;
-  
+
 }
- 

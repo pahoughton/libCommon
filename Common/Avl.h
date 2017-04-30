@@ -1,3 +1,5 @@
+/* 1994-08-04 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 /*
  *  This is the original Avl header file, it is not used any more.
  */

@@ -1,19 +1,3 @@
-.\"
-.\" Man page for AvlWalk
-.\"
-.\" $Id$
-.\"
-.\" $Log$
-.\" Revision 2.1  1998/09/24 14:30:02  houghton
-.\" Reworked to replace directory names with Makefile variable value.
-.\"
-.\" Revision 2.0  1995/10/28 17:34:37  houghton
-.\" Move to Version 2.0
-.\"
-.\" Revision 1.1  1994/07/05  21:37:58  houghton
-.\" Updated man pages for all libCommon functions.
-.\"
-.\"
 .TH AvlWalk 3  "26 Jun 94 (Common)"
 .SH NAME
 AvlWalk \- traverse an AVL tree performing an action at each node.
@@ -86,7 +70,7 @@ will be the current depth of the tree (with the root being level zero)
 that the current node corresponds to.
 .TP
 balance
-will be the balance factor for the current node (which should range 
+will be the balance factor for the current node (which should range
 from -1 .. 1).
 .TP
 closure
@@ -109,8 +93,8 @@ preorder, inorder, and postorder).
 None
 .SH FILES
 .nf
-%INSTALL_INC_DIR%/Common.h
-%INSTALL_LIB_DIR%/libCommon.a
+$prefix/include/Common/Common.h
+$prefix/lib/libCommon.so
 .fn
 .SH "SEE ALSO"
 AvlInit(3), AvlAttach(3), , AvlAdd(3), AvlFind(3), AvlDel(3), AvlGetRoot(3),
@@ -120,5 +104,4 @@ AvlDelMax(3), AvlFindMax(3), Common(3)
 .PD 0
 Brad Appleton - <brad@ssd.csd.Harris.COM>,
 .LP
-Paul Houghton - (houghton@cworld.wiltel.com) 
-
+1994-06-26 (cc) Paul Houghton <paul4hough@gmail.com>

@@ -1,34 +1,5 @@
-/*********************************************************************
- *
- * Title:            TempFileName.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton - (paul_houghton@wiltel.com)
- *
- * Start Date:	    11/09/95 04:13
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.4  1998/10/23 11:37:32  houghton
- * Removed include <paths.h>
- *
- * Revision 2.3  1998/09/22 14:33:38  houghton
- * Added include paths.h.
- *
- * Revision 2.2  1995/12/02 02:08:05  houghton
- * Reorder includes.
- *
- * Revision 2.1  1995/11/10  00:56:06  houghton
- * Initial Version
- *
- *
- *********************************************************************/
+/* 1995-11-09 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 
 #include "_Common.h"
 
@@ -52,18 +23,18 @@ static char UniqueNum[] =  "abcdefghijklmnopqrstuvwxyz"
                            "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                            "0123456789";
 
-  
+
 const char *
 TempFileName( const char * dir, const char * prefix )
 {
   const char *	tmpDir = NULL;
   const char *  tmpPrefix;
-  
+
   size_t	len = 0;
 
   if( dir )
     tmpDir = dir;
-  
+
   if( tmpDir == NULL )
     tmpDir = getenv( "TMPDIR" );
 
@@ -81,7 +52,7 @@ TempFileName( const char * dir, const char * prefix )
   if( prefix )
     len += ( ( ( strlen( prefix ) + COMMON_TEMPNAME_SIZE ) > FILENAME_MAX ) ?
 	     FILENAME_MAX : strlen( prefix ) );
-  
+
   if( len > sizeof( TempName ) )
     {
       COMMON_SET_ERROR( EC_BADPARAM, ("name to long '%s%s%s' max %d",
@@ -93,14 +64,14 @@ TempFileName( const char * dir, const char * prefix )
     }
 
   tmpPrefix = ( prefix != NULL ) ? prefix : "";
-  
+
   if( Pid[0] == 0 )
     sprintf( Pid, COMMON_PID_FORMAT, getpid() );
 
   while( Value[0] != sizeof( UniqueNum ) )
     {
       struct stat fileStat;
-      
+
       sprintf( TempName, "%s%s%s%s%s",
 	       tmpDir,
 	       COMMON_DIR_SEP_STRING,
@@ -128,13 +99,13 @@ TempFileName( const char * dir, const char * prefix )
       Unique[0] = UniqueNum[ Value[ 0 ] ];
       Unique[1] = UniqueNum[ Value[ 1 ] ];
       Unique[2] = UniqueNum[ Value[ 2 ] ];
-  
-	      
+
+
       if( stat( TempName, &fileStat ) != 0 )
 	return( TempName );
 
     }
-  
+
   COMMON_SET_ERROR( EC_BADPARAM, ("can't generate temp name from '%s%s%s'",
 				  dir,
 				  COMMON_DIR_SEP_STRING,

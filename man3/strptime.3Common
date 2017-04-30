@@ -8,7 +8,7 @@
 .\" manual under the conditions for verbatim copying, provided that the
 .\" entire resulting derived work is distributed under the terms of a
 .\" permission notice identical to this one
-.\" 
+.\"
 .\" Since the Linux kernel and libraries are constantly changing, this
 .\" manual page may be incorrect or out-of-date.  The author(s) assume no
 .\" responsibility for errors or omissions, or for damages resulting from
@@ -16,7 +16,7 @@
 .\" have taken the same level of care in the production of this manual,
 .\" which is licensed free of charge, as they might when working
 .\" professionally.
-.\" 
+.\"
 .\" Formatted or processed versions of this manual, if unaccompanied by
 .\" the source, must acknowledge the copyright and authors of this work.
 .\"
@@ -137,7 +137,7 @@ allowed for leap years)
 time as %H:%M:%S
 .TP
 .B %w
-weekday number (0-6) with Sunday as the first day of the week 
+weekday number (0-6) with Sunday as the first day of the week
 .TP
 .B %x
 date, using locale's date format
@@ -180,7 +180,7 @@ struct tm
 .fi
 .RE
 .SH "RETURN VALUE"
-The \fBstrptime()\fP function returns a pointer to the character following 
+The \fBstrptime()\fP function returns a pointer to the character following
 the last character in the string pointed to by
 .I buf
 \.
@@ -196,4 +196,3 @@ This function is only available in libraries newer than version 4.6.5
 .PP
 The function supports only those locales specified in
 .BR locale "(7)"
-

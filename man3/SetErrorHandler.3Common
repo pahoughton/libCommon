@@ -1,21 +1,3 @@
-.\"
-.\" File:	SetErrorHandler.3
-.\" Project:	Common
-.\" Desc:        
-.\"
-.\"     Man page for SetErrorHandler() Ver: 2.5
-.\"
-.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
-.\" Created:     06/17/94 18:07
-.\"
-.\" Revision History: (See end of file for Revision Log)
-.\"
-.\"  Last Mod By:   $Author$
-.\"  Last Mod:	    $Date$
-.\"  Version:	    $Revision$
-.\"
-.\" $Id$
-.\"
 .TH SetErrorHandler 3  "4/29/97 (Common)"
 .SH NAME
 SetErrorHandler \- specify the function to call when an error occurs.
@@ -121,7 +103,7 @@ ErrorHandler(
   static char DefaultErrorMesg[ 2048 ];
 
   DefaultErrorMesg[0] = 0;
-  
+
   switch( errorType )
     {
     case ET_OSERROR:
@@ -135,7 +117,7 @@ ErrorHandler(
       sprintf( DefaultErrorMesg, "%s: %s ",
 	       ErrorTypeString( errorType ),
 	       CommonErrorString( errorValue ) );
-      
+
       break;
 
     default:
@@ -152,7 +134,7 @@ ErrorHandler(
       strcat( DefaultErrorMesg, errorDesc );
       strcat( DefaultErrorMesg, " " );
     }
-      
+
   if( (strlen( DefaultErrorMesg ) + strlen( mesgFormat ) + 10 )
       < sizeof( DefaultErrorMesg ) )
     {
@@ -190,34 +172,12 @@ int main( int argc, char * argv[] )
 .fn
 .SH FILES
 .nf
-%INSTALL_LIB_DIR%/libCommon.a
-%INSTALL_INC_DIR%/Common.h
+$prefix/lib/libCommon.so
+$prefix/include/Common/Common.h
 .fn
 .SH "SEE ALSO"
 Common(3), GetErrorHandler(3), Error(3), ErrorArgs(3), SetError(3),
 ErrorMesg(3), ErrorTypeString(3), CommonErrorString(3),
 SET_ERROR_CLOSURE(3), SET_ERROR(3), ERROR(3), ERROR_APP(3)
 .SH AUTHORS
-Paul Houghton - (paul.houghton@wcom.com)
-
-.\"
-.\" $Log$
-.\" Revision 2.2  1998/09/24 14:30:06  houghton
-.\" Reworked to replace directory names with Makefile variable value.
-.\"
-.\" Revision 2.1  1997/05/07 11:35:03  houghton
-.\" Updated for release 2.01.02
-.\"
-.\" Revision 2.0  1995/10/28 17:34:52  houghton
-.\" Move to Version 2.0
-.\"
-.\" Revision 1.3  1994/07/05  21:50:35  houghton
-.\" fixup man page comment header
-.\"
-.\" Revision 1.2  1994/07/05  21:38:12  houghton
-.\" Updated man pages for all libCommon functions.
-.\"
-.\" Revision 1.1  1994/06/17  18:07:15  houghton
-.\" New man pages ... what a concept!
-.\"
-.\"
+1997-04-29 (cc)  Paul Houghton <paul4hough@gmail.com>

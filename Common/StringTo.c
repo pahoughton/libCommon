@@ -1,115 +1,125 @@
-/*********************************************************************
- *
- * Title:            StringToLong.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton x2309 - (houghton@shoe)
- *
- * Start Date:	    06/16/94 08:19
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.3  1998/09/22 14:33:10  houghton
- * Port(Linux): I was using 'index' as a variable name. This is also a
- *     syninoum for strchr(), so I change the variable name to avoid
- *     warnings.
- *
- * Revision 2.2  1995/10/29 13:33:45  houghton
- * Initial Linux Build of Version 2
- *
- * Revision 2.1  1995/10/29  12:01:22  houghton
- * Change Version Id String
- *
- * Revision 2.0  1995/10/28  17:35:31  houghton
- * Move to Version 2.0
- *
- * Revision 1.5  1995/02/13  15:34:20  houghton
- * New functions and many enhancements to existing functions.
- *
- * Revision 1.4  1994/08/15  19:57:09  houghton
- * Fix RcsId so ident will work
- *
- * Revision 1.3  1994/06/22  16:34:55  dpotluri
- * Port to MSWindows and OPENVMS
- *
- * Revision 1.2  1994/06/20  10:27:20  houghton
- * Porting and add LoggerLoc function
- *
- * Revision 1.1  1994/06/17  18:07:30  houghton
- * Cool new Logger function
- *
- *
- *********************************************************************/
+/* 1994-08-04 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
+/* 1994-06-16 (cc) paul4hough@gmail.com
+
+   Convert a number string into its apropriate binary value.
+   If base is 0, the string will define its base as in C. A
+   leading 0 implies octal and 0x implies hexadecimal.
+*/
 
 #include "_Common.h"
 #include <ctype.h>
+#include <math.h>
 
-COMMON_VERSION(
-  StringToLong,
-  "$Id$");
+#define MSTRING_TO_TYPE( _t_, _T_ )					\
+_t_									\
+StringTo##_T_(								\
+    const char * string,						\
+    int		 base,							\
+    int          len							\
+    )									\
+{									\
+									\
+  int pos = 0;								\
+  _t_ value = 0;							\
+  int neg = string[pos] == '-' ? ++pos : 0;				\
+  int prebase = base ? base : 10;					\
+									\
+  for( ; ! IS_BASE_DIGIT( string[pos], prebase )			\
+         && ( len != 0 ? pos < len : string[pos] != 0 )			\
+	 ; pos++ );							\
+									\
+  if( base == 0 )							\
+    {									\
+      if( string[pos] == '0' )						\
+	{								\
+	  ++ pos;							\
+	  if( tolower( string[pos] ) == 'x')				\
+	    {								\
+	      base = 16;						\
+	      ++ pos;							\
+	    }								\
+	  else								\
+	    {								\
+	      base = 8;							\
+	    }								\
+	}								\
+      else								\
+	{								\
+	  base = 10;							\
+	}								\
+    }									\
+									\
+  for( ; (len != 0 && pos < len ) || (len == 0 && string[pos] != 0);	\
+       pos++ )								\
+    {									\
+      if( IS_BASE_DIGIT( string[pos], base ) )				\
+	{								\
+	  value *= base;						\
+	  value += CHAR_TO_INT( string[pos] );				\
+	}								\
+    }									\
+  if( neg ) value *= -1;						\
+									\
+  return( value );							\
+}
+
+MSTRING_TO_TYPE( int, Int  );
+MSTRING_TO_TYPE( long, Long );
+MSTRING_TO_TYPE( short, Short );
+MSTRING_TO_TYPE( unsigned int, UInt  );
+MSTRING_TO_TYPE( unsigned long, ULong );
+MSTRING_TO_TYPE( unsigned short, UShort );
 
 
-long
-StringToLong(
-    const char * string,
-    int		 baseToUse,
-    int          len
-    )
+
+double
+StringToDouble(
+  const char * string,
+  int          len )
 {
 
-  int pos = 0;
-  int base = 0;
-  long value = 0;
-  
-  if( baseToUse == 0 )
-    {
-      for( pos = 0;
-	   ! isdigit( string[pos] ) &&
-	   ( (len != 0 && pos < len ) ||
-	     (len == 0 && string[pos] != 0) )
-	   ; pos++ );
+  int    pos = 0;
+  double value = 0;
+  int    neg = string[pos] == '-' ? ++pos : 0;
+  int	 fract = -1;
 
-      if( string[pos] == '0' )
+  for( ; ! IS_BASE_DIGIT( string[pos], 10 )
+         && ( len != 0 ? pos < len : string[pos] != 0 )
+	 ; pos++ );
+
+  for( ; (len != 0 && pos < len )
+	 || (len == 0 && string[pos] != 0);
+       pos++ )
+    {
+      if( fract == -1 && string[pos] == '.' )
 	{
-	  if( string[pos + 1] == 'x' || string[pos + 1] == 'X' )
-	    {
-	      base = 16;
-	      pos += 2;
-	    }
-	  else	
-	    {
-	      base = 8;
-	      pos += 1; 
-	    }
+	  fract = 0;
 	}
       else
 	{
-	  base = 10;
+	  if( IS_BASE_DIGIT( string[pos], 10 ) )
+	    {
+	      if( fract > -1 )
+		{
+		  fract++;
+		}
+	      value *= 10;
+	      value += CHAR_TO_INT( string[pos] );
+	    }
+	  else
+	    {
+	      break;
+	    }
 	}
-    }
-  else
-    {
-      base = baseToUse;
     }
 
-  for( ; (len != 0 && pos < len ) || (len == 0 && string[pos] != 0);
-       pos++ )
+  if( fract > 0 )
     {
-      if( IS_BASE_DIGIT( string[pos], base ) )
-	{
-	  value *= base;
-	  value += CHAR_TO_INT( string[pos] );
-	}
+      value = value * pow( (double)10, (double)(-1 * fract) );
     }
+
+  if( neg ) value *= -1;
 
   return( value );
 }
-
-
-

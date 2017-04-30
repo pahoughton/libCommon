@@ -1,37 +1,8 @@
-/*********************************************************************
- *
- * Title:            LogLevelSetString.c
- *
- * Description:
- *
- *	Provides a way to specify the string that will be output to
- *	represent a specific LogLevelBit. 
- *
- * Notes:
- *
- *	The string is not copied. It is directly accessed by the
- *	logger functions.
- *
- * Programmer:	    Paul Houghton - (paul_houghton@wiltel.com)
- *
- * Start Date:	    11/06/95 09:47
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.3  1998/09/22 14:32:46  houghton
- * Port(Linux): I was using 'index' as a variable name. This is also a
- *     syninoum for strchr(), so I change the variable name to avoid
- *     warnings.
- *
- * Revision 2.2  1997/05/07 11:36:56  houghton
- * Cleanup
- *
- * Revision 2.1  1995/11/10 00:56:01  houghton
- * Initial Version
- *
- *
- *********************************************************************/
+/* 1995-11-06 (cc) Paul Houghton <paul4hough@gmail.com>
+
+   Provides a way to specify the string that will be output to
+   represent a specific LogLevelBit.
+*/
 
 #include "_Common.h"
 
@@ -47,7 +18,7 @@ LogLevelSetString( LogLevelBit level, const char * string )
 {
   size_t	levNameIndex;
   const char *	old;
-  
+
   switch( level )
     {
     case LOG_NONE:      levNameIndex =  0;  break;
@@ -70,7 +41,7 @@ LogLevelSetString( LogLevelBit level, const char * string )
 
     default:
       return( 0 );
-      
+
     }
 
   old = _CLogLevelNames[ levNameIndex ];
@@ -78,8 +49,3 @@ LogLevelSetString( LogLevelBit level, const char * string )
 
   return( old );
 }
-
-
-
-
-

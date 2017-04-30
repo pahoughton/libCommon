@@ -1,25 +1,6 @@
-/*********************************************************************
- *
- * Title:            tLOGIT.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton - (paul_houghton@wiltel.com)
- *
- * Start Date:	    11/21/95 14:19
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.1  1995/12/02 02:13:56  houghton
- * Initial Version.
- *
- *
- *********************************************************************/
+/* 1995-11-21 (cc) Paul A. Houghton - (paul.houghton@wcom.com)
+ */
+
 
 #include <Common.h>
 
@@ -33,4 +14,3 @@ tLOGIT( void )
 
   return( TRUE );
 }
-

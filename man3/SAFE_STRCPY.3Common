@@ -1,21 +1,3 @@
-.\"
-.\" File:      SAFE_STRCPY.3
-.\" Project:   Common
-.\" Desc:        
-.\"
-.\"     Man page for SAFE_STRCPY
-.\"
-.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
-.\" Created:     05/05/97 06:34
-.\"
-.\" Revision History: (See end of file for Revision Log)
-.\"
-.\"  Last Mod By:    $Author$
-.\"  Last Mod:       $Date$
-.\"  Version:        $Revision$
-.\"
-.\" $Id$
-.\"
 .TH SAFE_STRCPY 3  "05/05/97 06:34 (Common)"
 .SH NAME
 SAFE_STRCPY \- copy a string into dest for 'size' bytes and null terminate it.
@@ -51,21 +33,9 @@ This is a simple macro wrapper for strncpy(3) adds a null terminator
 to the dest at size - 1.
 .SH FILES
 .PD 0
-%INSTALL_INC_DIR%/Common.h
+$prefix/include/Common/Common.h
 .PD
 .SH "SEE ALSO"
 Common(3), strncpy(3)
 .SH AUTHORS
-Paul A. Houghton - (paul.houghton@wcom.com)
-
-.\"
-.\" Revision Log:
-.\"
-.\" $Log$
-.\" Revision 2.2  1998/09/24 14:30:06  houghton
-.\" Reworked to replace directory names with Makefile variable value.
-.\"
-.\" Revision 2.1  1997/05/07 11:35:47  houghton
-.\" Initial version.
-.\"
-.\"
+1997-05-05 (cc)  Paul Houghton <paul4hough@gmail.com>

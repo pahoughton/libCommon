@@ -1,31 +1,7 @@
-/*********************************************************************
- *
- * Title:            LoggerSetLoc.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton - (paul_houghton@wiltel.com)
- *
- * Start Date:	    11/06/95 08:57
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.1  1995/11/10 00:56:04  houghton
- * Initial Version
- *
- *
- *********************************************************************/
+/* 1995-11-06 (cc) paul4hough@gmail.com
+ */
 
 #include "_Common.h"
-
-COMMON_VERSION(
-  LoggerSetLoc,
-  "$Id$" );
 
 extern BOOL  _CLogLoc;	/* _LoggerLogIt.c */
 
@@ -39,5 +15,3 @@ LoggerSetLoc( BOOL newState )
 
   return( oldState );
 }
-
-

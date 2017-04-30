@@ -29,25 +29,27 @@ static const char * CLValues[] =
 
 int
 tCenterLine(void) {
-
-  for( const struct CLTest * t = CenterLineTests;
-       t->inp;
-       ++ t ) {
-    char val[24];
-    CenterLine( val, t->inp, 20);
-    /* printf("e:%s~\nv:%s~\n\n", t->exp, val );
-     */
-    VVTRUE( strcmp( val, t->exp ) == 0 );
+  {
+    const struct CLTest * t = CenterLineTests;
+    for(; t->inp; ++ t ) {
+      char val[24];
+      CenterLine( val, t->inp, 20);
+      /* printf("e:%s~\nv:%s~\n\n", t->exp, val );
+       */
+      VVTRUE( strcmp( val, t->exp ) == 0 );
+    }
   }
+  {
+    const char ** inval = CLValues;
+    for( ; *inval; ++ inval ) {
+      char val[4096];
+      unsigned int width = 40;
+      unsigned int ilen  = strlen( *inval );
+      unsigned int elen  = ((width - ilen)/2)+ilen;
 
-  for( const char ** inval = CLValues; *inval; ++ inval ) {
-    char val[4096];
-    unsigned int width = 40;
-    unsigned int ilen  = strlen( *inval );
-    unsigned int elen  = ((width - ilen)/2)+ilen;
-
-    CenterLine( val, *inval, width);
-    VVTRUE( strlen( val ) == elen );
+      CenterLine( val, *inval, width);
+      VVTRUE( strlen( val ) == elen );
+    }
   }
   return( TRUE );
 }

@@ -2,15 +2,20 @@
 #
 
 bin_PROGRAMS = validator
-AM_CPPFLAGS = -I../../src
+AM_CPPFLAGS = -I../.. -DVVSHOW=1 -DPROG_SED='"$(SED)"'
 
-#validator_LDADD = clue/libclue.la
-#validator_CXXFLAGS = -ggdb
+validator_LDADD = ../../Common/libCommon.la -lm
 
 validator_SOURCES =				\
 	main.c	\
-	tmissing.c \
-	tstrptime.c
+	tCommon.c \
+	tstrptime.c \
+	tCenterLine.c \
+	tCanExecute.c \
+	tMemberOfGroup.c \
+	tFindPath.c \
+	tStripChars.c \
+	tStringTo.c
 
 #	tIsLeapYear.c
 

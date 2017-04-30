@@ -1,24 +1,6 @@
-.\"
-.\" File:      template.3
-.\" Project:   Common
-.\" Desc:        
-.\"
-.\"     Man page for template
-.\"
-.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
-.\" Created:     05/07/97 06:21
-.\"
-.\" Revision History: (See end of file for Revision Log)
-.\"
-.\"  Last Mod By:    $Author$
-.\"  Last Mod:       $Date$
-.\"  Version:        $Revision$
-.\"
-.\" $Id$
-.\"
 .TH template 3  "05/07/97 06:21 (Common)"
 .SH NAME
-template \- 
+template \-
 .SH SYNOPSIS
 
 .SH ARGUMENTS
@@ -39,13 +21,4 @@ template \-
 .SH "SEE ALSO"
 
 .SH AUTHORS
-Paul A. Houghton - (paul.houghton@wcom.com)
-
-.\"
-.\" Revision Log:
-.\"
-.\" $Log$
-.\" Revision 2.1  1997/05/07 12:23:41  houghton
-.\" Cleanup.
-.\"
-.\"
+1997-05-07 (cc)  Paul Houghton <paul4hough@gmail.com>

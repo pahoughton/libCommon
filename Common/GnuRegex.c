@@ -1,3 +1,5 @@
+/* 1994-08-04 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 /* Extended regular expression matching and search library,
    version 0.12.
    (Implements POSIX draft P10003.2/D11.2, except for

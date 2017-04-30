@@ -1,25 +1,5 @@
-/*********************************************************************
- *
- * Title:            LoggerSetOutputLevel.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton - (paul_houghton@wiltel.com)
- *
- * Start Date:	    11/06/95 09:14
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.1  1995/11/10 00:56:05  houghton
- * Initial Version
- *
- *
- *********************************************************************/
+/* 1995-11-06 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 
 #include "_Common.h"
 
@@ -33,7 +13,7 @@ int
 LoggerSetOutputLevel( LogSetLevelType setType, int outputLevels )
 {
   int old = _CLogOutputLevel;
-  
+
   switch( setType )
     {
     case LOG_ON:

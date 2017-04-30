@@ -1,60 +1,17 @@
-/*********************************************************************
- *
- * Title            FindPath.c
- *
- * Description
- *
- *  	Find an executable file in either the path parameter or
- *	the PATH environment varialbe (if path is NULL).
- *	
- *
- * Notes
- *
- *   SEE end of file for original Copywrite and notices
- *   This module is covered by GPL
- *
- * Author:	    Jeff Nieusma
- *		    Paul Houghton x2309 - (houghton@shoe.wiltel.com)
- *
- * Start Date	    08/04/94 09:38
- *
- * Modification History
- *
- * $Log$
- * Revision 2.3  1995/12/02 02:04:35  houghton
- * Reorder includes.
- *
- * Revision 2.2  1995/10/29  12:01:14  houghton
- * Change Version Id String
- *
- * Revision 2.1  1995/10/28  19:11:45  houghton
- * Change Version Id String
- *
- * Revision 2.0  1995/10/28  17:35:22  houghton
- * Move to Version 2.0
- *
- * Revision 1.3  1995/02/13  15:34:17  houghton
- * New functions and many enhancements to existing functions.
- *
- * Revision 1.2  1994/08/15  19:57:01  houghton
- * Fix RcsId so ident will work
- *
- * Revision 1.1  1994/08/15  19:42:20  houghton
- * Add ArgEnvFlage, ArgEnvLong, CanExecute, FindPath and MemberOfGroup
- * functions
- *
- *
- *********************************************************************/
+/* 1994-08-04 (cc) paul4hough@gmail.com
+
+   Find an executable file in either the path parameter or
+   the PATH environment varialbe (if path is NULL).
+*/
 
 #include "_Common.h"
 
 #include <stdlib.h>
 #include <string.h>
 
-COMMON_VERSION(
-  FindPath,
-  "$Id$");
-
+/* no gatesware :) */
+#define PATH_SEP     ':'
+#define PATH_SEP_STR ":"
 
 char *
 FindPath(
@@ -68,11 +25,11 @@ FindPath(
   char * pathDir;
 
   if( path == NULL )
-    envPath = getenv( COMMON_PATH_ENV_VAR );
+    envPath = getenv( "PATH" );
   else
     envPath = (char *)path;
-  
-  if( strchr( fileName, COMMON_DIR_SEP_CHAR ) != NULL ||
+
+  if( strchr( fileName, PATH_SEP ) != NULL ||
       envPath == NULL )
     {
       if( CanExecute( fileName )  )
@@ -83,9 +40,9 @@ FindPath(
 
   envPath = strdup( envPath );	/* need private copy */
 
-  for( pathDir = strtok( envPath, COMMON_PATH_SEP ) ;
+  for( pathDir = strtok( envPath, PATH_SEP_STR ) ;
        pathDir != NULL ;
-       pathDir = strtok( NULL, COMMON_PATH_SEP ) )
+       pathDir = strtok( NULL, PATH_SEP_STR ) )
     {
       char * fullName;
 
@@ -95,12 +52,12 @@ FindPath(
 	  free( envPath );
 	  return( NULL );
 	}
-      
+
       strcpy( fullName, pathDir );
-      strcat( fullName, COMMON_DIR_SEP_STRING );
+      strcat( fullName, "/" );
       strcat( fullName, fileName );
-      
-      if( CanExecute( fullName ) ) 
+
+      if( CanExecute( fullName ) )
 	{
 	  free( envPath );
 	  return( fullName );
@@ -110,7 +67,7 @@ FindPath(
   free( envPath );
   return( NULL );
 }
-	
+
 
 
 /*
@@ -135,12 +92,12 @@ FindPath(
  *  them to include in future releases.  Feel free to send them to:
  *      Jeff Nieusma                       nieusma@rootgroup.com
  *      3959 Arbol CT                      (303) 447-8093
- *      Boulder, CO 80301-1752             
+ *      Boulder, CO 80301-1752
  *
  *******************************************************************
  *
  *  This module contains the find_path() command that returns
- *  a pointer to a static area with the absolute path of the 
+ *  a pointer to a static area with the absolute path of the
  *  command or NULL if the command is not found in the path
  *
  *  I also added the strdup() function in here after I found most

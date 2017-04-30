@@ -1,21 +1,3 @@
-.\"
-.\" File:      DateStringFromTm.3
-.\" Project:   Common
-.\" Desc:        
-.\"
-.\"     Man page for DateStringFromTm
-.\"
-.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
-.\" Created:     05/07/97 03:46
-.\"
-.\" Revision History: (See end of file for Revision Log)
-.\"
-.\"  Last Mod By:    $Author$
-.\"  Last Mod:       $Date$
-.\"  Version:        $Revision$
-.\"
-.\" $Id$
-.\"
 .TH DateStringFromTm 3  "05/07/97 03:46 (Dist)"
 .SH NAME
 DateStringFromTm \- convert a tm struct to a string.
@@ -54,9 +36,9 @@ Use tmTime to create a string representation of a date and time.
 a string representation of the 'tmTime passed.
 .SH FILES
 .PD 0
-%INSTALL_INC_DIR%/Common.h
+$prefix/include/Common/Common.h
 .LP
-%INSTALL_LIB_DIR%/libCommon.a
+$prefix/lib/libCommon.so
 .PD
 .SH "SEE ALSO"
 Common(3), YYYYMMDDtoTimeT(3), YYMMDDtoTimeT(3),
@@ -64,16 +46,4 @@ HHMMSStoTimeT(3), DateStringToTimeT(3), DateStringFromTimeT(3),
 YearMonthDayToTimeT(3), HourMinSecToTimeT(3),
 strftime(3)
 .SH AUTHORS
-Paul A. Houghton - (paul.houghton@wcom.com)
-
-.\"
-.\" Revision Log:
-.\"
-.\" $Log$
-.\" Revision 2.2  1998/09/24 14:30:03  houghton
-.\" Reworked to replace directory names with Makefile variable value.
-.\"
-.\" Revision 2.1  1997/05/07 11:35:38  houghton
-.\" Initial version.
-.\"
-.\"
+1997-05-07 (cc)  Paul Houghton <paul4hough@gmail.com>

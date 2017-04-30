@@ -1,44 +1,8 @@
-/*********************************************************************
- *
- * Title:            EbcdicToAscii.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton - (houghton@cworld.wiltel.com)
- *
- * Start Date:	    10/05/94 11:34
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.3  1997/07/18 18:44:44  houghton
- * Port(Sun5): Changed EtoA to unsigned char.
- *
- * Revision 2.2  1995/10/29 18:16:00  houghton
- * Fixes for Borland 4.0 Port
- *
- * Revision 2.1  1995/10/28  19:11:44  houghton
- * Change Version Id String
- *
- * Revision 2.0  1995/10/28  17:35:21  houghton
- * Move to Version 2.0
- *
- * Revision 1.1  1995/02/13  15:34:16  houghton
- * New functions and many enhancements to existing functions.
- *
- *
- *********************************************************************/
+/* 1994-10-05 (cc) paul4hough@gmail.com
+ */
 
 #include "_Common.h"
-
-COMMON_VERSION(
-  EbcdicToAscii,
-  "$Id$");
-
+#include <string.h>
 
 const unsigned char EtoA[] =
 {
@@ -80,40 +44,9 @@ void
 EbcdicToAscii( unsigned char * buf, int len )
 {
   int	i;
-  int	end;
+  int	end = (len == 0 ? strlen( (char *)buf ) : len);
 
-  if( len == 0 )
-    {
-      end = strlen( (char *)buf );
-    }
-  else
-    {
-      end = len;
-    }
-
-  for( i = 0; i < end; i++, buf++ )
-    {
-      *buf = EtoA[*buf];
-    }
+  for( i = 0; i < end; i++, buf++ ) {
+    *buf = EtoA[*buf];
+  }
 }
-
-
-
-
-
-
-
-
-/**
- *             This software is the sole property of
- *
- *                 The Williams Companies, Inc.
- *                       1 Williams Center
- *                         P.O. Box 2400
- *                      Tulsa, Oklahoma 74102
- *
- *        Copyright (c) 1994 by The Williams Companies, Inc.
- *
- *                      All Rights Reserved.  
- *
- **/

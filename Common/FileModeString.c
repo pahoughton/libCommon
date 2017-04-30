@@ -1,37 +1,5 @@
-/*********************************************************************
- *
- * Title:            FileModeString.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton - (houghton@cworld.wiltel.com)
- *
- * Start Date:	    12/23/94 08:23
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.3  1995/12/31 11:29:31  houghton
- * Changed to use new 'arch' specific Stat.h header.
- *
- * Revision 2.2  1995/11/10 12:09:51  houghton
- * AIX Port. Change umode_t to mode_t.
- *
- * Revision 2.1  1995/10/29  13:33:56  houghton
- * Initial Linux Build of Version 2
- *
- * Revision 2.0  1995/10/28  17:35:47  houghton
- * Move to Version 2.0
- *
- * Revision 1.1  1995/02/13  15:34:17  houghton
- * New functions and many enhancements to existing functions.
- *
- *
- *********************************************************************/
+/* 1994-12-23 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 
 #include "_Stat.h"
 
@@ -42,7 +10,7 @@ COMMON_VERSION(
 
 static char ModeString[15];
 
-const char * 
+const char *
 FileModeString( mode_t	mode, char * modeString )
 {
     char * str = ModeString;
@@ -81,25 +49,3 @@ FileModeString( mode_t	mode, char * modeString )
 
     return( str );
 }
-
-
-
-
-
-
-
-
-
-/**
- *             This software is the sole property of
- *
- *                 The Williams Companies, Inc.
- *                       1 Williams Center
- *                         P.O. Box 2400
- *                      Tulsa, Oklahoma 74102
- *
- *        Copyright (c) 1994 by The Williams Companies, Inc.
- *
- *                      All Rights Reserved.  
- *
- **/

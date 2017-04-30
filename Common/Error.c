@@ -1,32 +1,9 @@
-/*********************************************************************
- *
- * Title:            Error.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton - (paul_houghton@wiltel.com)
- *
- * Start Date:	    11/07/95 10:26
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.1  1995/11/10 00:48:33  houghton
- * Initial Version
- *
- *
- *********************************************************************/
+/* 1995-11-07 (cc) paul4hough@gmail.com
+ */
 
 #include "_Common.h"
 #include <stdarg.h>
 
-COMMON_VERSION(
-  Error,
-  "$Id$" );
 
 int
 Error(
@@ -41,9 +18,9 @@ Error(
   )
 {
   int	ret;
-  
+
   va_list   args;
-  
+
   va_start( args, mesgFormat );
 
   ret = ErrorArgs( srcFileName,

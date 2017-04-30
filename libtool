@@ -1,5 +1,5 @@
 #! /bin/bash
-# Generated automatically by config.status (missing) 1.0
+# Generated automatically by config.status (common) 1.3.1
 # NOTE: Changes made to this file will be lost: look at ltmain.sh.
 
 # Provide generalized library-building support services.
@@ -96,7 +96,7 @@ NM="/usr/bin/nm -B"
 LN_S="ln -s"
 
 # What is the maximum length of a command?
-max_cmd_len=1572864
+max_cmd_len=1635000
 
 # Object file suffix (normally "o").
 objext=o

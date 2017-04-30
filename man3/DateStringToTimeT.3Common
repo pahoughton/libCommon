@@ -1,21 +1,3 @@
-.\"
-.\" File:      DateStringToTimeT.3
-.\" Project:   Common
-.\" Desc:        
-.\"
-.\"     Man page for DateStringToTimeT
-.\"
-.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
-.\" Created:     05/05/97 07:04
-.\"
-.\" Revision History: (See end of file for Revision Log)
-.\"
-.\"  Last Mod By:    $Author$
-.\"  Last Mod:       $Date$
-.\"  Version:        $Revision$
-.\"
-.\" $Id$
-.\"
 .TH DateStringToTimeT 3  "05/05/97 07:04 (Common)"
 .SH NAME
 DateStringToTimeT \- convert a date and time string to a time_t value.
@@ -47,9 +29,9 @@ Converts a string representation of a date and time to a time_t value.
 The converted value or 'TIMET_MIN' if the conversion failed.
 .SH FILES
 .PD 0
-%INSTALL_INC_DIR%/Common.h
+$prefix/include/Common/Common.h
 .LP
-%INSTALL_LIB_DIR%/libCommon.a
+$prefix/lib/libCommon.so
 .PD
 .SH "SEE ALSO"
 Common(3), YYYYMMDDtoTimeT(3), YYMMDDtoTimeT(3),
@@ -57,16 +39,4 @@ HHMMSStoTimeT(3), DateStringFromTimeT(3), DateStringFromTm(3),
 YearMonthDayToTimeT(3), HourMinSecToTimeT(3),
 strptime(3)
 .SH AUTHORS
-Paul A. Houghton - (paul.houghton@wcom.com)
-
-.\"
-.\" Revision Log:
-.\"
-.\" $Log$
-.\" Revision 2.2  1998/09/24 14:30:03  houghton
-.\" Reworked to replace directory names with Makefile variable value.
-.\"
-.\" Revision 2.1  1997/05/07 11:35:39  houghton
-.\" Initial version.
-.\"
-.\"
+1997-05-05 (cc)  Paul Houghton <paul4hough@gmail.com>

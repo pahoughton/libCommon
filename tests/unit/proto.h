@@ -1,14 +1,18 @@
-#ifndef _TestFunctProto_h_
-#define _TestFunctProto_h_
+#ifndef _proto_h_
+#define _proto_h_
 /* 1998-09-16 (cc) paul4hough@gmail.com
  */
 
-#if defined( __cplusplus )
-extern "C" {
-#endif
 
-int tmissing( void );
+int tCommon( void );
+
 int tstrptime( void );
+int tCenterLine( void );
+int tCanExecute( void );
+int tMemberOfGroup( void );
+int tFindPath( void );
+int tStripChars( void );
+int tStringTo( void );
 int tIsLeapYear( void );
 int tYearMonthDayToTimeT( void );
 int tHourMinSecToTimeT( void );
@@ -20,7 +24,11 @@ int tDateStringFromTm( void );
 int tDateStringFromTimeT( void );
 
 #if defined( __cplusplus )
+extern "C" {
+#endif
+
+#if defined( __cplusplus )
 };
 #endif
 
-#endif /* ! def _TestFunctProto_h_ */
+#endif /* ! def _proto_h_ */

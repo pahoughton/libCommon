@@ -15,8 +15,15 @@ struct TestFunct
 
 struct TestFunct    Tests[] =
 {
-  { "missing",              tmissing },
+  { "Common",               tCommon },
   { "strptime",		    tstrptime },
+  { "CenterLine",           tCenterLine },
+  { "StripChars",           tStripChars },
+  { "StringTo",		    tStringTo },
+  { "CanExecute",           tCanExecute },
+  { "MemberOfGroup",        tMemberOfGroup },
+  { "FindPath",             tFindPath },
+
   /*
   { "IsLeapYear",	    tIsLeapYear },
   { "YearMonthDayToTimeT",  tYearMonthDayToTimeT },
@@ -89,17 +96,3 @@ main( int argc, char * argv[] )
 
   return( result );
 }
-
-/*
- *
- * Revision Log:
- *
- * $Log$
- * Revision 1.2  1998/09/24 14:36:38  houghton
- * Added more tests.
- *
- * Revision 1.1  1998/09/22 14:39:41  houghton
- * Initial version.
- *
- *
- */

@@ -1,31 +1,5 @@
-/*********************************************************************
- *
- * Title:            _LoggerLogIt.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton - (paul_houghton@wiltel.com)
- *
- * Start Date:	    11/07/95 07:20
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.3  1998/09/22 14:36:28  houghton
- * Changed to use 4 digit year in time stamp output.
- *
- * Revision 2.2  1995/11/12 17:47:06  houghton
- * Cleanup output.
- *
- * Revision 2.1  1995/11/10  00:56:08  houghton
- * Initial Version
- *
- *
- *********************************************************************/
+/* 1995-11-07 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 
 #include "_Common.h"
 #include <stdio.h>
@@ -52,7 +26,7 @@ _LoggerLogIt(
     {
       time_t  nowSec = time(0);
       struct tm * now = localtime( &nowSec );
-      
+
       fprintf( log,"%02d/%02d/%04d %02d:%02d:%02d ",
 	       now->tm_mon + 1,
 	       now->tm_mday,
@@ -60,18 +34,16 @@ _LoggerLogIt(
 	       now->tm_hour,
 	       now->tm_min,
 	       now->tm_sec );
-      
+
     }
-  
+
   fprintf( log, "%s: ", LogLevelString( level ) );
-  
+
   if( _CLogLoc == TRUE && srcFileName != NULL )
     {
       fprintf( log,"%s:%ld: ", srcFileName, srcLineNumber );
     }
-  
-  vfprintf( log, mesgFmt, mesgArgs );
-  
-}  
 
-  
+  vfprintf( log, mesgFmt, mesgArgs );
+
+}

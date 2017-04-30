@@ -1,38 +1,9 @@
-/*********************************************************************
- *
- * Title:            _CommonDefaultErrorHandler.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton - (paul_houghton@wiltel.com)
- *
- * Start Date:	    11/07/95 10:40
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.3  1995/12/02 02:10:10  houghton
- * Cleanup error messages.
- *
- * Revision 2.2  1995/11/12  17:46:41  houghton
- * Cleanup output.
- *
- * Revision 2.1  1995/11/10  00:56:07  houghton
- * Initial Version
- *
- *
- *********************************************************************/
+/* 1995-11-07 (cc) paul4hough@gmail.com
+ */
 
 #include "_Common.h"
 #include <limits.h>
 
-COMMON_VERSION(
-  _CommonDefaultErrorHandler,
-  "$Id$" );
 
 int
 _CommonDefaultErrorHandler(
@@ -49,7 +20,7 @@ _CommonDefaultErrorHandler(
   static char DefaultErrorMesg[ 2048 ];
 
   DefaultErrorMesg[0] = 0;
-  
+
   switch( errorType )
     {
     case ET_OSERROR:
@@ -63,7 +34,7 @@ _CommonDefaultErrorHandler(
       sprintf( DefaultErrorMesg, "%s: %s ",
 	       ErrorTypeString( errorType ),
 	       CommonErrorString( errorValue ) );
-      
+
       break;
 
     default:
@@ -80,7 +51,7 @@ _CommonDefaultErrorHandler(
       strcat( DefaultErrorMesg, errorDesc );
       strcat( DefaultErrorMesg, " " );
     }
-      
+
   if( (strlen( DefaultErrorMesg ) + strlen( mesgFormat ) + 10 )
       < sizeof( DefaultErrorMesg ) )
     {
@@ -101,5 +72,3 @@ _CommonDefaultErrorHandler(
 
   return( INT_MAX );
 }
-	      
-

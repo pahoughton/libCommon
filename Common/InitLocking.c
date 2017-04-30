@@ -1,28 +1,5 @@
-/*********************************************************************
- *
- * Title:            InitLocking.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Dora Potluri x561-6131 - (dpotluri@shoe.wiltel.com)
- *
- * Start Date:	    11/11/94 13:28
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.0  1995/10/28 17:35:47  houghton
- * Move to Version 2.0
- *
- * Revision 1.1  1994/12/02  17:25:42  dpotluri
- * Added locking to Avl Trees
- *
- *
- *********************************************************************/
+/* 1994-11-11 (cc) Dora Potluri
+ */
 static const char * RcsId =
 "$Id$";
 
@@ -64,7 +41,7 @@ InitLocking(
     For all other purposes of mapping like Read-Write Read only
     get the existing semaphore and operate on that.
     */
-  
+
   if ( accessFlag & O_CREAT &&
        ( semId = semget( semKey, 1,IPC_CREAT | IPC_EXCL | SEM_ACCESS ) ) == -1 )
     {
@@ -73,7 +50,7 @@ InitLocking(
 	  /*
 	    Get the old Semaphore
 	    */
-	  
+
 	  if ( ( semId = semget( semKey, 1, IPC_CREAT | SEM_ACCESS ) ) == -1 )
 	    {
 	      printf(" Failed to get the old Sem Error:%d\n", errno );
@@ -100,7 +77,7 @@ InitLocking(
 	      printf("Failed to create a new Sem Error:%d \n", errno );
 	      return(-1);
 	    }
-	  
+
 	  return( semId );
 	}
       return( -1 );
@@ -113,21 +90,6 @@ InitLocking(
 	  return( -1 );
 	}
     }
-      
+
   return( semId );
 }
-      
-
-/**
- *             This software is the sole property of
- *
- *                 The Williams Companies, Inc.
- *                       1 Williams Center
- *                         P.O. Box 2400
- *                      Tulsa, Oklahoma 74102
- *
- *        Copyright (c) 1994 by The Williams Companies, Inc.
- *
- *                      All Rights Reserved.  
- *
- **/
