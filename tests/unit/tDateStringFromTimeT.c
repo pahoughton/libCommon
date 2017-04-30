@@ -1,23 +1,5 @@
-/*********************************************************************
- *
- * File:        tDateStringFromTimeT.c
- * Project:	Common
- * Desc:
- *
- *  
- *
- * Notes:
- *
- * Author:	Paul A. Houghton - (paul.houghton@wcom.com)
- * Created:	09/24/98 06:14
- *
- * Revision History: (See end of file for Revision Log)
- *
- *  Last Mod By:    $Author$
- *  Last Mod:	    $Date$
- *  Version:	    $Revision$
- *
- *********************************************************************/
+/* 1998-09-24 (cc) Paul A. Houghton <paul4hough@gmail.com>
+ */
 
 #include "TestConfig.h"
 #include "TestFunctProto.h"
@@ -78,7 +60,7 @@ tDateStringFromTimeT( void )
   int		t;
   char		value[ 128 ];
   const char *	ptr;
-  
+
   for( t = 0; TestData[ t ].str; ++ t )
     {
       ptr = DateStringFromTimeT( 0, TestData[ t ].fmt, TestData[ t ].value );
@@ -98,7 +80,7 @@ tDateStringFromTimeT( void )
 				 TestData[ t ].value );
 
       if( ptr != value || strcmp( value, TestData[ t ].str ) )
-	{	  
+	{
 	  printf( "DateStringFromTimeT: FAILED\n"
 		  "  got:  %s\n"
 		  "  exp:  %s\n",
@@ -110,15 +92,3 @@ tDateStringFromTimeT( void )
 
   return( ret );
 }
-	  
-      
-/*
- *
- * Revision Log:
- *
- * $Log$
- * Revision 1.1  1998/09/24 15:28:29  houghton
- * Initial Version.
- *
- *
- */

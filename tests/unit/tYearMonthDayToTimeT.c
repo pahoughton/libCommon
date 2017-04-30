@@ -1,23 +1,6 @@
-/*********************************************************************
- *
- * File:        tYearMonthDayToTimeT.c
- * Project:	Common
- * Desc:
- *
- *  
- *
- * Notes:
- *
- * Author:	Paul A. Houghton - (paul.houghton@wcom.com)
- * Created:	09/24/98 06:51
- *
- * Revision History: (See end of file for Revision Log)
- *
- *  Last Mod By:    $Author$
- *  Last Mod:	    $Date$
- *  Version:	    $Revision$
- *
- *********************************************************************/
+/* 1998-09-24 (cc) Paul A. Houghton <paul4hough@gmail.com>
+ */
+
 
 #include "TestConfig.h"
 #include "TestFunctProto.h"
@@ -98,14 +81,3 @@ tYearMonthDayToTimeT( void )
     }
   return( ret );
 }
-
-/*
- *
- * Revision Log:
- *
- * $Log$
- * Revision 1.1  1998/09/24 15:28:29  houghton
- * Initial Version.
- *
- *
- */

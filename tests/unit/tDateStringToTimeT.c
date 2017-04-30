@@ -1,23 +1,5 @@
-/*********************************************************************
- *
- * File:        tDateStringToTimeT.c
- * Project:	Common
- * Desc:
- *
- *  
- *
- * Notes:
- *
- * Author:	Paul A. Houghton - (paul.houghton@wcom.com)
- * Created:	09/24/98 05:08
- *
- * Revision History: (See end of file for Revision Log)
- *
- *  Last Mod By:    $Author$
- *  Last Mod:	    $Date$
- *  Version:	    $Revision$
- *
- *********************************************************************/
+/* 1998-09-24 (cc) Paul A. Houghton <paul4hough@gmail.com>
+ */
 
 #include "TestConfig.h"
 #include "TestFunctProto.h"
@@ -74,14 +56,14 @@ static struct TestValues TestData[] =
   { "1/1/1980 23:59:59",    "%m/%d/%Y %H:%M:%S",    315532800 + 86399},
   { "12/31/1999 22:00",	    "%m/%d/%Y %H:%M",	    946598400 + 79200 },
   { "1/1/2000 10:00:04",    "%m/%d/%Y %H:%M:%S",    946684800 + 36004 },
-  
+
   { "1/1/50",		    "%m/%d/%y",		    -631152000 },
   { "1/1/60 14:50",	    "%m/%d/%y %H:%M",	    -315619200 + 53400 },
   { "1/1/70",		    "%m/%d/%y",		    0 },
   { "1/1/80 23:59:59",	    "%m/%d/%y %H:%M:%S",    315532800 + 86399},
   { "12/31/99 22:00",	    "%m/%d/%y %H:%M",	    946598400 + 79200 },
   { "1/1/00 10:00:04",	    "%m/%d/%y %H:%M:%S",    946684800 + 36004 },
-  
+
   { 0, 0 }
 };
 
@@ -94,7 +76,7 @@ tDateStringToTimeT( void )
 
   struct tm ttm;
   memset( &ttm, 0, sizeof( ttm ) );
-  
+
   for( t = 0; TestData[ t].str; ++ t )
     {
       value = DateStringToTimeT( TestData[ t ].str,
@@ -129,18 +111,7 @@ tDateStringToTimeT( void )
 	  printf( "%s\n", asctime( gmtime( &value ) ) );
 	}
 #endif
-      
+
     }
   return( ret );
 }
-  
-/*
- *
- * Revision Log:
- *
- * $Log$
- * Revision 1.1  1998/09/24 15:28:29  houghton
- * Initial Version.
- *
- *
- */

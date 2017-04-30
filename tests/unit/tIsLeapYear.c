@@ -1,23 +1,5 @@
-/*********************************************************************
- *
- * File:        tIsLeapYear.c
- * Project:	Common
- * Desc:
- *
- *  
- *
- * Notes:
- *
- * Author:	Paul A. Houghton - (paul.houghton@wcom.com)
- * Created:	09/23/98 06:45
- *
- * Revision History: (See end of file for Revision Log)
- *
- *  Last Mod By:    $Author$
- *  Last Mod:	    $Date$
- *  Version:	    $Revision$
- *
- *********************************************************************/
+/* 1998-09-23 (cc) Paul A. Houghton <paul4hough@gmail.com>
+ */
 
 #include "TestConfig.h"
 #include "TestFunctProto.h"
@@ -39,7 +21,7 @@ static struct TestValues TestData[] =
   { 1800, FALSE },
   { 1900, FALSE },
   { 2000, TRUE },
-  
+
   { 1960, TRUE },
   { 1961, FALSE },
   { 1962, FALSE },
@@ -69,7 +51,7 @@ tIsLeapYear( void )
 {
   int status = 1;
   int l;
-  
+
   for( l = 0; TestData[ l ].year; ++ l )
     {
       if( ( IsLeapYear( TestData[ l ].year ) ? 1 : 0 )
@@ -83,14 +65,3 @@ tIsLeapYear( void )
     }
   return( status );
 }
-
-/*
- *
- * Revision Log:
- *
- * $Log$
- * Revision 1.1  1998/09/24 15:28:29  houghton
- * Initial Version.
- *
- *
- */

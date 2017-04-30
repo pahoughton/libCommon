@@ -1,23 +1,5 @@
-/*********************************************************************
- *
- * File:        tYYMMDDtoTimeT.c
- * Project:	Common
- * Desc:
- *
- *  
- *
- * Notes:
- *
- * Author:	Paul A. Houghton - (paul.houghton@wcom.com)
- * Created:	09/23/98 08:18
- *
- * Revision History: (See end of file for Revision Log)
- *
- *  Last Mod By:    $Author$
- *  Last Mod:	    $Date$
- *  Version:	    $Revision$
- *
- *********************************************************************/
+/* 1998-09-23 (cc) Paul A. Houghton <paul4hough@gmail.com>
+ */
 
 #include "TestConfig.h"
 #include "TestFunctProto.h"
@@ -53,7 +35,7 @@ static struct TestValues TestData[] =
   { 0, 0 }
 };
 
-    
+
 int
 tYYMMDDtoTimeT( void )
 {
@@ -63,7 +45,7 @@ tYYMMDDtoTimeT( void )
 
   struct tm ttm;
   memset( &ttm, 0, sizeof( ttm ) );
-  
+
   for( t = 0; TestData[ t].yymmdd; ++ t )
     {
       value = YYMMDDtoTimeT( TestData[ t ].yymmdd );
@@ -77,7 +59,7 @@ tYYMMDDtoTimeT( void )
 		  TestData[ t ].yymmdd,
 		  value,
 		  TestData[ t ].result,
-		  value - TestData[ t ].result );	  
+		  value - TestData[ t ].result );
 	  ret = 0;
 	}
       /* Double check */
@@ -109,14 +91,3 @@ tYYMMDDtoTimeT( void )
     }
   return( ret );
 }
-
-/*
- *
- * Revision Log:
- *
- * $Log$
- * Revision 1.1  1998/09/24 15:28:29  houghton
- * Initial Version.
- *
- *
- */

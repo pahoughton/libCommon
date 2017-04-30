@@ -1,12 +1,14 @@
 /* 2017-04-23 (cc) <paul4hough@gmail.com>
  */
 
-#include <missing/missing.h>
-#include <missing/verify.h>
+#include <Common/Common.h>
+#include <Common/verify.h>
+#include <memory.h>
 
 int
-tmissing(void)
+tCommon(void)
 {
+
   BOOL ttrue = TRUE;
   VVTRUE( ttrue );
   VVTRUE( ON );
@@ -47,5 +49,13 @@ tmissing(void)
   VVTRUE( IS_BASE_DIGIT( 'f',16 ) );
   VVTRUE( ! IS_BASE_DIGIT( 'g',16 ) );
 
-
+  {
+    char estr[8];
+    estr[0] = 0x81;
+    estr[1] = 0x82;
+    estr[2] = 0x83;
+    EbcdicToAscii( estr, 3 );
+    VVTRUE( memcmp( estr, "abc", 3 ) == 0 );
+  }
+  return( TRUE );
 }

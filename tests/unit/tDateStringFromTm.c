@@ -1,23 +1,5 @@
-/*********************************************************************
- *
- * File:        tDateStringFromTm.c
- * Project:	Common
- * Desc:
- *
- *  
- *
- * Notes:
- *
- * Author:	Paul A. Houghton - (paul.houghton@wcom.com)
- * Created:	09/24/98 06:30
- *
- * Revision History: (See end of file for Revision Log)
- *
- *  Last Mod By:    $Author$
- *  Last Mod:	    $Date$
- *  Version:	    $Revision$
- *
- *********************************************************************/
+/* 1998-09-24 (cc) Paul A. Houghton <paul4hough@gmail.com>
+ */
 
 #include "TestConfig.h"
 #include "TestFunctProto.h"
@@ -167,7 +149,7 @@ tDateStringFromTm( void )
 	       10,
 	       50,
 	       52 );
-  
+
   ret &= test( "01/01/1960 14:50",
 	       "%m/%d/%Y %H:%M",
 	       1960,
@@ -176,7 +158,7 @@ tDateStringFromTm( void )
 	       14,
 	       50,
 	       23 );
-  
+
   ret &= test( "01/01/1970",
 	       "%m/%d/%Y",
 	       1970,
@@ -185,7 +167,7 @@ tDateStringFromTm( void )
 	       12,
 	       12,
 	       12 );
-  
+
   ret &= test( "01/01/1980 23:59:59",
 	       "%m/%d/%Y %H:%M:%S",
 	       1980,
@@ -194,7 +176,7 @@ tDateStringFromTm( void )
 	       23,
 	       59,
 	       59 );
-  
+
   ret &= test( "12/31/1999 22:00",
 	       "%m/%d/%Y %H:%M",
 	       1999,
@@ -203,7 +185,7 @@ tDateStringFromTm( void )
 	       22,
 	       0,
 	       53 );
-  
+
   ret &= test( "01/01/2000 10:00:04",
 	       "%m/%d/%Y %H:%M:%S",
 	       2000,
@@ -212,18 +194,7 @@ tDateStringFromTm( void )
 	       10,
 	       0,
 	       4 );
-  
-  return( ret );
-	       
-}
 
-/*
- *
- * Revision Log:
- *
- * $Log$
- * Revision 1.1  1998/09/24 15:28:29  houghton
- * Initial Version.
- *
- *
- */
+  return( ret );
+
+}
