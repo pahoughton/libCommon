@@ -16,7 +16,6 @@
 
 # 2017-04-20 (cc) <paul4hough@gmail.com>
 #
-# ACLOCAL_AMFLAGS = '-Im4'
 
 VPATH = @srcdir@
 am__is_gnu_make = { \
@@ -105,6 +104,7 @@ DIST_COMMON = $(srcdir)/Makefile.am $(top_srcdir)/configure \
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
+CONFIG_HEADER = $(top_builddir)/Common/aconfig.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 AM_V_P = $(am__v_P_@AM_V@)
@@ -353,7 +353,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-SUBDIRS = src/missing tests/unit
+SUBDIRS = Common tests/unit
 dist_doc_DATA = README.md
 all: all-recursive
 

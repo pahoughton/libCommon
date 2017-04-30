@@ -1,28 +1,5 @@
-/*********************************************************************
- *
- * Title:            LoggerSetFunct.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton - (paul_houghton@wiltel.com)
- *
- * Start Date:	    11/08/95 03:30
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.2  1997/09/19 09:08:25  houghton
- * Bug-Fix: only set logger funct if funct is not NULL
- *
- * Revision 2.1  1995/11/10 00:56:03  houghton
- * Initial Version
- *
- *
- *********************************************************************/
+/* 1995-11-08 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 
 #include "_Common.h"
 

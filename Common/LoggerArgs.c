@@ -1,25 +1,5 @@
-/*********************************************************************
- *
- * Title:            LoggerArgs.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton - (paul_houghton@wiltel.com)
- *
- * Start Date:	    11/07/95 11:21
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.1  1995/11/10 00:56:02  houghton
- * Initial Version
- *
- *
- *********************************************************************/
+/* 1995-11-07 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 
 #include "_Common.h"
 
@@ -42,7 +22,7 @@ LoggerArgs(
   va_list	mesgArgs
   )
 {
-  
+
   if( _CLogTee == TRUE )
     {
       _LoggerLogIt( stderr,
@@ -52,7 +32,7 @@ LoggerArgs(
 		    mesgFmt,
 		    mesgArgs );
     }
-  
+
   if( _CLoggerFunct != NULL )
     {
       _CLoggerFunct( ( ( closure != 0 ) ?
@@ -62,6 +42,6 @@ LoggerArgs(
 		     level,
 		     mesgFmt,
 		     mesgArgs );
-      
+
     }
 }

@@ -1,21 +1,3 @@
-.\"
-.\" File:      Host2NetInt.3
-.\" Project:   Common
-.\" Desc:        
-.\"
-.\"     Man page for Host2NetInt
-.\"
-.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
-.\" Created:     05/07/97 04:28
-.\"
-.\" Revision History: (See end of file for Revision Log)
-.\"
-.\"  Last Mod By:    $Author$
-.\"  Last Mod:       $Date$
-.\"  Version:        $Revision$
-.\"
-.\" $Id$
-.\"
 .TH Host2NetInt 3  "05/07/97 04:28 (Common)"
 .SH NAME
 .SH NAME
@@ -36,9 +18,9 @@ first: 4321).
 the converted value.
 .SH FILES
 .PD 0
-%INSTALL_INC_DIR%/Common.h
+$prefix/include/Common/Common.h
 .LP
-%INSTALL_LIB_DIR%/libCommon.a
+$prefix/lib/libCommon.so
 .PD
 .SH "SEE ALSO"
 Common(3),
@@ -46,16 +28,4 @@ Host2NetShort(3), Net2HostShort(3), Host2NetUShort(3),
 Net2HostUShort(3), Net2HostInt(3), Host2NetUInt(3), Net2HostUInt(3),
 Host2NetLong(3), Net2HostLong(3), Host2NetULong(3), Net2HostULong(3)
 .SH AUTHORS
-Paul A. Houghton - (paul.houghton@wcom.com)
-
-.\"
-.\" Revision Log:
-.\"
-.\" $Log$
-.\" Revision 2.2  1998/09/24 14:30:04  houghton
-.\" Reworked to replace directory names with Makefile variable value.
-.\"
-.\" Revision 2.1  1997/05/07 11:35:41  houghton
-.\" Initial version.
-.\"
-.\"
+1997-05-07 (cc)  Paul Houghton <paul4hough@gmail.com>

@@ -1,47 +1,12 @@
-#ifndef _DateTime_h_
-#define _DateTime_h_
-/*********************************************************************
- *
- * Title:            DateTime.h
- *
- * Description:
- *
- *  Misc date time manipulation functions
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton x2309 - (houghton@shoe)
- *
- * Start Date:	    02/14/94 08:33
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.1  1995/10/28  19:11:42  houghton
- * Change Version Id String
- *
- * Revision 2.0  1995/10/28  17:35:19  houghton
- * Move to Version 2.0
- *
- * Revision 1.4  1995/02/13  15:34:15  houghton
- * New functions and many enhancements to existing functions.
- *
- * Revision 1.3  1994/06/20  10:27:19  houghton
- * Porting and add LoggerLoc function
- *
- * Revision 1.2  1994/06/17  18:03:57  houghton
- * Cleanup for beta release.
- *
- * Revision 1.1  1994/06/06  13:23:34  houghton
- * Avl and DateTime functions added for Rating
- *
- *
- *********************************************************************/
+/* 1994-02-14 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
+#ifndef _Common_DateTime_h_
+#define _Common_DateTime_h_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-  
+
 #define SEC_PER_MIN   60
 #define SEC_PER_HOUR  (60 * SEC_PER_MIN)
 #define SEC_PER_DAY   (24 * SEC_PER_HOUR)
@@ -64,15 +29,6 @@ typedef enum {
 
 #endif
 
-/*
- * These constants are defined in DateTimeData.c if your linker
- * has problems finding them (MS-Win) call the LinkDateData function
- * from main.
- */
-
-/* function in DataTimeData.c needed for some linkers */
-void LinkDateData( void );  
- 
 extern const int    DaysInMonth[];
 extern const int    MonthDayOfYear[];
 extern const char * Months[];
@@ -110,33 +66,15 @@ YearMonthDayToTimeT( int year, int month, int day );
 #define HourMinSecToTimeT( hour, min, sec ) \
   ( (hour * 60 * 60 ) + (min * 60) + sec )
 
-    
+
 #if !defined( COMMON_HAVE_STRPTIME )
 char *
 strptime( char *buf, const char *format, struct tm *tm);
 #endif
 
-  
+
 #ifdef __cplusplus
 };
 #endif
 
 #endif /* ! def _DateTime_h_ */
-
-/**
- *             This software is the sole property of
- *
- *                 The Williams Companies, Inc.
- *                       1 Williams Center
- *                         P.O. Box 2400
- *                      Tulsa, Oklahoma 74102
- *
- *        Copyright (c) 1994 by The Williams Companies, Inc.
- *
- *                      All Rights Reserved.  
- *
- **/
-/*
- * Well actually most of it is public domain.
- */
-   

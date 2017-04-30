@@ -1,11 +1,22 @@
 # 2001-06-04 (cc) <paul4hough@gmail.com>
 #
 
-lib_LTLIBRARIES = libmissing.la
+lib_LTLIBRARIES = libCommon.la
 
-libmissing_la_SOURCES = Difftm.c
+libCommon_la_SOURCES = \
+EbcdicToAscii.c \
+CenterLine.c \
+StripChars.c \
+StringTo.c \
+CanExecute.c \
+ForeachFile.c \
+FindPath.c \
+MemberOfGroup.c
 
 include_HEADERS =				\
-	missing.h
+	Common.h
 
-libmissing_la_CPPFLAGS = -I..
+libCommon_la_CPPFLAGS = -I..
+
+test: all
+	$(MAKE) -C ../tests/unit test

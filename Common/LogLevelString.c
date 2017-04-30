@@ -1,45 +1,5 @@
-/*********************************************************************
- *
- * Title:            LogLevelString.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton - (houghton@cworld.wiltel.com)
- *
- * Start Date:	    07/18/94 12:36
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.4  1998/09/22 14:32:57  houghton
- * Port(Linux): I was using 'index' as a variable name. This is also a
- *     syninoum for strchr(), so I change the variable name to avoid
- *     warnings.
- *
- * Revision 2.3  1997/05/07 11:36:57  houghton
- * Cleanup
- *
- * Revision 2.2  1995/11/10 00:57:21  houghton
- * Restructured to improve readability and move Global Values
- *
- * Revision 2.1  1995/10/29  12:01:17  houghton
- * Change Version Id String
- *
- * Revision 2.0  1995/10/28  17:35:25  houghton
- * Move to Version 2.0
- *
- * Revision 1.2  1994/08/15  19:57:05  houghton
- * Fix RcsId so ident will work
- *
- * Revision 1.1  1994/06/17  18:07:28  houghton
- * Cool new Logger function
- *
- *
- *********************************************************************/
+/* 1994-07-18 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 
 #include "_Common.h"
 
@@ -76,7 +36,7 @@ LogLevelString( LogLevelBit level )
 {
 
   size_t	levNameIndex;
-  
+
   switch( level )
     {
     case LOG_NONE:      levNameIndex =  0;  break;
@@ -100,9 +60,8 @@ LogLevelString( LogLevelBit level )
 
     default:
       return( "UNKNOWN" );
-      
+
     }
 
   return( _CLogLevelNames[ levNameIndex ] );
 }
-

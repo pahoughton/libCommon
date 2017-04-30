@@ -1,21 +1,3 @@
-.\"
-.\" File:      HourMinSecToTimeT.3
-.\" Project:   Common
-.\" Desc:        
-.\"
-.\"     Man page for HourMinSecToTimeT
-.\"
-.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
-.\" Created:     05/07/97 03:56
-.\"
-.\" Revision History: (See end of file for Revision Log)
-.\"
-.\"  Last Mod By:    $Author$
-.\"  Last Mod:       $Date$
-.\"  Version:        $Revision$
-.\"
-.\" $Id$
-.\"
 .TH HourMinSecToTimeT 3  "05/07/97 03:56 (Dist)"
 .SH NAME
 HourMinSecToTimeT \- convert an hour, minute and second to a time_t value.
@@ -53,9 +35,9 @@ value. The date portion of the time_t value created will be 0.
 the converted time_t value.
 .SH FILES
 .PD 0
-%INSTALL_INC_DIR%/Common.h
+$prefix/include/Common/Common.h
 .LP
-%INSTALL_LIB_DIR%/libCommon.a
+$prefix/lib/libCommon.so
 .PD
 .SH "SEE ALSO"
 Common(3), YYYYMMDDtoTimeT(3), YYMMDDtoTimeT(3),
@@ -63,16 +45,4 @@ HHMMSStoTimeT(3), DateStringToTimeT(3), DateStringFromTimeT(3),
 DateStringFromTm(3), YearMonthDayToTimeT(3),
 strftime(3)
 .SH AUTHORS
-Paul A. Houghton - (paul.houghton@wcom.com)
-
-.\"
-.\" Revision Log:
-.\"
-.\" $Log$
-.\" Revision 2.2  1998/09/24 14:30:04  houghton
-.\" Reworked to replace directory names with Makefile variable value.
-.\"
-.\" Revision 2.1  1997/05/07 11:35:42  houghton
-.\" Initial version.
-.\"
-.\"
+1997-05-07 (cc)  Paul Houghton <paul4hough@gmail.com>

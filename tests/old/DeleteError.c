@@ -1,30 +1,5 @@
-/*********************************************************************
- *
- * Title:            DeleteError.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Dora Potluri x561-6131 - (dpotluri@shoe.wiltel.com)
- *
- * Start Date:	    07/15/94 09:59
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.0  1995/10/28 17:35:54  houghton
- * Move to Version 2.0
- *
- * Revision 1.1  1994/08/25  15:58:48  houghton
- * Initial test program for libCommon
- *
- *
- *********************************************************************/
-static const char RcsId[] =
-"$Id$";
+/* 1994-07-15 (cc) Dora Potluri
+ */
 
 #include <stdio.h>
 
@@ -40,26 +15,6 @@ void DeleteError(
     void 	*closure )
 {
   int *	value = (int *) data;
-  
+
   printf("Still In the tree %d \n", *value);
 }
-    
-
-
-
-
-
-
-/**
- *             This software is the sole property of
- *
- *                 The Williams Companies, Inc.
- *                       1 Williams Center
- *                         P.O. Box 2400
- *                      Tulsa, Oklahoma 74102
- *
- *        Copyright (c) 1993 by The Williams Companies, Inc.
- *
- *                      All Rights Reserved.  
- *
- **/

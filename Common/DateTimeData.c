@@ -1,52 +1,8 @@
-/*********************************************************************
- *
- * Title:            DateTimeData.c
- *
- * Description:
- *
- *  This is a collection of constants used by date manipulation
- *  functions.
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton - (houghton@cworld)
- *
- * Start Date:	    02/19/94 12:57
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.3  1999/03/02 12:42:50  houghton
- * Added DaysInMonthLeap
- * Added MonthDayOfYearLeap
- *
- * Revision 2.2  1995/10/30 14:55:14  houghton
- * Move contents of Bit.h & DateTime.h to Common.h
- * Add Net2Host
- *
- * Revision 2.1  1995/10/28  19:11:43  houghton
- * Change Version Id String
- *
- * Revision 2.0  1995/10/28  17:35:19  houghton
- * Move to Version 2.0
- *
- * Revision 1.5  1995/02/13  15:34:15  houghton
- * New functions and many enhancements to existing functions.
- *
- * Revision 1.4  1994/08/15  19:57:00  houghton
- * Fix RcsId so ident will work
- *
- * Revision 1.3  1994/06/20  15:28:39  dpotluri
- * LibCommon Port to OPENVMS
- *
- * Revision 1.2  1994/06/17  18:03:58  houghton
- * Cleanup for beta release.
- *
- * Revision 1.1  1994/06/06  13:23:35  houghton
- * Avl and DateTime functions added for Rating
- *
- *
- *********************************************************************/
+/* 1994-02-19 (cc) Paul Houghton <paul4hough@gmail.com>
+
+   This is a collection of constants used by date manipulation
+   functions.
+*/
 
 #include "_Common.h"
 
@@ -101,7 +57,3 @@ void LinkDateData( void )
 {
   return;
 }
-
-/*
- * Public Domain - no copyright
- */

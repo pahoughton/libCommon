@@ -1,30 +1,5 @@
-/*********************************************************************
- *
- * Title:            StringTest.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Dora Potluri x561-6131 - (dpotluri@shoe.wiltel.com)
- *
- * Start Date:	    07/19/94 13:57
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.0  1995/10/28 17:35:57  houghton
- * Move to Version 2.0
- *
- * Revision 1.1  1994/08/25  15:58:50  houghton
- * Initial test program for libCommon
- *
- *
- *********************************************************************/
-static const char RcsId[] =
-"$Id$";
+/* 1994-07-19 (cc) Dora Potluri
+ */
 
 #include <Common.h>
 
@@ -41,9 +16,9 @@ StringTest()
   char * duplicateString = NULL;
   char   buffer[60];
 
-    
+
   duplicateString = (char *) strdup( upperCase );
-  
+
   if ( NULL == duplicateString )
     {
       printf("Failed to Duplicate the string \n" );
@@ -87,26 +62,9 @@ StringTest()
     }
 
   free( duplicateString );
-  
+
   TestOutput("Successfully Tested String Functions \n" );
-  
+
   return( RET_SUCCEED );
 
 }
-
-
-
-
-/**
- *             This software is the sole property of
- *
- *                 The Williams Companies, Inc.
- *                       1 Williams Center
- *                         P.O. Box 2400
- *                      Tulsa, Oklahoma 74102
- *
- *        Copyright (c) 1993 by The Williams Companies, Inc.
- *
- *                      All Rights Reserved.  
- *
- **/

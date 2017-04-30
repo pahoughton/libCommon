@@ -1,25 +1,5 @@
-/*********************************************************************
- *
- * Title:            LoggerGetFunct.c
- *
- * Description:
- *
- *	
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton - (paul_houghton@wiltel.com)
- *
- * Start Date:	    11/08/95 03:32
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.1  1995/11/10 00:56:02  houghton
- * Initial Version
- *
- *
- *********************************************************************/
+/* 1995-11-08 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 
 #include "_Common.h"
 
@@ -36,5 +16,3 @@ LoggerGetFunct( LoggerFunct * funct, void ** closure )
   *funct = _CLoggerFunct;
   *closure = _CLoggerClosure;
 }
-  
-

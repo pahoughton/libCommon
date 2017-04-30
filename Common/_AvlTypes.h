@@ -1,3 +1,5 @@
+/* 1994-08-04 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 /**
 * avl_typs.h -- declaration of private types used for avl trees
 *

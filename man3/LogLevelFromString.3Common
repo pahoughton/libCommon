@@ -1,21 +1,3 @@
-.\"
-.\" File:      LogLevelFromString.3
-.\" Project:   Common
-.\" Desc:        
-.\"
-.\"     Man page for LogLevelFromString() Ver: 2.3
-.\"
-.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
-.\" Created:     06/21/94
-.\"
-.\" Revision History: (See end of file for Revision Log)
-.\"
-.\"  Last Mod By:    $Author$
-.\"  Last Mod:       $Date$
-.\"  Version:        $Revision$
-.\"
-.\" $Id$
-.\"
 .TH LogLevelFromString 3  "04/29/97 08:41 (Common)"
 .SH NAME
 LogLevelFromString \- convert a string into a collection of LogLevelBits.
@@ -57,12 +39,12 @@ an int with the correct LogLevelBits set.
 		LogLevelFromString( " ERROR | WARN | TEST" ),
 		TRUE, TRUE );
     ...
-.fn    	
+.fn
 .SH FILES
 .PD 0
-%INSTALL_INC_DIR%/Common.h
+$prefix/include/Common/Common.h
 .LP
-%INSTALL_LIB_DIR%/libCommon.a
+$prefix/lib/libCommon.so
 .PD
 .SH "SEE ALSO"
 Common(3), LogLevelSetString(3), LogLevelString(3), LoggerInit(3),
@@ -70,24 +52,6 @@ LoggerSetLogFile(3), LoggerSetOutputLevel(3), LoggerSetDate(3),
 LoggerSetLoc(3), LoggerSetTee(3), LoggerSetFunct(3),
 LoggerGetFunct(3), LoggerLevel(3), LoggerLoc(3), Logger(3),
 LoggerArgs(3), LoggerTrim(3),
-LOGITLOC(3), LOGIT(3), LOGFUNCT(3), LOGERROR(3) 
+LOGITLOC(3), LOGIT(3), LOGFUNCT(3), LOGERROR(3)
 .SH AUTHORS
-Paul A. Houghton - (paul.houghton@wcom.com)
-
-.\"
-.\" Revision Log:
-.\"
-.\" $Log$
-.\" Revision 2.2  1998/09/24 14:30:04  houghton
-.\" Reworked to replace directory names with Makefile variable value.
-.\"
-.\" Revision 2.1  1997/05/07 11:35:01  houghton
-.\" Updated for release 2.01.02
-.\"
-.\" Revision 2.0  1995/10/28 17:34:46  houghton
-.\" Move to Version 2.0
-.\"
-.\" Revision 1.1  1994/07/05  21:38:08  houghton
-.\" Updated man pages for all libCommon functions.
-.\"
-.\"
+1997-04-29 (cc)  Paul Houghton <paul4hough@gmail.com>

@@ -1,25 +1,7 @@
-/*********************************************************************
- *
- * File:        strptime.c
- * Project:	Common
- * Desc:
- *
- *  
- *
- * Notes:
- *
- *  Swipped from Linux libc-5.4.33 (9/16/97). See Copywrite at end of file
- *
- * Author:	Paul A. Houghton - (paul.houghton@wcom.com)
- * Created:	09/16/97 10:02
- *
- * Revision History: (See end of file for Revision Log)
- *
- *  Last Mod By:    $Author$
- *  Last Mod:	    $Date$
- *  Version:	    $Revision$
- *
- *********************************************************************/
+/* 1997-09-16 (cc) Paul Houghton <paul4hough@gmail.com>
+
+   swipped from Linux libc-5.4.33 (9/16/97). See Copywrite at end of file
+*/
 
 #include "_Common.h"
 
@@ -88,7 +70,7 @@ MonthAbbr[] =
      result; })
 /* We intentionally do not use isdigit() for testing because this will
    lead to problems with the wide character version.  */
-     
+
 #define get_number_width(from, to, max_digits )				      \
   do {									      \
     const char * frp = rp;						      \
@@ -102,7 +84,7 @@ MonthAbbr[] =
     if (val < from || val > to)						      \
       return NULL;							      \
   } while (0)
-     
+
 #define get_number(from, to)						      \
   do {									      \
     val = 0;								      \
@@ -139,8 +121,8 @@ MonthAbbr[] =
     if (rp == NULL)							      \
       return NULL;							      \
   } while (0)
-  
-     
+
+
 char *
 strptime(
   const char * buf,
@@ -198,7 +180,7 @@ strptime(
 		  rp += len;
 		  break;
 		}
-	      
+
 	      len = strlen( DayOfWeekAbbr[ cnt ] );
 	      if( strncasecmp( DayOfWeekAbbr[ cnt ], rp, len ) == 0 )
 		{
@@ -225,14 +207,14 @@ strptime(
 		  rp += len;
 		  break;
 		}
-	      
+
 	      len = strlen( MonthAbbr[ cnt ] );
 	      if( strncasecmp( MonthAbbr[ cnt ], rp, len ) == 0 )
 		{
 		  rp += len;
 		  break;
 		}
-	      
+
 	    }
 	  if (cnt == 12)
 	    /* Does not match a month name.  */
@@ -295,14 +277,14 @@ strptime(
 	  /* Match locale's equivalent of AM/PM.  */
 	  {
 	    size_t len;
-	    
+
 	    len = strlen( AM_STR );
 	    if( strncasecmp(  AM_STR, rp, len ) == 0 )
 	      {
 		rp += len;
 		break;
 	      }
-	      
+
 	    len = strlen( PM_STR );
 	    if( strncasecmp(  PM_STR, rp, len ) == 0 )
 	      {
@@ -375,7 +357,7 @@ strptime(
 	    tm->tm_hour += 12;
 	}
     }
-  
+
   return (char *) rp;
 }
 
@@ -398,32 +380,3 @@ You should have received a copy of the GNU Library General Public
 License along with the GNU C Library; see the file COPYING.LIB.  If
 not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.  */
-
-/*
- *
- * Revision Log:
- *
- * $Log$
- * Revision 1.3  1998/10/13 14:39:07  houghton
- * Port(AIX41): can't use 'match_string' macro.
- *
- * Revision 1.2  1998/09/24 14:34:40  houghton
- * Bug-Fix: was processing to many digits with the width is specified.
- *
- * Revision 1.1  1998/09/22 14:36:46  houghton
- * initial version.
- *
- * Revision 4.2  1998/05/19 15:27:48  houghton
- * Bug-Fix: '%I' was off by 1.
- *
- * Revision 4.1  1997/09/17 15:13:19  houghton
- * Changed to Version 4
- *
- * Revision 3.2  1997/09/17 11:09:12  houghton
- * Changed: renamed library to StlUtils.
- *
- * Revision 3.1  1997/09/16 16:05:17  houghton
- * Initial Version (from Linux libc-5.4.33).
- *
- *
- */

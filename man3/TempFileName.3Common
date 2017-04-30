@@ -1,21 +1,3 @@
-.\"
-.\" File:      TempFileName.3
-.\" Project:   Common
-.\" Desc:        
-.\"
-.\"     Man page for TempFileName
-.\"
-.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
-.\" Created:     05/07/97 04:54
-.\"
-.\" Revision History: (See end of file for Revision Log)
-.\"
-.\"  Last Mod By:    $Author$
-.\"  Last Mod:       $Date$
-.\"  Version:        $Revision$
-.\"
-.\" $Id$
-.\"
 .TH TempFileName 3  "05/07/97 04:54 (Common)"
 .SH NAME
 TempFileName \- create a unique filename.
@@ -57,23 +39,11 @@ NULL
 an error occured.
 .SH FILES
 .PD 0
-%INSTALL_INC_DIR%/Common.h
+$prefix/include/Common/Common.h
 .LP
-%INSTALL_LIB_DIR%/libCommon.a
+$prefix/lib/libCommon.so
 .PD
 .SH "SEE ALSO"
 Common(3)
 .SH AUTHORS
-Paul A. Houghton - (paul.houghton@wcom.com)
-
-.\"
-.\" Revision Log:
-.\"
-.\" $Log$
-.\" Revision 2.2  1998/09/24 14:30:07  houghton
-.\" Reworked to replace directory names with Makefile variable value.
-.\"
-.\" Revision 2.1  1997/05/07 11:35:49  houghton
-.\" Initial version.
-.\"
-.\"
+1997-05-07 (cc)  Paul Houghton <paul4hough@gmail.com>

@@ -1,23 +1,5 @@
-/*********************************************************************
- *
- * File:        tCommonError.c
- * Project:	Common
- * Desc:
- *
- *  
- *
- * Notes:
- *
- * Author:	Paul A. Houghton - (paul.houghton@wcom.com)
- * Created:	04/29/97 04:57
- *
- * Revision History: (See end of file for Revision Log)
- *
- *  Last Mod By:    $Author$
- *  Last Mod:	    $Date$
- *  Version:	    $Revision$
- *
- *********************************************************************/
+/* 1997-04-29 (cc) Paul A. Houghton - (paul.houghton@wcom.com)
+ */
 
 #include <Common.h>
 #include <stdio.h>
@@ -38,7 +20,7 @@ ErrorHandler(
   static char DefaultErrorMesg[ 2048 ];
 
   DefaultErrorMesg[0] = 0;
-  
+
   switch( errorType )
     {
     case ET_OSERROR:
@@ -52,7 +34,7 @@ ErrorHandler(
       sprintf( DefaultErrorMesg, "%s: %s ",
 	       ErrorTypeString( errorType ),
 	       CommonErrorString( errorValue ) );
-      
+
       break;
 
     default:
@@ -69,7 +51,7 @@ ErrorHandler(
       strcat( DefaultErrorMesg, errorDesc );
       strcat( DefaultErrorMesg, " " );
     }
-      
+
   if( (strlen( DefaultErrorMesg ) + strlen( mesgFormat ) + 10 )
       < sizeof( DefaultErrorMesg ) )
     {
@@ -94,7 +76,7 @@ BOOL
 tCommonError( void )
 {
   fprintf( stderr, "\n" );
-  
+
   SetErrorHandler( ErrorHandler, NULL );
 
   ERROR( ET_COMMON, EC_RANGE, ("Testing ERROR with: %s %s\n",
@@ -104,17 +86,6 @@ tCommonError( void )
   ERROR( ET_OSERROR, ENOENT, ("Testing ERROR with: %s %s\n",
 			      "ET_OSERROR",
 			      "ENOENT" ) );
-  
+
   return( TRUE );
 }
-
-/*
- *
- * Revision Log:
- *
- * $Log$
- * Revision 2.1  1997/05/07 11:38:20  houghton
- * Initial version.
- *
- *
- */

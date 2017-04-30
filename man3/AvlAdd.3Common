@@ -1,22 +1,3 @@
-.\"
-.\" Man page for AvlAdd
-.\"
-.\" $Id$
-.\"
-.\" $Log$
-.\" Revision 2.1  1998/09/24 14:30:01  houghton
-.\" Reworked to replace directory names with Makefile variable value.
-.\"
-.\" Revision 2.0  1995/10/28 17:34:30  houghton
-.\" Move to Version 2.0
-.\"
-.\" Revision 1.2  1994/07/05  21:37:53  houghton
-.\" Updated man pages for all libCommon functions.
-.\"
-.\" Revision 1.1  1994/06/06  13:23:18  houghton
-.\" Avl and DateTime functions added for Rating
-.\"
-.\"
 .TH AvlAdd 3  "09 Feb 94" Common
 .SH NAME
 AvlAdd \- Add a data item to the tree
@@ -42,10 +23,10 @@ data added to.
 .TP
 data
 The data you want to add to the tree. This value is passed to the
-compare function to determine its position in the tree. 
+compare function to determine its position in the tree.
 .SH DESCRIPTION
 AvlAdd will add a data item to the AVL tree. Each item added must
-be unique (as determined by the compare function). 
+be unique (as determined by the compare function).
 .SH RETURNS
 .TP
 NULL
@@ -56,8 +37,8 @@ The value of the data with the same key will be returned if the data
 could not be added to the tree because of a duplicate key.
 .SH FILES
 .nf
-%INSTALL_INC_DIR%/Common.h
-%INSTALL_LIB_DIR%/libCommon.a
+$prefix/include/Common/Common.h
+$prefix/lib/libCommon.so
 .fn
 .SH "SEE ALSO"
 AvlInit(3), AvlAttach(3), , AvlDel(3), AvlFind(3), AvlGetRoot(3),
@@ -67,5 +48,4 @@ AvlDelMax(3), AvlFindMax(3), Common(3)
 .PD 0
 Brad Appleton - <brad@ssd.csd.Harris.COM>,
 .LP
-Paul Houghton x2309 - (houghton@shoe) 
-
+1994-02-09 (cc) Paul Houghton <paul4hough@gmail.com>

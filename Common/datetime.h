@@ -1,3 +1,5 @@
+/* 1994-08-04 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 #ifndef _missing_datetime_h_
 #define _missing_datetime_h_
 /* 1993-09-03 (cc) paul4hough@gmail.com

@@ -1,21 +1,3 @@
-.\"
-.\" File:      LOGFUNCT.3
-.\" Project:   Common
-.\" Desc:        
-.\"
-.\"     Man page for LOGFUNCT
-.\"
-.\" Author:      Paul A. Houghton - (paul.houghton@wcom.com)
-.\" Created:     05/05/97 05:04
-.\"
-.\" Revision History: (See end of file for Revision Log)
-.\"
-.\"  Last Mod By:    $Author$
-.\"  Last Mod:       $Date$
-.\"  Version:        $Revision$
-.\"
-.\" $Id$
-.\"
 .TH LOGFUNCT 3  "05/05/97 05:04 (Common)"
 .SH NAME
 LOGFUNCT \- create a LOG_FUNCT entry.
@@ -50,8 +32,8 @@ entry into a function durring execution.
 .fn
 .SH FILES
 .nf
-%INSTALL_INC_DIR%/Common.h
-%INSTALL_LIB_DIR%/libCommon.a
+$prefix/include/Common/Common.h
+$prefix/lib/libCommon.so
 .fn
 .SH "SEE ALSO"
 Common(3), LogLevelSetString(3), LogLevelFromString(3), LogLevelString(3),
@@ -59,18 +41,6 @@ LoggerInit(3), LoggerSetLogFile(3), LoggerSetOutputLevel(3),
 LoggerSetDate(3), LoggerSetLoc(3), LoggerSetTee(3),
 LoggerSetFunct(3), LoggerGetFunct(3), LoggerLevel(3), LoggerLoc(3),
 Logger(3), LoggerArgs(3), LoggerTrim(3).
-LOGITLOC(3), LOGIT(3), LOGERROR(3) 
+LOGITLOC(3), LOGIT(3), LOGERROR(3)
 .SH AUTHORS
-Paul A. Houghton - (paul.houghton@wcom.com)
-
-.\"
-.\" Revision Log:
-.\"
-.\" $Log$
-.\" Revision 2.2  1998/09/24 14:30:04  houghton
-.\" Reworked to replace directory names with Makefile variable value.
-.\"
-.\" Revision 2.1  1997/05/07 11:35:43  houghton
-.\" Initial version.
-.\"
-.\"
+1997-05-05 (cc)  Paul Houghton <paul4hough@gmail.com>

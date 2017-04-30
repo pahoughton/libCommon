@@ -1,21 +1,3 @@
-.\"
-.\" File:      AsciiToEbcdic.3
-.\" Project:   Common
-.\" Desc:        
-.\"
-.\"     Man page for AsciiToEbcdic
-.\"
-.\" Author:      Paul Houghton 719-527-7834 - (paul.houghton@wcom.com)
-.\" Created:     03/03/00 06:52
-.\"
-.\" Revision History: (See end of file for Revision Log)
-.\"
-.\"  Last Mod By:    $Author$
-.\"  Last Mod:       $Date$
-.\"  Version:        $Revision$
-.\"
-.\" $Id$
-.\"
 .TH AsciiToEbcdic 3  "03/03/00 06:52 (Common)"
 .SH NAME
 AsciiToEbcdic \- convert all characters in an ASCII char buffer to EBCDIC.
@@ -47,17 +29,12 @@ This fucntion does an inplace conversion of 'len' characters in
 'buffer' from EBCDIC to their ASCII equivalent.
 .SH FILES
 .PD 0
-%INSTALL_INC_DIR%/Common.h
+$prefix/include/Common/Common.h
 .LP
-%INSTALL_LIB_DIR%/libCommon.a
+$prefix/lib/libCommon.so
 .PD
 .SH "SEE ALSO"
 Common(3), A2E(3), E2A(3), EbcdicToAscii(3)
 .SH AUTHORS
-Paul Houghton - (paul.houghton@wcom.com)
-
-.\"
-.\" Revision Log:
-.\"
-.\" $Log$
-.\"
+Paul Houghton - (paul4hough@gmail.com)
+2000-03-03 (cc) Paul Houghton <paul4hough@gmail.com>

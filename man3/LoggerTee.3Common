@@ -1,20 +1,3 @@
-.\"
-.\" Man page for LoggerTee
-.\"
-.\" $Id$
-.\"
-.\" $Log$
-.\" Revision 2.1  1998/09/24 14:30:05  houghton
-.\" Reworked to replace directory names with Makefile variable value.
-.\"
-.\" Revision 2.0  1995/10/28 17:34:49  houghton
-.\" Move to Version 2.0
-.\"
-.\" Revision 1.1  1994/07/13  13:42:33  houghton
-.\" Added Logger entries to Common.3
-.\" Added LoggerTee man page
-.\"
-.\"
 .TH LoggerTee 3  "13 Jul 94"
 .SH NAME
 LoggerTee \- tee log output to stderr
@@ -39,11 +22,10 @@ Turns ON or OFF ouputing log messages to stderr in addition to the log file.
 the original state.
 .SH FILES
 .nf
-%INSTALL_INC_DIR%/Common.h
-%INSTALL_LIB_DIR%/libCommon.a
+$prefix/include/Common/Common.h
+$prefix/lib/libCommon.so
 .SH "SEE ALSO"
 LoggerInit(3), LOGIT(3), Logger(3), LogLevelFromString(3), LoggerLoc(3),
 LoggerTrim(3), Common(3)
 .SH AUTHORS
-Paul Houghton x2309 - (houghton@shoe.wiltel.com) 
-
+1994-07-13 (cc)  Paul Houghton <paul4hough@gmail.com>

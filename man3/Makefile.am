@@ -1,35 +1,7 @@
-#
-# Title:        Makefile
-# Project:	Common
-# Desc:
-# 
-#   
-# 
-# Notes:
-# 
-# Author:	Paul A. Houghton - (paul.houghton@wcom.com)
-# Created:	05/07/97 05:54
-#
-# Revision History: (See end of file for Revision Log)
-#
-#   Last Mod By:    $Author$
-#   Last Mod:	    $Date$
-#   Version:	    $Revision$
-#
-#   $Id$
-# 
+# 1997-05-07 (cc) paul4hough@gmail.com
 
-make_cfg_ver	= 5.06
 
-include Make/make.cfg.$(make_cfg_ver)
-
-INSTALL_MAN_DIR = $(local_mandir)
-INSTALL_INC_DIR = $(local_incdir)
-INSTALL_LIB_DIR = $(local_libdir)
-
-MAN_PERM	= 444
-
-MAN_3_PAGES	=		\
+dist_man3_MANS	=		\
 	Common.3		\
 	SetErrorHandler.3	\
 	GetErrorHandler.3	\
@@ -142,7 +114,7 @@ sed -e 's!%INSTALL_LIB_DIR%!$(INSTALL_LIB_DIR)!'	\
 	-e 's!%INSTALL_INC_DIR%!$(INSTALL_INC_DIR)!'
 endef
 
-install_man3: $(MAN_3_PAGES) 
+install_man3: $(MAN_3_PAGES)
 	$(hide) for src in $^ ; do 				\
 	  dest=$(INSTALL_MAN_DIR)/man3/$$src;			\
 	  rm -f $$dest;						\

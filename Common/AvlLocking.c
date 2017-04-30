@@ -1,3 +1,5 @@
+/* 1994-08-04 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 /****************************************************************
  *
  * Semaphores for Locking/Unlocking

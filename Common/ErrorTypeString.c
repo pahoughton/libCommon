@@ -1,28 +1,7 @@
-/*********************************************************************
- *
- * Title:            ErrorTypeString.c
- *
- * Description:
- *
- *	Return a string description of a CommonErrorType value.
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton - (paul_houghton@wiltel.com)
- *
- * Start Date:	    11/07/95 11:13
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.2  1997/05/07 11:36:56  houghton
- * Cleanup
- *
- * Revision 2.1  1995/11/10 00:48:34  houghton
- * Initial Version
- *
- *
- *********************************************************************/
+/* 1995-11-07 (cc) Paul Houghton <paul4hough@gmail.com>
+
+   Return a string description of a CommonErrorType value.
+ */
 
 #include "_Common.h"
 
@@ -51,7 +30,3 @@ ErrorTypeString( CommonErrorType type )
   else
     return( ErrorType[ type ] );
 }
-
-
-
-		

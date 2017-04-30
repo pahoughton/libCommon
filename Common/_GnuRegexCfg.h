@@ -1,3 +1,5 @@
+/* 1994-08-04 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 #ifndef _regexcfg_h_
 #define _regexcfg_h_
 

@@ -1,2 +1,7 @@
 *.o
 .deps
+.libs
+*.lo
+*.la
+aconfig.h
+stamp-h1

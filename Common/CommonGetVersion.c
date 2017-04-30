@@ -1,23 +1,5 @@
-/*********************************************************************
- *
- * File:        CommonGetVersion.c
- * Project:	Common
- * Desc:
- *
- *   Return a version String pointer.
- *
- * Notes:
- *
- * Author:	Paul A. Houghton - (paul.houghton@wcom.com)
- * Created:	04/26/97 06:34
- *
- * Revision History: (See end of file for Revision Log)
- *
- *  Last Mod By:    $Author$
- *  Last Mod:	    $Date$
- *  Version:	    $Revision$
- *
- *********************************************************************/
+/* 1997-04-26 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 
 #include "_Common.h"
 
@@ -28,17 +10,7 @@ COMMON_VERSION(
 
 const long CommonLibVersion = COMMON_LIB_VERSION;
 
-const char CommonVersion[] =
-#if !defined( OPENVMS )
-
-  "@(#) " COMMON_PRJ_NAME " - " COMMON_PRJ_VER "\n"			      
-  "    Compiled: " __DATE__ " "__TIME__ "\n"
-  "    CVS Tag: " COMMON_PRJ_VER_TAG "\n"
-  "    $Id$ "; 
-
-#else
-
-"@(#) libCommon - 2.00.00.b.02\n    Compiled: after $Date$\n    CVS Tag: BETA_2_0\n    $Id$\n";
+const char CommonVersion[] = "@(#) libCommon - 3.01.01";
 
 #endif
 
@@ -47,60 +19,3 @@ CommonGetVersion( void )
 {
   return( CommonVersion );
 }
-
-/*
- *
- * Revision Log:
- *
- * $Log$
- * Revision 2.6  1997/05/07 11:36:56  houghton
- * Cleanup
- *
- * Revision 2.5  1997/04/26 12:44:46  houghton
- * Cleanup.
- *
- * Revision 2.4  1997/03/02 12:28:56  houghton
- * Changed version info.
- *
- * Revision 2.3  1996/05/03 16:09:27  houghton
- * Cleanup for AIX port.
- *
- * Revision 2.2  1995/11/10 00:46:11  houghton
- * Fixed CVS Tag value
- *
- * Revision 2.1  1995/10/28  19:11:40  houghton
- * Change Version Id String
- *
- * Revision 2.0  1995/10/28  17:35:16  houghton
- * Move to Version 2.0
- *
- * Revision 1.5  1994/08/15  19:57:00  houghton
- * Fix RcsId so ident will work
- *
- * Revision 1.4  1994/08/15  19:40:17  houghton
- * Cleanup; Rating QA1 Checkin
- *
- * Revision 1.3  1994/06/20  15:28:38  dpotluri
- * LibCommon Port to OPENVMS
- *
- * Revision 1.2  1994/06/17  18:03:57  houghton
- * Cleanup for beta release.
- *
- * Revision 1.1  1994/01/31  14:06:13  houghton
- * Add avl and some other minor functions
- *
- */
-
-/**
- *             This software is the sole property of
- *
- *                 The Williams Companies, Inc.
- *                       1 Williams Center
- *                         P.O. Box 2400
- *                      Tulsa, Oklahoma 74102
- *
- *        Copyright (c) 1993 by The Williams Companies, Inc.
- *
- *                      All Rights Reserved.  
- *
- **/

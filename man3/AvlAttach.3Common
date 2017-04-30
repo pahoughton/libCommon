@@ -1,26 +1,10 @@
-.\"
-.\" Man page for AvlAttach
-.\"
-.\" $Id$
-.\"
-.\" $Log$
-.\" Revision 2.1  1998/09/24 14:30:01  houghton
-.\" Reworked to replace directory names with Makefile variable value.
-.\"
-.\" Revision 2.0  1995/10/28 17:34:30  houghton
-.\" Move to Version 2.0
-.\"
-.\" Revision 1.1  1994/07/05  21:37:53  houghton
-.\" Updated man pages for all libCommon functions.
-.\"
-.\"
 .TH AvlAttach 3 "08 Feb 94" Common
 .SH NAME
 AvlAttach \- Attach an avlRoot to a AVL tree
 .SH SYNOPSIS
 #include <Common.h>
 .LP
-AvlTree AvlAttach( 
+AvlTree AvlAttach(
 .PD 0
 .RS
 .TP 9
@@ -83,7 +67,7 @@ freeMem functions.
 .SH DESCRIPTION
 Attach to an existing AVL tree and and return a token used to
 identify the tree. This function was provided primarily for
-memory mapped (see mmalloc(3)) persistent trees. 
+memory mapped (see mmalloc(3)) persistent trees.
 The value returned must be passed as the first argument to all other
 Avl functions.
 .SH RETURNS
@@ -95,14 +79,13 @@ NULL
 An error has occurred.
 .SH FILES
 .PD 0
-%INSTALL_INC_DIR%/Common.h
+$prefix/include/Common/Common.h
 .LP
-%INSTALL_LIB_DIR%/libCommon.a
+$prefix/lib/libCommon.so
 .PD
 .SH "SEE ALSO"
 AvlInit(3), AvlAdd(3), AvlDel(3), AvlFind(3), AvlGetRoot(3),
 AvlDispose(3), AvlWalk(3), AvlCount(3), AvlDelMin(3), AvlFindMin(3),
 AvlDelMax(3), AvlFindMax(3)
 .SH AUTHORS
-Paul Houghton x2309 - (houghton@shoe) 
-
+1994-02-08 (cc) Paul Houghton <paul4hough@gmail.com>

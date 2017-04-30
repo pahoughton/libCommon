@@ -1,32 +1,8 @@
-/*********************************************************************
- *
- * Title:            LoggerSetLogFile.c
- *
- * Description:
- *
- *	This function initializes the file that log entries are
- *	written to, if the default logging funtion is used. Log files
- *	are opened with the append flag, so if the file exist, it will
- *	be appended.
- *
- * Notes:
- *
- * Programmer:	    Paul Houghton - (paul_houghton@wiltel.com)
- *
- * Start Date:	    11/07/95 13:17
- *
- * Modification History:
- *
- * $Log$
- * Revision 2.2  1997/05/07 11:36:57  houghton
- * Cleanup
- *
- * Revision 2.1  1995/11/10 00:56:05  houghton
- * Initial Version
- *
- *
- *********************************************************************/
+/* 1995-11-07 (cc) Paul Houghton <paul4hough@gmail.com>
 
+   Initializes the log file.
+
+ */
 #include "_Common.h"
 
 COMMON_VERSION(
@@ -54,7 +30,7 @@ LoggerSetLogFile(
   if( outputFileType == LOG_STDOUT )
     COMMON_RETURN_ERROR( EC_BADPARAM,
 			 ("Output file type is 'LOG_STDOUT'") );
-      
+
   if( logPath != NULL )
     {
       if( strlen( logPath )  > COMMON_PATH_MAX )
@@ -86,7 +62,7 @@ LoggerSetLogFile(
       char logFn[1024];
 
       _LoggerFileName( logFn, sizeof( logFn ) );
-      
+
       if( (_CLogFP = fopen( logFn, "a" )) == NULL)
 	{
 	  SET_ERROR( ET_OSERROR, errno );
@@ -94,8 +70,7 @@ LoggerSetLogFile(
 	  return( RET_ERROR );
 	}
     }
-      
+
 
   return( RET_SUCCEED );
 }
-

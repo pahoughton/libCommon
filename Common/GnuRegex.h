@@ -1,3 +1,5 @@
+/* 1994-08-04 (cc) Paul Houghton <paul4hough@gmail.com>
+ */
 /* Definitions for data structures and routines for the regular
    expression library, version 0.12.
 
